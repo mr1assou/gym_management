@@ -150,13 +150,6 @@ ALTER TABLE operations ADD CONSTRAINT OPERATION_STATUS check(operation_status IN
 --insert values
 insert into operations(operation_status,client_id) VALUES('trial',5);
 
---create a trigger
-CREATE TRIGGER triggerOperation ON operations
-AFTER INSERT
-AS
-BEGIN
-	UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
-END
 --When user login do this
 UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
 --create table payment
@@ -231,7 +224,7 @@ begin
 		RAISERROR('Client Already Exist in Your Gym',16,1)
 	end
 end
---select client for 
+--select client for supervisor 
 ALTER PROCEDURE selectClients(@gym_id int)
 AS
 begin
@@ -268,6 +261,13 @@ begin
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
 
---set clients who their 
+--set client operation status who their month expired
+CREATE PROCEDURE setOperationStatus
+AS
+begin
+	UPDATE operations SET operation_status='reject' WHERE GETDATE()>end_period_date;
+end
+exec setOperationStatus;
+
 
 
