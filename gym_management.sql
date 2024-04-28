@@ -253,11 +253,20 @@ end
 ALTER PROCEDURE detailsClient(@client_id int)
 AS
 begin
-	SELECT client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
-	ON client.gym_id=gym.gym_id    WHERE client_id=4;
+	SELECT client_first_name,client_last_name,beginning_period_date,end_period_date,
+	price_per_month,operation_status FROM operations INNER JOIN 
+	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
+	ON client.gym_id=gym.gym_id WHERE client_id=@client_id) t ON operations.client_id=t.client_id;
 end
-
-EXEC detailsClient 4;
-
+--clients which their month expired
+CREATE PROCEDURE searchClientsMonthExpired(@gym_id int)
+AS
+begin
+	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='reject' 
+	AND operations.operation_id 
+	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
+end
+--set clients who their 
 
 
