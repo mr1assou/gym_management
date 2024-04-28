@@ -239,3 +239,25 @@ begin
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+--search client
+ALTER PROCEDURE searchClient(@gym_id int,@regex varchar(40))
+AS
+begin
+	SET @regex=REPLACE(@regex,' ','');
+	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE
+	(client_first_name+client_last_name LIKE '%'+@regex+'%') AND gym_id=@gym_id AND operations.operation_id 
+	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
+end
+--details of client
+ALTER PROCEDURE detailsClient(@client_id int)
+AS
+begin
+	SELECT client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
+	ON client.gym_id=gym.gym_id    WHERE client_id=4;
+end
+
+EXEC detailsClient 4;
+
+
+
