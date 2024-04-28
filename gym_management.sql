@@ -267,6 +267,7 @@ begin
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+
 --set clients who their 
 
 
