@@ -132,7 +132,6 @@ VALUES ('Sophia', 'Anderson', 1, '0901234567');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
 VALUES ('James', 'Garcia', 2, '0123456789');
-SELECT * FROM client;
 --create operation table
 CREATE TABLE operations(
 	operation_id int primary key identity(1,1),
@@ -150,8 +149,7 @@ go
 ALTER TABLE operations ADD CONSTRAINT OPERATION_STATUS check(operation_status IN ('trial','access','reject'));
 --insert values
 insert into operations(operation_status,client_id) VALUES('trial',5);
-insert into operations(beginning_period_date,end_period_date,operation_status,client_id) VALUES(GETDATE(),DATEADD(day,1,getDate()),'access',1);
-SELECT * FROM operations;
+
 --create a trigger
 CREATE TRIGGER triggerOperation ON operations
 AFTER INSERT
@@ -196,21 +194,41 @@ ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10)
 ,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int)
 AS
 begin
-	DECLARE @count int;
 	DECLARE @supervisor_id int;
-	SET @count=(SELECT COUNT(*) FROM users WHERE (first_name=@firstName AND Last_name=@lastName) OR (email=@email));
-	if @count=0
+	if NOT EXISTS (SELECT 1 FROM users WHERE (first_name=@firstName AND Last_name=@lastName) OR (email=@email))
 		begin
 			insert into users(first_name,Last_name,phone_number,email,password) VALUES (@firstName,@lastName,@phoneNumber,@email,@password);
-			SET @supervisor_id=(SELECT  user_id FROM users WHERE first_name=@firstName AND Last_name=@lastName);
+			SET @supervisor_id=SCOPE_IDENTITY();
 			insert into gym VALUES(@gym_name,@price_per_month,@supervisor_id);
 		end
 	else
 		begin
-			print 'this credentails used by another client either first name,last name or email please provide different credentials';
+			RAISERROR('this credentails used by another client either first name,last name or email please provide different credentials',16,1)
 		end
 	end
 
---next
-
+--login
+ALTER PROCEDURE Login(@email varchar(40))
+as	
+begin
+	SELECT users.user_id,gym.gym_id,role FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
+end
+--add client
+CREATE PROCEDURE addClient(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),
+@gym_id int,@status varchar(40))
+AS 
+begin
+	DECLARE @idCl int
+	IF NOT EXISTS(SELECT 1 FROM client WHERE client_first_name=@client_first_name AND client_last_name=@client_last_name AND gym_id=@gym_id)
+	begin
+		insert into client(client_first_name,client_last_name,client_phone_number,gym_id)  VALUES 
+		(@client_first_name,@client_last_name,@client_phone_number,@gym_id);
+		SET @idCl=SCOPE_IDENTITY();
+		insert into operations(operation_status,client_id) VALUES(@status,@idCl);
+	end
+	ELSE
+	begin
+		RAISERROR('Client Already Exist in Your Gym',16,1)
+	end
+end
 
