@@ -260,6 +260,15 @@ begin
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+--clients which they have access
+CREATE PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
+AS
+begin
+	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='access' 
+	AND operations.operation_id 
+	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
+end
 
 --set client operation status who their month expired
 CREATE PROCEDURE setOperationStatus
@@ -268,6 +277,7 @@ begin
 	UPDATE operations SET operation_status='reject' WHERE GETDATE()>end_period_date;
 end
 exec setOperationStatus;
+
 
 
 
