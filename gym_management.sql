@@ -293,3 +293,11 @@ exec calculateTotalOfMonth 3,6;
 
 insert into operations(beginning_period_date,end_period_date,operation_status,client_id) VALUES 
 ('2024-06-10','2024-07-10','access',9);
+--give access to client
+Create PROCEDURE giveAccessToClient(@client_id int)
+As
+begin
+	insert into operations(operation_status,client_id) Values('access',@client_id);
+end
+
+SELECT * FROM operations;
