@@ -278,6 +278,18 @@ begin
 end
 exec setOperationStatus;
 
+SELECT * FROM operations;
+
+--calculate total of specific month of specific gym
+alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int)
+AS
+begin
+	SELECT client_first_name,client_last_name,client_phone_number,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
+	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
+	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month;
+end
+exec calculateTotalOfMonth 3,6;
 
 
-
+insert into operations(beginning_period_date,end_period_date,operation_status,client_id) VALUES 
+('2024-06-10','2024-07-10','access',9);
