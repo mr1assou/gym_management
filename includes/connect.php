@@ -15,7 +15,7 @@
     // }
 
     $query = "{CALL addSupervisorAndGym(?, ?, ?, ?, ?,?,?)}";
-    $params = array('j', 'waller', '0635103092', 'jwaller@gmail.com', '000','ox','500');
+    $params = array('rz', 'w', '0635103092', 'r@gmail.com', '000','ox','500');
     $result= sqlsrv_query($conn, $query);
     $result = sqlsrv_query($conn, $query, $params);
     if($result){

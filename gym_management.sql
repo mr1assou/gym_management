@@ -297,7 +297,6 @@ insert into operations(beginning_period_date,end_period_date,operation_status,cl
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
 begin
-	insert into operations(operation_status,client_id) Values('access',@client_id);
+	insert into operations(operation_status,client_id) Values('access',@client_id) ;
 end
 
-SELECT * FROM operations;
