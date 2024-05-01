@@ -207,8 +207,8 @@ begin
 	SELECT users.user_id,gym.gym_id,role FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
 --add client
-CREATE PROCEDURE addClient(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),
-@gym_id int,@status varchar(40))
+ALTER PROCEDURE addClientWithTrialPeriod(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),
+@gym_id int,@numberOfTrialDays int)
 AS 
 begin
 	DECLARE @idCl int
@@ -217,7 +217,14 @@ begin
 		insert into client(client_first_name,client_last_name,client_phone_number,gym_id)  VALUES 
 		(@client_first_name,@client_last_name,@client_phone_number,@gym_id);
 		SET @idCl=SCOPE_IDENTITY();
-		insert into operations(operation_status,client_id) VALUES(@status,@idCl);
+		IF @numberOfTrialDays<>0
+		begin
+			insert into operations(end_period_date,operation_status,client_id) VALUES(DATEADD(Day,@numberOfTrialDays,GETDATE()),'trial',@idCl);
+		end
+		else
+		BEGIN
+			insert into operations(end_period_date,operation_status,client_id) VALUES(DATEADD(MONTH,1,GETDATE()),'access',@idCl);
+		end
 	end
 	ELSE
 	begin
@@ -290,9 +297,6 @@ begin
 end
 exec calculateTotalOfMonth 3,6;
 
-
-insert into operations(beginning_period_date,end_period_date,operation_status,client_id) VALUES 
-('2024-06-10','2024-07-10','access',9);
 --give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
