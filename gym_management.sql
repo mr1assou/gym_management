@@ -153,16 +153,16 @@ insert into operations(operation_status,client_id) VALUES('trial',5);
 --When user login do this
 UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
 --create table payment
-Create Table payment(
+CREATE Table payment(
 	payment_id int primary key identity(1,1), 
-	payment_DATE DATE,
+	beginning_DATE DATE DEFAULT GETDATE(),
+	end_date DATE DEFAULT DATEADD(MONTH,1,GETDATE()),
 	subscription_price int,
 	user_id int,
 	Constraint USER_ID FOREIGN KEY (user_id) REFERENCES users(user_id),
 )
 --constraints of payment
 ALTER TABLE payment ADD constraint DEFAULT_SUBSCRIPTION_PAYMENT DEFAULT 15 FOR subscription_price; 
-ALTER TABLE payment ADD constraint PAYMENT_DATE DEFAULT GETDATE() FOR payment_date;
 ALTER TABLE payment ADD CONSTRAINT CHECK_sub_price CHECK(subscription_price>0);
 --Create Trigger if user pay change his status in users table
 CREATE TRIGGER status_user ON payment
@@ -285,8 +285,6 @@ begin
 end
 exec setOperationStatus;
 
-SELECT * FROM operations;
-
 --calculate total of specific month of specific gym
 alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int)
 AS
@@ -295,12 +293,21 @@ begin
 	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
 	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month;
 end
-exec calculateTotalOfMonth 3,6;
-
 --give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
 begin
 	insert into operations(operation_status,client_id) Values('access',@client_id) ;
 end
+--add payment
+CREATE PROCEDURE addPayment(@user_id int)
+AS
+begin
+	insert into payment(user_id) VALUES(@user_id);
+end
+exec addPayment 2;
+
+
+
+
 
