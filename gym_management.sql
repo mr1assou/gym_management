@@ -313,4 +313,12 @@ begin
 	SELECT first_name,Last_name,beginning_trial_period,end_trial_period,beginning_DATE,end_date,subscription_price FROM users INNER JOIN payment ON users.user_id=payment.user_id WHERE payment.payment_id 
 	IN (SELECT MAX(payment.payment_id) as 'payment_id' FROM payment group by user_id)
 end
-exec selectUsers;
+--details payment for specific user
+ALTER PROCEDURE detailsUsers(@user_id int)
+AS
+begin
+	SELECT first_name,Last_name,phone_number,beginning_trial_period,end_trial_period,beginning_DATE,end_date,subscription_price FROM 
+	users INNER JOIN payment ON payment.user_id=users.user_id WHERE users.user_id=@user_id;
+end
+
+
