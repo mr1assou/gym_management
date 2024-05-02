@@ -296,8 +296,10 @@ AS
 begin
 	SELECT client_first_name,client_last_name,client_phone_number,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
 	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
-	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month;
+	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month AND 
+	operation_status='access';
 end
+exec calculateTotalOfMonth 3,5;
 --give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
@@ -317,7 +319,6 @@ begin
 	SELECT first_name,last_name,phone_number,beginning_trial_period,end_trial_period,status 
 	FROM users WHERE user_id=@user_id;
 end
-exec selectUerInformation 3;
 --SELECT payment status of each user
 ALTER PROCEDURE selectUsers
 AS
