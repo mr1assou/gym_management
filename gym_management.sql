@@ -252,10 +252,16 @@ end
 ALTER PROCEDURE detailsClient(@client_id int)
 AS
 begin
-	SELECT client_first_name,client_last_name,beginning_period_date,end_period_date,
+	SELECT beginning_period_date,end_period_date,
 	price_per_month,operation_status FROM operations INNER JOIN 
 	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
 	ON client.gym_id=gym.gym_id WHERE client_id=@client_id) t ON operations.client_id=t.client_id;
+end
+--select client information
+CREATE PROCEDURE selectInformationOfClient(@client_id int)
+AS
+begin
+	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
 end
 --clients which their month expired
 CREATE PROCEDURE searchClientsMonthExpired(@gym_id int)
@@ -304,8 +310,14 @@ AS
 begin
 	insert into payment(user_id) VALUES(@user_id);
 end
-exec addPayment 8;
---
+--select users information
+CREATE PROCEDURE selectUerInformation(@user_id int)
+AS
+begin
+	SELECT first_name,last_name,phone_number,beginning_trial_period,end_trial_period,status 
+	FROM users WHERE user_id=@user_id;
+end
+exec selectUerInformation 3;
 --SELECT payment status of each user
 ALTER PROCEDURE selectUsers
 AS
