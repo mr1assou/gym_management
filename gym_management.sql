@@ -14,8 +14,16 @@ CREATE TABLE users(
 	end_trial_period date,
 	status varchar(10)
 )
-
 --constraints for users table
+-- Inserting five users
+INSERT INTO users (first_name, last_name, phone_number, email, password, role, end_trial_period, status)
+VALUES
+    ('Marwane', 'Assou', '0123456783', 'marwane.assou@gmail.com', 'password123', 'admin', DATEADD(month, 2, GETDATE()), 'access'),
+    ('Jane', 'Smith', '0987654321', 'jane.smith@gmail.com', 'password456', 'supervisor', DATEADD(month, 2, GETDATE()), 'access'),
+    ('Alice', 'Johnson', '0567890123', 'alice.johnson@gmail.com', 'password789', 'supervisor', DATEADD(month, 2, GETDATE()), 'trial'),
+    ('Bob', 'Brown', '0765432109', 'bob.brown@gmail.com', 'passwordabc', 'admin', DATEADD(month, 2, GETDATE()), 'trial'),
+    ('Emily', 'Taylor', '0345678901', 'emily.taylor@gmail.com', 'passworddef', 'admin', DATEADD(month, 2, GETDATE()), 'trial');
+SELECT * FROM users;
 --first name and Last name
 ALTER TABLE users
 ADD CONSTRAINT chkFirst_name
@@ -42,20 +50,6 @@ ALTER TABLE users ADD CONSTRAINT CHECK_STATUS check(status IN ('trial','access',
 go
 ALTER TABLE users ADD CONSTRAINT DEFAULT_STATUS DEFAULT 'trial' FOR status;
 --test
-INSERT INTO users (first_name, last_name, phone_number, email, password, role,beginning_trial_period,end_trial_period,status) 
-VALUES ('Marwane', 'Assou', '0123456789', 'marwane.assou@gmail.com', 'password1', 'admin',NULL,NULL,'access');
-go
-INSERT INTO users (first_name, last_name, phone_number, email, password, role) 
-VALUES ('Raghad', 'Assou', '0635103092', 'ko1@gmail.com', 'password2', 'supervisor');
-go
-INSERT INTO users (first_name, last_name, phone_number, email, password, role) 
-VALUES ('Alice', 'Smith', '0987654321', 'alice.smith@gmail.com', 'password3', 'supervisor');
-go
-INSERT INTO users (first_name, last_name, phone_number, email, password, role) 
-VALUES ('Bob', 'Johnson', '0654321098', 'bob.johnson@gmail.com', 'password4', 'supervisor');
-go
-INSERT INTO users (first_name, last_name, phone_number, email, password, role) 
-VALUES ('Emily', 'Davis', '0976543210', 'emily.davis@gmail.com', 'password5', 'supervisor');
 
 --gym table
 CREATE TABLE gym(
@@ -71,7 +65,7 @@ go
 ALTER TABLE gym ADD CONSTRAINT PRICE_PER_MONTH CHECK (price_per_month>0);
 --values gym
 INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 1', 50, 1);
+VALUES ('Gym 1', 1, 1);
 go
 INSERT INTO gym (gym_name, price_per_month, supervisor_id)
 VALUES ('Gym 2', 60, 2);
@@ -80,7 +74,11 @@ INSERT INTO gym (gym_name, price_per_month, supervisor_id)
 VALUES ('Gym 3', 70, 3);
 go
 INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 4', 80, 4);
+VALUES ('Gym 4', 90, 4);
+go
+INSERT INTO gym (gym_name, price_per_month, supervisor_id)
+VALUES ('Gym 5', 150, 5);
+
 --clients table
 CREATE TABLE client(
 	client_id int primary key identity(1,1),
@@ -91,7 +89,6 @@ CREATE TABLE client(
 	gym_id int,
 	CONSTRAINT GYM_id FOREIGN KEY (gym_id) REFERENCES gym(gym_id) ON DELETE CASCADE
 )
-
 --constraints
 ALTER TABLE Client
 ADD CONSTRAINT CLIENT_First_name
@@ -104,34 +101,34 @@ CHECK (Client_last_name NOT LIKE '%[^A-Za-z]%');
 ALTER TABLE client ADD CONSTRAINT CHECK_CLIENT_PHONE_NUMBER check (client_phone_number LIKE '0[0-9]%' AND len(client_phone_number)=10);
 --insert data to client table
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('John', 'Doe', 1, '0123456789');
+VALUES ('John', 'Doe', 2, '0123456789');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
 VALUES ('Alice', 'Smith', 2, '0234567890');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Bob', 'Johnson', 3, '0345678901');
+VALUES ('Bob', 'Johnson', 2, '0345678901');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Emily', 'Davis', 4, '0456789012');
+VALUES ('Emily', 'Davis', 3, '0456789012');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Michael', 'Wilson', 1, '0567890123');
+VALUES ('Michael', 'Wilson', 3, '0567890123');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Emma', 'Brown', 2, '0678901234');
+VALUES ('Emma', 'Brown', 4, '0678901234');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('David', 'Martinez', 3, '0789012345');
+VALUES ('David', 'Martinez', 4, '0789012345');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Olivia', 'Taylor', 4, '0890123456');
+VALUES ('Olivia', 'Taylor', 5, '0890123456');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Sophia', 'Anderson', 1, '0901234567');
+VALUES ('Sophia', 'Anderson', 5, '0901234567');
 go
 INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('James', 'Garcia', 2, '0123456789');
+VALUES ('James', 'Garcia', 3, '0123456789');
 --create operation table
 CREATE TABLE operations(
 	operation_id int primary key identity(1,1),
@@ -141,15 +138,21 @@ CREATE TABLE operations(
 	client_id int,
 	CONSTRAINT CLIENT_ID FOREIGN KEY (client_id) REFERENCES client(client_id) ON DELETE CASCADE
 )
-
 --constraints
 ALTER TABLE operations DROP CONSTRAINT CLIENT_ID;
 ALTER TABLE operations ADD CONSTRAINT check_operation_Date check(beginning_period_date<end_period_date)
 go
 ALTER TABLE operations ADD CONSTRAINT OPERATION_STATUS check(operation_status IN ('trial','access','reject'));
 --insert values
-insert into operations(operation_status,client_id) VALUES('trial',5);
-
+insert into operations VALUES ('2024-04-01','2024-05-01','reject',1);
+go
+insert into operations VALUES ('2024-03-19','2024-04-19','reject',2);
+go
+insert into operations VALUES ('2024-04-20','2024-05-20','access',2);
+go
+insert into operations VALUES ('2024-05-5','2024-06-5','access',1);
+go
+insert into operations VALUES ('2024-03-19','2024-04-19','access',3);
 --When user login do this
 UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
 --create table payment
@@ -165,23 +168,15 @@ CREATE Table payment(
 ALTER TABLE payment ADD constraint DEFAULT_SUBSCRIPTION_PAYMENT DEFAULT 15 FOR subscription_price; 
 ALTER TABLE payment ADD CONSTRAINT CHECK_sub_price CHECK(subscription_price>0);
 --Create Trigger if user pay change his status in users table
-CREATE TRIGGER status_user ON payment
+ALTER TRIGGER status_user ON payment
 AFTER INSERT
 AS
 begin
 	UPDATE users SET users.status='access' WHERE user_id=(SELECT top 1 user_id FROM payment ORDER BY payment_id DESC);
 end
----functions and stored procedures
-SELECT * FROM users;
-go
-SELECT * FROM gym;
-go
-SELECT * FROM client;
-go
-SELECT * FROM operations;
-go
-SELECT * FROM payment;
 
+
+--functions and procedure
 --procedure sign up
 ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
 ,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int)
