@@ -25,9 +25,9 @@
         </nav>
         <!-- <div class="absolute to h-[100%] w-[50%] bg-green top-0 left-0 -z-50    "></div> -->
         <div class=" h-[92%] w-full mt-2 flex pt-7">
-            <div class="basis-[40%] w-full flex items-start z-10">
+            <div class="basis-[40%] w-full flex-column items-start z-10">
                 <h1 class="text-white text-4xl font-black mt-10 leading-snug">Welcome to Gym Manager your all-in-one solution for effortlessly managing your fitness center.</h1>
-                
+                <small class="text-grey block mt-10">With Gym Manager, focus less on administrative tasks and more on what matters providing exceptional fitness experiences.</small>
             </div>
             <div class="basis-[60%] z-10 w-full flex items-center justify-end" style="clip-path: polygon(43% 0, 100% 0, 100% 100%, 0% 100%);">
                 <img src="./images/home-img.png" alt="image" class="h-[100%] w-[70%] object-top mr-5">
