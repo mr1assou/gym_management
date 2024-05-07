@@ -10,19 +10,4 @@
         "pwd"=>$_ENV["PASSWORD"]
     );
     $conn = sqlsrv_connect($serverName, $connectionInfo);
-    if($conn){
-        echo "connection good";
-    }
-    else{
-        die( print_r( sqlsrv_errors(), true));
-    }
-
-    // $query = "{CALL addSupervisorAndGym(?, ?, ?, ?, ?,?,?)}";
-    // $params = array('rz', 'w', '0635103092', 'r@gmail.com', '000','ox','500');
-    // $result= sqlsrv_query($conn, $query);
-    // $result = sqlsrv_query($conn, $query, $params);
-    // if($result){
-    //     echo "good";
-    // }   
-    
 ?>
