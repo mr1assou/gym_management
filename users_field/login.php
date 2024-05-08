@@ -9,7 +9,20 @@
         $numRows=sqlsrv_num_rows($result);
         if($numRows==0) $count++;
         else{
-            echo "";
+            print_r(sqlsrv_num_rows($result));
+            echo "<br>";
+            echo $password;
+            echo "<br>";
+            $data=sqlsrv_fetch_array($result);
+            $gymId=$data['gym_id'];
+            $userId=$data['user_id'];
+            $passwordInDb=$data['password'];
+            echo $passwordInDb;
+            echo "<br>"; 
+            if(password_verify($password,$passwordInDb))
+                echo "password is valid";
+            else
+                echo "password is not valid";
         }
     }
 ?>

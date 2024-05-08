@@ -201,7 +201,7 @@ begin
 end
 select * from users;
 go
-ALTER tABLE USERS Alter column password VARCHAR(255);
+SELECT * FROM users;
 select * from gym;
 --add client
 ALTER PROCEDURE addClientWithTrialPeriod(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),

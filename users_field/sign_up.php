@@ -20,7 +20,7 @@
         $gymName = htmlspecialchars($_POST['gym_name']);
         $price = htmlspecialchars($_POST['price']);
         if($password==$repeatPassword){
-            $password=password_hash($password,PASSWORD_DEFAULT);
+            $password=crypt($password,PASSWORD_BCRYPT);
             $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?)}";
             $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price));
             if($result)
@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    <div class="absolute bg-green right-0 top-0 w-[70%]  z-0 h-[120%]" style="clip-path: polygon(74% 0, 100% 0, 100% 100%, 22% 100%);"></div>
+    <div class="absolute bg-green right-0 top-0 w-[70%]  z-0 h-[120%]" style="clip-path: polygon(74% 0, 100% 0, 100% 100%, 74% 100%);"></div>
     <div class="w-full min-h-screen bg-black px-[3%] pt-[2%]">
         <!-- nav bar -->
         <nav class="text-white flex justify-between items-center">
