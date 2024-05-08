@@ -174,8 +174,6 @@ AS
 begin
 	UPDATE users SET users.status='access' WHERE user_id=(SELECT top 1 user_id FROM payment ORDER BY payment_id DESC);
 end
-
-
 --functions and procedure
 --procedure sign up
 ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
@@ -195,11 +193,16 @@ begin
 		end
 	end
 --login
+select * from users;
 ALTER PROCEDURE Login(@email varchar(40))
 as	
 begin
-	SELECT users.user_id,gym.gym_id,role FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
+	SELECT users.user_id,gym.gym_id,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
+select * from users;
+go
+ALTER tABLE USERS Alter column password VARCHAR(255);
+select * from gym;
 --add client
 ALTER PROCEDURE addClientWithTrialPeriod(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),
 @gym_id int,@numberOfTrialDays int)
