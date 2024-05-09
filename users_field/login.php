@@ -9,20 +9,25 @@
         $numRows=sqlsrv_num_rows($result);
         if($numRows==0) $count++;
         else{
-            print_r(sqlsrv_num_rows($result));
-            echo "<br>";
-            echo $password;
-            echo "<br>";
             $data=sqlsrv_fetch_array($result);
             $gymId=$data['gym_id'];
             $userId=$data['user_id'];
+            $role=$data['role'];
             $passwordInDb=$data['password'];
-            echo $passwordInDb;
-            echo "<br>"; 
-            if(password_verify($password,$passwordInDb))
-                echo "password is valid";
-            else
-                echo "password is not valid";
+            if(password_verify($password,$passwordInDb) && $role='supervisor'){
+                session_start();
+                echo $userId;
+                echo "<br>";
+                echo $gymId;
+                $_SESSION['user_id']=$userId;
+                $_SESSION['gym_id']=$gymId;
+                header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
+            }
+            else if(password_verify($password,$passwordInDb) && $role='admin')
+                header('location:../admin_field/dashboard.php');
+            else{
+                $count++;
+            }    
         }
     }
 ?>
@@ -56,6 +61,10 @@
                 <p class="text-green text-4xl text-center">Log in</p>
         <div class=" h-[100%] w-full  flex pt-3 px-2 items-center justify-center">
             <form class="z-10 bg-white rounded-md mt-5" style="width:40%;padding:1% 2%;" action="" method="post">
+            <?php
+                if($count!=0)
+                    echo '<p class="font-black text-red-600">email or password are incorrect</p>';
+            ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input  type="email" name="email" pattern=".+@gmail\.com" required
                 placeholder="xxxxxx@gmail.com"
@@ -65,7 +74,6 @@
                 email:
                 </label>
             </div>
-            <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input  required
                  title="Password must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" 
