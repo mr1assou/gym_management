@@ -47,7 +47,7 @@
 </head>
 
 <body>
-    <div class="absolute bg-green right-0 top-0 w-[70%]  z-0 h-[120%]" style="clip-path: polygon(74% 0, 100% 0, 100% 100%, 74% 100%);"></div>
+    
     <div class="w-full min-h-screen bg-black px-[3%] pt-[2%]">
         <!-- nav bar -->
         <nav class="text-white flex justify-between items-center">
@@ -59,8 +59,7 @@
                 <a href="./login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md">Login</a>
             </div>
         </nav>
-                <p class="text-green text-4xl text-center">sign up</p>
-        <div class=" h-screen w-full   flex pt-3 px-2 items-center">
+        <div class=" h-screen w-full   flex  px-2 items-center">
             <img src="../images/home.png" alt="image" class="block h-[80%] w-[30%] object-cover mr-5 rounded-lg">
             <form class="z-10 bg-white rounded-md"style="width:40%;padding:1% 2%;" action="" method="post">
             <?php
