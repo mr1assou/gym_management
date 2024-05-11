@@ -2,7 +2,7 @@
 
 
         <!-- sidebar -->
-        <div class="basis-[18%] bg-green  h-screen rounded-lg sticky left-0 top-0 right-0">
+        <div class="basis-[18%] bg-green  h-screen rounded-lg sticky top-0">
             <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full">
                 <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
                 <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
@@ -43,4 +43,4 @@
                         <a class="cursor-pointer">Log out</a>
             </div>
         </div>
-  
+          
