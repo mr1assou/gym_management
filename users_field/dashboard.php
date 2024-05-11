@@ -1,10 +1,12 @@
 <?php
+    include "../functions/functions.php";
     session_start();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
         exit;
     }
-
+    $userId=$_GET['user_id'];
+    $gymId=$_GET['gym_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,13 +27,15 @@
 <body>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
-        <?php include '../includes/sidebar.php' ?>
+        <?php 
+            sidebar($userId,$gymId);
+        ?>
         <!-- content -->
-        <div class="basis-[82%]  bg-grey " style="padding-left:10px;">
+        <div class="basis-[82%] " style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2">
-                    <div class="w-full">
+     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
+                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                         <div class="w-full p-5  flex items-center justify-between px-2 py-7 bg-white rounded-xl">
                             <div class="basis-[30%]  flex flex-col justify-between items-center">
                                 <div class="flex items-center">
@@ -58,7 +62,7 @@
                         </div>
             </div>
             <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md">
+        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
             style="border-radius:20px;">
                 <thead class="capitalise rounded-xl bg-white text-green font-black">
