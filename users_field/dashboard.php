@@ -1,5 +1,6 @@
 <?php
     include "../functions/functions.php";
+    include '../vendor/connect.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
@@ -63,70 +64,9 @@
             </div>
             <!-- information -->
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-            <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
-            style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black">
-                            <tr>
-                                <th class="px-1 py-2 text-sm text-center">
-                                    First Name: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center">
-                                    Last Name: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center">
-                                    Beginning Period Date: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center">
-                                    End Period Date: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center">
-                                    Status: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center ">
-                                    Left Time: 
-                                </th>
-                                <th class="px-1 py-2 text-sm text-center ">
-                                    informations: 
-                                </th>
-                            </tr>
-                </thead>
-                <tbody class="dark:bg-gray-700 dark:text-gray-400 ">
-                    <tr class=" border-b dark:border-gray-700">
-                                <td class="px-1 py-2 text-center text-sm font-bold">Marwane</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">Assou</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">access</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">15jrs:22min:10hrs:30s</td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
-                                    <a href="" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                                </td>
-                    </tr>
-                    <tr class=" border-b dark:border-gray-700">
-                                <td class="px-1 py-2 text-center text-sm font-bold">Marwane</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">Assou</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">access</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">15jrs:22min:10hrs:30s</td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
-                                    <a href="" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                                </td>
-                    </tr>
-                    <tr class=" border-b dark:border-gray-700">
-                                <td class="px-1 py-2 text-center text-sm font-bold">Marwane</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">Assou</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">14-07-2003</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">access</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">15jrs:22min:10hrs:30s</td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
-                                    <a href="" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                                </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
+                <?php
+                    selectClientsDashboard($conn,$gymId,$userId);
+                ?>
                 </div>
             </div>
         </div> 
