@@ -1,9 +1,14 @@
 <?php
     include '../vendor/connect.php';
     include '../functions/functions.php';
+    session_start();
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
-    session_start();
+    $count=0;
+    $clientFirstName="";
+    $clientLastName="";
+    $clientPhoneNumber="";
+    $numberOfTrialDays="";
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
         exit;
@@ -13,13 +18,13 @@
         $clientLastName=$_POST['client_last_name'];
         $clientPhoneNumber=$_POST['phone_number'];
         $numberOfTrialDays=$_POST['number_of_trial_days'];
-        $query="{CALL addClientWithTrialPeriod(?,?,?,?,?)}";
-        $result=sqlsrv_query($clientFirstName,$clientLastName,$clientPhoneNumber,$numberOfTrialDays,$gymId);
+        $query="{CALL addClientForGym(?,?,?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$numberOfTrialDays));
         if($result){
-            echo "good";
+            echo "<script>window.open('./add_client.php?status=success&user_id=$userId&gym_id=$gymId','_self');</script>"; 
         }
         else{
-            echo "not good";
+            $count++;
         }
     }
 ?>
@@ -47,9 +52,29 @@
         <!-- content -->
         <div class="basis-[82%]  p-4" style="padding-left:10px;">
              <form class="z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
+              <?php
+                if($count!=0)
+                    echo '<small class="text-red-500 font-bold">Client already exist in your gym</small>';
+            ?>
+              <?php
+                if(isset($_GET['status'])){
+                    echo '<p class="text-green font-bold text-2xl alert hidden">Client Added succefully</p>';
+                     echo '<script>const alert=document.querySelector(".alert");
+                        function alertDanger(aler){
+                            alert.classList.remove("hidden");
+                            alert.classList.add("block");
+                            setTimeout(()=>{
+                                alert.classList.remove("block");
+                                alert.classList.add("hidden");
+                            },5000)
+                        }
+                       alertDanger(alert);
+                    </script>';
+                }
+            ?>
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <input required type="text" pattern="^(?:[a-z]+|[A-Z]+|[a-zA-Z]+)$"
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="client_first_name"/>
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="client_first_name" value="<?php echo $clientFirstName?>"/>
                     <label
                     class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 Client First Name:
@@ -57,7 +82,7 @@
             </div>
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <input required type="text" pattern="^(?:[a-z]+|[A-Z]+|[a-zA-Z]+)$"
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="client_last_name"/>
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="client_last_name" value="<?php echo $clientLastName?>"/>
                     <label
                     class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 Client Last Name:
@@ -65,7 +90,7 @@
             </div>
                 
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
-                    <input  pattern="0[0-9]{9}" name="phone_number"  required
+                    <input  pattern="0[0-9]{9}" name="phone_number"  required value="<?php echo $clientPhoneNumber?>"
                     class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -74,7 +99,7 @@
             </div>
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <input  type="number" value="0" min="0" name="number_of_trial_days" required
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" value="<?php echo $numberOfTrialDays?>"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 Number Of Trial Days:
