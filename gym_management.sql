@@ -23,7 +23,6 @@ VALUES
     ('Alice', 'Johnson', '0567890123', 'alice.johnson@gmail.com', 'password789', 'supervisor', DATEADD(month, 2, GETDATE()), 'trial'),
     ('Bob', 'Brown', '0765432109', 'bob.brown@gmail.com', 'passwordabc', 'admin', DATEADD(month, 2, GETDATE()), 'trial'),
     ('Emily', 'Taylor', '0345678901', 'emily.taylor@gmail.com', 'passworddef', 'admin', DATEADD(month, 2, GETDATE()), 'trial');
-SELECT * FROM users;
 --first name and Last name
 ALTER TABLE users
 ADD CONSTRAINT chkFirst_name
@@ -203,31 +202,37 @@ select * from users;
 go
 SELECT * FROM users;
 select * from gym;
---add client
-ALTER PROCEDURE addClientWithTrialPeriod(@client_first_name varchar(50),@client_last_name varchar(50),@client_phone_number varchar(50),
-@gym_id int,@numberOfTrialDays int)
+--add Trigger
+ALTER TRIGGER addClient On client 
+AFTER  insert
 AS 
 begin
-	DECLARE @idCl int
-	IF NOT EXISTS(SELECT 1 FROM client WHERE client_first_name=@client_first_name AND client_last_name=@client_last_name AND gym_id=@gym_id)
-	begin
-		insert into client(client_first_name,client_last_name,client_phone_number,gym_id)  VALUES 
-		(@client_first_name,@client_last_name,@client_phone_number,@gym_id);
-		SET @idCl=SCOPE_IDENTITY();
-		IF @numberOfTrialDays<>0
+	DECLARE @clFName varchar(70)
+	DECLARE @clLName varchar(70)
+	DECLARE @gymId int
+	DECLARE @count int
+	select @clFName=client_first_name,@clLName=client_last_name,@gymId=gym_id FROM inserted
+	SET @count=(SELECT COUNT(*) FROM client WHERE client_first_name=@clFName AND client_last_name=@clLName AND gym_id=@gymId)
+	if (@count>=2)
 		begin
-			insert into operations(end_period_date,operation_status,client_id) VALUES(DATEADD(Day,@numberOfTrialDays,GETDATE()),'trial',@idCl);
+			raiserror('this client already exist',16,1)
+			rollback
 		end
-		else
-		BEGIN
-			insert into operations(end_period_date,operation_status,client_id) VALUES(DATEADD(MONTH,1,GETDATE()),'access',@idCl);
-		end
-	end
-	ELSE
-	begin
-		RAISERROR('Client Already Exist in Your Gym',16,1)
-	end
 end
+ALTER PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name varchar(80),@client_phone_number varchar(70),@gym_id int,@trialDays int)
+as
+begin
+	DECLARE @clientId int 
+	insert into client(client_first_name,client_last_name,client_phone_number,gym_id)  VALUES 
+		(@client_first_name,@client_last_name,@client_phone_number,@gym_id);
+	SET @clientId=SCOPE_IDENTITY();
+	if @trialDays=0
+		insert into operations(operation_status, client_id) VALUES ('access',@clientId);
+	ELSE
+		insert into operations VALUES (GETDATE(),DATEADD(day,4,GETDATE()),'trial',@clientId);
+end
+exec addClientForGym 'go','go','0661805085',5,4;
+
 --select client for supervisor 
 ALTER PROCEDURE selectClients(@gym_id int)
 AS
