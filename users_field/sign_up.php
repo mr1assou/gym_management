@@ -1,5 +1,6 @@
 <?php
     include '../vendor/connect.php'; 
+     include '../vendor/connect.php';
     $countPassword=0;
     $countCredentails=0;
     $firstName ="";
@@ -67,7 +68,7 @@
                     echo '<small class="text-red-500 font-bold"> first name and last name or email used by another client</small>';
             ?>
             <?php
-                if(isset($_GET['status']))
+                if(isset($_GET['status'])){
                     echo '<p class="text-green font-bold text-2xl alert hidden">you are signed up succefully</p>';
                      echo '<script>const alert=document.querySelector(".alert");
                         function alertDanger(aler){
@@ -80,6 +81,7 @@
                         }
                        alertDanger(alert);
                     </script>';
+                }
             ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input required

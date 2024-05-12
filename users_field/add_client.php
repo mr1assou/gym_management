@@ -14,10 +14,10 @@
         exit;
     }
     if(isset($_POST['submit'])){
-        $clientFirstName=$_POST['client_first_name'];
-        $clientLastName=$_POST['client_last_name'];
-        $clientPhoneNumber=$_POST['phone_number'];
-        $numberOfTrialDays=$_POST['number_of_trial_days'];
+        $clientFirstName=htmlspecialchars($_POST['client_first_name']);
+        $clientLastName=htmlspecialchars($_POST['client_last_name']);
+        $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
+        $numberOfTrialDays=htmlspecialchars($_POST['number_of_trial_days']);
         $query="{CALL addClientForGym(?,?,?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$numberOfTrialDays));
         if($result){
@@ -50,7 +50,7 @@
              sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%]  p-4" style="padding-left:10px;">
+        <div class="basis-[82%]  p-4  flex items-start mt-10" style="padding-left:10px;">
              <form class="z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
               <?php
                 if($count!=0)

@@ -50,7 +50,7 @@
                                       <i class="fa-solid fa-user-check text-green fa-4x"></i>
                                     <p class="ml-3 font-black">Active Members:</p>
                                 </div>
-                                <p class="mt-4 font-bold text-sm ">100<span>
+                                <p class="mt-4 font-bold text-sm "><?php echo activeMembers($conn,$gymId)?><span>
                                 </span></p>
                             </div>
                             <div class="basis-[30%] flex flex-col justify-between items-center">
