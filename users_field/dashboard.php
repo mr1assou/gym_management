@@ -43,7 +43,7 @@
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
                                     <p class="ml-3 font-black">New Clients This month:</p>
                                 </div>
-                                <p class="mt-5 font-bold text-s">20<span></span></p>
+                                <p class="mt-5 font-bold text-s"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
                             </div>
                             <div class="basis-[30%] flex flex-col justify-between items-center">
                                 <div class="flex items-center">
@@ -58,7 +58,8 @@
                                     <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
                                     <p class="ml-3 font-black">Earning of this month:</p>
                                 </div>
-                                <p class="mt-3 font-bold text-s"><span>1000</span> DH</p>
+                                <p class="mt-3 font-bold text-s"><span><?php echo earningThisMonth($conn,$gymId,date('m'));
+                                ?></span> DH</p>
                             </div>
                         </div>
             </div>

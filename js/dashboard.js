@@ -19,16 +19,16 @@ function statusColor(){
     })
 }
 statusColor();
-function getHoursFromMidnight(){
-    let now = new Date();
-    let then = new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        0,0,0),
-    diff = now.getTime() - then.getTime();
-    return diff;
-}
+// function getHoursFromMidnight(){
+//     let now = new Date();
+//     let then = new Date(
+//         now.getFullYear(),
+//         now.getMonth(),
+//         now.getDate(),
+//         0,0,0),
+//     diff = now.getTime() - then.getTime();
+//     return diff;
+// }
 function countdown(){
     const parents=document.querySelectorAll('.parent');
     parents.forEach(parent=>{
@@ -45,7 +45,7 @@ function countdown(){
 
     let endPeriod=new Date(endDate.textContent).getTime();
     // to get the exact date timeNow-getHoursFromMidnight()-+oneHour
-    let startPeriod=new Date().getTime()-getHoursFromMidnight()+oneHour;
+    let startPeriod=new Date().getTime()-oneDay;
     let intervalId=setInterval(()=>{
     let t=endPeriod-startPeriod;
     let restDays=Math.floor(t/oneDay);

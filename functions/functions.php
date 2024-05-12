@@ -102,3 +102,16 @@
         $rowCount=sqlsrv_num_rows($result);
         return $rowCount;
     }
+    function newClientsOfThisMonth($conn,$gymId){
+        $query="{CALL newClientOfThisMonth(?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $rowCount=sqlsrv_fetch_array($result);
+        return $rowCount['number'];
+    }
+    function earningThisMonth($conn,$gymId,$month){
+        $query="{CALL earningOfMonth (?,?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId,$month));
+        $row=sqlsrv_fetch_array($result);
+        return $row['amount'];
+    }
+    
