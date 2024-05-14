@@ -16,11 +16,11 @@
             $passwordInDb=$data['password'];
             if(password_verify($password,$passwordInDb) && $role='supervisor'){
                 session_start();
-                echo $userId;
-                echo "<br>";
-                echo $gymId;
                 $_SESSION['user_id']=$userId;
                 $_SESSION['gym_id']=$gymId;
+                //set operations status 
+                $query="{CALL setOperationsStatus()}";
+                $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
             }
             else if(password_verify($password,$passwordInDb) && $role='admin')
@@ -63,7 +63,7 @@
             <form class="z-10 bg-white rounded-md mt-5" style="width:40%;padding:1% 2%;" action="" method="post">
             <?php
                 if($count!=0)
-                    echo '<p class="font-black text-red-600">email or password are incorrect</p>';
+                    echo '<p class="font-bold text-red">email or password are incorrect</p>';
             ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input  type="email" name="email" pattern=".+@gmail\.com" required

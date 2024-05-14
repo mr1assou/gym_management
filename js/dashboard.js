@@ -19,17 +19,7 @@ function statusColor(){
     })
 }
 statusColor();
-// function getHoursFromMidnight(){
-//     let now = new Date();
-//     let then = new Date(
-//         now.getFullYear(),
-//         now.getMonth(),
-//         now.getDate(),
-//         0,0,0),
-//     diff = now.getTime() - then.getTime();
-//     return diff;
-// }
-function countdown(){
+export default function countdown(){
     const parents=document.querySelectorAll('.parent');
     parents.forEach(parent=>{
     const endDate=parent.querySelector('.end-date');
@@ -64,6 +54,5 @@ function countdown(){
     })
 }
 countdown();
-        
 
 
