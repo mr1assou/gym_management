@@ -229,18 +229,23 @@ begin
 	if @trialDays=0
 		insert into operations(operation_status, client_id) VALUES ('access',@clientId);
 	ELSE
-		insert into operations VALUES (GETDATE(),DATEADD(day,4,GETDATE()),'trial',@clientId);
+		insert into operations VALUES (GETDATE(),DATEADD(day,@trialDays,GETDATE()),'trial',@clientId);
 end
-exec addClientForGym 'go','go','0661805085',5,4;
-
+exec addClientForGym 'wo','way','0661805085',5,36;
+select * from client WHERE gym_id=35;
+go
+select * from operations;
 --select client for supervisor 
 ALTER PROCEDURE selectClients(@gym_id int)
 AS
 begin
-	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+select * from client WHERE gym_id=36;
+go
+select * from operations;
 --search client
 ALTER PROCEDURE searchClient(@gym_id int,@regex varchar(40))
 AS
@@ -267,22 +272,29 @@ begin
 	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
 end
 --clients which their month expired
-CREATE PROCEDURE searchClientsMonthExpired(@gym_id int)
+ALTER PROCEDURE searchClientsMonthExpired(@gym_id int)
 AS
 begin
-	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='reject' 
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+
 --clients which they have access
-CREATE PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
+ALTER PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
 AS
 begin
-	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='access' 
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
+end
+ALTER PROCEDURE newClientOfThisMonth(@gymId int)
+as
+begin
+	SELECT COUNT(*) as 'number' FROM client INNER JOIN operations ON operations.client_id=client.client_id
+	WHERE MONTH(joinning_date)=MONTH(GETDATE()) AND gym_id=@gymId AND operation_status='access';
 end
 
 --set client operation status who their month expired
@@ -294,15 +306,25 @@ end
 exec setOperationStatus;
 
 --calculate total of specific month of specific gym
-alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int)
+alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
 AS
 begin
-	SELECT client_first_name,client_last_name,client_phone_number,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
 	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
 	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month AND 
-	operation_status='access';
+	YEAR(end_period_date)=@year AND (operation_status='access' OR operation_status='reject');
 end
-exec calculateTotalOfMonth 3,5;
+
+--earnning actual month
+ALTER PROCEDURE earningOfMonth(@gym_id int,@month int)
+AS
+begin
+	select SUM(price_per_month) as 'amount' FROM operations INNER JOIN (
+	select client_id,price_per_month FROM gym INNER JOIN client ON client.gym_id=gym.gym_id WHERE gym.gym_id=@gym_id) t
+	ON t.client_id=operations.client_id WHERE operation_status='access';
+			
+end
+exec earningOfMonth 35,5;
 --give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
