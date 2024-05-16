@@ -9,3 +9,16 @@ function displayNumberOfNewClients(){
         numberOfClients.textContent=0;
 }
 displayNumberOfNewClients();
+
+function displayEarningOfThisMonth(){
+    const amounts=document.querySelectorAll('.amount');
+    if(amounts!=null){
+        const earning=document.querySelector('.earning');
+        let sum=0;
+        amounts.forEach(amount=>{
+            sum+=parseInt(amount.textContent);
+        })
+        earning.textContent=sum;
+    }
+}
+displayEarningOfThisMonth();

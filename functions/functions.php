@@ -263,7 +263,7 @@
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">
+                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date amount">
                                     '.$row['amount'].'
                                 </td>
                                 <td class="px-1 py-2 text-center text-sm  font-bold">

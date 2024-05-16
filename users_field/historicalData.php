@@ -50,8 +50,7 @@
                                     <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
                                     <p class="ml-3 font-black">Earning of this month:</p>
                                 </div>
-                                <p class="mt-3 font-bold text-s"><span><?php echo earningThisMonth($conn,$gymId,date('m'));
-                                ?></span> DH</p>
+                                <p class="mt-3 font-bold text-s"><span class="earning"></span> DH</p>
                             </div>
                         </div>
                         <p class="text-black text-center text-2xl font-black">New Clients of This Month:</p>
