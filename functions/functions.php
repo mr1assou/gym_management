@@ -308,7 +308,7 @@
                 </thead>';
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent">
+                    echo '<tr class=" border-b dark:border-gray-70 new-clients">
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold beginning-date">

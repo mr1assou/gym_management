@@ -43,7 +43,7 @@
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
                                     <p class="ml-3 font-black">New Clients This month:</p>
                                 </div>
-                                <p class="mt-5 font-bold text-s"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
+                                <p class="mt-5 font-bold text-s number-clients">20<span></span></p>
                             </div>
                             <div class="flex flex-col justify-between items-center">
                                 <div class="flex items-center">
@@ -70,6 +70,6 @@
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/dashboard.js" type="module"></script>
+    <script src="../js/historicalData.js" type="module"></script>
 </body>
 </html>
