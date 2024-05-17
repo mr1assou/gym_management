@@ -14,15 +14,7 @@ CREATE TABLE users(
 	end_trial_period date,
 	status varchar(10)
 )
---constraints for users table
--- Inserting five users
-INSERT INTO users (first_name, last_name, phone_number, email, password, role, end_trial_period, status)
-VALUES
-    ('Marwane', 'Assou', '0123456783', 'marwane.assou@gmail.com', 'password123', 'admin', DATEADD(month, 2, GETDATE()), 'access'),
-    ('Jane', 'Smith', '0987654321', 'jane.smith@gmail.com', 'password456', 'supervisor', DATEADD(month, 2, GETDATE()), 'access'),
-    ('Alice', 'Johnson', '0567890123', 'alice.johnson@gmail.com', 'password789', 'supervisor', DATEADD(month, 2, GETDATE()), 'trial'),
-    ('Bob', 'Brown', '0765432109', 'bob.brown@gmail.com', 'passwordabc', 'admin', DATEADD(month, 2, GETDATE()), 'trial'),
-    ('Emily', 'Taylor', '0345678901', 'emily.taylor@gmail.com', 'passworddef', 'admin', DATEADD(month, 2, GETDATE()), 'trial');
+--constraints for users tables
 --first name and Last name
 ALTER TABLE users
 ADD CONSTRAINT chkFirst_name
@@ -48,8 +40,6 @@ ALTER TABLE users ADD CONSTRAINT DEFAULT_END_DATE DEFAULT DATEADD(month,2,getDat
 ALTER TABLE users ADD CONSTRAINT CHECK_STATUS check(status IN ('trial','access','reject'));
 go
 ALTER TABLE users ADD CONSTRAINT DEFAULT_STATUS DEFAULT 'trial' FOR status;
---test
-
 --gym table
 CREATE TABLE gym(
 	gym_id int primary key identity(1,1),
@@ -62,22 +52,6 @@ CREATE TABLE gym(
 ALTER TABLE gym ADD CONSTRAINT GYM_NAME CHECK (gym_name NOT LIKE '%[^A-Za-z0-9 ]%');
 go
 ALTER TABLE gym ADD CONSTRAINT PRICE_PER_MONTH CHECK (price_per_month>0);
---values gym
-INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 1', 1, 1);
-go
-INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 2', 60, 2);
-go
-INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 3', 70, 3);
-go
-INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 4', 90, 4);
-go
-INSERT INTO gym (gym_name, price_per_month, supervisor_id)
-VALUES ('Gym 5', 150, 5);
-
 --clients table
 CREATE TABLE client(
 	client_id int primary key identity(1,1),
@@ -85,9 +59,11 @@ CREATE TABLE client(
 	client_last_name varchar(20),
 	joinning_date date DEFAULT getDate(),
 	client_phone_number varchar(10),
+	type_joinning_date varchar(20), 
 	gym_id int,
 	CONSTRAINT GYM_id FOREIGN KEY (gym_id) REFERENCES gym(gym_id) ON DELETE CASCADE
 )
+
 --constraints
 ALTER TABLE Client
 ADD CONSTRAINT CLIENT_First_name
@@ -98,36 +74,6 @@ ADD CONSTRAINT Client_Last_name
 CHECK (Client_last_name NOT LIKE '%[^A-Za-z]%');
 --phone number
 ALTER TABLE client ADD CONSTRAINT CHECK_CLIENT_PHONE_NUMBER check (client_phone_number LIKE '0[0-9]%' AND len(client_phone_number)=10);
---insert data to client table
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('John', 'Doe', 2, '0123456789');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Alice', 'Smith', 2, '0234567890');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Bob', 'Johnson', 2, '0345678901');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Emily', 'Davis', 3, '0456789012');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Michael', 'Wilson', 3, '0567890123');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Emma', 'Brown', 4, '0678901234');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('David', 'Martinez', 4, '0789012345');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Olivia', 'Taylor', 5, '0890123456');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('Sophia', 'Anderson', 5, '0901234567');
-go
-INSERT INTO client (client_first_name, client_last_name, gym_id, client_phone_number)
-VALUES ('James', 'Garcia', 3, '0123456789');
 --create operation table
 CREATE TABLE operations(
 	operation_id int primary key identity(1,1),
@@ -142,16 +88,7 @@ ALTER TABLE operations DROP CONSTRAINT CLIENT_ID;
 ALTER TABLE operations ADD CONSTRAINT check_operation_Date check(beginning_period_date<end_period_date)
 go
 ALTER TABLE operations ADD CONSTRAINT OPERATION_STATUS check(operation_status IN ('trial','access','reject'));
---insert values
-insert into operations VALUES ('2024-04-01','2024-05-01','reject',1);
-go
-insert into operations VALUES ('2024-03-19','2024-04-19','reject',2);
-go
-insert into operations VALUES ('2024-04-20','2024-05-20','access',2);
-go
-insert into operations VALUES ('2024-05-5','2024-06-5','access',1);
-go
-insert into operations VALUES ('2024-03-19','2024-04-19','access',3);
+
 --When user login do this
 UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
 --create table payment
@@ -192,16 +129,11 @@ begin
 		end
 	end
 --login
-select * from users;
 ALTER PROCEDURE Login(@email varchar(40))
 as	
 begin
 	SELECT users.user_id,gym.gym_id,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
-select * from users;
-go
-SELECT * FROM users;
-select * from gym;
 --add Trigger
 ALTER TRIGGER addClient On client 
 AFTER  insert
@@ -223,14 +155,21 @@ ALTER PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name
 as
 begin
 	DECLARE @clientId int 
-	insert into client(client_first_name,client_last_name,client_phone_number,gym_id)  VALUES 
-		(@client_first_name,@client_last_name,@client_phone_number,@gym_id);
-	SET @clientId=SCOPE_IDENTITY();
 	if @trialDays=0
-		insert into operations(operation_status, client_id) VALUES ('access',@clientId);
+		begin
+			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id)  VALUES 
+			(@client_first_name,@client_last_name,@client_phone_number,'trial',@gym_id);
+			SET @clientId=SCOPE_IDENTITY();
+			insert into operations(operation_status, client_id) VALUES ('access',@clientId);
+		end
 	ELSE
-		insert into operations VALUES (GETDATE(),DATEADD(day,@trialDays,GETDATE()),'trial',@clientId);
-end
+		begin
+			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id)  VALUES 
+			(@client_first_name,@client_last_name,@client_phone_number,'trial',@gym_id);
+			SET @clientId=SCOPE_IDENTITY();
+			insert into operations VALUES (GETDATE(),DATEADD(day,@trialDays,GETDATE()),'trial',@clientId);
+		end
+	end
 exec addClientForGym 'wo','way','0661805085',5,36;
 select * from client WHERE gym_id=35;
 go
@@ -298,13 +237,15 @@ begin
 end
 
 --set client operation status who their month expired
-CREATE PROCEDURE setOperationStatus
+ALTER PROCEDURE setOperationStatus
 AS
 begin
-	UPDATE operations SET operation_status='reject' WHERE GETDATE()>end_period_date;
+	UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
 end
 exec setOperationStatus;
-
+go
+select * from operations INNER JOIN client ON operations.client_id=client.client_id WHERE client_first_name='sbix';
+use gym_management;
 --calculate total of specific month of specific gym
 alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
 AS
