@@ -30,6 +30,11 @@
                         <i class="fa-solid fa-user-check"></i>
                         <a class="cursor-pointer" href="./activeMembers.php?user_id='.$userId.'&gym_id='.$gymId.'">Active Members</a>
             </div>
+            <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            " style="border-top-right-radius:-20px;">
+                        <i class="fa-solid fa-hourglass-end"></i>
+                        <a class="cursor-pointer" href="./trialMembers.php?user_id='.$userId.'&gym_id='.$gymId.'">Trial Members</a>
+            </div>
             <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-gear"></i>
                         <a class="cursor-pointer">Settings</a>
@@ -46,7 +51,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-black font-bold">You don\'t have any client</div>';
+            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any client</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -112,14 +117,14 @@
         $query="{CALL earningOfMonth (?,?)}";
         $result=sqlsrv_query($conn,$query,array($gymId,$month));
         $row=sqlsrv_fetch_array($result);
-        return $row['amount'];
+        return $row['amount']?$row['amount']:0;
     }
     function selectExpiredClients($conn,$gymId,$userId){
         $query="{CALL searchClientsMonthExpired(?)}";
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-black font-bold">You don\'t have any expired memebers</div>';
+            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any expired members</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -174,7 +179,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-black font-bold">You don\'t have any expired memebers</div>';
+            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any active members</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -229,7 +234,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-black font-bold">You don\'t have any expired memebers</div>';
+            echo '<div class="text-4xl mt-5 text-center text-green font-bold">You don\'t have any expired operations</div>';
         }
         else{
             echo '<table class="text-sm text-left mt-5 rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -251,9 +256,6 @@
                                 <th class="px-1 py-2 text-sm text-center">
                                     price: 
                                 </th>
-                                 <th class="px-1 py-2 text-sm text-center ">
-                                    informations: 
-                                </th>
                             </tr>
                 </thead>';
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
@@ -265,10 +267,6 @@
                                 <td class="px-1 py-2 text-center text-sm font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold beginning-date amount">
                                     '.$row['amount'].'
-                                </td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
-                                    <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                    &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
                                 </td>
                     </tr>';
                 }
@@ -282,7 +280,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-black font-bold">You don\'t have any expired memebers</div>';
+            echo '<div class="text-4xl mt-5 text-center text-green  font-bold">You don\'t have any new members</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right mt-5 text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -327,3 +325,72 @@
                 echo '</table>';
         }
     }    
+    function displaydates($conn,$userId,$gymId,$month,$year){
+        $query="{CALL datesHistoricalData(?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId));
+        echo '<select class="select" class="text-2xl mt-2">';
+        echo '<option value="" selected disabled hidden>'.$year.'-'.$month.'</option>';
+        while($row=sqlsrv_fetch_array($result)){
+            echo "<option value='./historicalData.php?user_id=" . $userId . "&gym_id=" . $gymId . "&month=" . $row['month'] . "&year=" . $row['year'] . "'>
+            " . $row['year'] . '-' . $row['month'] ."
+            </option>";
+        }
+        echo '</select>';
+    }
+    
+    function selectTrialClients($conn,$gymId,$userId){
+        $query="{CALL searchTrialMembers(?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $rowCount=sqlsrv_num_rows($result);
+        if($rowCount==0){
+            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any active members</div>';
+        }
+        else{
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
+            style="border-radius:20px;">
+                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                            <tr>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    First Name: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Last Name: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Beginning Period Date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    End Period Date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Status: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center ">
+                                    Left Time: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center ">
+                                    informations: 
+                                </th>
+                            </tr>
+                </thead>';
+                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                while($row=sqlsrv_fetch_array($result)){
+                    echo '<tr class=" border-b dark:border-gray-70 parent">
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold status">'.$row['operation_status'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">
+                                <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
+                                <td class="px-1 py-2 justify-center text-sm  font-bold flex gap-1">
+                                    <button  class=" px-3 py-2 bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
+                                    <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                                    &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
+                                </td>
+                    </tr>';
+                }
+                echo '</tbody>';
+                echo '</table>';
+        }
+    }

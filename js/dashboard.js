@@ -48,6 +48,9 @@ export default function countdown(){
     startPeriod+=1000;
         if(t<=0){
             parent.classList.add('text-red');
+            const confirm=document.querySelector('.confirm');
+            confirm.classList.remove('hidden');
+            confirm.classList.add('block');
         }
         },1000)
     })

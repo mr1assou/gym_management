@@ -19,7 +19,7 @@
                 $_SESSION['user_id']=$userId;
                 $_SESSION['gym_id']=$gymId;
                 //set operations status 
-                $query="{CALL setOperationsStatus()}";
+                $query="{CALL adjustOperationStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
             }

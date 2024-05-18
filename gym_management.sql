@@ -229,6 +229,16 @@ begin
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+--client in trial period
+CREATE PROCEDURE searchTrialMembers(@gym_id int)
+AS
+begin
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND DATEDIFF(day,beginning_period_date,end_period_date)<=10 
+	AND operations.operation_id 
+	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
+end
+--search trial members
 ALTER PROCEDURE newClientOfThisMonth(@gymId int)
 as
 begin
@@ -335,3 +345,9 @@ begin
 	ON t.client_id=operations.client_id;
 end
 exec datesHistoricalData 2;
+
+CREATE PROCEDURE confirmClient(@client_id int)
+AS
+begin
+	insert into operations VALUES (GETDATE(),DATEADD(MONTH,1,GETDATE()),'access',@client_id); 
+end
