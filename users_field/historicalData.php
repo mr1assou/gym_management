@@ -37,6 +37,12 @@
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
                     <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                    <div class=" flex justify-center ">    
+                            <?php  
+                                displaydates($conn,$userId,$gymId,$_GET['month'],$_GET['year']);
+                            ?>
+                    </div>
+                        <!-- --------------------------------------- -->
                         <div class="w-full p-5  flex  justify-evenly px-2 py-7 bg-white rounded-xl">
                             <div class="flex flex-col justify-between items-center">
                                 <div class="flex items-center">
@@ -69,6 +75,6 @@
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/historicalData.js" type="module"></script>
+    <script type="module" src="../js/historicalData.js"></script>
 </body>
 </html>
