@@ -9,7 +9,6 @@ function clickLinksSideBar(){
     })
 }
 clickLinksSideBar();
-
 function statusColor(){
     const status=document.querySelectorAll('.status');
     status.forEach(item=>{
