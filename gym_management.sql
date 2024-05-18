@@ -63,7 +63,6 @@ CREATE TABLE client(
 	gym_id int,
 	CONSTRAINT GYM_id FOREIGN KEY (gym_id) REFERENCES gym(gym_id) ON DELETE CASCADE
 )
-
 --constraints
 ALTER TABLE Client
 ADD CONSTRAINT CLIENT_First_name
@@ -158,7 +157,7 @@ begin
 	if @trialDays=0
 		begin
 			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id)  VALUES 
-			(@client_first_name,@client_last_name,@client_phone_number,'trial',@gym_id);
+			(@client_first_name,@client_last_name,@client_phone_number,'access',@gym_id);
 			SET @clientId=SCOPE_IDENTITY();
 			insert into operations(operation_status, client_id) VALUES ('access',@clientId);
 		end
@@ -216,6 +215,7 @@ AS
 begin
 	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='reject' 
+	AND DATEDIFF(day,beginning_period_date,end_period_date)>10
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
@@ -247,13 +247,14 @@ go
 select * from operations INNER JOIN client ON operations.client_id=client.client_id WHERE client_first_name='sbix';
 use gym_management;
 --calculate total of specific month of specific gym
-alter PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
+ALTER PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
 AS
 begin
-	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
-	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
+	SELECT client_first_name,client_last_name,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
+	(SELECT client.client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
 	ON client.gym_id=gym.gym_id WHERE  gym.gym_id=@gym_id) t ON operations.client_id=t.client_id WHERE MONTH(beginning_period_date)=@month AND 
-	YEAR(end_period_date)=@year AND (operation_status='access' OR operation_status='reject');
+	YEAR(end_period_date)=@year AND (operation_status='access' OR operation_status='reject') AND 
+	DATEDIFF(day,beginning_period_date,end_period_date)>10;
 end
 
 --earnning actual month
@@ -300,4 +301,37 @@ begin
 	users INNER JOIN payment ON payment.user_id=users.user_id WHERE users.user_id=@user_id;
 end
 
+ALTER PROCEDURE newClientsHistoricalData(@gym_id int,@month int,@year int)
+AS
+begin
+	select client_id,client_first_name,client_last_name,client_phone_number,joinning_date FROM client WHERE gym_id=@gym_id 
+	AND type_joinning_date='access' AND MONTH(joinning_date)=@month AND YEAR(joinning_date)=@year;
+end
+exec newClientsHistoricalData 2,5,2024;
 
+select * from client;
+go
+select * from operations;
+
+insert into client VALUES('malika','aboulahcen','2024-05-14','0635103092','trial',2);
+go
+insert into operations VALUES('2024-05-14','2024-05-17','trial',5);
+
+CREATE PROCEDURE adjustOperationStatus
+AS
+begin
+	UPDATE operations SET operation_status='reject' WHERE GETDATE()>=end_period_date;
+end
+
+select DISTINCT MONTH(beginning_period_date) as 'month',YEAR(beginning_period_date) as 'year' from operations;
+go
+select * from operations;
+
+ALTER PROCEDURE datesHistoricalData(@gym_id int) 
+AS
+begin
+	select DISTINCT  MONTH(beginning_period_date) as 'month',YEAR(end_period_date) as 'year' FROM operations INNER JOIN 
+	(select client_id FROM client INNER JOIN gym ON client.gym_id=gym.gym_id WHERE gym.gym_id=@gym_id) t
+	ON t.client_id=operations.client_id;
+end
+exec datesHistoricalData 2;
