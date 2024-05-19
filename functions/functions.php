@@ -91,7 +91,8 @@
                                 <td class="px-1 py-2 text-center text-sm font-bold status">'.$row['operation_status'].'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold">
                                 <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
+                                <td class="px-1 py-2 justify-center text-sm  font-bold flex gap-1">
+                                    <button  class=" px-3 py-2 bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
                                     <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                                     &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
                                 </td>
@@ -164,7 +165,8 @@
                                 <td class="px-1 py-2 text-center text-sm font-bold status">'.$row['operation_status'].'</td>
                                 <td class="px-1 py-2 text-center text-sm font-bold">
                                 <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
+                                <td class="px-1 py-2 justify-center text-sm  font-bold flex gap-1">
+                                    <button  class=" px-3 py-2 bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
                                     <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                                     &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
                                 </td>
@@ -343,7 +345,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any active members</div>';
+            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any trial members</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"

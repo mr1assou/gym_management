@@ -1,10 +1,6 @@
 <?php
     include '../vendor/connect.php'; 
-    $query="{CALL confirmClient(?)}";
+    $query="{CALL confirmClientTrialPriod(?)}";
     $result=sqlsrv_query($conn,$query,array($_GET['client_id']));
-    if($result){
-        echo "good";
-    }
-    else{
-        echo "not good";
-    }
+    $referrer = isset($_SERVER['HTTP_REFERER']) ?  : 'Unknown';
+    header("Location: " . $_SERVER['HTTP_REFERER']);

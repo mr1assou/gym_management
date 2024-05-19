@@ -26,6 +26,17 @@
 </head>
 
 <body>
+    <!-- start pop up -->
+    <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+        <div class="bg-white flex-col p-10 rounded-lg">
+            <p class="text-black font-bold">Are you Sure The client pay new month?</p>
+            <div class="flex mt-5">
+                <a href="" class="block bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md yes">yes</a>
+                <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
+            </div>
+        </div>
+    </div>
+    <!-- end pop up -->
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
