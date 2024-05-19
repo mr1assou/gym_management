@@ -8,6 +8,7 @@
     }
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -8,6 +8,7 @@
     }
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,6 +47,7 @@
         <div class="basis-[82%] " style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
+          <p class="text-center text-4xl text-green font-bold">Expired Members</p>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">

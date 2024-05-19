@@ -27,6 +27,7 @@
             $count++;
         }
     }
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,13 +53,14 @@
         <!-- content -->
         <div class="basis-[82%]  p-4  flex items-start mt-10" style="padding-left:10px;">
              <form class="z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
+         <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)
-                    echo '<small class="text-red-500 font-bold">Client already exist in your gym</small>';
+                    echo '<small class="text-red font-bold mt-5">Client already exist in your gym</small>';
             ?>
               <?php
                 if(isset($_GET['status'])){
-                    echo '<p class="text-green font-bold text-2xl alert hidden">Client Added succefully</p>';
+                    echo '<p class="text-green mt-2 font-bold text-2xl alert hidden">Client Added succefully</p>';
                      echo '<script>const alert=document.querySelector(".alert");
                         function alertDanger(aler){
                             alert.classList.remove("hidden");
@@ -72,7 +74,7 @@
                     </script>';
                 }
             ?>
-                <div class="relative h-11 w-full min-w-[200px] mt-5">
+                <div class="relative h-11 w-full min-w-[200px] mt-10">
                     <input required type="text" pattern="^(?:[a-z]+|[A-Z]+|[a-zA-Z]+)$"
                     class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="client_first_name" value="<?php echo $clientFirstName?>"/>
                     <label

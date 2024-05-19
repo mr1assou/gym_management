@@ -8,6 +8,7 @@
     }
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,15 +27,6 @@
 </head>
 
 <body>
-    <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
-        <div class="bg-white flex-col p-10 rounded-lg">
-            <p class="text-black font-bold">Are you Sure The client pay new month?</p>
-            <div class="flex mt-5">
-                <a href="" class="block bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md yes">yes</a>
-                <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
-            </div>
-        </div>
-    </div>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
@@ -44,19 +36,19 @@
         <div class="basis-[82%] " style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-        <p class="text-center text-4xl text-green font-bold">Trial Members</p>
-
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
-            <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                <?php
-                    selectTrialClients($conn,$gymId,$userId)
-                ?>
+     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
+                <p class="text-center text-4xl text-green font-bold">Client details</p>
+                <div class="w-full mt-2">
+                    <div class="flex flex-wrap p-5 justify-between">
+                        <?php informationClient($conn,$_GET['client_id']);?>
+                    </div>                         
                 </div>
+                <?php displayDetailsClients($conn,$gymId,$userId,$_GET['client_id']) ?>
             </div>
+            <p class="text-center text-black font-black text-2xl mt-5">Earning from this client:<span class="text-green ml-3 total-price">400</span><span class="text-green">DH</span></p>
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/trialMembers.js" type="module"></script>
+    <script type="module" src="../js/details.js"></script>
 </body>
 </html>

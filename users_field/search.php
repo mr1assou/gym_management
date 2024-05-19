@@ -8,6 +8,8 @@
     }
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
+    $clientName=$_GET['client_name'];
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +28,7 @@
 </head>
 
 <body>
+    <!-- start pop up -->
     <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col p-10 rounded-lg">
             <p class="text-black font-bold">Are you Sure The client pay new month?</p>
@@ -35,6 +38,7 @@
             </div>
         </div>
     </div>
+    <!-- end pop up -->
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
@@ -44,19 +48,18 @@
         <div class="basis-[82%] " style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-        <p class="text-center text-4xl text-green font-bold">Trial Members</p>
-
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
+              <p class="text-center text-4xl text-green font-bold">Search Client</p>
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 <?php
-                    selectTrialClients($conn,$gymId,$userId)
+                    searchClient($conn,$userId,$gymId,$clientName);
                 ?>
                 </div>
             </div>
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/trialMembers.js" type="module"></script>
+    <script src="../js/dashboard.js" type="module"></script>
 </body>
 </html>

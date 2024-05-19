@@ -8,6 +8,7 @@
     }
     $userId=$_GET['user_id'];
     $gymId=$_GET['gym_id'];
+    searchForm($userId,$gymId);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,8 @@
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
                     <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                    <div class=" flex justify-center ">    
+                    <p class="text-center text-4xl text-green font-bold">Historical Data</p>
+                    <div class=" flex justify-center mt-5">
                             <?php  
                                 displaydates($conn,$userId,$gymId,$_GET['month'],$_GET['year']);
                             ?>

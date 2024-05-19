@@ -1,5 +1,5 @@
 
-function clickLinksSideBar(){
+export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
     link.addEventListener('click',(e)=>{

@@ -396,3 +396,126 @@
                 echo '</table>';
         }
     }
+    function informationClient($conn,$clientId){
+        $query="{CALL selectInformationOfClient(?)}";
+        $result=sqlsrv_query($conn,$query,array($clientId));
+        while($row=sqlsrv_fetch_array($result)){
+            echo '<div class="flex">
+                            <p class="text-green text-3xl font-bold">Client First Name:</p>
+                            <p class="ml-3 text-black font-bold">'.$row['client_first_name'].'</p>
+                        </div>
+                        <div class="flex">
+                            <p class="text-green text-3xl font-bold">Client Last Name:</p>
+                            <p class="ml-3 text-black font-bold">'.$row['client_last_name'].'</p>
+                        </div>
+                        <div class="flex">
+                            <p class="text-green text-3xl font-bold">Joinning date:</p>
+                            <p class="ml-3 text-black font-bold">'.$row['joinning_date']->format('Y-m-d').'</p>
+                        </div>
+                        <div class="flex">
+                            <p class="text-green text-3xl font-bold">Client Phone number:</p>
+                            <p class="ml-3 text-black font-bold">'.$row['client_phone_number'].'</p>
+                        </div>';
+        }
+    }
+    function displayDetailsClients($conn,$gymId,$userId,$clientId){
+        $query="{CALL detailsClient(?)}";
+        $result=sqlsrv_query($conn,$query,array($clientId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $rowCount=sqlsrv_num_rows($result);
+        if($rowCount==0){
+            echo '<div class="text-4xl text-center text-green font-bold">This Client don\'t have any operations</div>';
+        }
+        else{
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
+            style="border-radius:20px;">
+                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                            <tr>
+                                  <th class="px-1 py-2 text-sm text-center">
+                                    operation number: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Beginning period date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    End period date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Operation status: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    price: 
+                                </th>
+                            </tr>
+                </thead>';
+                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                $count=1;
+                while($row=sqlsrv_fetch_array($result)){
+                    echo '<tr class=" border-b dark:border-gray-70 parent">
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$count.'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date status">'.$row['real_operations_status'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold price">'.$row['price_per_month'].'</td>
+                    </tr>';
+                    $count++;
+                }
+                echo '</tbody>';
+                echo '</table>';
+        }
+    }
+    function searchForm($userId,$gymId){
+        if(isset($_POST['search'])){
+            $clientName=$_POST['client_name'];
+            header("location:./search.php?user_id=$userId&gym_id=$gymId&client_name=$clientName");
+        }
+    }
+    function searchClient($conn,$userId,$gymId,$clientName){
+         $query="{CALL search(?,?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId,$clientName));
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
+            style="border-radius:20px;">
+                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                            <tr>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    First Name: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Last Name: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Beginning Period Date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    End Period Date: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center">
+                                    Status: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center ">
+                                    Left Time: 
+                                </th>
+                                <th class="px-1 py-2 text-sm text-center ">
+                                    informations: 
+                                </th>
+                            </tr>
+                </thead>';
+                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                while($row=sqlsrv_fetch_array($result)){
+                    echo '<tr class=" border-b dark:border-gray-70 parent">
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold status">'.$row['operation_status'].'</td>
+                                <td class="px-1 py-2 text-center text-sm font-bold">
+                                <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
+                                <td class="px-1 py-2 justify-center text-sm  font-bold flex gap-1">
+                                    <button  class=" px-3 py-2 bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
+                                    <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                                    &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
+                                </td>
+                    </tr>';
+                }
+                echo '</tbody>';
+                echo '</table>';
+    }

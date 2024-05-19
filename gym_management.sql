@@ -134,7 +134,7 @@ begin
 	SELECT users.user_id,gym.gym_id,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
 --add Trigger
-ALTER TRIGGER addClient On client 
+CREATE TRIGGER addClient On client 
 AFTER  insert
 AS 
 begin
@@ -185,30 +185,16 @@ select * from client WHERE gym_id=36;
 go
 select * from operations;
 --search client
-ALTER PROCEDURE searchClient(@gym_id int,@regex varchar(40))
+CREATE PROCEDURE search(@gym_id int,@regex varchar(40))
 AS
 begin
 	SET @regex=REPLACE(@regex,' ','');
 	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE
-	(client_first_name+client_last_name LIKE '%'+@regex+'%') AND gym_id=@gym_id AND operations.operation_id 
+	((client_first_name+client_last_name LIKE '%'+@regex+'%') OR (client_last_name+client_first_name LIKE '%'+@regex+'%')) AND gym_id=@gym_id AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
---details of client
-ALTER PROCEDURE detailsClient(@client_id int)
-AS
-begin
-	SELECT beginning_period_date,end_period_date,
-	price_per_month,operation_status FROM operations INNER JOIN 
-	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
-	ON client.gym_id=gym.gym_id WHERE client_id=@client_id) t ON operations.client_id=t.client_id;
-end
---select client information
-CREATE PROCEDURE selectInformationOfClient(@client_id int)
-AS
-begin
-	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
-end
+exec search 2,'assouhamza';
 --clients which their month expired
 ALTER PROCEDURE searchClientsMonthExpired(@gym_id int)
 AS
@@ -276,8 +262,7 @@ begin
 	ON t.client_id=operations.client_id WHERE operation_status='access';
 			
 end
-exec earningOfMonth 35,5;
---give access to client
+exec earningOfMonth 35,5;--give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
 begin
@@ -323,9 +308,7 @@ select * from client;
 go
 select * from operations;
 
-insert into client VALUES('malika','aboulahcen','2024-05-14','0635103092','trial',2);
-go
-insert into operations VALUES('2024-05-14','2024-05-17','trial',5);
+
 
 CREATE PROCEDURE adjustOperationStatus
 AS
@@ -346,8 +329,38 @@ begin
 end
 exec datesHistoricalData 2;
 
-CREATE PROCEDURE confirmClient(@client_id int)
+ALTER PROCEDURE confirmClientTrialPriod(@client_id int)
 AS
 begin
 	insert into operations VALUES (GETDATE(),DATEADD(MONTH,1,GETDATE()),'access',@client_id); 
+	update client SET type_joinning_date='access' WHERE client_id=@client_id;
 end
+
+
+insert into client VALUES('Hamza','Assou','2024-01-14','0635103092','access',2);
+go
+insert into operations VALUES('2024-01-10','2024-01-13','trial',21);
+
+--details of client
+ALTER PROCEDURE detailsClient(@client_id int)
+AS
+begin
+	SELECT beginning_period_date,end_period_date,
+	price_per_month,operation_status,
+	CASE WHEN DATEDIFF(day,beginning_period_date,end_period_date)>10 THEN 'payed'
+		WHEN DATEDIFF(day,beginning_period_date,end_period_date)<10 THEN 'trial'
+	END	AS real_operations_status
+	FROM operations INNER JOIN 
+	(SELECT client_id,client_first_name,client_last_name,joinning_date,client_phone_number,gym.price_per_month FROM client INNER JOIN gym
+	ON client.gym_id=gym.gym_id WHERE client_id=@client_id) t ON operations.client_id=t.client_id;
+end
+exec detailsClient 21;
+
+--select client information
+CREATE PROCEDURE selectInformationOfClient(@client_id int)
+AS
+begin
+	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
+end
+
+
