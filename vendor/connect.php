@@ -9,5 +9,5 @@
         "uid"=>$_ENV["USERNAME"],
         "pwd"=>$_ENV["PASSWORD"]
     );
-    $conn = sqlsrv_connect($serverName, $connectionInfo);
+    $conn =sqlsrv_connect($serverName, $connectionInfo);
 ?>

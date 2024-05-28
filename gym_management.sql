@@ -1,7 +1,5 @@
 
 
-CREATE DATABASE gym_management;
-
 CREATE TABLE users(
 	user_id int primary key identity(1,1),
 	first_name varchar(20),
@@ -111,7 +109,7 @@ begin
 end
 --functions and procedure
 --procedure sign up
-ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
+CREATE PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
 ,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int)
 AS
 begin
@@ -128,7 +126,7 @@ begin
 		end
 	end
 --login
-ALTER PROCEDURE Login(@email varchar(40))
+CREATE PROCEDURE Login(@email varchar(40))
 as	
 begin
 	SELECT users.user_id,gym.gym_id,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
@@ -174,7 +172,7 @@ select * from client WHERE gym_id=35;
 go
 select * from operations;
 --select client for supervisor 
-ALTER PROCEDURE selectClients(@gym_id int)
+CREATE PROCEDURE selectClients(@gym_id int)
 AS
 begin
 	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
@@ -196,7 +194,7 @@ begin
 end
 exec search 2,'assouhamza';
 --clients which their month expired
-ALTER PROCEDURE searchClientsMonthExpired(@gym_id int)
+CREATE PROCEDURE searchClientsMonthExpired(@gym_id int)
 AS
 begin
 	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
@@ -205,9 +203,8 @@ begin
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
-
 --clients which they have access
-ALTER PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
+CREATE PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
 AS
 begin
 	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
@@ -225,7 +222,7 @@ begin
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
 --search trial members
-ALTER PROCEDURE newClientOfThisMonth(@gymId int)
+CREATE PROCEDURE newClientOfThisMonth(@gymId int)
 as
 begin
 	SELECT COUNT(*) as 'number' FROM client INNER JOIN operations ON operations.client_id=client.client_id
@@ -243,7 +240,7 @@ go
 select * from operations INNER JOIN client ON operations.client_id=client.client_id WHERE client_first_name='sbix';
 use gym_management;
 --calculate total of specific month of specific gym
-ALTER PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
+CREATE PROCEDURE calculateTotalOfMonth(@gym_id int,@month int,@year int)
 AS
 begin
 	SELECT client_first_name,client_last_name,beginning_period_date,end_period_date,price_per_month as 'amount' FROM operations INNER JOIN 
@@ -254,7 +251,7 @@ begin
 end
 
 --earnning actual month
-ALTER PROCEDURE earningOfMonth(@gym_id int,@month int)
+CREATE PROCEDURE earningOfMonth(@gym_id int,@month int)
 AS
 begin
 	select SUM(price_per_month) as 'amount' FROM operations INNER JOIN (
@@ -296,7 +293,7 @@ begin
 	users INNER JOIN payment ON payment.user_id=users.user_id WHERE users.user_id=@user_id;
 end
 
-ALTER PROCEDURE newClientsHistoricalData(@gym_id int,@month int,@year int)
+CREATE PROCEDURE newClientsHistoricalData(@gym_id int,@month int,@year int)
 AS
 begin
 	select client_id,client_first_name,client_last_name,client_phone_number,joinning_date FROM client WHERE gym_id=@gym_id 
@@ -320,7 +317,7 @@ select DISTINCT MONTH(beginning_period_date) as 'month',YEAR(beginning_period_da
 go
 select * from operations;
 
-ALTER PROCEDURE datesHistoricalData(@gym_id int) 
+CREATE PROCEDURE datesHistoricalData(@gym_id int) 
 AS
 begin
 	select DISTINCT  MONTH(beginning_period_date) as 'month',YEAR(end_period_date) as 'year' FROM operations INNER JOIN 
@@ -342,7 +339,7 @@ go
 insert into operations VALUES('2024-01-10','2024-01-13','trial',21);
 
 --details of client
-ALTER PROCEDURE detailsClient(@client_id int)
+CREATE PROCEDURE detailsClient(@client_id int)
 AS
 begin
 	SELECT beginning_period_date,end_period_date,
@@ -362,5 +359,7 @@ AS
 begin
 	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
 end
+
+
 
 
