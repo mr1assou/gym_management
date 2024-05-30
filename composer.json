@@ -1,5 +1,9 @@
 {
     "require": {
-        "vlucas/phpdotenv": "^5.6"
+        "vlucas/phpdotenv": "^5.6",
+        "phpmailer/phpmailer": "^6.9",
+        "sendinblue/api-v3-sdk": "^8.4",
+        "guzzlehttp/guzzle": "^7.8",
+        "getbrevo/brevo-php": "^2.0"
     }
 }

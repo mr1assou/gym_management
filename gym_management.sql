@@ -148,7 +148,7 @@ begin
 			rollback
 		end
 end
-ALTER PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name varchar(80),@client_phone_number varchar(70),@gym_id int,@trialDays int)
+CREATE PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name varchar(80),@client_phone_number varchar(70),@gym_id int,@trialDays int)
 as
 begin
 	DECLARE @clientId int 
@@ -183,11 +183,11 @@ select * from client WHERE gym_id=36;
 go
 select * from operations;
 --search client
-CREATE PROCEDURE search(@gym_id int,@regex varchar(40))
+ALTER PROCEDURE search(@gym_id int,@regex varchar(40))
 AS
 begin
 	SET @regex=REPLACE(@regex,' ','');
-	SELECT operation_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE
 	((client_first_name+client_last_name LIKE '%'+@regex+'%') OR (client_last_name+client_first_name LIKE '%'+@regex+'%')) AND gym_id=@gym_id AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
@@ -326,7 +326,7 @@ begin
 end
 exec datesHistoricalData 2;
 
-ALTER PROCEDURE confirmClientTrialPriod(@client_id int)
+CREATE PROCEDURE confirmClientTrialPriod(@client_id int)
 AS
 begin
 	insert into operations VALUES (GETDATE(),DATEADD(MONTH,1,GETDATE()),'access',@client_id); 
@@ -361,5 +361,16 @@ begin
 end
 
 
+select * from client;
+
+insert into client VALUES ('Hamza','Assou','2024-04-20','0635103092','access',5);
+go
+insert into operations VALUES ('2024-04-20','2024-05-20','access',4);
 
 
+select * from users;
+update users SET email='assou@gmail.com' where user_id=7;
+go
+select * from client;
+
+use gym_management;

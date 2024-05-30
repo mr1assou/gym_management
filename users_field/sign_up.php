@@ -1,6 +1,11 @@
 <?php
     include '../vendor/connect.php'; 
-     include '../vendor/connect.php';
+    include '../functions/functions.php';
+    require __DIR__ . '/../vendor/autoload.php';
+    $dotenv = Dotenv\Dotenv::createImmutable('../vendor');
+    $dotenv->load();
+    use PHPMailer\PHPMailer\PHPMailer;
+    //login sign up
     $countPassword=0;
     $countCredentails=0;
     $firstName ="";
@@ -11,6 +16,7 @@
     $repeatPassword="";
     $gymName="";
     $price="";
+    $verificationCode="";
     if(isset($_POST["submit"])){
         $firstName = htmlspecialchars($_POST['first_name']);
         $lastName = htmlspecialchars($_POST['last_name']);
@@ -20,14 +26,20 @@
         $repeatPassword = htmlspecialchars($_POST['repeat_password']);
         $gymName = htmlspecialchars($_POST['gym_name']);
         $price = htmlspecialchars($_POST['price']);
+        $verificationCode=rand(100000, 999999);
         if($password==$repeatPassword){
             $password=crypt($password,PASSWORD_BCRYPT);
-            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?)}";
-            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price));
-            if($result)
+            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?,?)}";
+            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price,$verificationCode));
+            if($result){
+                $mail = new PHPMailer(true);
+                sendEmailToUser($email,$firstName,$lastName,$mail,$verificationCode);
                 echo "<script>window.open('./sign_up.php?status=success','_self');</script>"; 
-            else
+            }
+            else{
+                echo "outside";
                 $countCredentails++;
+            }
         }
         else{
             $countPassword++;
@@ -65,7 +77,7 @@
             <form class="z-10 bg-white rounded-md"style="width:40%;padding:1% 2%;" action="" method="post">
             <?php
                 if($countCredentails!=0)
-                    echo '<small class="text-red-500 font-bold"> first name and last name or email used by another client</small>';
+                    echo '<small class="text-red font-bold"> first name and last name or email used by another client</small>';
             ?>
             <?php
                 if(isset($_GET['status'])){
