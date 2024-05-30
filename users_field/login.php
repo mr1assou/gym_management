@@ -88,5 +88,6 @@
                 <input  type="submit" value="Log in" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110">
             </div>
     </form>
+</div>
 </body>
 </html>

@@ -34,10 +34,9 @@
             if($result){
                 $mail = new PHPMailer(true);
                 sendEmailToUser($email,$firstName,$lastName,$mail,$verificationCode);
-                echo "<script>window.open('./sign_up.php?status=success','_self');</script>"; 
+                header("location:./verification.php?email=$email");
             }
             else{
-                echo "outside";
                 $countCredentails++;
             }
         }

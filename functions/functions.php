@@ -520,26 +520,28 @@
                 echo '</table>';
     }
     function sendEmailToUser($recipientEmail,$recipientFname,$recipientLname,$mail,$verificationCode){
-        //Server settings
-        //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $mail->isSMTP();                                            //Send using SMTP
-        $mail->Host = 'smtp-relay.brevo.com';                     //Set the SMTP server to send through
-        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-        $mail->Username = $_ENV["LOGINSMTP"];                     //SMTP username
-        $mail->Password =$_ENV["PASSWORDSMTP"];                               //SMTP password
-        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-        $mail->Port = 465;                                    //TCP port to connect to; use 587 if you      have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-        //Recipients
-        $mail->setFrom('marwane.assou@gmail.com', 'Assou');
-        $mail->addAddress($recipientEmail,$recipientFname . $recipientLname);     //Add a recipient
+        $mail->isSMTP();                                           
+        $mail->Host = 'smtp-relay.brevo.com';                    
+        $mail->SMTPAuth = true;                                 
+        $mail->Username = $_ENV["LOGINSMTP"];                    
+        $mail->Password =$_ENV["PASSWORDSMTP"];                             
+        $mail->SMTPSecure = 'ssl';            
+        $mail->Port = 465;                
+        $mail->setFrom('marwane.assou@gmail.com', 'Gym Manager');
+        $mail->addAddress($recipientEmail,$recipientFname . $recipientLname);
         $mail->addBCC($recipientEmail);
-        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->isHTML(true);
         $mail->Subject = 'Here is the subject';
         $mail->Encoding = 'base64';
-
-        $mail->Body = 'This is your verification code:<b>'.$verificationCode.'</b>';
+        $mail->Body = 
+        '
+        <div style="display: flex;justify-content: center;">
+            <div style="display:flex;flex-direction: column;align-items: center;background-color: #eee;width: 50%;border-radius: 2%;padding:10px;">
+                <p style="font-weight:bold;">Code:<b style="color:#00FC3A;font-size:20px;font-weight:bold;">'.$verificationCode.'</b></p>
+                </div>
+            </div>
+        ';
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-        //$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
         try{
         $mail->send();
             echo 'Message has been sent';
