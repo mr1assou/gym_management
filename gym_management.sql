@@ -35,9 +35,10 @@ ALTER TABLE users ADD CONSTRAINT check_Trial_Date check(beginning_trial_period<e
 go
 ALTER TABLE users ADD CONSTRAINT DEFAULT_END_DATE DEFAULT DATEADD(month,2,getDate()) FOR end_trial_period;
 --status
-ALTER TABLE users ADD CONSTRAINT CHECK_STATUS check(status IN ('trial','access','reject'));
+ALTER TABLE users ADD CONSTRAINT CHECK_STATUS check(status IN ('inactive','trial','access','reject'));
 go
-ALTER TABLE users ADD CONSTRAINT DEFAULT_STATUS DEFAULT 'trial' FOR status;
+ALTER TABLE users ADD CONSTRAINT DEFAULT_STATUS DEFAULT 'inactive' FOR status;
+ALTER TABLE users ADD verification_code varchar(20);
 --gym table
 CREATE TABLE gym(
 	gym_id int primary key identity(1,1),
@@ -109,14 +110,16 @@ begin
 end
 --functions and procedure
 --procedure sign up
-CREATE PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
-,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int)
+select * from users;
+ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
+,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int,@verification_code varchar(50))
 AS
 begin
 	DECLARE @supervisor_id int;
 	if NOT EXISTS (SELECT 1 FROM users WHERE (first_name=@firstName AND Last_name=@lastName) OR (email=@email))
 		begin
-			insert into users(first_name,Last_name,phone_number,email,password) VALUES (@firstName,@lastName,@phoneNumber,@email,@password);
+			insert into users(first_name,Last_name,phone_number,email,password,beginning_trial_period,
+			end_trial_period,verification_code) VALUES (@firstName,@lastName,@phoneNumber,@email,@password,Null,NULL,@verification_code);
 			SET @supervisor_id=SCOPE_IDENTITY();
 			insert into gym VALUES(@gym_name,@price_per_month,@supervisor_id);
 		end
@@ -125,6 +128,7 @@ begin
 			RAISERROR('this credentails used by another client either first name,last name or email please provide different credentials',16,1)
 		end
 	end
+exec addSupervisorAndGym 'j','j','0635103092','waller@gmail.com','password1','X',300,'cxjhsgyfrzvghchscd';
 --login
 CREATE PROCEDURE Login(@email varchar(40))
 as	
@@ -374,3 +378,22 @@ go
 select * from client;
 
 use gym_management;
+select * from users;
+delete from users where user_id=31;
+
+
+CREATE PROCEDURE activateEmail(@email varchar(40),@code varchar(30))
+AS
+begin
+	if EXISTS(select 1 FROM users WHERE email=@email AND verification_code=@code)
+	begin
+		UPDATE users SET status='trial',beginning_trial_period=GETDATE(),end_trial_period=DATEADD(MONTH,2,GETDATE()),verification_code=NULL;		
+	end
+	ELSE
+	begin
+		raiserror('the code verification is incorrect check your email please',1,16);
+	end
+end
+select * from users;
+
+
