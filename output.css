@@ -627,10 +627,6 @@ video {
   z-index: 20;
 }
 
-.z-50 {
-  z-index: 50;
-}
-
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
@@ -707,10 +703,6 @@ video {
   display: table;
 }
 
-.contents {
-  display: contents;
-}
-
 .hidden {
   display: none;
 }
@@ -751,8 +743,40 @@ video {
   height: 100vh;
 }
 
-.h-\[95\%\] {
-  height: 95%;
+.h-\[10\%\] {
+  height: 10%;
+}
+
+.h-\[full\%\] {
+  height: full%;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[20\%\] {
+  height: 20%;
+}
+
+.h-\[30px\] {
+  height: 30px;
+}
+
+.h-\[20px\] {
+  height: 20px;
+}
+
+.h-\[50\%\] {
+  height: 50%;
+}
+
+.h-\[60\%\] {
+  height: 60%;
+}
+
+.h-\[45\%\] {
+  height: 45%;
 }
 
 .min-h-\[100vh\] {
@@ -795,6 +819,46 @@ video {
   width: 100%;
 }
 
+.w-\[90\%\] {
+  width: 90%;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[30px\] {
+  width: 30px;
+}
+
+.w-\[20px\] {
+  width: 20px;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
+.w-\[\%\] {
+  width: %;
+}
+
+.w-\[75\%\] {
+  width: 75%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
+}
+
+.w-\[82\%\] {
+  width: 82%;
+}
+
+.w-\[100\%\] {
+  width: 100%;
+}
+
 .min-w-\[200px\] {
   min-width: 200px;
 }
@@ -823,6 +887,34 @@ video {
   flex-basis: 82%;
 }
 
+.basis-\[100\%\] {
+  flex-basis: 100%;
+}
+
+.basis-\[20\%\] {
+  flex-basis: 20%;
+}
+
+.basis-\[8\%\] {
+  flex-basis: 8%;
+}
+
+.basis-\[80\%\] {
+  flex-basis: 80%;
+}
+
+.basis-\[\%\] {
+  flex-basis: %;
+}
+
+.basis-\[25\%\] {
+  flex-basis: 25%;
+}
+
+.basis-\[75\%\] {
+  flex-basis: 75%;
+}
+
 .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -837,8 +929,20 @@ video {
           user-select: none;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .flex-wrap {
@@ -1093,11 +1197,6 @@ video {
   line-height: 2rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -1106,6 +1205,21 @@ video {
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-black {
@@ -1381,6 +1495,120 @@ video {
 
 .peer:disabled ~ .peer-disabled\:text-transparent {
   color: transparent;
+}
+
+@media (min-width: 768px) {
+  .md\:z-10 {
+    z-index: 10;
+  }
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:h-\[92\%\] {
+    height: 92%;
+  }
+
+  .md\:h-\[65px\] {
+    height: 65px;
+  }
+
+  .md\:h-\[100\%\] {
+    height: 100%;
+  }
+
+  .md\:h-screen {
+    height: 100vh;
+  }
+
+  .md\:w-\[65px\] {
+    width: 65px;
+  }
+
+  .md\:w-\[70\%\] {
+    width: 70%;
+  }
+
+  .md\:basis-\[100\%\] {
+    flex-basis: 100%;
+  }
+
+  .md\:basis-\[\] {
+    flex-basis: ;
+  }
+
+  .md\:basis-\[40\%\] {
+    flex-basis: 40%;
+  }
+
+  .md\:basis-\[60\%\] {
+    flex-basis: 60%;
+  }
+
+  .md\:basis-\[100\] {
+    flex-basis: 100;
+  }
+
+  .md\:basis-\[20\] {
+    flex-basis: 20;
+  }
+
+  .md\:basis-\[40\] {
+    flex-basis: 40;
+  }
+
+  .md\:basis-\[80\%\] {
+    flex-basis: 80%;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:flex-col {
+    flex-direction: column;
+  }
+
+  .md\:items-start {
+    align-items: flex-start;
+  }
+
+  .md\:items-center {
+    align-items: center;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .md\:justify-center {
+    justify-content: center;
+  }
+
+  .md\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .md\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .md\:leading-snug {
+    line-height: 1.375;
+  }
 }
 
 .rtl\:text-right:where([dir="rtl"], [dir="rtl"] *) {
