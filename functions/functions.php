@@ -400,20 +400,20 @@
         $query="{CALL selectInformationOfClient(?)}";
         $result=sqlsrv_query($conn,$query,array($clientId));
         while($row=sqlsrv_fetch_array($result)){
-            echo '<div class="flex">
-                            <p class="text-green text-3xl font-bold">Client First Name:</p>
+            echo '<div class="flex items-center ">
+                            <p class="text-green text-1xl font-bold">Client First Name:</p>
                             <p class="ml-3 text-black font-bold">'.$row['client_first_name'].'</p>
                         </div>
-                        <div class="flex">
-                            <p class="text-green text-3xl font-bold">Client Last Name:</p>
+                        <div class="flex items-center ">
+                            <p class="text-green text-1xl font-bold">Client Last Name:</p>
                             <p class="ml-3 text-black font-bold">'.$row['client_last_name'].'</p>
                         </div>
-                        <div class="flex">
-                            <p class="text-green text-3xl font-bold">Joinning date:</p>
+                        <div class="flex items-center ">
+                            <p class="text-green text-1xl font-bold">Joinning date:</p>
                             <p class="ml-3 text-black font-bold">'.$row['joinning_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class="flex">
-                            <p class="text-green text-3xl font-bold">Client Phone number:</p>
+                        <div class="flex items-center ">                                                     
+                            <p class="text-green text-1xl font-bold">Client Phone number:</p>
                             <p class="ml-3 text-black font-bold">'.$row['client_phone_number'].'</p>
                         </div>';
         }
@@ -531,7 +531,7 @@
         $mail->addAddress($recipientEmail,$recipientFname . $recipientLname);
         $mail->addBCC($recipientEmail);
         $mail->isHTML(true);
-        $mail->Subject = 'Here is the subject';
+        $mail->Subject = 'verification code';
         $mail->Encoding = 'base64';
         $mail->Body = 
         '

@@ -130,10 +130,10 @@ begin
 	end
 exec addSupervisorAndGym 'j','j','0635103092','waller@gmail.com','password1','X',300,'cxjhsgyfrzvghchscd';
 --login
-CREATE PROCEDURE Login(@email varchar(40))
+ALTER PROCEDURE Login(@email varchar(40))
 as	
 begin
-	SELECT users.user_id,gym.gym_id,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
+	SELECT users.user_id,first_name,Last_name,gym.gym_id,status,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
 --add Trigger
 CREATE TRIGGER addClient On client 
@@ -394,6 +394,15 @@ begin
 		raiserror('the code verification is incorrect check your email please',1,16);
 	end
 end
+
+CREATE PROCEDURE sendAnotherCode(@email varchar(30),@code varchar(20))
+AS
+begin
+	UPDATE users SET verification_code=@code WHERE email=@email;
+end
+
+delete FROM users;
 select * from users;
+delete from users;
 
 

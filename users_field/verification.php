@@ -1,5 +1,6 @@
 <?php
     include '../vendor/connect.php'; 
+    $count=0;
     if(isset($_POST['submit'])){
         $code=$_POST['code'];
         $query="{CALL activateEmail(?,?)}";
@@ -9,7 +10,7 @@
             header('location:./login.php');
         }        
         else{
-            die(print_r(sqlsrv_errors(),true));
+            $count++;
         }
     }    
 
@@ -35,14 +36,16 @@
                 <img src="../images/logo.png"  class="block w-[65px] h-[65px]">
                 <p class="ml-3 text-1xl font-black ">Gym Manager</p>
             </div>
-            <div class="flex items-center mb-2 z-10">
-                <a href="../index.php" class="block mr-5 font-bold bg-black px-6 py-[9px]  transition duration-300 ease-in-out transform  hover:shadow-black hover:shadow-2xl rounded-md">Home</a>
-            </div>
         </nav>
         <!--  -->
-        <div class=" h-[92%] w-full mt-2 flex pt-7">
-        <div class=" h-[100%] w-full  flex  items-start justify-center ">
-            <form class="z-10 bg-white rounded-md mt-10" style="width:40%;padding:1% 2%;" action="" method="post">
+        <p class="text-green text-4xl text-center">Activate your email</p>
+        <div class=" w-full mt-2 flex pt-7">
+        <div class="  w-full  flex  items-start justify-center ">
+            <form class="z-10 bg-white rounded-md mt-2" style="width:40%;padding:1% 2%;" action="" method="post">
+            <?php
+                if($count!=0)
+                    echo '<p class="font-bold text-red">invalid code</p>';
+            ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
             <input  required
                  title="Password must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" placeholder="0 0 0 0 0 0" 
@@ -53,7 +56,8 @@
                 Activation Code:
                 </label>
             </div>
-            <div class="flex justify-end mt-5">
+            <div class="flex justify-between mt-5 items-center">
+                <a href="./send_another_code.php?email=<?php echo $_GET['email'];?>" class="block text-green">send another code</a>
                 <input  type="submit" value="Activate" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110">
             </div>
                 </form>

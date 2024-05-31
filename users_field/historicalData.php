@@ -37,7 +37,7 @@
             <?php include '../includes/header.php'?>
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
-                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-5">
                     <p class="text-center text-4xl text-green font-bold">Historical Data</p>
                     <div class=" flex justify-center mt-5">
                             <?php  
@@ -67,7 +67,7 @@
                         ?>
                 </div>
             <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
                 <p class="text-black text-center text-2xl font-black">Operations Of This Month:</p>
                 <?php
                     showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);

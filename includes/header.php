@@ -14,6 +14,7 @@
         </input>
     </form>
         <div>
-            Welcome Marwane Assou   
+            <?php echo '<p class="text-green font-bold">Welcome
+            '.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>';?>
         </div>
         </div>

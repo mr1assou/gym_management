@@ -13,18 +13,23 @@
             $gymId=$data['gym_id'];
             $userId=$data['user_id'];
             $role=$data['role'];
+            $status=$data['status'];
             $passwordInDb=$data['password'];
-            if(password_verify($password,$passwordInDb) && $role='supervisor'){
+            $firstName=$data['first_name'];
+            $lastName=$data['Last_name'];
+            if(password_verify($password,$passwordInDb) && $role='supervisor' && $status!='inactive'){
                 session_start();
                 $_SESSION['user_id']=$userId;
                 $_SESSION['gym_id']=$gymId;
+                $_SESSION['first_name']=$firstName;
+                $_SESSION['last_name']=$lastName;
                 //set operations status 
                 $query="{CALL adjustOperationStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
             }
-            else if(password_verify($password,$passwordInDb) && $role='admin')
-                header('location:../admin_field/dashboard.php');
+            else if(password_verify($password,$passwordInDb) && $status='inactive')
+                header("Location: ./verification.php?email=$email");
             else{
                 $count++;
             }    
