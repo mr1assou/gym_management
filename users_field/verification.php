@@ -32,16 +32,20 @@
     <div class="w-full h-screen bg-black px-[3%] py-[2%]">
         <!-- nav bar -->
         <nav class="text-white flex justify-between items-center">
-            <div class="flex items-center z-10">
-                <img src="../images/logo.png"  class="block w-[65px] h-[65px]">
-                <p class="ml-3 text-1xl font-black ">Gym Manager</p>
+        <div class="flex items-center z-10">
+                <img src="../images/logo.png"  class="block md:w-[65px] md:h-[65px] w-[30px] h-[30px]">
+                <p class="ml-3 md:text-1xl text-xs font-black ">Gym Manager</p>
+            </div>
+            <div class="flex items-center mb-2 z-10">
+            <a href=".login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
+            <a href="../index.php" class="block bg-black text-white font-bold px-6 py-[9px] transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Home</a>
             </div>
         </nav>
         <!--  -->
-        <p class="text-green text-4xl text-center">Activate your email</p>
+        <p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">Activate your email</p>
         <div class=" w-full mt-2 flex pt-7">
         <div class="  w-full  flex  items-start justify-center ">
-            <form class="z-10 bg-white rounded-md mt-2" style="width:40%;padding:1% 2%;" action="" method="post">
+            <form class="z-10 bg-white rounded-md mt-2 p-5 w-full md:w-[40%] md:px-[2%] md:py-[1%]" action="" method="post">
             <?php
                 if($count!=0)
                     echo '<p class="font-bold text-red">invalid code</p>';

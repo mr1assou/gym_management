@@ -63,17 +63,18 @@
     <div class="w-full min-h-screen bg-black px-[3%] pt-[2%]">
         <!-- nav bar -->
         <nav class="text-white flex justify-between items-center">
-            <div class="flex items-center z-10">
-                <img src="../images/logo.png"  class="block w-[65px] h-[65px]">
-                <p class="ml-3 text-1xl font-bold ">Gym Manager</p>
+        <div class="flex items-center z-10">
+                <img src="../images/logo.png"  class="block md:w-[65px] md:h-[65px] w-[30px] h-[30px]">
+                <p class="ml-3 md:text-1xl text-xs font-black ">Gym Manager</p>
             </div>
             <div class="flex items-center mb-2 z-10">
-                <a href="./login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md">Login</a>
+            <a href=".login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
+                <a href="../index.php" class="block bg-green text-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Home</a>
             </div>
         </nav>
         <div class=" h-screen w-full   flex  px-2 items-center">
-            <img src="../images/home.png" alt="image" class="block h-[80%] w-[30%] object-cover mr-5 rounded-lg">
-            <form class="z-10 bg-white rounded-md"style="width:40%;padding:1% 2%;" action="" method="post">
+            <img src="../images/home.png" alt="image" class="md:block h-[80%] w-[30%] object-cover mr-5 rounded-lg hidden">
+            <form class="z-10 bg-white rounded-md md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post">
             <?php
                 if($countCredentails!=0)
                     echo '<small class="text-red font-bold"> first name and last name or email used by another client</small>';

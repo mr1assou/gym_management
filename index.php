@@ -19,7 +19,7 @@
                 <p class="ml-3 md:text-1xl text-xs font-black ">Gym Manager</p>
             </div>
             <div class="flex items-center mb-2 z-10">
-                <a href="./users_field/sign_up.php" class="block mr-2 md:mr-5 font-bold  px-6 py-[9px]  transition duration-300 ease-in-out transform  hover:shadow-black hover:shadow-2xl rounded-md md:text-1xl text-xs  bg-black text-white ">Sign up</a>
+                <a href="./users_field/sign_up.php" class="block mr-2 md:mr-5 font-bold  px-6 py-[9px]  transition duration-300 ease-in-out transform  hover:shadow-black hover:shadow-2xl rounded-md md:text-1xl text-xs  md:bg-black bg-green text-white ">Sign up</a>
                 <a href="./users_field/login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Login</a>
             </div>
         </nav>
