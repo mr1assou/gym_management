@@ -1,5 +1,5 @@
-<div class="w-full bg-white p-4 flex justify-between items-center">
-                <i class="fa-solid fa-bars text-black hidden" style="font-size:20px;"></i>
+<div class="w-full bg-white p-4 flex justify-between items-center gap-6">
+                <i class="fa-solid fa-bars text-black  md:invisible visible"></i>
                 <form class="flex items-center max-w-sm mx-auto" action="" method="post">   
                     <div class="relative w-full">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -9,12 +9,12 @@
             </div>
             <input type="text" id="simple-search" class="border text-sm rounded-lg  block w-full ps-10 p-2.5   dark:border-green dark:placeholder-gray-4" name="client_name" placeholder="Search name..." required />
         </div>
-        <input type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-green rounded-lg border border-blue-700 hover:bg-green focus:ring-4 focus:outline-none  dark:bg-blue-600  dark:focus:ring-blue-800 cursor-pointer transform transition-transform duration-300 hover:scale-110" value="search" name="search">
+        <input type="submit" class="md:p-2.5 p-1.5 ms-2 text-sm font-medium text-white bg-green rounded-lg border border-blue-700 hover:bg-green focus:ring-4 focus:outline-none  dark:bg-blue-600  dark:focus:ring-blue-800 cursor-pointer transform transition-transform duration-300 hover:scale-110" value="search" name="search">
             <span class="sr-only">Search</span>
         </input>
     </form>
         <div>
-            <?php echo '<p class="text-green font-bold">Welcome
+            <?php echo '<p class="text-green font-bold text-[8px] md:text-lg">Welcome
             '.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>';?>
         </div>
         </div>

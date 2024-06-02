@@ -1,6 +1,7 @@
 <?php
     function sidebar($userId,$gymId){
-        echo '<div class="basis-[18%] bg-green  h-screen rounded-lg sticky top-0">
+        echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg md:sticky md:top-0
+        absolute top-0 left-0 translate-x-[-100%] md:translate-x-[]">
             <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full">
                 <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
                 <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
@@ -56,27 +57,27 @@
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
             style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                <thead class="capitalise rounded-xl bg-white text-green font-black w-full">
                             <tr>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center">
                                     First Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center">
                                     Last Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center">
                                     Beginning Period Date: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center">
                                     End Period Date: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center">
                                     Status: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center ">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center ">
                                     Left Time: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center ">
+                                <th class="px-1 py-2 text-[5px] md:text-sm text-center ">
                                     informations: 
                                 </th>
                             </tr>
@@ -84,17 +85,17 @@
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 while($row=sqlsrv_fetch_array($result)){
                     echo '<tr class=" border-b dark:border-gray-70 parent">
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold status">'.$row['operation_status'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">
+                                <td class="px-1 py-2 text-center md:text-sm text-[4px]  font-bold">'.$row['client_first_name'].'</td>
+                                <td class="px-1 py-2 text-center md:text-sm text-[4px]  font-bold">'.$row['client_last_name'].'</td>
+                                <td class="px-1 py-2 text-center md:text-sm text-[4px]  font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center md:text-sm  text-[4px] font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center md:text-sm text-[4px] font-bold status">'.$row['operation_status'].'</td>
+                                <td class="px-1 py-2 text-center md:text-sm  text-[4px] font-bold">
                                 <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                                <td class="px-1 py-2 justify-center text-sm  font-bold flex gap-1">
-                                    <button  class=" px-3 py-2 bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
+                                <td class="px-1 py-2 justify-center md:text-sm text-[4px]   font-bold flex gap-1">
+                                    <button  class=" md:px-3 md:py-2 px-2  bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
                                     <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                    &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
+                                    &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 px-2  text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
                                 </td>
                     </tr>';
                 }

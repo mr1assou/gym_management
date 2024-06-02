@@ -44,33 +44,33 @@
             sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] " style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
-                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                        <div class="w-full p-5  flex items-center justify-between px-2 py-7 bg-white rounded-xl">
-                            <div class="basis-[30%]  flex flex-col justify-between items-center">
+     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2">
+                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-2">
+                        <div class="w-full p-5 md:flex flex-row items-center justify-between px-2 py-7 bg-white rounded-xl">
+                            <div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1">
                                 <div class="flex items-center">
-                                    <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
-                                    <p class="ml-3 font-black">New Clients This month:</p>
+                                    <i class="fa-regular fa-user text-orange fa-6x md:fa-4x text-green"></i>
+                                    <p class="md:ml-3 ml-10 font-black md:text-lg text-[10px]">New Clients This month:</p>
                                 </div>
-                                <p class="mt-5 font-bold text-s"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
+                                <p class="md:mt-5 font-bold text-s"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
                             </div>
-                            <div class="basis-[30%] flex flex-col justify-between items-center">
+                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
-                                      <i class="fa-solid fa-user-check text-green fa-4x"></i>
-                                    <p class="ml-3 font-black">Active Members:</p>
+                                      <i class="fa-solid fa-user-check text-green fa-6x md:fa-4x"></i>
+                                    <p class="ml-3 font-black md:text-lg text-[10px]">Active Members:</p>
                                 </div>
-                                <p class="mt-4 font-bold text-sm "><?php echo activeMembers($conn,$gymId)?><span>
+                                <p class="md:mt-4 font-bold text-sm "><?php echo activeMembers($conn,$gymId)?><span>
                                 </span></p>
                             </div>
-                            <div class="basis-[30%] flex flex-col justify-between items-center">
+                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
-                                    <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
-                                    <p class="ml-3 font-black">Earning of this month:</p>
+                                    <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
+                                    <p class="md:ml-3 ml-5 font-black md:text-lg text-[10px]">Earning of this month:</p>
                                 </div>
-                                <p class="mt-3 font-bold text-s"><span><?php echo earningThisMonth($conn,$gymId,date('m'));
+                                <p class="md:mt-3 font-bold text-sm "><span><?php echo earningThisMonth($conn,$gymId,date('m'));
                                 ?></span> DH</p>
                             </div>
                         </div>
