@@ -112,7 +112,7 @@ end
 --procedure sign up
 select * from users;
 ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
-,@email varchar(40),@password varchar(40),@gym_name varchar(20),@price_per_month int,@verification_code varchar(50))
+,@email varchar(40),@password varchar(255),@gym_name varchar(20),@price_per_month int,@verification_code varchar(50))
 AS
 begin
 	DECLARE @supervisor_id int;
@@ -401,8 +401,11 @@ begin
 	UPDATE users SET verification_code=@code WHERE email=@email;
 end
 
-delete FROM users;
-select * from users;
+
 delete from users;
+select * from users;
+ALTER TABLE users ALTER COLUMN password varchar(255);
+
+
 
 

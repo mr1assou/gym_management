@@ -23,13 +23,15 @@
                 $_SESSION['gym_id']=$gymId;
                 $_SESSION['first_name']=$firstName;
                 $_SESSION['last_name']=$lastName;
-                //set operations status 
                 $query="{CALL adjustOperationStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
+                exit;
             }
-            else if(password_verify($password,$passwordInDb) && $status='inactive')
+            else if(password_verify($password,$passwordInDb) && $status='inactive'){
                 header("Location: ./verification.php?email=$email");
+                exit;
+            }    
             else{
                 $count++;
             }    
@@ -52,17 +54,6 @@
 <body>
     <div class="absolute bg-green right-0 top-0 w-[70%]  z-0 h-[100%]" style="clip-path: polygon(74% 0, 100% 0, 100% 100%, 22% 100%);"></div>
     <div class="w-full min-h-screen  bg-black px-[3%] pt-[2%]">
-        <!-- nav bar -->
-        <!-- <nav class="text-white flex justify-between items-center">
-            <div class="flex items-center z-10">
-                <img src="../images/logo.png"  class="block w-[65px] h-[65px]">
-                <p class="ml-3 text-1xl font-bold ">Gym Manager</p>
-            </div>
-            <div class="flex items-center mb-2 z-10">
-                <a href="./sign_up.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md mr-2">Sign up</a>
-                <a href="../index.php" class="block mr-5 font-bold bg-black px-6 py-[9px]  transition duration-300 ease-in-out transform  hover:shadow-black hover:shadow-2xl rounded-md">Home</a>
-            </div>
-        </nav> -->
         <nav class="text-white flex justify-between items-center">
             <div class="flex items-center z-10">
                 <img src="../images/logo.png"  class="block md:w-[65px] md:h-[65px] w-[30px] h-[30px]">

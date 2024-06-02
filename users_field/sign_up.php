@@ -28,7 +28,8 @@
         $price = htmlspecialchars($_POST['price']);
         $verificationCode=rand(100000, 999999);
         if($password==$repeatPassword){
-            $password=crypt($password,PASSWORD_BCRYPT);
+            $password=password_hash($password,PASSWORD_DEFAULT);
+            echo '<p class="text-4xl">'.$password.'</p>';
             $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?,?)}";
             $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price,$verificationCode));
             if($result){
@@ -68,7 +69,7 @@
                 <p class="ml-3 md:text-1xl text-xs font-black ">Gym Manager</p>
             </div>
             <div class="flex items-center mb-2 z-10">
-            <a href=".login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
+            <a href="./login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
                 <a href="../index.php" class="block bg-green text-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Home</a>
             </div>
         </nav>
