@@ -51,7 +51,7 @@
              sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%]  p-4  flex items-start mt-10" style="padding-left:10px;">
+        <div class="basis-[82%] z-0 p-4  flex items-start mt-10" style="padding-left:10px;">
              <form class="z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
