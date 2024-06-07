@@ -45,14 +45,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
+<div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+        <div class="bg-white flex-col p-10 rounded-lg">
+            <p class="text-black font-bold">Are you Sure The client pay new month?</p>
+            <div class="flex mt-5">
+                <a href="" class="block bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md yes">yes</a>
+                <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
+            </div>
+        </div>
+    </div>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
              sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] z-0 p-4  flex items-start mt-10" style="padding-left:10px;">
-             <form class="z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
+        <div class="basis-[82%] z-0 flex-col" style="padding-left:10px;">
+            <?php include '../includes/header.php'?>
+             <form class="mt-10 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)

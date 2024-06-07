@@ -1,5 +1,5 @@
 <div class="w-full bg-white p-4 flex justify-between items-center gap-6">
-                <i class="fa-solid fa-bars text-black  md:invisible visible"></i>
+                <i class="fa-solid fa-bars text-black  md:invisible visible toggleButton"></i>
                 <form class="flex items-center max-w-sm mx-auto" action="" method="post">   
                     <div class="relative w-full">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -14,7 +14,7 @@
         </input>
     </form>
         <div>
-            <?php echo '<p class="text-green font-bold text-[8px] md:text-lg">Welcome
+            <?php echo '<p class="text-green font-bold text-[8px] md:text-[15px]">Welcome
             '.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>';?>
         </div>
         </div>

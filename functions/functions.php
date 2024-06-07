@@ -1,10 +1,13 @@
 <?php
     function sidebar($userId,$gymId){
         echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg md:sticky md:top-0
-        absolute top-0 left-0 basis-[50%] translate-x-[0%] z-10 md:translate-x-[]">
-            <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full">
-                <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
-                <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
+        fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-10 md:translate-x-[] sidebar transition duration-300">
+            <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full justify-between">
+                <div class="flex items-center">
+                    <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
+                    <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
+                </div>
+                <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
             <div class=" text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
