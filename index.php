@@ -26,7 +26,7 @@
         <!-- <div class="absolute to h-[100%] w-[50%] bg-green top-0 left-0 -z-50    "></div> -->
         <div class="h-[92%] w-full mt-2 flex pt-7">
             <div class="md:basis-[40%] basis-[35%] w-full flex-column items-start z-10">
-                <h1 class="text-white md:text-4xl text-[15px]  font-black mt-10 md:leading-snug leading-snug">Welcome to Gym Manager your all-in-one solution for effortlessly managing your fitness center.</h1>
+                <h1 class="text-white md:text-4xl text-[10px]  font-black mt-10 md:leading-snug leading-snug">Welcome to Gym Manager your all-in-one solution for effortlessly managing your fitness center.</h1>
                 <small class="text-grey block mt-10 text-[10px] md:text-sm">With Gym Manager, focus less on administrative tasks and more on what matters providing exceptional fitness experiences.</small>
             </div>
             <div class="md:basis-[60%] basis-[65%]  z-10 w-full flex md:items-center items-start justify-end" md:style="clip-path: polygon(43% 0, 100% 0, 100% 100%, 0% 100%);" style="clip-path: polygon(0 0, 100% 0%, 99% 100%, 0% 100%);">

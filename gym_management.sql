@@ -171,7 +171,7 @@ begin
 			insert into operations VALUES (GETDATE(),DATEADD(day,@trialDays,GETDATE()),'trial',@clientId);
 		end
 	end
-exec addClientForGym 'wo','way','0661805085',5,36;
+
 select * from client WHERE gym_id=35;
 go
 select * from operations;
@@ -207,6 +207,7 @@ begin
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
+select * from operations;
 --clients which they have access
 CREATE PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
 AS
@@ -338,10 +339,13 @@ begin
 end
 
 
-insert into client VALUES('Hamza','Assou','2024-01-14','0635103092','access',2);
+insert into client VALUES('k','k','2024-05-6','0635103092','trial',69);
 go
-insert into operations VALUES('2024-01-10','2024-01-13','trial',21);
+insert into operations VALUES('2024-06-8','2024-06-11','access',25);
 
+select * from client;
+go 
+select * from operations;
 --details of client
 CREATE PROCEDURE detailsClient(@client_id int)
 AS

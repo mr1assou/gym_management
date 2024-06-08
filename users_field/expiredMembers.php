@@ -44,7 +44,7 @@
             sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] " style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
           <p class="text-center text-4xl text-green font-bold">Expired Members</p>
