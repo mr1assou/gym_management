@@ -33,19 +33,21 @@
             sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] " style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
+        <div class="px-1">
+        <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 <p class="text-center text-4xl text-green font-bold">Client details</p>
-                <div class="w-full mt-2">
-                    <div class="flex flex-wrap p-5 justify-between">
+                <div class="w-full mt-2 text-[7px] md:text-[15px]">
+                    <div class="md:flex flex-row p-5 md:justify-between  items-center ">
                         <?php informationClient($conn,$_GET['client_id']);?>
                     </div>                         
                 </div>
                 <?php displayDetailsClients($conn,$gymId,$userId,$_GET['client_id']) ?>
             </div>
-            <p class="text-center text-black font-black text-2xl mt-5">Earning from this client:<span class="text-green ml-3 total-price">400</span><span class="text-green">DH</span></p>
+        </div>
+            <p class="text-center text-black font-black text-2xl mt-5 px-2">Earning from this client:<span class="text-green ml-3 total-price">400</span><span class="text-green">DH</span></p>
         </div> 
     </div>
     <!-- javascript -->
