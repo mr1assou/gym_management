@@ -715,6 +715,10 @@ video {
   margin-right: 0px;
 }
 
+.mt-0 {
+  margin-top: 0px;
+}
+
 .block {
   display: block;
 }
@@ -815,6 +819,10 @@ video {
   width: 100%;
 }
 
+.w-\[\] {
+  width: ;
+}
+
 .min-w-\[200px\] {
   min-width: 200px;
 }
@@ -845,6 +853,30 @@ video {
 
 .basis-0 {
   flex-basis: 0px;
+}
+
+.basis-\[\%\] {
+  flex-basis: %;
+}
+
+.basis-\[60\%\] {
+  flex-basis: 60%;
+}
+
+.basis-\[40\%\] {
+  flex-basis: 40%;
+}
+
+.basis-\[35\%\] {
+  flex-basis: 35%;
+}
+
+.basis-\[65\%\] {
+  flex-basis: 65%;
+}
+
+.basis-\[\] {
+  flex-basis: ;
 }
 
 .translate-x-\[-100\%\] {
@@ -952,6 +984,10 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .border-b {
@@ -1099,6 +1135,11 @@ video {
   padding-bottom: 9px;
 }
 
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -1188,6 +1229,32 @@ video {
   line-height: 1rem;
 }
 
+.text-\[1px\] {
+  font-size: 1px;
+}
+
+.text-\[15px\] {
+  font-size: 15px;
+}
+
+.text-\[6px\] {
+  font-size: 6px;
+}
+
+.text-\[7px\] {
+  font-size: 7px;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .font-black {
   font-weight: 900;
 }
@@ -1258,6 +1325,18 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[\] {
+  color: ;
+}
+
+.text-\[5\] {
+  color: 5;
+}
+
+.text-\[6mx\] {
+  color: 6mx;
 }
 
 .opacity-100 {
@@ -1522,6 +1601,10 @@ video {
     margin-right: 5rem;
   }
 
+  .md\:mt-10 {
+    margin-top: 2.5rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1574,6 +1657,14 @@ video {
     flex-basis: 82%;
   }
 
+  .md\:basis-\[35\%\] {
+    flex-basis: 35%;
+  }
+
+  .md\:basis-\[65\%\] {
+    flex-basis: 65%;
+  }
+
   .md\:translate-x-\[\] {
     --tw-translate-x: ;
     transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -1585,6 +1676,10 @@ video {
 
   .md\:items-center {
     align-items: center;
+  }
+
+  .md\:justify-evenly {
+    justify-content: space-evenly;
   }
 
   .md\:bg-black {

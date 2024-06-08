@@ -43,7 +43,7 @@
             sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] " style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
@@ -55,30 +55,30 @@
                             ?>
                     </div>
                         <!-- --------------------------------------- -->
-                        <div class="w-full p-5  flex  justify-evenly px-2 py-7 bg-white rounded-xl">
-                            <div class="flex flex-col justify-between items-center">
+                        <div class="w-full p-5  md:flex  md:justify-evenly px-2 py-7 bg-white rounded-xl flex-row ">
+                            <div class=" md:flex-col flex justify-between items-center">
                                 <div class="flex items-center">
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
-                                    <p class="ml-3 font-black">New Clients This month:</p>
+                                    <p class="ml-5 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
-                                <p class="mt-5 font-bold text-s number-clients">20<span></span></p>
+                                <p class="md:mt-5 mt-0 font-bold text-xs number-clients">20<span></span></p>
                             </div>
-                            <div class="flex flex-col justify-between items-center">
+                            <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
                                     <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
-                                    <p class="ml-3 font-black">Earning of this month:</p>
+                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
                                 </div>
-                                <p class="mt-3 font-bold text-s"><span class="earning"></span> DH</p>
+                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span> DH</p>
                             </div>
                         </div>
-                        <p class="text-black text-center text-2xl font-black">New Clients of This Month:</p>
+                        <p class="text-green text-center text-2xl font-black">New Clients of This Month:</p>
                         <?php
                             newClientsHistoricalData($conn,$gymId,$userId,$_GET['month'],$_GET['year']);        
                         ?>
                 </div>
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
-                <p class="text-black text-center text-2xl font-black">Operations Of This Month:</p>
+                <p class="text-green text-center text-2xl font-black">Operations Of This Month:</p>
                 <?php
                     showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
                 ?>

@@ -245,33 +245,33 @@
         else{
             echo '<table class="text-sm text-left mt-5 rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
             style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                <thead class="capitalise rounded-xl bg-white text-green font-black text-[7px] md:text-sm">
                             <tr>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     First Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     Last Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     Beginning Period Date: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     End Period Date: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     price: 
                                 </th>
                             </tr>
                 </thead>';
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent">
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date amount">
+                    echo '<tr class=" border-b dark:border-gray-70 parent text-sm text-[6px]">
+                                <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
+                                <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
+                                <td class="px-1 py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class="px-1 py-2 text-center font-bold beginning-date amount">
                                     '.$row['amount'].'
                                 </td>
                     </tr>';
@@ -291,40 +291,41 @@
         else{
             echo '<table class="text-sm text-left rtl:text-right mt-5 text-gray-500 dark:text-gray-400  bg-white w-full"
             style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black">
+                <thead class="capitalise rounded-xl bg-white text-green font-black text-[7px] md:text-sm">
                             <tr>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2 text-center">
                                     First Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2  text-center">
                                     Last Name: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2  text-center">
                                     Phone number: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2  text-center">
                                     Joinning Date: 
                                 </th>
-                                <th class="px-1 py-2 text-sm text-center">
+                                <th class="px-1 py-2  text-center">
                                     informations: 
                                 </th>
                             </tr>
                 </thead>';
-                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400">';
                 while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 new-clients">
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">
+                    echo '<tr class=" border-b dark:border-gray-70 new-clients md:text-sm text-[6px]">
+                                <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
+                                <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
+                                <td class="px-1 py-2 text-center font-bold beginning-date">
                                     '.$row['client_phone_number'].'
                                 </td>
-                                <td class="px-1 py-2 text-center text-sm font-bold beginning-date">
+                                <td class="px-1 py-2 text-center font-bold beginning-date">
                                     '.$row['joinning_date']->format('Y-m-d').'
                                 </td>
-                                <td class="px-1 py-2 text-center text-sm  font-bold">
-                                    <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                    &gym_id='.$gymId.'" class="block  px-3 py-2 text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                                </td>
+                                <td class="px-1 py-2 justify-center md:text-sm text-[4px]   font-bold flex gap-1">
+                                <button  class=" md:px-3 md:py-2 px-2  bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
+                                <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                                &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 px-2  text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
+                            </td>
                     </tr>';
                 }
                 echo '</tbody>';
@@ -334,7 +335,7 @@
     function displaydates($conn,$userId,$gymId,$month,$year){
         $query="{CALL datesHistoricalData(?)}";
         $result=sqlsrv_query($conn,$query,array($gymId));
-        echo '<select class="select" class="text-2xl mt-2">';
+        echo '<select  class="text-md mt-2 select bg-white border-2 rounded-md px-2 py-1">';
         echo '<option value="" selected disabled hidden>'.$year.'-'.$month.'</option>';
         while($row=sqlsrv_fetch_array($result)){
             echo "<option value='./historicalData.php?user_id=" . $userId . "&gym_id=" . $gymId . "&month=" . $row['month'] . "&year=" . $row['year'] . "'>
