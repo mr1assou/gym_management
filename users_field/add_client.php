@@ -60,9 +60,10 @@
              sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] z-0 flex-col" style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
-             <form class="mt-10 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]"style="width:40%;padding:1% 2%;margin-left:30%;" action="" method="post">
+            <div class="flex justify-center w-full px-3">
+             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)
@@ -121,6 +122,7 @@
                 <input  type="submit" value="Add Client" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110 ">
             </div>
         </form>
+            </div>
     </div>
     <!-- javascript -->
     <script src="../js/dashboard.js" type="module"></script>
