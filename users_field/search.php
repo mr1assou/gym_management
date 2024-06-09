@@ -45,7 +45,7 @@
             sidebar($userId,$gymId);
         ?>
         <!-- content -->
-        <div class="basis-[82%] " style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
@@ -60,6 +60,6 @@
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/dashboard.js" type="module"></script>
+    <script src="../js/search.js" type="module"></script>
 </body>
 </html>
