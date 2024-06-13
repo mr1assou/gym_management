@@ -17,18 +17,18 @@
             $passwordInDb=$data['password'];
             $firstName=$data['first_name'];
             $lastName=$data['Last_name'];
-            if(password_verify($password,$passwordInDb) && $role='supervisor' && $status!='inactive'){
+            if(password_verify($password,$passwordInDb) && $role=='supervisor' && $status!='inactive'){
                 session_start();
                 $_SESSION['user_id']=$userId;
                 $_SESSION['gym_id']=$gymId;
                 $_SESSION['first_name']=$firstName;
                 $_SESSION['last_name']=$lastName;
-                $query="{CALL adjustOperationStatus}";
+                $query="{CALL adjustStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
                 exit;
             }
-            else if(password_verify($password,$passwordInDb) && $status='inactive'){
+            else if(password_verify($password,$passwordInDb) && $status=='inactive'){
                 header("Location: ./verification.php?email=$email");
                 exit;
             }    

@@ -55,7 +55,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any client</div>';
+            echo '<div class="text-1xl text-center text-grey font-bold">You don\'t have any client</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -185,55 +185,91 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-4xl text-center text-green font-bold">You don\'t have any active members</div>';
+            echo '<div class="text-xl text-center text-grey font-bold">You don\'t have any active members</div>';
         }
         else{
-            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
-            style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black text-[4px] md:text-sm">
-                            <tr>
-                                <th class="px-1 py-2 text-center">
-                                    First Name: 
-                                </th>
-                                <th class="px-1 py-2 text-center">
-                                    Last Name: 
-                                </th>
-                                <th class="px-1 py-2 text-center">
-                                    Beginning Period Date: 
-                                </th>
-                                <th class="px-1 py-2 text-center">
-                                    End Period Date: 
-                                </th>
-                                <th class="px-1 py-2 text-center">
-                                    Status: 
-                                </th>
-                                <th class="px-1 py-2 text-center ">
-                                    Left Time: 
-                                </th>
-                                <th class="px-1 py-2 text-center ">
-                                    informations: 
-                                </th>
-                            </tr>
-                </thead>';
-                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
-                while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent text-[4px] md:text-sm">
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center font-bold status">'.$row['operation_status'].'</td>
-                                <td class="px-1 py-2 text-center font-bold">
-                                <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                            <td class="px-1 py-2 justify-center md:text-sm text-[4px]   font-bold flex gap-1">
-                                <button  class=" md:px-3 md:py-2 px-2  bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm">confirm</button>
-                                <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 px-2  text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                            </td>
-                    </tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
+            // echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
+            // style="border-radius:20px;">
+            //     <thead class="capitalise rounded-xl bg-white text-green font-black text-[4px] md:text-sm">
+            //                 <tr>
+            //                     <th class="px-1 py-2 text-center">
+            //                         First Name: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center">
+            //                         Last Name: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center">
+            //                         Beginning Period Date: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center">
+            //                         End Period Date: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center">
+            //                         Status: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center ">
+            //                         Left Time: 
+            //                     </th>
+            //                     <th class="px-1 py-2 text-center ">
+            //                         informations: 
+            //                     </th>
+            //                 </tr>
+            //     </thead>';
+            //     echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+            //     while($row=sqlsrv_fetch_array($result)){
+            //         echo '<tr class=" border-b dark:border-gray-70 parent text-[4px] md:text-sm">
+            //                     <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
+            //                     <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
+            //                     <td class="px-1 py-2 text-center font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+            //                     <td class="px-1 py-2 text-center font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
+            //                     <td class="px-1 py-2 text-center font-bold status">'.$row['operation_status'].'</td>
+            //                     <td class="px-1 py-2 text-center font-bold">
+            //                     <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
+            //                 <td class="px-1 py-2 justify-center md:text-sm text-[4px]   font-bold flex gap-1">
+            //                     <button  class=" md:px-3 md:py-2 px-2  bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm">confirm</button>
+            //                     <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+            //                     &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 px-2  text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
+            //                 </td>
+            //         </tr>';
+            //     }
+            //     echo '</tbody>';
+            //     echo '</table>';
+            while($row=sqlsrv_fetch_array($result)){
+                echo '<div class="h-96 shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md py-2 parent">
+                <div class="h-[60%] px-5">
+                    <div class="h-full w-full py-1 rounded-full p-1 bg-green">    
+                        <img src="../images/face.jpg" class=" h-full w-full object-top rounded-full">
+                    </div>
+                </div>
+                <div class="mt-3 px-3 w-full">
+                    <div class="flex w-full">
+                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class="b basis-[10%] text-[13px] text-green font-black">'.$row['operation_status'].'</p>
+                    </div>
+                    <div class="flex  text-[13px] mt-3 font-black">
+                        <div class=" basis-[60%] flex">
+                            <p class="text-green font-black">start:</p>
+                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                        </div>
+                        <div class=" basis-[40%] flex">
+                            <p class="text-green font-black">end:</p>
+                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                        </div>
+                    </div>
+                    <div class="flex  text-[13px] mt-3 font-black">
+                        <div class=" basis-[60%] flex center">
+                            <p class="text-green font-black">Timer:</p>
+                            <p class="text-center font-bold">
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                        </div>
+                    </div>
+                        <div class="flex justify-end">
+                            <a href="./details.php?client_id=3&user_id=3
+                            &gym_id=3" class="block  md:px-3 md:py-2 px-2   text-black bg-grey  transition  duration-100 ease-in-out hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                        </div>
+                </div>
+            </div>';
+            }
         }
     }
     function showOperations($conn,$gymId,$userId,$month,$year){
@@ -524,34 +560,4 @@
                 }
                 echo '</tbody>';
                 echo '</table>';
-    }
-    function sendEmailToUser($recipientEmail,$recipientFname,$recipientLname,$mail,$verificationCode){
-        $mail->isSMTP();                                           
-        $mail->Host = 'smtp-relay.brevo.com';                    
-        $mail->SMTPAuth = true;                                 
-        $mail->Username = $_ENV["LOGINSMTP"];                    
-        $mail->Password =$_ENV["PASSWORDSMTP"];                             
-        $mail->SMTPSecure = 'ssl';            
-        $mail->Port = 465;                
-        $mail->setFrom('marwane.assou@gmail.com', 'Gym Manager');
-        $mail->addAddress($recipientEmail,$recipientFname . $recipientLname);
-        $mail->addBCC($recipientEmail);
-        $mail->isHTML(true);
-        $mail->Subject = 'verification code';
-        $mail->Encoding = 'base64';
-        $mail->Body = 
-        '
-        <div style="display: flex;justify-content: center;">
-            <div style="display:flex;flex-direction: column;align-items: center;background-color: #eee;width: 50%;border-radius: 2%;padding:10px;">
-                <p style="font-weight:bold;">Code:<b style="color:#00FC3A;font-size:20px;font-weight:bold;">'.$verificationCode.'</b></p>
-                </div>
-            </div>
-        ';
-        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-        try{
-        $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
     }

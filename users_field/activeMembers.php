@@ -46,10 +46,10 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-    <p class="text-center text-4xl text-green font-bold">Active Members</p>
+    <p class="text-center text-4xl text-green font-bold mt-3">Active Members</p>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="w-full bg-white p-3 mt-3 rounded-md grid grid-cols-4 gap-3">
                 <?php
                     selectActiveClients($conn,$gymId,$userId)
                 ?>
