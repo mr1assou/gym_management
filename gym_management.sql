@@ -152,14 +152,14 @@ begin
 			rollback
 		end
 end
-CREATE PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name varchar(80),@client_phone_number varchar(70),@gym_id int,@trialDays int)
+ALTER PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name varchar(80),@client_phone_number varchar(70),@gym_id int,@image varchar(255))
 as
 begin
 	DECLARE @clientId int 
 	if @trialDays=0
 		begin
-			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id)  VALUES 
-			(@client_first_name,@client_last_name,@client_phone_number,'access',@gym_id);
+			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id,image)  VALUES 
+			(@client_first_name,@client_last_name,@client_phone_number,'access',@gym_id,@image);
 			SET @clientId=SCOPE_IDENTITY();
 			insert into operations(operation_status, client_id) VALUES ('access',@clientId);
 		end
@@ -369,14 +369,13 @@ begin
 end
 
 
-select * from client;
+select * from gym;
 
-insert into client VALUES ('Hamza','Assou','2024-04-20','0635103092','access',5);
+insert into client VALUES ('mohamed','grmat','2024-05-5','0635103092','access',73);
 go
-insert into operations VALUES ('2024-04-20','2024-05-20','access',4);
+insert into operations VALUES ('2024-05-5','2024-06-5','access',34);
 
-
-select * from users;
+select * from client;
 update users SET email='assou@gmail.com' where user_id=7;
 go
 select * from client;
@@ -411,5 +410,5 @@ select * from users;
 ALTER TABLE users ALTER COLUMN password varchar(255);
 
 
-
-
+delete from client;
+ALTER TABLE client add image varchar(50);

@@ -76,7 +76,7 @@
                         </div>
             </div>
             <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="w-full bg-white p-3 mt-3 rounded-md grid grid-cols-4 gap-3">
                 <?php
                     selectClientsDashboard($conn,$gymId,$userId);
                 ?>

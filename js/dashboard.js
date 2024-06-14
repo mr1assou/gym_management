@@ -47,7 +47,9 @@ export default function countdown(){
     secondes.textContent=restSecondes;
     startPeriod+=1000;
         if(t<=0){
-            parent.classList.add('text-red');
+            const bottom=parent.querySelector('.bottom');
+            bottom.classList.remove('bg-green-dark');
+            bottom.classList.add('bg-red-light');
             const confirm=parent.querySelector('.confirm');
             confirm.classList.remove('hidden');
             confirm.classList.add('block');

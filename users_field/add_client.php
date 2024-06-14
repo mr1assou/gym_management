@@ -21,10 +21,9 @@
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL addClientForGym(?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,0));
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$path));
         if($result){
             echo "<script>window.open('./add_client.php?status=success&user_id=$userId&gym_id=$gymId','_self');</script>"; 
-            echo "";
         }
         else{
             $count++;
