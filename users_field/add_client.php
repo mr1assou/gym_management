@@ -8,7 +8,7 @@
     $clientFirstName="";
     $clientLastName="";
     $clientPhoneNumber="";
-    $numberOfTrialDays="";
+    $image="";
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
         exit;
@@ -17,11 +17,14 @@
         $clientFirstName=htmlspecialchars($_POST['client_first_name']);
         $clientLastName=htmlspecialchars($_POST['client_last_name']);
         $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
-        $numberOfTrialDays=htmlspecialchars($_POST['number_of_trial_days']);
+        $profile_image=$_FILES['profile_image'];
+        $path='../images/'.$profile_image['name'];
+        move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL addClientForGym(?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$numberOfTrialDays));
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,0));
         if($result){
             echo "<script>window.open('./add_client.php?status=success&user_id=$userId&gym_id=$gymId','_self');</script>"; 
+            echo "";
         }
         else{
             $count++;
@@ -63,7 +66,7 @@
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
             <div class="flex justify-center w-full px-3">
-             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post">
+             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post" post" enctype="multipart/form-data">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)
@@ -111,11 +114,11 @@
                 </label>
             </div>
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
-                    <input  type="number" value="0" min="0" max="10" name="number_of_trial_days" required
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" value="<?php echo $numberOfTrialDays?>"/>
+                    <input  type="file" name="profile_image" required
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Number Of Trial Days:
+                image:
                 </label>
             </div>
              <div class="flex justify-end mt-5">

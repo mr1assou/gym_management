@@ -235,8 +235,8 @@
             //     echo '</tbody>';
             //     echo '</table>';
             while($row=sqlsrv_fetch_array($result)){
-                echo '<div class="h-96 shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md py-2 parent">
-                <div class="h-[60%] px-5">
+                echo '<div class="h-96 shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md py-2 parent mt-5">
+                <div class="h-[50%] px-10">
                     <div class="h-full w-full py-1 rounded-full p-1 bg-green">    
                         <img src="../images/face.jpg" class=" h-full w-full object-top rounded-full">
                     </div>
@@ -263,9 +263,9 @@
                             <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
-                        <div class="flex justify-end">
-                            <a href="./details.php?client_id=3&user_id=3
-                            &gym_id=3" class="block  md:px-3 md:py-2 px-2   text-black bg-grey  transition  duration-100 ease-in-out hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                        <div class="flex justify-end mt-3">
+                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                 </div>
             </div>';
