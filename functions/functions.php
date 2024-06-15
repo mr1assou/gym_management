@@ -83,8 +83,8 @@
                     <div class="flex  text-[13px] mt-3 font-black">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer">
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</p>
                         </div>
                     </div>
                         <div class="flex justify-end mt-1">
@@ -94,7 +94,7 @@
                             &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                 </div>
-                <div class="bg-green-dark mt-[30px] h-[17%] rounded-md bottom"></div>
+                <div class="bg-green-dark mt-[30px] h-[10%] bottom"></div>
             </div>';
             }            
         }
@@ -150,8 +150,8 @@
                     <div class="flex  text-[13px] mt-3 font-black">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer">
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-1">
@@ -161,7 +161,7 @@
                             &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                 </div>
-                <div class="bg-green-dark mt-[30px] h-[17%] rounded-md bottom"></div>
+                <div class="bg-green-dark mt-[30px] h-[10%] bottom"></div>
             </div>';
             }
         }
@@ -200,7 +200,7 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</p>
                         </div>
                     </div>
                         <div class="flex justify-end mt-1">
@@ -210,7 +210,7 @@
                             &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                 </div>
-                <div class="bg-green-dark mt-[30px] h-[17%] rounded-md bottom"></div>
+                <div class="bg-green-dark mt-[30px] h-[10%] bottom"></div>
             </div>';
             }
         }

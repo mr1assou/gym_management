@@ -50,9 +50,12 @@ export default function countdown(){
             const bottom=parent.querySelector('.bottom');
             bottom.classList.remove('bg-green-dark');
             bottom.classList.add('bg-red-light');
-            const confirm=parent.querySelector('.confirm');
-            confirm.classList.remove('hidden');
-            confirm.classList.add('block');
+            const timer=parent.querySelector('.timer');
+            console.log(timer);
+            timer.classList.add('text-red');
+            // const confirm=parent.querySelector('.confirm');
+            // confirm.classList.remove('hidden');
+            // confirm.classList.add('block');
         }
         },1000)
     })
