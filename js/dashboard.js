@@ -9,15 +9,7 @@ export function clickLinksSideBar(){
     })
 }
 clickLinksSideBar();
-function statusColor(){
-    const status=document.querySelectorAll('.status');
-    status.forEach(item=>{
-        if(item.textContent=='trial') item.classList.add('text-blue');
-        else if(item.textContent=='access') item.classList.add('text-green-dark');
-        else if(item.textContent=='reject') item.classList.add('text-red');
-    })
-}
-statusColor();
+
 export default function countdown(){
     const parents=document.querySelectorAll('.parent');
     parents.forEach(parent=>{

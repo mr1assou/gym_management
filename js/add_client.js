@@ -1,7 +1,7 @@
 import countdown from './dashboard.js';
 countdown();
 clickLinksSideBar();
-statusColor();
+
 
 
 // display calendar
@@ -26,22 +26,65 @@ const next=document.querySelector('.next');
 // getting new date,current year and month
 let date=new Date();
 let currYear=date.getFullYear();
-let grapYear=currYear;
 let currMonth=date.getMonth();
-let grapMonth=currMonth;
 let currDay=date.getDate();
 // months
 const months=["january","February","March","April","May","June","July","August","September","October","November","December"];
 let day="";
-const renderCalendar=(currYear,currMonth,currDay,grapYear,days,customClass,currentDate)=>{
+const renderCalendar=(currYear,currMonth,days,customClass,currentDate)=>{
     // get last date of months
     let lastDateofMonth=new Date(currYear,currMonth+1,0).getDate();
     for(let i=1;i<=lastDateofMonth;i++){
-            day+=`<p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3 text-green text-sm">1</p>`
+            day+=`<p class="px-4 py-2 font-black w-[12px] text-center bg-white  flex items-center justify-center rounded-full hover:bg-green hover:text-white cursor-pointer  text-green text-xs ${customClass}">${i}</p>`
         }
     days.innerHTML=day;
     // appear the current date
     currentDate.textContent=`${months[currMonth]} ${currYear}`;
     day="";
 }
-renderCalendar(currYear,currMonth,currDay,grapYear,days,'day',currentDate);
+renderCalendar(currYear,currMonth,days,'day',currentDate);
+
+export function clickLinksSideBar(){
+    const links=document.querySelectorAll('.link-page');
+    links.forEach((link)=>{
+    link.addEventListener('click',(e)=>{
+            const sibling=e.currentTarget.children[1];
+            sibling.click();
+        })
+    })
+}
+clickLinksSideBar();
+
+prev.addEventListener('click',(e)=>{
+    e.preventDefault();
+    day="";
+    currMonth=currMonth-1;
+    if(currMonth===-1){
+        currYear-=1;
+        currMonth=11;
+    }
+    renderCalendar(currYear,currMonth,days,'day',currentDate);
+    // preventUserSelect();
+    startDateAll.forEach((startDate,index)=>{
+    preventUserSelect(startDate,endDateAll[index]);
+    })
+    selectDays=document.querySelectorAll('.day');
+    clickDays(selectDays,inputDate,outputDate,alert);
+})
+// next Btn
+next.addEventListener('click',(e)=>{
+    e.preventDefault()
+    day="";
+    currMonth=currMonth+1;
+    if(currMonth===12){
+        currYear+=1;
+        currMonth=0;
+    }
+    renderCalendar(currYear,currMonth,days,'day',currentDate);
+    // preventUserSelect();
+    startDateAll.forEach((startDate,index)=>{
+        preventUserSelect(startDate,endDateAll[index]);
+    })
+    selectDays=document.querySelectorAll('.day');
+    clickDays(selectDays,inputDate,outputDate,alert);
+})

@@ -64,8 +64,8 @@
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
-            <div class="flex justify-center w-full px-3">
-             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post" post" enctype="multipart/form-data">
+            <div class="flex justify-center w-full px-3 py-10">
+             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)
@@ -120,63 +120,60 @@
                 image:
                 </label>
             </div>
-                <div class="relative h-11 w-full min-w-[200px] mt-2">
+            <div class="relative h-11 w-full min-w-[200px] mt-5">
+                    <input  pattern="0[0-9]{9}" name="phone_number"  required value="<?php echo $clientPhoneNumber?>"
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                    <label
+                        class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                Price for client:
+                </label>
+            </div>
+                <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 payment date:
                 </label>
-                <div class=" absolute left-0 top-[35%] flex w-full items-center">
-                <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block basis-[10%] "></i>
-                <p class="basis-[80%] ml-5 font-bold  text-green">13-06-2024</p>
-            </div>
-            </div> 
-             <div class="flex justify-end mt-5">
-                <input  type="submit" value="Add Client" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110 ">
-            </div>
-        </form> 
-        </div>
-         <!-- calendar -->
-        <div class="absolute w-8/12 flex items-center justify-between flex-col bg- z-80 bg-grey    text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar">
-                                <p class="alert w-full text-center bg-red-500 text-white p-2 m-1 rounded-full text-sm hidden">you can't choose this day</p>
+                <div class=" absolute left-0 top-[39%] flex w-full items-center justify-between">
+                    <p class="  font-bold  text-green">13-06-2024</p>
+                    <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
+                </div>
+                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] top-[-320px] hidden">
                                 <div class="w-full flex justify-between items-center mt-1">
-                                
-                                <p class="text-xl font-bold text-orange text-left w-full current-date"></p>
+                                <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
                                 <div class="flex text-orange">
-                                    <button class="text-4xl bg-white mr-2 rounded-full p-2 hover:bg-orange hover:text-white cursor-pointer prev"><</p>
-                                    <button class="text-4xl bg-white rounded-full p-2 hover:bg-orange hover:text-white cursor-pointer next">></button>
+                                    <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>
+                                    <button class="text-lg bg-white rounded-full p-2 hover:bg-orange text-green   cursor-pointer next hover:bg-green hover:text-white font-black">></button>
                                 </div>
                                 </div>
                                 <div class="grid grid-cols-7 gap-3 w-full mt-2">
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">Mon</p>
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">Thu</p>
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">wed</p>
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">Thu</p>
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">Fri</p>
-                                    <p class=" text-brown font-bold w-[3rem]  col-span-1 text-center flex items-center justify-center ">Sat</p>
-                                    <p class=" text-brown font-bold  w-[3rem]  col-span-1 text-center flex items-center justify-center ">Sun</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>
+                                    <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">Thu</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Fri</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sat</p>
+                                    <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>
                                 </div>           
-                                <div class="grid grid-cols-7 gap-3 w-full justify-between items-center mt-2 days">
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
-                                <p class=" font-black w-[3rem] text-center bg-white  flex items-center justify-center rounded-full hover:bg-orange hover:text-white cursor-pointer py-3   text-green text-sm">1</p>
+                                <div class="grid grid-cols-7 gap-4 w-full justify-between items-center mt-2 days">
+                                    
                                 </div>           
                             </div>
-
-        <!-- end calendar -->   
+                            <!-- end calendar -->
+            </div> 
+             <div class="flex justify-end mt-[40px]">
+                <input  type="submit" value="Add Client" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110 ">
+            </div>
+        </form> 
+                </div>
+                   
+    </div>
     </div>
     <!-- javascript -->
-    <script src="../js/dashboard.js" type="module"></script>
+    <script src="../js/add_client.js" type="module"></script>
 </body>
 </html>
+
+
+
+
+
