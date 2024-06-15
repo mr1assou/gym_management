@@ -156,36 +156,23 @@ ALTER PROCEDURE addClientForGym(@client_first_name varchar(70),@client_last_name
 as
 begin
 	DECLARE @clientId int 
-	if @trialDays=0
-		begin
-			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id,image)  VALUES 
-			(@client_first_name,@client_last_name,@client_phone_number,'access',@gym_id,@image);
-			SET @clientId=SCOPE_IDENTITY();
-			insert into operations(operation_status, client_id) VALUES ('access',@clientId);
-		end
-	ELSE
-		begin
-			insert into client(client_first_name,client_last_name,client_phone_number,type_joinning_date,gym_id)  VALUES 
-			(@client_first_name,@client_last_name,@client_phone_number,'trial',@gym_id);
-			SET @clientId=SCOPE_IDENTITY();
-			insert into operations VALUES (GETDATE(),DATEADD(day,@trialDays,GETDATE()),'trial',@clientId);
-		end
-	end
-
-select * from client WHERE gym_id=35;
-go
-select * from operations;
+		insert into client(client_first_name,client_last_name,client_phone_number,gym_id,client_image)  VALUES 
+		(@client_first_name,@client_last_name,@client_phone_number,@gym_id,@image);
+		SET @clientId=SCOPE_IDENTITY();
+		insert into operations(operation_status, client_id) VALUES ('access',@clientId);
+end
+EXEC addClientForGym 'Hamza','Assou','0661805085',74,'blabla';
+select * from client;
 --select client for supervisor 
-CREATE PROCEDURE selectClients(@gym_id int)
+ALTER PROCEDURE selectClients(@gym_id int)
 AS
 begin
-	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status,client_image 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
 end
-select * from client WHERE gym_id=36;
-go
-select * from operations;
+
+
 --search client
 ALTER PROCEDURE search(@gym_id int,@regex varchar(40))
 AS
@@ -198,10 +185,10 @@ begin
 end
 exec search 2,'assouhamza';
 --clients which their month expired
-CREATE PROCEDURE searchClientsMonthExpired(@gym_id int)
+ALTER PROCEDURE searchClientsMonthExpired(@gym_id int)
 AS
 begin
-	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,client_image,beginning_period_date,end_period_date,operation_status 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='reject' 
 	AND DATEDIFF(day,beginning_period_date,end_period_date)>10
 	AND operations.operation_id 
@@ -209,10 +196,10 @@ begin
 end
 select * from operations;
 --clients which they have access
-CREATE PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
+ALTER PROCEDURE searchClientsWhoTheyHaveAccess(@gym_id int)
 AS
 begin
-	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status 
+	SELECT client.client_id,client_first_name,client_last_name,beginning_period_date,end_period_date,operation_status,client_image 
 	FROM client INNER JOIN operations ON operations.client_id=client.client_id WHERE gym_id=@gym_id AND operation_status='access' 
 	AND operations.operation_id 
 	IN (SELECT MAX(operations.operation_id) as 'operation' FROM operations group by client_id)
@@ -405,10 +392,10 @@ begin
 end
 
 
-delete from users;
-select * from users;
-ALTER TABLE users ALTER COLUMN password varchar(255);
+select * from client;
+go
+select * from operations;
 
-
-delete from client;
-ALTER TABLE client add image varchar(50);
+insert into client values('k','cap','2024-04-12','0635103092',74,'../images/nCHrdjlh_400x400.jpg')
+go
+insert into operations values('2024-04-12','2024-05-12','reject',76)

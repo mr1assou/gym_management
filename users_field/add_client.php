@@ -134,7 +134,7 @@
                 payment date:
                 </label>
                 <div class=" absolute left-0 top-[39%] flex w-full items-center justify-between">
-                    <p class="  font-bold  text-green">13-06-2024</p>
+                    <p class="  font-bold  text-green output-date">13-06-2024</p>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] top-[-320px] hidden">
