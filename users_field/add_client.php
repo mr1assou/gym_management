@@ -134,6 +134,7 @@
                 payment date:
                 </label>
                 <div class=" absolute left-0 top-[39%] flex w-full items-center justify-between">
+                    <input type="text" class="bg-green input-date"/>
                     <p class="  font-bold  text-green output-date">13-06-2024</p>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
@@ -155,7 +156,6 @@
                                     <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>
                                 </div>           
                                 <div class="grid grid-cols-7 gap-4 w-full justify-between items-center mt-2 days">
-                                    
                                 </div>           
                             </div>
                             <!-- end calendar -->
