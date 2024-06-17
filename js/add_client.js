@@ -43,7 +43,7 @@ const renderCalendar=(currYear,currMonth,days,currentDate)=>{
     day="";
 }
 renderCalendar(currYear,currMonth,days,currentDate);
-clickDays(document.querySelectorAll('.day'),document.querySelector('.output-date'));
+clickDays(document.querySelectorAll('.day'));
 export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
@@ -65,8 +65,7 @@ prev.addEventListener('click',(e)=>{
     }
     renderCalendar(currYear,currMonth,days,currentDate);
     const selectDays=document.querySelectorAll('.day');
-    const outputDate=document.querySelector('.output-date');
-    clickDays(selectDays,outputDate);
+    clickDays(selectDays);
 })
 // next Btn
 next.addEventListener('click',(e)=>{
@@ -79,16 +78,14 @@ next.addEventListener('click',(e)=>{
     }
     renderCalendar(currYear,currMonth,days,currentDate);
     const selectDays=document.querySelectorAll('.day');
-    const outputDate=document.querySelector('.output-date');
-    clickDays(selectDays,outputDate);
+    clickDays(selectDays);
 })
 
-function clickDays(selectDays, outputDate) {
+function clickDays(selectDays) {
     selectDays.forEach(day => {
       day.addEventListener('click', () => {
         const inputDate=document.querySelector('.input-date');
         inputDate.value = `${currYear}-${currMonth + 1}-${day.textContent}`;
-        outputDate.textContent = `${currYear}-${currMonth + 1}-${day.textContent}`;
         calendar.classList.remove('block');
         calendar.classList.add('hidden');
       });

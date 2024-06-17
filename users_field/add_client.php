@@ -9,6 +9,8 @@
     $clientLastName="";
     $clientPhoneNumber="";
     $image="";
+    $price="";
+    $paymentDate="";
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
         exit;
@@ -17,11 +19,13 @@
         $clientFirstName=htmlspecialchars($_POST['client_first_name']);
         $clientLastName=htmlspecialchars($_POST['client_last_name']);
         $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
+        $price=$_POST['price'];
+        $paymentDate=$_POST['payment_date'];
         $profile_image=$_FILES['profile_image'];
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
-        $query="{CALL addClientForGym(?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$path));
+        $query="{CALL addClientForGym(?,?,?,?,?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$path,$price,$paymentDate));
         if($result){
             echo "<script>window.open('./add_client.php?status=success&user_id=$userId&gym_id=$gymId','_self');</script>"; 
         }
@@ -65,7 +69,7 @@
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
             <div class="flex justify-center w-full px-3 py-10">
-             <form class="mt-10 mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
+             <form class=" mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
          <p class="text-center text-4xl text-green font-bold">Add Client</p>
               <?php
                 if($count!=0)
@@ -114,15 +118,15 @@
             </div>
                 <div class="relative min-h-11 w-full min-w-[200px] mt-5 py-3">
                     <input  type="file" name="profile_image" required
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent  font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 py-2"/>
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent  font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 py-2" value="<?php echo $image?>"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 image:
                 </label>
             </div>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
-                    <input  pattern="0[0-9]{9}" name="phone_number"  required value="<?php echo $clientPhoneNumber?>"
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
+                    <input   name="price" type="number" min="0"  required value="<?php ?>"
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" value="<?php echo $price?>"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 Price for client:
@@ -134,8 +138,7 @@
                 payment date:
                 </label>
                 <div class=" absolute left-0 top-[39%] flex w-full items-center justify-between">
-                    <input type="text" class="bg-green input-date"/>
-                    <p class="  font-bold  text-green output-date">13-06-2024</p>
+                    <input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required value="<?php echo $paymentDate?>"/>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] top-[-320px] hidden">
