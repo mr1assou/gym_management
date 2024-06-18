@@ -72,15 +72,15 @@
                             </div>
                         </div>
                         <p class="text-green text-center text-2xl font-black">New Clients of This Month:</p>
-                        <?php
-                            newClientsHistoricalData($conn,$gymId,$userId,$_GET['month'],$_GET['year']);        
-                        ?>
+                            <?php
+                                newClientsHistoricalData($conn,$gymId,$userId,$_GET['month'],$_GET['year']);        
+                            ?>
                 </div>
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
                 <p class="text-green text-center text-2xl font-black">Operations Of This Month:</p>
                 <?php
-                    showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
+                    //showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
                 ?>
                 </div>
             </div>

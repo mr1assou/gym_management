@@ -58,45 +58,47 @@
             echo '<div class="text-1xl text-center text-grey font-bold">You don\'t have any client</div>';
         }
         else{
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
             while($row=sqlsrv_fetch_array($result)){
-                echo '<div class="min-h-96 shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent mt-5 transition duration-300 ease-in-out hover:scale-110 cursor-pointer">
-                <div class="h-[40%] px-10 mt-3">
-                    <div class="h-full w-full py-1 rounded-full p-1 bg-green">    
+                echo '
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
+                <div class="h-[45%] px-10 mt-2">
+                    <div class="h-full w-full p-1 rounded-full  bg-green">    
                         <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
                     </div>
                 </div>
-                <div class="mt-5 px-3 w-full">
+                <div class="px-3 w-full mt-2">
                     <div class="flex w-full">
                         <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
-                        
                     </div>
-                    <div class="flex  text-[13px] mt-3 font-black">
-                        <div class=" basis-[60%] flex">
+                    <div class="flex  text-[13px] font-black mt-1">
+                        <div class=" basis-[55%] flex">
                             <p class="text-green font-black">start:</p>
                             <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class=" basis-[40%] flex">
+                        <div class=" basis-[45%] flex">
                             <p class="text-green font-black">end:</p>
                             <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
                         </div>
                     </div>
-                    <div class="flex  text-[13px] mt-3 font-black">
+                    <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</p>
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
-                        <div class="flex justify-end mt-1">
+                        <div class="flex justify-end mt-2">
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
                             <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
+                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
-                <div class="bg-green-dark mt-[30px] h-[10%] bottom"></div>
             </div>';
-            }            
+            }
+            echo ' </div>';
         }
     }
     function activeMembers($conn,$gymId){
@@ -125,8 +127,10 @@
             echo '<div class="text-xl text-center text-grey font-bold">You don\'t have any expired members</div>';
         }
         else{
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
             while($row=sqlsrv_fetch_array($result)){
-                echo '<div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
+                echo '
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
                 <div class="h-[45%] px-10 mt-2">
                     <div class="h-full w-full p-1 rounded-full  bg-green">    
                         <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
@@ -163,6 +167,7 @@
                 </div>
             </div>';
             }
+            echo ' </div>';
         }
     }    
     function selectActiveClients($conn,$gymId,$userId){
@@ -173,8 +178,10 @@
             echo '<div class="text-xl text-center text-grey font-bold">You don\'t have any active members</div>';
         }
         else{
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
             while($row=sqlsrv_fetch_array($result)){
-                echo '<div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
+                echo '
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
                 <div class="h-[45%] px-10 mt-2">
                     <div class="h-full w-full p-1 rounded-full  bg-green">    
                         <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
@@ -211,6 +218,7 @@
                 </div>
             </div>';
             }
+            echo ' </div>';
         }
     }
     function showOperations($conn,$gymId,$userId,$month,$year){
@@ -258,7 +266,6 @@
                 echo '</table>';
         }
     }    
-
     function newClientsHistoricalData($conn,$gymId,$userId,$month,$year){
         $query="{CALL newClientsHistoricalData(?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -267,47 +274,47 @@
             echo '<div class="text-1xl mt-5 text-center text-grey  font-bold">You don\'t have any new members</div>';
         }
         else{
-            echo '<table class="text-sm text-left rtl:text-right mt-5 text-gray-500 dark:text-gray-400  bg-white w-full"
-            style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black text-[7px] md:text-sm">
-                            <tr>
-                                <th class="px-1 py-2 text-center">
-                                    First Name: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Last Name: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Phone number: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Joinning Date: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    informations: 
-                                </th>
-                            </tr>
-                </thead>';
-                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400">';
-                while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 new-clients md:text-sm text-[6px]">
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center font-bold beginning-date">
-                                    '.$row['client_phone_number'].'
-                                </td>
-                                <td class="px-1 py-2 text-center font-bold beginning-date">
-                                    '.$row['joinning_date']->format('Y-m-d').'
-                                </td>
-                                <td class="px-1 py-2 justify-center md:text-sm text-[4px]   font-bold flex gap-1">
-                                <button  class=" md:px-3 md:py-2 px-2  bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110 hidden confirm">confirm</button>
-                                <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 px-2  text-black bg-grey  transition duration-100 ease-in-out hover:scale-110">Details</a>
-                            </td>
-                    </tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            while($row=sqlsrv_fetch_array($result)){
+                echo '
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
+                <div class="h-[45%] px-10 mt-2">
+                    <div class="h-full w-full p-1 rounded-full  bg-green">    
+                        <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                    </div>
+                </div>
+                <div class="px-3 w-full mt-2">
+                    <div class="flex w-full">
+                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    </div>
+                    <div class="flex  text-[13px] font-black mt-1">
+                        <div class=" basis-[55%] flex">
+                            <p class="text-green font-black">start:</p>
+                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                        </div>
+                        <div class=" basis-[45%] flex">
+                            <p class="text-green font-black">end:</p>
+                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                        </div>
+                    </div>
+                    <div class="flex  text-[13px] font-black mt-1">
+                        <div class=" basis-[60%] flex">
+                            <p class="text-green font-black">Timer:</p>
+                            <p class="text-center font-black timer">
+                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                        </div>
+                    </div>
+                        <div class="flex justify-end mt-2">
+                            <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                            &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                        </div>
+                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                </div>
+            </div>';
+            }
+            echo ' </div>';
         }
     }    
     function displaydates($conn,$userId,$gymId,$month,$year){

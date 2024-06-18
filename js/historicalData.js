@@ -1,4 +1,4 @@
-
+import {} from './dashboard.js';
 function displayNumberOfNewClients(){
     const newClients=document.querySelectorAll('.new-clients');
     let len=newClients.length;

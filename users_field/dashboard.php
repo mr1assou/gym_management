@@ -76,11 +76,9 @@
                         </div>
             </div>
             <!-- information -->
-        <div class="w-full bg-white p-3 mt-3 rounded-md grid grid-cols-4 gap-3">
                 <?php
                     selectClientsDashboard($conn,$gymId,$userId);
                 ?>
-                </div>
             </div>
         </div> 
     </div>
