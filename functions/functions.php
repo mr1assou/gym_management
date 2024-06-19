@@ -392,22 +392,32 @@
         $query="{CALL selectInformationOfClient(?)}";
         $result=sqlsrv_query($conn,$query,array($clientId));
         while($row=sqlsrv_fetch_array($result)){
-            echo '<div class="flex items-center justify-center gap-2 mt-5">
-                            <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] md:basis-[75%] text-start ">Client First Name:</p>
-                            <p class="md:ml-3 text-black font-bold basis-[40%] md:basis-[25%] text-start">'.$row['client_first_name'].'</p>
+            echo '
+            <div class="basis-[25%] rounded-full p-[4px] bg-green">
+                <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full"/>
+            </div>
+            <div class="basis-[75%]">
+                        <div class="flex  gap-2 mt-5 px-5">
+                            <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client First Name:</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['client_first_name'].'</p>
+                            </div>
+                            <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client Last Name:</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['client_last_name'].'</p>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-center gap-2 mt-5">
-                            <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] md:basis-[75%] text-start ">Client Last Name:</p>
-                            <p class="md:ml-3 text-black font-bold basis-[40%] md:basis-[25%] text-start">'.$row['client_last_name'].'</p>
+                        <div class="flex  gap-2 mt-5 px-5">
+                            <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Joinning Date:</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['joinning_date']->format('Y-m-d').'</p>
+                            </div>
+                            <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client Last Name:</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['client_phone_number'].'</p>
+                            </div>
                         </div>
-                        <div class="flex items-center justify-center gap-2 mt-5">
-                            <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] md:basis-[75%] text-start ">Joinning date:</p>
-                            <p class="md:ml-3 text-black font-bold basis-[40%] md:basis-[25%] text-start">'.$row['joinning_date']->format('Y-m-d').'</p>
-                        </div>
-                        <div class="flex items-center justify-center gap-2 mt-5">                                                     
-                            <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] md:basis-[75%] text-start ">Phone number:</p>
-                            <p class="md:ml-3 text-black font-bold basis-[40%] md:basis-[25%] text-start">'.$row['client_phone_number'].'</p>
-                        </div>';
+            </div>';
         }
     }
     function displayDetailsClients($conn,$gymId,$userId,$clientId){
@@ -443,11 +453,11 @@
                 $count=1;
                 while($row=sqlsrv_fetch_array($result)){
                     echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[6px]">
-                                <td class=" text-center  font-bold">'.$count.'</td>
-                                <td class=" text-center  font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class=" text-center  font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class=" text-center  font-bold beginning-date status">'.$row['real_operations_status'].'</td>
-                                <td class=" text-center  font-bold price">'.$row['price_per_month'].'</td>
+                                <td class=" text-center  font-bold py-3">'.$count.'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class=" text-center  font-bold beginning-date status py-3">'.$row['real_operations_status'].'</td>
+                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].'</td>
                     </tr>';
                     $count++;
                 }
@@ -464,50 +474,45 @@
     function searchClient($conn,$userId,$gymId,$clientName){
             $query="{CALL search(?,?)}";
             $result=sqlsrv_query($conn,$query,array($gymId,$clientName));
-            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full table"
-            style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black md:text-sm text-[4px]">
-                            <tr>
-                                <th class="px-1 py-2  text-center">
-                                    First Name: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Last Name: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Beginning Period Date: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    End Period Date: 
-                                </th>
-                                <th class="px-1 py-2  text-center">
-                                    Status: 
-                                </th>
-                                <th class="px-1 py-2  text-center ">
-                                    Left Time: 
-                                </th>
-                                <th class="px-1 py-2  text-center ">
-                                    informations: 
-                                </th>
-                            </tr>
-                </thead>';
-                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
-                while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[4px]">
-                                <td class="px-1 py-2 text-center  font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center  font-bold">'.$row['client_last_name'].'</td>
-                                <td class="px-1 py-2 text-center  font-bold beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center  font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center  font-bold status">'.$row['operation_status'].'</td>
-                                <td class="px-1 py-2 text-center  font-bold">
-                                <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                                <td class=" justify-center md:text-sm text-[4px]   font-bold flex gap-1 py-2">
-                                <button  class="px-1 md:px-3 md:py-2   bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm h-1/2">confirm</button>
-                                <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                &gym_id='.$gymId.'" class="px-1 block  md:px-3 md:py-2   text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 h-1/2">Details</a>
-                            </td>
-                    </tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            while($row=sqlsrv_fetch_array($result)){
+                echo '
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
+                <div class="h-[45%] px-10 mt-2">
+                    <div class="h-full w-full p-1 rounded-full  bg-green">    
+                        <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                    </div>
+                </div>
+                <div class="px-3 w-full mt-2">
+                    <div class="flex w-full text-[11px]">
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    </div>
+                    <div class="flex  text-[13px] font-black mt-1">
+                        <div class=" basis-[55%] flex text-[11px]">
+                            <p class="text-green font-black">start:</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                        </div>
+                        <div class=" basis-[45%] flex text-[11px]">
+                            <p class="text-green font-black">end:</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                        </div>
+                    </div>
+                    <div class="flex  text-[13px] font-black mt-1">
+                        <div class=" basis-[60%] flex">
+                            <p class="text-green font-black">Timer:</p>
+                            <p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                        </div>
+                    </div>
+                        <div class="flex justify-end mt-2">
+                            <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                            &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
+                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                        </div>
+                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                </div>
+            </div>';
+            }
+            echo ' </div>';
     }

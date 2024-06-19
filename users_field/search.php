@@ -48,10 +48,10 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
+     <div class="flex-col justify-between w-full  gap-2 mt-5 relative p-2 ">
             <!-- information -->
               <p class="text-center text-4xl text-green font-bold">Search Client</p>
-        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] content">
                 <?php
                     searchClient($conn,$userId,$gymId,$clientName);
                 ?>

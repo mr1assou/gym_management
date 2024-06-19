@@ -38,9 +38,9 @@
         <!-- second part-->
         <div class="px-1">
         <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                <p class="text-center text-4xl text-green font-bold">Client details</p>
+                <p class="text-center text-4xl text-green font-bold">Client Information</p>
                 <div class="w-full mt-2 text-[7px] md:text-[15px]">
-                    <div class="md:flex flex-row p-5 md:justify-between  items-center ">
+                    <div class="md:flex flex-row p-5">
                         <?php informationClient($conn,$_GET['client_id']);?>
                     </div>                         
                 </div>
