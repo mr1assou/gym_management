@@ -55,7 +55,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-1xl text-center text-grey font-bold">You don\'t have any client</div>';
+            echo '<div class="text-1xl text-center mt-3 text-grey font-bold">You don\'t have any client</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -68,24 +68,24 @@
                     </div>
                 </div>
                 <div class="px-3 w-full mt-2">
-                    <div class="flex w-full">
-                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    <div class="flex w-full text-[11px]">
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
-                        <div class=" basis-[55%] flex">
+                        <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class=" basis-[45%] flex">
+                        <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black timer">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -137,24 +137,24 @@
                     </div>
                 </div>
                 <div class="px-3 w-full mt-2">
-                    <div class="flex w-full">
-                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    <div class="flex w-full text-[11px]">
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
-                        <div class=" basis-[55%] flex">
+                        <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class=" basis-[45%] flex">
+                        <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black timer">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -188,24 +188,24 @@
                     </div>
                 </div>
                 <div class="px-3 w-full mt-2">
-                    <div class="flex w-full">
-                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    <div class="flex w-full text-[11px]">
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
-                        <div class=" basis-[55%] flex">
+                        <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class=" basis-[45%] flex">
+                        <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black timer">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -220,7 +220,7 @@
             }
             echo ' </div>';
         }
-    }
+    }   
     function showOperations($conn,$gymId,$userId,$month,$year){
         $query="{CALL calculateTotalOfMonth(?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
@@ -231,14 +231,12 @@
         else{
             echo '<table class="text-sm text-left mt-5 rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
             style="border-radius:20px;">
-                <thead class="capitalise rounded-xl bg-white text-green font-black text-[7px] md:text-sm">
+                <thead class="capitalise rounded-xl  text-green font-black text-[7px] md:text-sm ">
                             <tr>
-                                <th class=" text-center">
-                                    First Name: 
+                                <th class=" text-start ">
+                                    Full Name: 
                                 </th>
-                                <th class=" text-center">
-                                    Last Name: 
-                                </th>
+                               
                                 <th class=" text-center">
                                     Beginning Period Date: 
                                 </th>
@@ -252,12 +250,16 @@
                 </thead>';
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent text-[7px] md:text-sm">
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_first_name'].'</td>
-                                <td class="px-1 py-2 text-center font-bold">'.$row['client_last_name'].'</td>
+                    echo '<tr class=" border-b dark:border-gray-70 text-[7px] md:text-sm">
+                                <td class="px-1 py-2 text-center font-bold flex gap-1 items-center ">
+                                    <div class="basis-[17%] w-[55px] h-[55px] bg-green p-[3px] rounded-full">
+                                        <img src="'.$row['client_image'].'" alt="" class="rounded-full   object-center brightness-100 w-full h-full">
+                                    </div>
+                                    <p class="basis-[83%] text-start">'.$row['client_first_name'].'  '.$row['client_last_name'].'</p>
+                                </td>
                                 <td class="px-1 py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
                                 <td class="px-1 py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center font-bold beginning-date amount">
+                                <td class="px-1 py-2 text-center font-bold amount">
                                     '.$row['amount'].'
                                 </td>
                     </tr>';
@@ -284,24 +286,24 @@
                     </div>
                 </div>
                 <div class="px-3 w-full mt-2">
-                    <div class="flex w-full">
-                        <p class=" basis-[90%] text-[13px] text-green font-black">name:<span class=" text-black ml-1 ">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                    <div class="flex w-full text-[11px]">
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
-                        <div class=" basis-[55%] flex">
+                        <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
-                        <div class=" basis-[45%] flex">
+                        <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
-                            <p class="text-center font-black timer">
-                            <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -374,7 +376,7 @@
                                 <td class=" text-center font-bold end-date py-2">'.$row['end_period_date']->format('Y-m-d').'</td>
                                 <td class=" text-center  font-bold status py-2">'.$row['operation_status'].'</td>
                                 <td class=" text-center  font-bold py-2">
-                                <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
+                                <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
                             <td class=" justify-center md:text-sm text-[4px]   font-bold flex gap-1 py-2">
                                 <button  class="px-1 md:px-3 md:py-2   bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm h-1/2">confirm</button>
                                 <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
@@ -498,7 +500,7 @@
                                 <td class="px-1 py-2 text-center  font-bold end-date">'.$row['end_period_date']->format('Y-m-d').'</td>
                                 <td class="px-1 py-2 text-center  font-bold status">'.$row['operation_status'].'</td>
                                 <td class="px-1 py-2 text-center  font-bold">
-                                <span class="days mx-0.5">15</span>days:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
+                                <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
                                 <td class=" justify-center md:text-sm text-[4px]   font-bold flex gap-1 py-2">
                                 <button  class="px-1 md:px-3 md:py-2   bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm h-1/2">confirm</button>
                                 <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'

@@ -68,7 +68,7 @@
                                     <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
                                     <p class="ml-3 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
                                 </div>
-                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span> DH</p>
+                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span>DH</p>
                             </div>
                         </div>
                         <p class="text-green text-center text-2xl font-black">New Clients of This Month:</p>
@@ -80,7 +80,7 @@
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
                 <p class="text-green text-center text-2xl font-black">Operations Of This Month:</p>
                 <?php
-                    //showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
+                    showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
                 ?>
                 </div>
             </div>

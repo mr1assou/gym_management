@@ -53,7 +53,7 @@
                             <div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1">
                                 <div class="flex items-center">
                                     <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
-                                    <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px]  ">New Clients This month:</p>
+                                    <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
                                 <p class="md:mt-5 font-bold text-xs"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
                             </div>

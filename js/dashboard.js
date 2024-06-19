@@ -43,7 +43,6 @@ export default function countdown(){
             bottom.classList.remove('bg-green-dark');
             bottom.classList.add('bg-red-light');
             const timer=parent.querySelector('.timer');
-            console.log(timer);
             timer.classList.add('text-red');
             // const confirm=parent.querySelector('.confirm');
             // confirm.classList.remove('hidden');
@@ -83,7 +82,6 @@ deletePopUp();
 function hideSideBar(){
     const cross=document.querySelector('.cross');
     const sidebar=document.querySelector('.sidebar');
-    console.log(cross);
     cross.addEventListener('click',()=>{
         sidebar.classList.remove('translate-x-[0%]');
         sidebar.classList.add('translate-x-[-100%]');

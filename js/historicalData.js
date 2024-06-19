@@ -1,7 +1,7 @@
 import {} from './dashboard.js';
 function displayNumberOfNewClients(){
-    const newClients=document.querySelectorAll('.new-clients');
-    let len=newClients.length;
+    const clients=document.querySelectorAll('.parent');
+    let len=clients.length;
     const numberOfClients=document.querySelector('.number-clients');
     if(numberOfClients!=null)
         numberOfClients.textContent=len;
@@ -48,7 +48,6 @@ selectDates();
 function hideSideBar(){
     const cross=document.querySelector('.cross');
     const sidebar=document.querySelector('.sidebar');
-    console.log(cross);
     cross.addEventListener('click',()=>{
         sidebar.classList.remove('translate-x-[0%]');
         sidebar.classList.add('translate-x-[-100%]');
