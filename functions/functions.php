@@ -12,27 +12,27 @@
             <div class=" text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-table block mr-2"></i>
-                        <a href="dashboard.php?user_id='.$userId.'&gym_id='.$gymId.'" class="cursor-pointer">Dashboard</a>
+                        <a href="./dashboard.php" class="cursor-pointer">Dashboard</a>
             </div>
             <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user"></i>
-                        <a href="./add_client.php?user_id='.$userId.'&gym_id='.$gymId.'" class="cursor-pointer">Add client</a>
+                        <a href="./add_client.php" class="cursor-pointer">Add client</a>
             </div>
             <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-calendar-day"></i>
-                        <a class="cursor-pointer" href="./historicalData.php?user_id='.$userId.'&gym_id='.$gymId.'&month='.date('m').'&year='.date('Y').'">Historical Data</a>
+                        <a class="cursor-pointer" href="./historicalData.php?month='.date('m').'&year='.date('Y').'">Historical Data</a>
             </div>
             <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-eye-slash"></i>
-                        <a href="./expiredMembers.php?user_id='.$userId.'&gym_id='.$gymId.'" class="cursor-pointer">Expired Members</a>
+                        <a href="./expiredMembers.php" class="cursor-pointer">Expired Members</a>
             </div>
             <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user-check"></i>
-                        <a class="cursor-pointer" href="./activeMembers.php?user_id='.$userId.'&gym_id='.$gymId.'">Active Members</a>
+                        <a class="cursor-pointer" href="./activeMembers.php">Active Members</a>
             </div>
             <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
@@ -91,8 +91,7 @@
                         <div class="flex justify-end mt-2">
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
@@ -160,8 +159,7 @@
                         <div class="flex justify-end mt-2">
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
@@ -211,8 +209,7 @@
                         <div class="flex justify-end mt-2">
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                             <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
@@ -307,10 +304,8 @@
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
-                            <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                            <a href="./edit.php?client_id='.$row['client_id'].'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
@@ -325,7 +320,7 @@
         echo '<select  class="text-md mt-2 select bg-white border-2 rounded-md px-2 py-1">';
         echo '<option value="" selected disabled hidden>'.$year.'-'.$month.'</option>';
         while($row=sqlsrv_fetch_array($result)){
-            echo "<option value='./historicalData.php?user_id=" . $userId . "&gym_id=" . $gymId . "&month=" . $row['month'] . "&year=" . $row['year'] . "'>
+            echo "<option value='./historicalData.php?month=" . $row['month'] . "&year=" . $row['year'] . "'>
             " . $row['year'] . '-' . $row['month'] ."
             </option>";
         }
@@ -388,9 +383,9 @@
                 echo '</table>';
         }
     }
-    function informationClient($conn,$clientId){
-        $query="{CALL selectInformationOfClient(?)}";
-        $result=sqlsrv_query($conn,$query,array($clientId));
+    function informationClient($conn,$gymId,$clientId){
+        $query="{CALL selectInformationOfClient(?,?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId,$clientId));
         while($row=sqlsrv_fetch_array($result)){
             echo '
             <div class="basis-[25%] rounded-full p-[4px] bg-green">
@@ -416,6 +411,12 @@
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client Last Name:</p>
                                 <p class="text-black font-bold basis-[60%] text-start">'.$row['client_phone_number'].'</p>
                             </div>
+                        </div>
+                        <div class="flex  gap-2 mt-5 px-5">
+                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Price:</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['price'].'</p>
+                        </div>
                         </div>
             </div>';
         }
@@ -468,7 +469,7 @@
     function searchForm($userId,$gymId){
         if(isset($_POST['search'])){
             $clientName=$_POST['client_name'];
-            header("location:./search.php?user_id=$userId&gym_id=$gymId&client_name=$clientName");
+            header("location:./search.php?client_name=$clientName");
         }
     }
     function searchClient($conn,$userId,$gymId,$clientName){
@@ -507,8 +508,7 @@
                         <div class="flex justify-end mt-2">
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                             <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>

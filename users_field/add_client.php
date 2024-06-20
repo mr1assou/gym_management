@@ -2,8 +2,6 @@
     include '../vendor/connect.php';
     include '../functions/functions.php';
     session_start();
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
     $count=0;
     $clientFirstName="";
     $clientLastName="";
@@ -19,21 +17,21 @@
         $clientFirstName=htmlspecialchars($_POST['client_first_name']);
         $clientLastName=htmlspecialchars($_POST['client_last_name']);
         $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
-        $price=$_POST['price'];
-        $paymentDate=$_POST['payment_date'];
+        $price=htmlspecialchars($_POST['price']);
+        $paymentDate=htmlspecialchars($_POST['payment_date']);
         $profile_image=$_FILES['profile_image'];
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL addClientForGym(?,?,?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$gymId,$path,$price,$paymentDate));
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate));
         if($result){
-            echo "<script>window.open('./add_client.php?status=success&user_id=$userId&gym_id=$gymId','_self');</script>"; 
+            echo "<script>window.open('./add_client.php?status=success','_self');</script>"; 
         }
         else{
             $count++;
         }
     }
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,7 +61,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-             sidebar($userId,$gymId);
+             sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
@@ -167,8 +165,7 @@
                 <input  type="submit" value="Add Client" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110 ">
             </div>
         </form> 
-                </div>
-                   
+                </div>         
     </div>
     </div>
     <!-- javascript -->

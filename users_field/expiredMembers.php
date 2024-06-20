@@ -6,9 +6,7 @@
         header('location:./login.php');
         exit;
     }
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +39,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($userId,$gymId);
+            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -51,7 +49,7 @@
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php
-                    selectExpiredClients($conn,$gymId,$userId);
+                    selectExpiredClients($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
                 ?>
             </div>
         </div> 

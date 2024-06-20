@@ -6,10 +6,8 @@
         header('location:./login.php');
         exit;
     }
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
     $clientName=$_GET['client_name'];
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +40,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($userId,$gymId);
+            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -53,7 +51,7 @@
               <p class="text-center text-4xl text-green font-bold">Search Client</p>
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] content">
                 <?php
-                    searchClient($conn,$userId,$gymId,$clientName);
+                    searchClient($conn,$_SESSION['user_id'],$_SESSION['gym_id'],$clientName);
                 ?>
                 </div>
             </div>

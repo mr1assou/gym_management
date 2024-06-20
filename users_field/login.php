@@ -25,7 +25,7 @@
                 $_SESSION['last_name']=$lastName;
                 $query="{CALL adjustStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
-                header("Location: ./dashboard.php?user_id=$userId&gym_id=$gymId");
+                header("Location: ./dashboard.php");
                 exit;
             }
             else if(password_verify($password,$passwordInDb) && $status=='inactive'){

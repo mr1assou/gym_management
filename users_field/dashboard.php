@@ -6,9 +6,7 @@
         header('location:./login.php');
         exit;
     }
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +39,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($userId,$gymId);
+            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -55,14 +53,14 @@
                                     <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
                                     <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
-                                <p class="md:mt-5 font-bold text-xs"><?php echo newClientsOfThisMonth($conn,$gymId)?><span></span></p>
+                                <p class="md:mt-5 font-bold text-xs"><?php echo newClientsOfThisMonth($conn,$_SESSION['gym_id'])?><span></span></p>
                             </div>
                             <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
                                       <i class="fa-solid fa-user-check text-green fa-6x md:fa-4x"></i>
                                     <p class="ml-3 font-black md:text-[15px] text-[10px]">Active Members:</p>
                                 </div>
-                                <p class="md:mt-4 font-bold text-xs "><?php echo activeMembers($conn,$gymId)?><span>
+                                <p class="md:mt-4 font-bold text-xs "><?php echo activeMembers($conn,$_SESSION['gym_id'])?><span>
                                 </span></p>
                             </div>
                             <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
@@ -70,14 +68,14 @@
                                     <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                     <p class="md:ml-3 ml-5 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
                                 </div>
-                                <p class="md:mt-3 font-bold text-xs"><span><?php echo earningThisMonth($conn,$gymId,date('m'));
+                                <p class="md:mt-3 font-bold text-xs"><span><?php echo earningThisMonth($conn,$_SESSION['gym_id'],date('m'));
                                 ?></span> DH</p>
                             </div>
                         </div>
             </div>
             <!-- information -->
                 <?php
-                    selectClientsDashboard($conn,$gymId,$userId);
+                    selectClientsDashboard($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
                 ?>
             </div>
         </div> 

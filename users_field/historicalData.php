@@ -6,9 +6,7 @@
         header('location:./login.php');
         exit;
     }
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +38,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($userId,$gymId);
+            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -51,7 +49,7 @@
                     <p class="text-center text-4xl text-green font-bold">Historical Data</p>
                     <div class=" flex justify-center mt-5">
                             <?php  
-                                displaydates($conn,$userId,$gymId,$_GET['month'],$_GET['year']);
+                                displaydates($conn,$_SESSION['user_id'],$_SESSION['gym_id'],$_GET['month'],$_GET['year']);
                             ?>
                     </div>
                         <!-- --------------------------------------- -->
@@ -61,7 +59,7 @@
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
                                     <p class="ml-5 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
-                                <p class="md:mt-5 mt-0 font-bold text-xs number-clients">20<span></span></p>
+                                <p class="md:mt-5 mt-0 font-bold text-xs number-clients"><span></span></p>
                             </div>
                             <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
@@ -73,14 +71,14 @@
                         </div>
                         <p class="text-green text-center text-2xl font-black">New Clients of This Month:</p>
                             <?php
-                                newClientsHistoricalData($conn,$gymId,$userId,$_GET['month'],$_GET['year']);        
+                                newClientsHistoricalData($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);        
                             ?>
                 </div>
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
                 <p class="text-green text-center text-2xl font-black">Operations Of This Month:</p>
                 <?php
-                    showOperations($conn,$gymId,$userId,$_GET['month'],$_GET['year']);
+                    showOperations($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);
                 ?>
                 </div>
             </div>

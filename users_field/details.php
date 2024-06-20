@@ -6,9 +6,7 @@
         header('location:./login.php');
         exit;
     }
-    $userId=$_GET['user_id'];
-    $gymId=$_GET['gym_id'];
-    searchForm($userId,$gymId);
+    searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +28,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($userId,$gymId);
+            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -41,10 +39,10 @@
                 <p class="text-center text-4xl text-green font-bold">Client Information</p>
                 <div class="w-full mt-2 text-[7px] md:text-[15px]">
                     <div class="md:flex flex-row p-5">
-                        <?php informationClient($conn,$_GET['client_id']);?>
+                        <?php informationClient($conn,$_SESSION['gym_id'],$_GET['client_id']);?>
                     </div>                         
                 </div>
-                <?php displayDetailsClients($conn,$gymId,$userId,$_GET['client_id']) ?>
+                <?php displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id']) ?>
             </div>
         </div>
             <p class="text-center text-black font-black text-2xl mt-5 px-2">Earning from this client:<span class="text-green ml-3 total-price">400</span><span class="text-green">DH</span></p>
