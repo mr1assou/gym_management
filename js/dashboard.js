@@ -44,9 +44,9 @@ export default function countdown(){
             bottom.classList.add('bg-red-light');
             const timer=parent.querySelector('.timer');
             timer.classList.add('text-red');
-            // const confirm=parent.querySelector('.confirm');
-            // confirm.classList.remove('hidden');
-            // confirm.classList.add('block');
+            const confirm=parent.querySelector('.confirm');
+            confirm.classList.remove('hidden');
+            confirm.classList.add('block');
         }
         },1000)
     })

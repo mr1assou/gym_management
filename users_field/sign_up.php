@@ -29,12 +29,10 @@
         $verificationCode=rand(100000, 999999);
         if($password==$repeatPassword){
             $password=password_hash($password,PASSWORD_DEFAULT);
-            echo '<p class="text-4xl">'.$password.'</p>';
-            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?,?)}";
+            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?)}";
             $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price,$verificationCode));
             if($result){
                 $mail = new PHPMailer(true);
-                //sendEmailToUser($email,$firstName,$lastName,$mail,$verificationCode);
                 header("location:./send_another_code.php?email=$email");
                 exit;
             }

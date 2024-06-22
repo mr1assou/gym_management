@@ -89,9 +89,10 @@
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden">confirm</a>
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
-                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
@@ -248,15 +249,15 @@
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 while($row=sqlsrv_fetch_array($result)){
                     echo '<tr class=" border-b dark:border-gray-70 text-[7px] md:text-sm">
-                                <td class="px-1 py-2 text-center font-bold flex gap-1 items-center ">
-                                    <div class="basis-[17%] w-[55px] h-[55px] bg-green p-[3px] rounded-full">
-                                        <img src="'.$row['client_image'].'" alt="" class="rounded-full   object-center brightness-100 w-full h-full">
+                                <td class="py-2 text-center font-bold flex gap-1 items-center ">
+                                    <div class="w-[55px] h-[55px] bg-green p-[3px] rounded-full">
+                                        <img src="'.$row['client_image'].'" alt="" class="rounded-full object-center brightness-100 w-full h-full">
                                     </div>
-                                    <p class="basis-[83%] text-start">'.$row['client_first_name'].'  '.$row['client_last_name'].'</p>
+                                    <p class="text-start">'.$row['client_first_name'].'  '.$row['client_last_name'].'</p>
                                 </td>
-                                <td class="px-1 py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class="px-1 py-2 text-center font-bold amount">
+                                <td class=" py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
+                                <td class=" py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class=" py-2 text-center font-bold amount">
                                     '.$row['amount'].'
                                 </td>
                     </tr>';
@@ -389,7 +390,7 @@
         while($row=sqlsrv_fetch_array($result)){
             echo '
             <div class="basis-[25%] rounded-full p-[4px] bg-green">
-                <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full"/>
+                <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full object-center"/>
             </div>
             <div class="basis-[75%]">
                         <div class="flex  gap-2 mt-5 px-5">
