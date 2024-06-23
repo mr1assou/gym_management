@@ -7,6 +7,9 @@
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if(isset($_POST['pay'])){
+        pay($conn,$_SESSION['gym_id'],$_POST['client_id'],$_POST['beginning_date']);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,17 +29,29 @@
 
 <body>
     <!-- start pop up -->
-    <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up ">
-        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[40%]">
-            <p class="font-bold text-green">Marwane Assou</span></p>
+    <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[50%]">
+            <p class="font-bold text-green name">Marwane Assou</p>
+            <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
+            <div class="flex mt-2">
+                <div class=" basis-[55%] flex text-[11px]">
+                    <p class="text-green font-black">start:</p>
+                    <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
+                </div>
+                <div class=" basis-[55%] flex text-[11px]">
+                    <p class="text-green font-black">end:</p>
+                    <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
+                </div>
+            </div>            
             <form action="" method="post" class="flex-col mt-5">
+            <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <label
-                        class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                payment date:
+                        class="mt-2 after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
+                baginning date:
                 </label>
-                <div class=" absolute left-0 top-[140%] flex w-full items-center justify-between">
-                    <input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />
+                <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
+                    <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-400px] top-[-260px] hidden">
@@ -62,7 +77,7 @@
                             <!-- end calendar -->
             </div>
             <div class="flex justify-end mt-20">
-                <input type="submit" value="pay" class="block bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
+                <input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
                 <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
             </div>
         </form>

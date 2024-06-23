@@ -69,12 +69,12 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="text-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
@@ -90,8 +90,6 @@
                     </div>
                         <div class="flex justify-end mt-2">
                             <button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
                             <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>
                         </div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
@@ -328,62 +326,6 @@
         echo '</select>';
     }
     
-    function selectTrialClients($conn,$gymId,$userId){
-        $query="{CALL searchTrialMembers(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
-        if($rowCount==0){
-            echo '<div class="text-1xl text-center text-grey font-bold">You don\'t have any trial members</div>';
-        }
-        else{
-            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
-            style="border-radius:20px;">
-            <thead class="capitalise rounded-xl bg-white text-green font-black md:text-sm text-[4px]">
-            <tr class="py-2">
-                    <th class=" text-center py-2">
-                        First Name: 
-                    </th>
-                    <th class=" text-center py-2">
-                        Last Name: 
-                    </th>
-                    <th class=" text-center py-2">
-                        Beginning Period Date: 
-                    </th>
-                    <th class=" text-center py-2">
-                            End Period Date: 
-                    </th>
-                    <th class=" text-center py-2">
-                        Status: 
-                    </th>
-                    <th class=" text-center  py-2">
-                            Left Time: 
-                        </th>
-                        <th class=" text-center  py-2">
-                            informations: 
-                        </th>
-                    </tr>
-                </thead>';
-                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
-                while($row=sqlsrv_fetch_array($result)){
-                    echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[4px] py-2">
-                                <td class=" text-center  font-bold py-2">'.$row['client_first_name'].'</td>
-                                <td class=" text-center  font-bold py-2">'.$row['client_last_name'].'</td>
-                                <td class=" text-center  font-bold beginning-date py-2">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class=" text-center font-bold end-date py-2">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class=" text-center  font-bold status py-2">'.$row['operation_status'].'</td>
-                                <td class=" text-center  font-bold py-2">
-                                <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5">10</span>min:<span class="secondes mx-0.5">30</span>s</td>
-                            <td class=" justify-center md:text-sm text-[4px]   font-bold flex gap-1 py-2">
-                                <button  class="px-1 md:px-3 md:py-2   bg-green-dark text-white transition duration-100 ease-in-out hover:scale-110  hidden confirm h-1/2">confirm</button>
-                                <a href="./details.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                                &gym_id='.$gymId.'" class="px-1 block  md:px-3 md:py-2   text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 h-1/2">Details</a>
-                            </td>
-                    </tr>';
-                }
-                echo '</tbody>';
-                echo '</table>';
-        }
-    }
     function informationClient($conn,$gymId,$clientId){
         $query="{CALL selectInformationOfClient(?,?)}";
         $result=sqlsrv_query($conn,$query,array($gymId,$clientId));
@@ -516,4 +458,8 @@
             </div>';
             }
             echo ' </div>';
+    }
+    function pay($conn,$gymId,$clientId,$beginningDate){
+        $query="{CALL pay(?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId,$clientId,$beginningDate));
     }

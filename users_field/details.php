@@ -45,7 +45,7 @@
                 <?php displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id']) ?>
             </div>
         </div>
-            <p class="text-center text-black font-black text-2xl mt-5 px-2">Earning from this client:<span class="text-green ml-3 total-price">400</span><span class="text-green">DH</span></p>
+            <p class="text-center text-black font-black text-2xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>
         </div> 
     </div>
     <!-- javascript -->

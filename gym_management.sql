@@ -318,21 +318,13 @@ begin
 end
 exec datesHistoricalData 2;
 
-CREATE PROCEDURE confirmClientTrialPriod(@client_id int)
+DROP PROCEDURE clientPay(@gym_id int,@client_id int,@beginning_date varchar(40))
 AS
 begin
-	insert into operations VALUES (GETDATE(),DATEADD(MONTH,1,GETDATE()),'access',@client_id); 
-	update client SET type_joinning_date='access' WHERE client_id=@client_id;
+	insert into operations VALUES (@beginning_date,DATEADD(MONTH,1,GETDATE()),'access',@client_id,(select price from client WHERE client_id=@client_id)); 
 end
+exec clientPay 75,152,'2024-06-01';
 
-
-insert into client VALUES('k','k','2024-05-6','0635103092','trial',69);
-go
-insert into operations VALUES('2024-06-8','2024-06-11','access',25);
-
-select * from client;
-go 
-select * from operations;
 --details of client
 CREATE PROCEDURE detailsClient(@client_id int)
 AS
@@ -399,3 +391,5 @@ select * from operations;
 insert into client values('k','cap','2024-04-12','0635103092',74,'../images/nCHrdjlh_400x400.jpg')
 go
 insert into operations values('2024-04-12','2024-05-12','reject',76)
+
+select * from client;
