@@ -1,4 +1,4 @@
-
+import {} from './add_client.js';
 export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
@@ -60,8 +60,6 @@ function confirm(){
             let link=e.currentTarget.nextElementSibling.getAttribute('href');
             link=link.split("?");
             link[0]="./confirm.php?";
-            const yes=document.querySelector('.yes');
-            yes.setAttribute('href',link.join(""));
             const popUP=document.querySelector('.pop-up');
             popUP.classList.remove('hidden');
             popUP.classList.add('block');

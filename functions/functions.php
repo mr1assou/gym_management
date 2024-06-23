@@ -89,7 +89,7 @@
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
-                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden">confirm</a>
+                            <button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
                             <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
                             <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>
