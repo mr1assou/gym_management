@@ -83,7 +83,6 @@
         </form>
     </div>
     </div>
-    </div>
     <!-- end pop up -->
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->

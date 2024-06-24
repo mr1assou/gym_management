@@ -309,21 +309,29 @@ select DISTINCT MONTH(beginning_period_date) as 'month',YEAR(beginning_period_da
 go
 select * from operations;
 
-CREATE PROCEDURE datesHistoricalData(@gym_id int) 
+ALTER PROCEDURE datesHistoricalData(@gym_id int) 
 AS
 begin
-	select DISTINCT  MONTH(beginning_period_date) as 'month',YEAR(end_period_date) as 'year' FROM operations INNER JOIN 
+	select DISTINCT  MONTH(beginning_period_date) as 'month',YEAR(beginning_period_date) as 'year' FROM operations INNER JOIN 
 	(select client_id FROM client INNER JOIN gym ON client.gym_id=gym.gym_id WHERE gym.gym_id=@gym_id) t
 	ON t.client_id=operations.client_id;
 end
 exec datesHistoricalData 2;
 
-DROP PROCEDURE clientPay(@gym_id int,@client_id int,@beginning_date varchar(40))
+ALTER PROCEDURE pay(@gym_id int,@client_id int,@beginning_date varchar(40))
 AS
 begin
-	insert into operations VALUES (@beginning_date,DATEADD(MONTH,1,GETDATE()),'access',@client_id,(select price from client WHERE client_id=@client_id)); 
+	IF @beginning_date>=GETDATE()
+		begin
+			insert into operations VALUES (@beginning_date,DATEADD(MONTH,1,@beginning_date),'access',@client_id,(select price from client WHERE client_id=@client_id)); 
+		end
+	ELSE
+		begin
+			insert into operations VALUES (@beginning_date,DATEADD(MONTH,1,@beginning_date),'reject',@client_id,(select price from client WHERE client_id=@client_id)); 
+		end
 end
-exec clientPay 75,152,'2024-06-01';
+exec pay 75,154,'2024-01-18';
+select * from operations; 
 
 --details of client
 CREATE PROCEDURE detailsClient(@client_id int)
@@ -392,4 +400,7 @@ insert into client values('k','cap','2024-04-12','0635103092',74,'../images/nCHr
 go
 insert into operations values('2024-04-12','2024-05-12','reject',76)
 
-select * from client;
+
+
+
+
