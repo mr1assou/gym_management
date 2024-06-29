@@ -111,22 +111,35 @@
                             </div>
                             <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
-                                    <i class="fa-solid fa-money-bill-1-wave fa-4x text-orange text-green"></i>
-                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
+                                    <i class="fa-solid fa-money-bill-1-wave fa-4x  text-green"></i>
+                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Earning of month:</p>
                                 </div>
-                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span>DH</p>
+                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span> DH</p>
+                            </div>
+                            <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
+                                <div class="flex items-center">  
+                                    <i class="fa-sharp fa-solid fa-inbox fa-4x text-orange text-green"></i>
+                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
+                                </div>
+                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="drawer-money"></span> DH</p>
                             </div>
                         </div>
-                        <p class="text-green text-center text-2xl font-black">New Clients of This Month:</p>
+                        <p class="text-green text-center text-2xl font-black">New Clients of  Month:</p>
                             <?php
                                 newClientsHistoricalData($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);        
                             ?>
                 </div>
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
-                <p class="text-green text-center text-2xl font-black">Operations Of This Month:</p>
+                <p class="text-green text-center text-2xl font-black">Operations Of Month:</p>
                 <?php
                     showOperations($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);
+                ?>
+                </div>
+        <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
+                <p class="text-green text-center text-2xl font-black">Fees Of Month:</p>
+                <?php
+                    displayFee($conn,$_SESSION['gym_id'],$_GET['month'],$_GET['year']);
                 ?>
                 </div>
             </div>

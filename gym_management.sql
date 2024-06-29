@@ -392,15 +392,12 @@ begin
 end
 
 
-select * from client;
-go
-select * from operations;
 
-insert into client values('k','cap','2024-04-12','0635103092',74,'../images/nCHrdjlh_400x400.jpg')
-go
-insert into operations values('2024-04-12','2024-05-12','reject',76)
-
-
-
+ALTER Procedure addFee(@description varchar(500),@amount int,@gym_id int)
+AS
+begin
+	insert into fees Values (@description,GETDATE(),@gym_id,@amount);
+end
+ALTER Table fees ALTER COLUMN date_of_fee date;
 
 

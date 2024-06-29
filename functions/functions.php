@@ -9,44 +9,44 @@
                 </div>
                 <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
-            <div class=" text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-table block mr-2"></i>
-                        <a href="./dashboard.php" class="cursor-pointer">Dashboard</a>
+                        <i class="fa-solid fa-table block basis-[15%]"></i>
+                        <a href="./dashboard.php" class="cursor-pointer block basis-[85%]">Dashboard</a>
             </div>
-            <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user"></i>
-                        <a href="./add_client.php" class="cursor-pointer">Add client</a>
+                        <i class="fa-solid fa-user block basis-[15%]"></i>
+                        <a href="./add_client.php" class="cursor-pointer block basis-[85]">Add client</a>
             </div>
-            <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-calendar-day"></i>
-                        <a class="cursor-pointer" href="./historicalData.php?month='.date('m').'&year='.date('Y').'">Historical Data</a>
+                        <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
+                        <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'">Historical Data</a>
             </div>
-            <div class=" text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <a href="./expiredMembers.php" class="cursor-pointer">Expired Members</a>
+                        <i class="fa-solid fa-eye-slash basis-[15%]"></i>
+                        <a href="./expiredMembers.php" class="basis-[85%] cursor-pointer">Expired Members</a>
             </div>
-            <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user-check"></i>
-                        <a class="cursor-pointer" href="./activeMembers.php">Active Members</a>
+                        <i class="fa-solid fa-user-check block basis-[15%]"></i>
+                        <a class="cursor-pointer block basis-[85%]" href="./activeMembers.php">Active Members</a>
             </div>
-            <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-hourglass-end"></i>
-                        <a class="cursor-pointer" href="./add_fees.php">Add Fees</a>
+                        <i class="fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
+                        <a class="cursor-pointer basis-[85%]" href="./add_fees.php">Add Fees</a>
             </div>
-            <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-gear"></i>
-                        <a class="cursor-pointer">Settings</a>
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
+                        <i class="fa-solid fa-gear block basis-[15%]"></i>
+                        <a class="cursor-pointer block basis-[85]">Settings</a>
             </div>
-            <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <a href="./logout.php" class="cursor-pointer">Log out</a>
+                        <i class="fa-solid fa-right-from-bracket block basis-[15%]"></i>
+                        <a href="./logout.php" class="cursor-pointer basis-[85%]">Log out</a>
             </div>
         </div>';
     }
@@ -55,7 +55,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-1xl text-center mt-3 text-grey font-bold">You don\'t have any client</div>';
+            echo '<div class="text-1xl text-center mt-3 text-grey-light font-bold">You don\'t have any client</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -99,11 +99,11 @@
             echo ' </div>';
         }
     }
-    function activeMembers($conn,$gymId){
-        $query="{CALL searchClientsWhoTheyHaveAccess(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
-        return $rowCount;
+    function drawerMoney($conn,$gymId){
+        $query="SELECT dbo.calculateFee(?) as sum";
+        $result=sqlsrv_query($conn,$query,array($gymId));
+        $row=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
+        return $row['sum'];   
     }
     function newClientsOfThisMonth($conn,$gymId){
         $query="{CALL newClientOfThisMonth(?)}";
@@ -111,18 +111,18 @@
         $rowCount=sqlsrv_fetch_array($result);
         return $rowCount['number'];
     }
-    function earningThisMonth($conn,$gymId,$month){
-        $query="{CALL earningOfMonth (?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$month));
-        $row=sqlsrv_fetch_array($result);
-        return $row['amount']?$row['amount']:0;
+    function earningThisMonth($conn,$gymId){
+        $query="SELECT dbo.earningOfMonth(?) as sum";
+        $result=sqlsrv_query($conn,$query,array($gymId));
+        $row=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
+        return $row['sum'];
     }
     function selectExpiredClients($conn,$gymId,$userId){
         $query="{CALL searchClientsMonthExpired(?)}";
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-xl text-center text-grey font-bold">You don\'t have any expired members</div>';
+            echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any expired members</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -171,7 +171,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-xl text-center text-grey font-bold">You don\'t have any active members</div>';
+            echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any active members</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -220,7 +220,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-xl mt-5 text-center text-grey font-bold">You don\'t have any expired operations</div>';
+            echo '<div class="text-xl mt-5 text-center text-grey-light font-bold">You don\'t have any expired operations</div>';
         }
         else{
             echo '<table class="text-sm text-left mt-5 rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -254,7 +254,7 @@
                                 <td class=" py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
                                 <td class=" py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
                                 <td class=" py-2 text-center font-bold amount">
-                                    '.$row['amount'].'
+                                    '.$row['amount'].'<span> DH</span>
                                 </td>
                     </tr>';
                 }
@@ -267,7 +267,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-1xl mt-5 text-center text-grey  font-bold">You don\'t have any new members</div>';
+            echo '<div class="text-1xl mt-5 text-center text-grey-light  font-bold">You don\'t have any new members</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -367,7 +367,7 @@
         $result=sqlsrv_query($conn,$query,array($clientId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-xl text-center text-grey font-bold">This Client don\'t have any operations</div>';
+            echo '<div class="text-xl text-center text-grey-light font-bold">This Client don\'t have any operations</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
@@ -427,7 +427,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
+                        <p class=" basis-[90%]  text-green font-black full-name">name:<span class=" text-black ml-1 font-bold">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -452,7 +452,7 @@
                             &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
                              <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
-                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                        <div class="h-[10%] w-full bottom absolute bottom-3 left-0 bg-green-dark"></div>
                 </div>
             </div>';
             }
@@ -461,4 +461,41 @@
     function pay($conn,$gymId,$clientId,$beginningDate){
         $query="{CALL pay(?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($gymId,$clientId,$beginningDate));
+    }
+    function displayFee($conn,$gymId,$month,$year){
+        $query="{CALL displayFees(?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $rowCount=sqlsrv_num_rows($result);
+        if($rowCount==0){
+            echo '<div class="mt-5 text-1xl text-center  text-grey-light font-bold">You don\'t have any fee in this month</div>';
+        }
+        else{
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full mt-5"
+            style="border-radius:20px;">
+                <thead class="capitalise rounded-xl  text-green font-black text-[7px] md:text-sm ">
+                            <tr>
+                                <th class=" text-center">
+                                    Description: 
+                                </th>
+                                <th class=" text-center">
+                                    date: 
+                                </th>
+                                <th class=" text-center">
+                                    amount: 
+                                </th>
+                            </tr>
+                </thead>';
+                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                $count=1;
+                while($row=sqlsrv_fetch_array($result)){
+                    echo '<tr class=" border-b dark:border-gray-70 md:text-sm text-[6px] ">
+                        <td class=" py-5 text-center font-bold max-w-32">'.$row['description'].'</td>
+                        <td class=" py-5 text-center font-bold">'.$row['date_of_fee']->format('Y-m-d').'</td>
+                        <td class=" py-5 text-center font-bold money-fee">'.$row['amount'].'<span> DH</span></td>
+                    </tr>';
+                    $count++;
+                }
+                echo '</tbody>';
+                echo '</table>';
+        }
     }

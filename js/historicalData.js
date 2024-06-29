@@ -63,3 +63,16 @@ function displaySideBar(){
     })
 }
 displaySideBar();
+
+
+function drawerMoney(){
+    const drawer=document.querySelector('.drawer-money');
+    const moneyFees=document.querySelectorAll('.money-fee');
+    let sum=0;
+    moneyFees.forEach(fee=>{
+        sum+=parseInt(fee.textContent);
+    })
+    const earningOfMonth=document.querySelector('.earning');
+    drawer.textContent=parseInt(earningOfMonth.textContent)-sum;
+}
+drawerMoney();

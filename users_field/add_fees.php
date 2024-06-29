@@ -6,6 +6,12 @@
         header('location:./login.php');
         exit;
     }
+    if(isset($_POST['submit'])){
+        $description=htmlspecialchars($_POST['description']);
+        $amount=htmlspecialchars($_POST['amount']);
+        $query="{CALL addFee(?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($description,$amount,$_SESSION['gym_id']));
+    }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
 ?>
 <!DOCTYPE html>
@@ -26,14 +32,60 @@
 
 <body>
     <!-- start pop up -->
-    <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
-        <div class="bg-white flex-col p-10 rounded-lg">
-            <p class="text-black font-bold">Are you Sure The client pay new month?</p>
-            <div class="flex mt-5">
-                <a href="" class="block bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md yes">yes</a>
+    <!-- start pop up -->
+    <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[50%]">
+            <p class="font-bold text-green name">Marwane Assou</p>
+            <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
+            <div class="flex mt-2">
+                <div class=" basis-[55%] flex text-[11px]">
+                    <p class="text-green font-black">start:</p>
+                    <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
+                </div>
+                <div class=" basis-[55%] flex text-[11px]">
+                    <p class="text-green font-black">end:</p>
+                    <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
+                </div>
+            </div>            
+            <form action="" method="post" class="flex-col mt-5">
+            <input type="text" name="client_id" value="0" class="client-id hidden"/>
+            <div class="relative h-11 w-full min-w-[200px] mt-5">
+                    <label
+                        class="mt-2 after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
+                baginning date:
+                </label>
+                <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
+                    <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />
+                    <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
+                </div>
+                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-400px] top-[-260px] hidden">
+                                <div class="w-full flex justify-between items-center mt-1">
+                                <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
+                                <div class="flex text-orange">
+                                    <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>
+                                    <button class="text-lg bg-white rounded-full p-2 hover:bg-orange text-green   cursor-pointer next hover:bg-green hover:text-white font-black">></button>
+                                </div>
+                                </div>
+                                <div class="grid grid-cols-7 gap-3 w-full mt-2">
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>
+                                    <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">Thu</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Fri</p>
+                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sat</p>
+                                    <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>
+                                </div>           
+                                <div class="grid grid-cols-7 gap-4 w-full justify-between items-center mt-2 days">
+                                </div>           
+                            </div>
+                            <!-- end calendar -->
+            </div>
+            <div class="flex justify-end mt-20">
+                <input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
                 <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
             </div>
-        </div>
+        </form>
+    </div>
     </div>
     <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col p-10 rounded-lg">
@@ -53,30 +105,34 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-        <p class="text-center text-4xl text-green font-bold mt-3">Add Fees</p>
+        <p class="text-center text-2xl text-green font-bold mt-3">Add Fees</p>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">                                          
-            <form class="w-full flex items-center">
+            <form class="w-full flex items-center" action="" method="post">
             <div class="basis-[70%] flex items-center justify-evenly">
                 <div class="mb-5">
                     <label for="email" class="block mb-2 text-sm font-mediumdark:text-white text-gray-500">Your description:</label>
-                    <textarea class="text-sm rounded-lg  block w-full p-2.5  focus:border-green "   placeholder="description"></textarea>
+                    <textarea name="description" class="text-sm rounded-lg  block w-full p-2.5  focus:border-green "   placeholder="description"></textarea>
                 </div>
                 <div class="mb-5">
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-500 dark:text-white">amount:</label>
-                    <input type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                    <input type="number" name="amount"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                 </div>
             </div>
                 <div class="basis-[30%] items-center flex justify-center">
-                    <input type="submit" value="Add" class="px-10 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green"/>
+                    <input type="submit" name="submit" value="Add" class="px-10 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green"/>
                 </div>
             </form>
                 </div>
+                <!-- display fees of this month-->
+                <p class="text-green text-center text-2xl font-black mt-10">Fees Of This Month:</p>
+                <?php displayFee($conn,$_SESSION['gym_id'],date('m'),date('Y')); ?>
+                <!-- end -->
             </div>
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/trialMembers.js" type="module"></script>
+    <script src="../js/add_fee.js" type="module"></script>
 </body>
 </html>

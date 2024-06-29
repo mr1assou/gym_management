@@ -105,19 +105,19 @@
                             </div>
                             <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
-                                      <i class="fa-solid fa-user-check text-green fa-6x md:fa-4x"></i>
-                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Active Members:</p>
-                                </div>
-                                <p class="md:mt-4 font-bold text-xs "><?php echo activeMembers($conn,$_SESSION['gym_id'])?><span>
-                                </span></p>
-                            </div>
-                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
-                                <div class="flex items-center">
                                     <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                     <p class="md:ml-3 ml-5 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
                                 </div>
-                                <p class="md:mt-3 font-bold text-xs"><span><?php echo earningThisMonth($conn,$_SESSION['gym_id'],date('m'));
+                                <p class="md:mt-3 font-bold text-xs"><span><?php echo earningThisMonth($conn,$_SESSION['gym_id']);
                                 ?></span> DH</p>
+                            </div>
+                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
+                                <div class="flex items-center">
+                                <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
+                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
+                                </div>
+                                <p class="md:mt-4 font-bold text-xs"><span><?php echo drawerMoney($conn,$_SESSION['gym_id']) ?>
+                                </span> DH</p>
                             </div>
                         </div>
             </div>
