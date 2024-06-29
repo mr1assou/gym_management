@@ -15,7 +15,6 @@
     $password="";
     $repeatPassword="";
     $gymName="";
-    $price="";
     $verificationCode="";
     if(isset($_POST["submit"])){
         $firstName = htmlspecialchars($_POST['first_name']);
@@ -25,18 +24,18 @@
         $password = htmlspecialchars($_POST['password']);
         $repeatPassword = htmlspecialchars($_POST['repeat_password']);
         $gymName = htmlspecialchars($_POST['gym_name']);
-        $price = htmlspecialchars($_POST['price']);
         $verificationCode=rand(100000, 999999);
         if($password==$repeatPassword){
             $password=password_hash($password,PASSWORD_DEFAULT);
             $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?)}";
-            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$price,$verificationCode));
+            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$verificationCode));
             if($result){
                 $mail = new PHPMailer(true);
                 header("location:./send_another_code.php?email=$email");
                 exit;
             }
             else{
+                die( print_r( sqlsrv_errors(), true));
                 $countCredentails++;
             }
         }
@@ -155,14 +154,6 @@
                 <label
                 class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
                 Gym Name:
-                </label>
-            </div>
-            <div class="relative h-11 w-full min-w-[200px] mt-5">
-                <input  required
-                class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" type="number" name="price" min="0" step="1" value="<?php echo $price?>"/>
-                <label
-                class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Gym Price:
                 </label>
             </div>
             <div class="flex justify-end mt-5">

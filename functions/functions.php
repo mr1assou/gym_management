@@ -37,7 +37,7 @@
             <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-hourglass-end"></i>
-                        <a class="cursor-pointer" href="./trialMembers.php?user_id='.$userId.'&gym_id='.$gymId.'">Trial Members</a>
+                        <a class="cursor-pointer" href="./add_fees.php">Add Fees</a>
             </div>
             <div class=" text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-gear"></i>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -85,7 +85,7 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -136,7 +136,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black full-name">name:<span class=" text-black ml-1 font-bold">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -152,14 +152,14 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
                             <button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
                             <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>
                         </div>
-                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                        <div class=" h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
             </div>';
             }
@@ -185,7 +185,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black full-name">name:<span class=" text-black ml-1 font-bold">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -201,7 +201,7 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -281,7 +281,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -297,7 +297,7 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
@@ -427,7 +427,7 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.$row['client_first_name'].' '.$row['client_last_name'].'</span></p>
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
@@ -443,7 +443,7 @@
                         <div class=" basis-[60%] flex">
                             <p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5">15</span>d:<span class="hrs mx-0.5">22</span>hrs:<span class="minutes mx-0.5 ">10</span>min:<span class="secondes mx-0.5">30</span>s</pd>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
                         </div>
                     </div>
                         <div class="flex justify-end mt-2">
