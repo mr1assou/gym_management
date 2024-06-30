@@ -22,6 +22,9 @@
         $profile_image=$_FILES['profile_image'];
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
+        if($profile_image['size']==0){
+            $path='../images/empty_profile.png';
+        }
         $query="{CALL addClientForGym(?,?,?,?,?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate));
         if($result){
@@ -75,7 +78,7 @@
             ?>
               <?php
                 if(isset($_GET['status'])){
-                    echo '<p class="text-green mt-2 font-bold text-2xl alert hidden">Client Added succefully</p>';
+                    echo '<p class="text-green-dark mt-2 font-bold text-2xl alert hidden">Client Added succefully</p>';
                      echo '<script>const alert=document.querySelector(".alert");
                         function alertDanger(aler){
                             alert.classList.remove("hidden");
@@ -105,7 +108,6 @@
                 Client Last Name:
                 </label>
             </div>
-                
                 <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <input  pattern="0[0-9]{9}" name="phone_number"  required value="<?php echo $clientPhoneNumber?>"
                     class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"/>
@@ -115,7 +117,7 @@
                 </label>
             </div>
                 <div class="relative min-h-11 w-full min-w-[200px] mt-5 py-3">
-                    <input  type="file" name="profile_image" required
+                    <input  type="file" name="profile_image"
                     class="peer h-full w-full border-b border-blue-gray-200 bg-transparent  font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 py-2" value="<?php echo $image?>"/>
                     <label
                         class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">

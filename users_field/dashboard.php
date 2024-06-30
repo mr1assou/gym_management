@@ -116,7 +116,7 @@
                                 <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
                                     <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
                                 </div>
-                                <p class="md:mt-4 font-bold text-xs"><span><?php echo drawerMoney($conn,$_SESSION['gym_id']) ?>
+                                <p class="md:mt-4 font-bold text-xs"><span><?php echo drawerMoney($conn,$_SESSION['gym_id']); ?>
                                 </span> DH</p>
                             </div>
                         </div>

@@ -323,16 +323,18 @@
         }
         echo '</select>';
     }
-    
-    function informationClient($conn,$gymId,$clientId){
-        $query="{CALL selectInformationOfClient(?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$clientId));
-        while($row=sqlsrv_fetch_array($result)){
+    function informationClient($conn,$gymId,$row){
             echo '
-            <div class="basis-[25%] rounded-full p-[4px] bg-green">
-                <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full object-center"/>
+            <div class="basis-[25%] rounded-full p-[4px] bg-green relative">
+                <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full object-center image-field"/>
+                <button class="absolute bottom-2 right-2 image-button bg-green  rounded-full ">
+                    <i class="fa-solid fa-circle-plus  fa-3x
+                    cursor-pointer text-white"></i>
+                </button>
+                <input  type="file" name="image" 
+                class="image-input hidden" />
             </div>
-            <div class="basis-[75%]">
+            <div class="basis-[75%] ">
                         <div class="flex  gap-2 mt-5 px-5">
                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client First Name:</p>
@@ -349,28 +351,30 @@
                                 <p class="text-black font-bold basis-[60%] text-start">'.$row['joinning_date']->format('Y-m-d').'</p>
                             </div>
                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
-                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client Last Name:</p>
-                                <p class="text-black font-bold basis-[60%] text-start">'.$row['client_phone_number'].'</p>
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Phone Number:(0123456789)</p>
+                                <input type="text" pattern="0[0-9]{9}" name="phone_number"  class="text-black font-bold basis-[60%] text-start bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value="'.$row['client_phone_number'].'"/>
                             </div>
                         </div>
                         <div class="flex  gap-2 mt-5 px-5">
-                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Price:</p>
-                                <p class="text-black font-bold basis-[60%] text-start">'.$row['price'].'</p>
-                        </div>
+                                <input type="text" name="price"  class="text-black font-bold basis-[60%] text-start bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value="'.$row['price'].'"/><span class="text-black font-bold"> DH</span>
+                            </div>
+                            <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
+                                <input type="submit" name="change" value="Change" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
+                            </div>
                         </div>
             </div>';
-        }
     }
     function displayDetailsClients($conn,$gymId,$userId,$clientId){
         $query="{CALL detailsClient(?)}";
         $result=sqlsrv_query($conn,$query,array($clientId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-xl text-center text-grey-light font-bold">This Client don\'t have any operations</div>';
+            echo '<div class="mt-10 text-xl text-center text-grey-light font-bold">This Client don\'t have any operations</div>';
         }
         else{
-            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full"
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full mt-10"
             style="border-radius:20px;">
                 <thead class="capitalise rounded-xl bg-white text-green font-black md:text-sm text-[6px]">
                             <tr>
@@ -399,7 +403,7 @@
                                 <td class=" text-center  font-bold py-3">'.$row['beginning_period_date']->format('Y-m-d').'</td>
                                 <td class=" text-center  font-bold py-3">'.$row['end_period_date']->format('Y-m-d').'</td>
                                 <td class=" text-center  font-bold beginning-date status py-3">'.$row['real_operations_status'].'</td>
-                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].'</td>
+                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].' DH</td>
                     </tr>';
                     $count++;
                 }
@@ -448,8 +452,6 @@
                     </div>
                         <div class="flex justify-end mt-2">
                             <button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./edit.php?client_id='.$row['client_id'].'&user_id='.$userId.'
-                            &gym_id='.$gymId.'" class="block  md:px-5 md:py-2  text-white bg-green  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold  mr-2">edit</a>
                              <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">Details</a>
                         </div>
                         <div class="h-[10%] w-full bottom absolute bottom-3 left-0 bg-green-dark"></div>

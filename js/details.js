@@ -40,7 +40,6 @@ clickLinksSideBar();
 function hideSideBar(){
     const cross=document.querySelector('.cross');
     const sidebar=document.querySelector('.sidebar');
-    console.log(cross);
     cross.addEventListener('click',()=>{
         sidebar.classList.remove('translate-x-[0%]');
         sidebar.classList.add('translate-x-[-100%]');
@@ -56,3 +55,17 @@ function displaySideBar(){
     })
 }
 displaySideBar();
+
+
+const imageButton=document.querySelector('.image-button');
+imageButton.addEventListener('click',(e)=>{
+e.preventDefault();
+const imageInput=document.querySelector('.image-input');
+imageInput.click();
+imageInput.addEventListener('change',()=>{
+        const imageField=document.querySelector('.image-field');
+        imageField.src=URL.createObjectURL(imageInput.files[0]);     
+    })
+})
+
+
