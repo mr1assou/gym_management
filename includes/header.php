@@ -15,10 +15,10 @@
     </form>
         <div>
             <?php echo '<div class="flex items-center">
-            <div class="w-[45px] h-[45px] bg-green  rounded-full p-[2px] mr-2">
+            <div class="md:w-[45px] md:h-[45px] w-[40px] h-[30px] bg-green  rounded-full p-[2px] mr-2">
                                     <img src="'.$_SESSION['user_image'].'" alt="" class="rounded-full object-center brightness-100 w-full h-full">
                                     </div>
-                                    <p class="text-green font-bold text-[8px] md:text-[15px]">'.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>
+                                    <p class="text-green font-bold text-[7px] md:text-[15px]">'.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>
                                     </div>';?>
         </div>
         </div>

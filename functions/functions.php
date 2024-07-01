@@ -238,6 +238,9 @@
                                     End Period Date: 
                                 </th>
                                 <th class=" text-center">
+                                    Checkout date: 
+                                </th>
+                                <th class=" text-center">
                                     price: 
                                 </th>
                             </tr>
@@ -253,6 +256,7 @@
                                 </td>
                                 <td class=" py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
                                 <td class=" py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class=" py-2 text-center font-bold">'.$row['checkout_date']->format('Y-m-d').'</td>
                                 <td class=" py-2 text-center font-bold amount">
                                     '.$row['amount'].'<span> DH</span>
                                 </td>
