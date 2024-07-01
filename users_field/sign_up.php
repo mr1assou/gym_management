@@ -25,17 +25,23 @@
         $repeatPassword = htmlspecialchars($_POST['repeat_password']);
         $gymName = htmlspecialchars($_POST['gym_name']);
         $verificationCode=rand(100000, 999999);
+        $profile_image=$_FILES['profile_image'];
+        $path='../images/'.$profile_image['name'];
+        move_uploaded_file($profile_image['tmp_name'], $path);
+        if($profile_image['size']==0){
+            $path='../images/body_builder.jpg';
+        }
         if($password==$repeatPassword){
             $password=password_hash($password,PASSWORD_DEFAULT);
-            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?)}";
-            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$verificationCode));
+            $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?,?)}";
+            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$verificationCode,$path));
             if($result){
-                $mail = new PHPMailer(true);
                 header("location:./send_another_code.php?email=$email");
+                echo "good";
                 exit;
             }
             else{
-                die( print_r( sqlsrv_errors(), true));
+                die(print_r(sqlsrv_errors(), true));
                 $countCredentails++;
             }
         }
@@ -71,28 +77,11 @@
                 <a href="../index.php" class="block bg-green text-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Home</a>
             </div>
         </nav>
-        <div class=" h-screen w-full   flex  px-2 items-center">
-            <img src="../images/home.png" alt="image" class="md:block h-[80%] w-[30%] object-cover mr-5 rounded-lg hidden">
-            <form class="z-10 bg-white rounded-md md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post">
+        <div class=" h-full w-full flex  px-2 items-start justify-center py-5">
+            <form class="z-10 bg-white rounded-md md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post" enctype="multipart/form-data">
             <?php
                 if($countCredentails!=0)
                     echo '<small class="text-red font-bold"> first name and last name or email used by another client</small>';
-            ?>
-            <?php
-                if(isset($_GET['status'])){
-                    echo '<p class="text-green font-bold text-2xl alert hidden">you are signed up succefully</p>';
-                     echo '<script>const alert=document.querySelector(".alert");
-                        function alertDanger(aler){
-                            alert.classList.remove("hidden");
-                            alert.classList.add("block");
-                            setTimeout(()=>{
-                                alert.classList.remove("block");
-                                alert.classList.add("hidden");
-                            },5000)
-                        }
-                       alertDanger(alert);
-                    </script>';
-                }
             ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input required
@@ -127,12 +116,20 @@
                 email:
                 </label>
             </div>
+            <div class="relative min-h-11 w-full min-w-[200px] mt-5 py-3">
+                    <input  type="file" name="profile_image"
+                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent  font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 py-2"/>
+                    <label
+                        class="after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                image:
+                </label>
+            </div>
             <?php 
-                if($countPassword!=0) echo '<p class="text-red-400 font-bold">password incompatible</p>';
+                if($countPassword!=0) echo '<p class="text-red font-bold">password incompatible</p>';
             ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input  required
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" 
+                 title="Password must contain at least one number, one uppercase and one lowercase letter, and be at least 8 characters long" 
                 class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" type="password" name="password" value="<?php echo ""?>"
                 />
                 <label
@@ -160,5 +157,6 @@
                 <input  type="submit" value="sign up" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110 ">
             </div>
     </form>
+    </div>
 </body>
 </html>

@@ -17,12 +17,14 @@
             $passwordInDb=$data['password'];
             $firstName=$data['first_name'];
             $lastName=$data['Last_name'];
+            $userImage=$data['user_image'];
             if(password_verify($password,$passwordInDb) && $role=='supervisor' && $status!='inactive'){
                 session_start();
                 $_SESSION['user_id']=$userId;
                 $_SESSION['gym_id']=$gymId;
                 $_SESSION['first_name']=$firstName;
                 $_SESSION['last_name']=$lastName;
+                $_SESSION['user_image']=$userImage;
                 $query="{CALL adjustStatus}";
                 $result=sqlsrv_query($conn,$query,Array());
                 header("Location: ./dashboard.php");

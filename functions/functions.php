@@ -55,7 +55,7 @@
         $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
         $rowCount=sqlsrv_num_rows($result);
         if($rowCount==0){
-            echo '<div class="text-1xl text-center mt-3 text-grey-light font-bold">You don\'t have any client</div>';
+            echo '<div class="text-1xl text-center mt-5 text-grey-light font-bold">You don\'t have any client</div>';
         }
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
@@ -327,12 +327,12 @@
             echo '
             <div class="basis-[25%] rounded-full p-[4px] bg-green relative">
                 <img src="'.$row['client_image'].'" class="w-full h-[250px] rounded-full object-center image-field"/>
-                <button class="absolute bottom-2 right-2 image-button bg-green  rounded-full ">
+                <button class="absolute bottom-2 right-2 image-button bg-white text-green rounded-full hover:text-white hover:bg-green">
                     <i class="fa-solid fa-circle-plus  fa-3x
-                    cursor-pointer text-white"></i>
+                    cursor-pointer "></i>
                 </button>
                 <input  type="file" name="image" 
-                class="image-input hidden" />
+                class="image-input hidden"/>
             </div>
             <div class="basis-[75%] ">
                         <div class="flex  gap-2 mt-5 px-5">

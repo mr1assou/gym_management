@@ -14,7 +14,11 @@
         </input>
     </form>
         <div>
-            <?php echo '<p class="text-green font-bold text-[8px] md:text-[15px]">Welcome
-            '.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>';?>
+            <?php echo '<div class="flex items-center">
+            <div class="w-[45px] h-[45px] bg-green  rounded-full p-[2px] mr-2">
+                                    <img src="'.$_SESSION['user_image'].'" alt="" class="rounded-full object-center brightness-100 w-full h-full">
+                                    </div>
+                                    <p class="text-green font-bold text-[8px] md:text-[15px]">'.$_SESSION['first_name'].' '.$_SESSION['last_name'].'</p>
+                                    </div>';?>
         </div>
         </div>

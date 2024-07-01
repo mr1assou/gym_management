@@ -31,9 +31,8 @@ ALTER TABLE users ADD CONSTRAINT UNIQUE_EMAIL UNIQUE (email);
 ALTER TABLE users ADD CONSTRAINT CHECK_ROLE check (role IN ('admin','supervisor'));
 ALTER TABLE users ADD CONSTRAINT DEFAULT_ROLE DEFAULT 'supervisor' FOR role;
 --beginning trial period and end_trial period
-ALTER TABLE users ADD CONSTRAINT check_Trial_Date check(beginning_trial_period<end_trial_period)
-go
-ALTER TABLE users ADD CONSTRAINT DEFAULT_END_DATE DEFAULT DATEADD(month,2,getDate()) FOR end_trial_period;
+
+
 --status
 ALTER TABLE users ADD CONSTRAINT CHECK_STATUS check(status IN ('inactive','trial','access','reject'));
 go
@@ -110,31 +109,38 @@ begin
 end
 --functions and procedure
 --procedure sign up
-select * from users;
+select * from users
+go
+select * from gym;
+go
+select * from client;
+use gym_management;
 ALTER PROCEDURE addSupervisorAndGym(@firstName Varchar(10),@lastName Varchar(10),@phoneNumber Varchar(10)
-,@email varchar(40),@password varchar(255),@gym_name varchar(20),@price_per_month int,@verification_code varchar(50))
+,@email varchar(40),@password varchar(255),@gym_name varchar(20),@verification_code varchar(50),@image varchar(500))
 AS
 begin
 	DECLARE @supervisor_id int;
 	if NOT EXISTS (SELECT 1 FROM users WHERE (first_name=@firstName AND Last_name=@lastName) OR (email=@email))
 		begin
-			insert into users(first_name,Last_name,phone_number,email,password,beginning_trial_period,
-			end_trial_period,verification_code) VALUES (@firstName,@lastName,@phoneNumber,@email,@password,Null,NULL,@verification_code);
+			insert into users(first_name,Last_name,phone_number,email,password,role,
+			verification_code,user_image) VALUES (@firstName,@lastName,@phoneNumber,@email,@password,'supervisor',@verification_code,@image);
 			SET @supervisor_id=SCOPE_IDENTITY();
-			insert into gym VALUES(@gym_name,@price_per_month,@supervisor_id);
+			insert into gym VALUES(@gym_name,@supervisor_id);
 		end
 	else
 		begin
 			RAISERROR('this credentails used by another client either first name,last name or email please provide different credentials',16,1)
 		end
 	end
-exec addSupervisorAndGym 'j','j','0635103092','waller@gmail.com','password1','X',300,'cxjhsgyfrzvghchscd';
+exec addSupervisorAndGym 'j','j','0635103092','waller@gmail.com','password1','X',675432,'cxjhsgyfrzvghchscd';
+delete from users;
 --login
 ALTER PROCEDURE Login(@email varchar(40))
 as	
 begin
-	SELECT users.user_id,first_name,Last_name,gym.gym_id,status,role,password FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
+	SELECT users.user_id,first_name,Last_name,gym.gym_id,status,role,password,user_image FROM users INNER JOIN gym ON users.user_id=gym.supervisor_id WHERE email=@email;
 end
+select * from users;
 --add Trigger
 CREATE TRIGGER addClient On client 
 AFTER  insert
@@ -243,14 +249,17 @@ begin
 end
 
 --earnning actual month
-CREATE PROCEDURE earningOfMonth(@gym_id int,@month int)
+ALTER FUNCTION earningOfMonth(@gym_id int)
+returns int
 AS
 begin
-	select SUM(price_per_month) as 'amount' FROM operations INNER JOIN (
-	select client_id,price_per_month FROM gym INNER JOIN client ON client.gym_id=gym.gym_id WHERE gym.gym_id=@gym_id) t
-	ON t.client_id=operations.client_id WHERE operation_status='access';
-			
+	DECLARE @sum int;
+	SET @sum=ISNULL((select SUM(actual_price) as 'amount' FROM operations INNER JOIN client
+	ON operations.client_id=client.client_id WHERE operation_status='access' AND gym_id=@gym_id 
+	AND MONTH(beginning_period_date)=MONTH(GETDATE())),0)
+	return @sum;
 end
+print dbo.earningOfMonth (74);
 exec earningOfMonth 35,5;--give access to client
 Create PROCEDURE giveAccessToClient(@client_id int)
 As
@@ -349,15 +358,13 @@ end
 exec detailsClient 21;
 
 --select client information
-CREATE PROCEDURE selectInformationOfClient(@client_id int)
+ALTER PROCEDURE selectInformationOfClient(@client_id int)
 AS
 begin
-	SELECT client_first_name,client_last_name,joinning_date,client_phone_number FROM client WHERE client_id=@client_id;
+	SELECT client_first_name,client_last_name,joinning_date,client_phone_number,price,client_image FROM client WHERE client_id=@client_id;
 end
 
-
-select * from gym;
-
+delete from client;
 insert into client VALUES ('mohamed','grmat','2024-05-5','0635103092','access',73);
 go
 insert into operations VALUES ('2024-05-5','2024-06-5','access',34);
@@ -398,6 +405,37 @@ AS
 begin
 	insert into fees Values (@description,GETDATE(),@gym_id,@amount);
 end
-ALTER Table fees ALTER COLUMN date_of_fee date;
 
 
+CREATE Procedure displayFees(@gym_id int,@month int,@year int)
+AS
+begin
+	select description,date_of_fee,amount FROM fees WHERE @gym_id=gym_id AND MONTH(date_of_fee)=@month AND YEAR(date_of_fee)=@year;
+end	
+
+ALTER FUNCTION calculateFee(@gym_id int)
+returns int
+AS
+begin
+	DECLARE @total_fees int
+	DECLARE @result int
+	DECLARE @drawer_money int
+	SET @total_fees=ISNULL((select SUM(amount) FROM fees WHERE @gym_id=gym_id 
+	AND MONTH(date_of_fee)=Month(GETDATE()) AND YEAR(date_of_fee)=Year(GETDATE())),0);
+	SET @drawer_money=dbo.earningOfMonth(@gym_id)-@total_fees
+	return @drawer_money; 
+end	
+
+SELECT * from client;
+ 
+CREATE PROCEDURE updateClient(@image varchar(500),@phone_number varchar(30),@price int,@client_id int)
+AS
+begin
+	UPDATE client SET client_phone_number=@phone_number,price=@price,client_image=@image WHERE client_id=@client_id; 
+end
+
+
+
+select * from users;
+
+ALTER TABLE users ADD user_image varchar(500);
