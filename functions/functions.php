@@ -41,7 +41,7 @@
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-gear block basis-[15%]"></i>
-                        <a class="cursor-pointer block basis-[85]">Settings</a>
+                        <a href="./settings.php" class="cursor-pointer block basis-[85]">Settings</a>
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
@@ -318,7 +318,7 @@
     function displaydates($conn,$userId,$gymId,$month,$year){
         $query="{CALL datesHistoricalData(?)}";
         $result=sqlsrv_query($conn,$query,array($gymId));
-        echo '<select  class="text-md mt-2 select bg-white border-2 rounded-md px-2 py-1">';
+        echo '<select  class=" text-md mt-2 select bg-white border-2 rounded-md px-2 py-1">';
         echo '<option value="" selected disabled hidden>'.$year.'-'.$month.'</option>';
         while($row=sqlsrv_fetch_array($result)){
             echo "<option value='./historicalData.php?month=" . $row['month'] . "&year=" . $row['year'] . "'>
@@ -505,3 +505,52 @@
                 echo '</table>';
         }
     }
+    function informationUser($conn,$userId,$row){
+        echo '
+        <div class="basis-[25%] ">
+            <div class="basis-[100%] rounded-full p-[4px] bg-green relative">
+                <img src="'.$row['user_image'].'" class="w-full h-[250px] rounded-full object-center image-field"/>
+                <button class="absolute bottom-2 right-2 image-button bg-white text-green rounded-full hover:text-white hover:bg-green">
+                <i class="fa-solid fa-circle-plus  fa-3x
+                cursor-pointer "></i>
+            </button>
+            <input  type="file" name="image" 
+            class="image-input hidden"/>
+            </div>
+            <div class="flex justify-center gap-2 mt-2 items-center basis-[50%]">
+                            <input type="submit" name="change" value="Change image" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
+                        </div>
+        </div>
+        <div class="basis-[75%] ">
+                    <div class="flex  gap-2 mt-5 px-5">
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client First Name:</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['first_name'].'</p>
+                        </div>
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Client Last Name:</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['Last_name'].'</p>
+                        </div>
+                    </div>
+                    <div class="flex  gap-2 mt-5 px-5">
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Start Date:</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['beginning_period']->format('Y-m-d').'</p>
+                        </div>
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">End Date:</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['end_period']->format('Y-m-d').'</p>
+                        </div>
+                    </div>
+                    <div class="flex  gap-2 mt-5 px-5">
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start ">Subscription price:</p>
+                            <p class="basis-[60%] text-black font-bold">'.$row['subscription_price'].'</p>
+                        </div>
+                        <div class="flex  gap-2 mt-5 items-center basis-[50%]">
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start ">email:</p>
+                            <p class="basis-[60%] text-black font-bold">'.$row['email'].'</p>
+                        </div>
+                    </div>
+        </div>';
+}

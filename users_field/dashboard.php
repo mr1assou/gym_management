@@ -30,10 +30,10 @@
 <body>
     <!-- start pop up -->
     <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
-        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[50%]">
+        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[65%]">
             <p class="font-bold text-green name">Marwane Assou</p>
             <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
-            <div class="flex mt-2">
+            <div class="flex mt-5">
                 <div class=" basis-[55%] flex text-[11px]">
                     <p class="text-green font-black">start:</p>
                     <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
@@ -45,7 +45,7 @@
             </div>            
             <form action="" method="post" class="flex-col mt-5">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
-            <div class="relative h-11 w-full min-w-[200px] mt-5">
+            <div class="relative h-11 w-full min-w-[200px] mt-10">
                     <label
                         class="mt-2 after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
                 baginning date:
@@ -76,7 +76,7 @@
                             </div>
                             <!-- end calendar -->
             </div>
-            <div class="flex justify-end mt-20">
+            <div class="flex justify-end mt-10">
                 <input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
                 <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
             </div>
