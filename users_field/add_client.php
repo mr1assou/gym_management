@@ -9,6 +9,9 @@
     $image="";
     $price="";
     $paymentDate="";
+    if($status=='reject'){
+        header('location:./payment.php');
+    }
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php');
         exit;
@@ -35,6 +38,9 @@
         }
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -13,6 +13,9 @@
         $result=sqlsrv_query($conn,$query,array($description,$amount,$_SESSION['gym_id']));
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

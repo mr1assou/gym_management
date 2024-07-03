@@ -7,6 +7,9 @@
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
     $query="{CALL selectInformationOfClient(?)}";
     $outcome=sqlsrv_query($conn,$query,array($_GET['client_id']));
     $row=sqlsrv_fetch_array($outcome);

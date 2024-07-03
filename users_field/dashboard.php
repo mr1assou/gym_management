@@ -10,6 +10,9 @@
     if(isset($_POST['pay'])){
         pay($conn,$_SESSION['gym_id'],$_POST['client_id'],$_POST['beginning_date']);
     }
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

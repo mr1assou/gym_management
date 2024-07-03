@@ -7,6 +7,9 @@
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
     if(isset($_POST['pay'])){
         pay($conn,$_SESSION['gym_id'],$_POST['client_id'],$_POST['beginning_date']);
     }

@@ -25,12 +25,22 @@
                 $_SESSION['first_name']=$firstName;
                 $_SESSION['last_name']=$lastName;
                 $_SESSION['user_image']=$userImage;
-                $query="{CALL adjustStatus}";
-                $result=sqlsrv_query($conn,$query,Array());
-                header("Location: ./dashboard.php");
-                exit;
+                $query="{CALL adjustStatus(?,?)}";
+                $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id'],$_SESSION['gym_id']));
+                $query="{CALL selectUserStatus(?)}";
+                $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id']));
+                $row=sqlsrv_fetch_array($result);
+                $_SESSION['status']=$row['status'];
+                $status=$_SESSION['status'];
+                if($status=='trial' || $status=='access'){
+                    header("Location: ./dashboard.php");
+                }
+                else if($status=='reject'){
+                    header("Location: ./payment.php");
+                    exit;
+                }
             }
-            else if(password_verify($password,$passwordInDb) && $status=='inactive'){
+            else if(password_verify($password,$passwordInDb) && $status=='inactive' && $role='supervisor'){
                 header("Location: ./verification.php?email=$email");
                 exit;
             }    

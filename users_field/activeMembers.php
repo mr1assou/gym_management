@@ -7,6 +7,9 @@
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
+    if($_SESSION['status']=='reject'){
+        header('location:./payment.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
