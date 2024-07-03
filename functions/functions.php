@@ -362,7 +362,7 @@
                         <div class="flex  gap-2 mt-5 px-5">
                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Price:</p>
-                                <input type="text" name="price"  class="text-black font-bold basis-[60%] text-start bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value="'.$row['price'].'"/><span class="text-black font-bold"> DH</span>
+                                <input type="number" min="0" name="price"  class="text-black font-bold basis-[60%] text-start bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value="'.$row['price'].'"/><span class="text-black font-bold"> DH</span>
                             </div>
                             <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
                                 <input type="submit" name="change" value="Change" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
