@@ -23,6 +23,7 @@
     }
     $countActualPassword=0;
     $countCompatibility=0;
+    $countSuccess=0;
     if(isset($_POST['change_password'])){
         $actualPassword=htmlspecialchars($_POST['actual_password']);
         $newPassword=htmlspecialchars($_POST['new_password']);
@@ -39,6 +40,7 @@
         else{
             $query="{CALL changePassword(?,?)}";
             $result=sqlsrv_query($conn,$query,array($_SESSION['user_id'],password_hash( $newPassword,PASSWORD_DEFAULT)));
+            $countSuccess++;
         }
     }
 ?>
@@ -85,7 +87,7 @@
                 else if($countCompatibility!=0){
                     echo '<p class="font-bold text-red">please repeat your new password twice</p>';
                 }
-                else{
+                else if($countSuccess!=0){
                     echo '<p class="text-green-dark mt-2 font-bold text-2xl alert hidden">you change your password succefully</p>';
                      echo '<script>const alert=document.querySelector(".alert");
                         function alertDanger(aler){
