@@ -102,7 +102,8 @@
                 Password:
                 </label>
             </div>
-            <div class="flex justify-end mt-5">
+            <div class="flex justify-between mt-5">
+                <a href="./email.php" class="block text-green hover:underline">forget password</a>
                 <input  type="submit" value="Log in" name="submit" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110">
             </div>
     </form>

@@ -37,4 +37,7 @@
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-    header('Location:./verification.php?email='.$_GET['email'].'');
+    if(!isset($_GET['status']))
+        header('Location:./verification.php?email='.$_GET['email'].''); 
+    else
+        header('Location:./verification.php?email='.$_GET['email'].'&status=change_password');
