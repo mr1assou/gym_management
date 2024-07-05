@@ -52,6 +52,7 @@
             <li class="mb-2"><strong>Time-Saving Automation:</strong> Say goodbye to manual tracking and paperwork. Free up more time to focus on what you do best – providing an exceptional fitness experience for your members.</li>
             <li class="mb-2"><strong>Access from Anywhere:</strong> Manage your gym on the go with mobile access. Stay connected to your gym’s operations from anywhere in the world.</li>
             <li class="mb-2"><strong>Client Earnings Insights:</strong> See exactly how much you gain from each client and all his operations, helping you optimize your pricing and services.</li>
+            <li class="mb-2"><strong>Instant Client Lookup:</strong> Find client information in milliseconds rather than using a register or copybook.</li>
         </ul>
         
         <p class="mb-6">For just <span class="font-bold"><?php echo $row['subscription_price']

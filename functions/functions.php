@@ -75,11 +75,11 @@
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="text-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="text-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
@@ -142,11 +142,11 @@
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
@@ -191,11 +191,11 @@
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
@@ -255,9 +255,9 @@
                                     </div>
                                     <p class="text-start">'.$row['client_first_name'].'  '.$row['client_last_name'].'</p>
                                 </td>
-                                <td class=" py-2 text-center font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class=" py-2 text-center font-bold">'.$row['end_period_date']->format('Y-m-d').'</td>
-                                <td class=" py-2 text-center font-bold">'.$row['checkout_date']->format('Y-m-d').'</td>
+                                <td class=" py-2 text-center font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</td>
+                                <td class=" py-2 text-center font-bold">'.$row['end_period_date']->format('d-m-Y').'</td>
+                                <td class=" py-2 text-center font-bold">'.$row['checkout_date']->format('d-m-Y').'</td>
                                 <td class=" py-2 text-center font-bold amount">
                                     '.$row['amount'].'<span> DH</span>
                                 </td>
@@ -291,11 +291,11 @@
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
@@ -353,7 +353,7 @@
                         <div class="flex  gap-2 mt-5 px-5">
                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Joinning Date:</p>
-                                <p class="text-black font-bold basis-[60%] text-start">'.$row['joinning_date']->format('Y-m-d').'</p>
+                                <p class="text-black font-bold basis-[60%] text-start">'.$row['joinning_date']->format('d-m-Y').'</p>
                             </div>
                             <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Phone Number:(0123456789)</p>
@@ -405,8 +405,8 @@
                 while($row=sqlsrv_fetch_array($result)){
                     echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[6px]">
                                 <td class=" text-center  font-bold py-3">'.$count.'</td>
-                                <td class=" text-center  font-bold py-3">'.$row['beginning_period_date']->format('Y-m-d').'</td>
-                                <td class=" text-center  font-bold py-3">'.$row['end_period_date']->format('Y-m-d').'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['beginning_period_date']->format('d-m-Y').'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['end_period_date']->format('d-m-Y').'</td>
                                 <td class=" text-center  font-bold beginning-date status py-3">'.$row['real_operations_status'].'</td>
                                 <td class=" text-center  font-bold price py-3">'.$row['actual_price'].' DH</td>
                     </tr>';
@@ -441,11 +441,11 @@
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
-                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('Y-m-d').'</p>
+                            <p class="textx-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
                         </div>
                         <div class=" basis-[45%] flex text-[11px]">
                             <p class="text-green font-black">end:</p>
-                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('Y-m-d').'</p>
+                            <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
@@ -497,7 +497,7 @@
                 while($row=sqlsrv_fetch_array($result)){
                     echo '<tr class=" border-b dark:border-gray-70 md:text-sm text-[6px] ">
                         <td class=" py-5 text-center font-bold max-w-32">'.$row['description'].'</td>
-                        <td class=" py-5 text-center font-bold">'.$row['date_of_fee']->format('Y-m-d').'</td>
+                        <td class=" py-5 text-center font-bold">'.$row['date_of_fee']->format('d-m-Y').'</td>
                         <td class=" py-5 text-center font-bold money-fee">'.$row['amount'].'<span> DH</span></td>
                     </tr>';
                     $count++;
@@ -536,11 +536,11 @@
                     <div class="flex  gap-2 mt-5 px-5">
                         <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                             <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Start Date:</p>
-                            <p class="text-black font-bold basis-[60%] text-start">'.$row['beginning_period']->format('Y-m-d').'</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['beginning_period']->format('d-m-Y').'</p>
                         </div>
                         <div class="flex  gap-2 mt-5 items-center basis-[50%]">
                             <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">End Date:</p>
-                            <p class="text-black font-bold basis-[60%] text-start">'.$row['end_period']->format('Y-m-d').'</p>
+                            <p class="text-black font-bold basis-[60%] text-start">'.$row['end_period']->format('d-m-Y').'</p>
                         </div>
                     </div>
                     <div class="flex  gap-2 mt-5 px-5">
