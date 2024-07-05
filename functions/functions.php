@@ -69,7 +69,8 @@
                 </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">
-                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">'.ucfirst($row['client_first_name']) .' '.ucfirst($row['client_last_name']).'</span></p>
+                        <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">
+                        '.$row['client_first_name'] .' '.$row['client_last_name'].'</span></p>
                     </div>
                     <div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">

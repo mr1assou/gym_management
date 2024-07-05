@@ -9,9 +9,10 @@
             $countCompatibility++;
         }
         else{
-            $query="{CALL changePassword(?,?,?)}";
+            $query="{CALL changePsw(?,?,?)}";
             $result=sqlsrv_query($conn,$query,array($_GET['email'],$_GET['code'],password_hash( $newPassword,PASSWORD_DEFAULT)));
             header('location:./login.php');
+            exit;
         }
     }
 ?>
@@ -36,7 +37,7 @@
                 <p class="ml-3 md:text-1xl text-xs font-black ">Gym Manager</p>
             </div>
             <div class="flex items-center mb-2 z-10">
-            <a href=".login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
+            <a href="./login.php" class="block text-black bg-white font-bold px-6 py-[9px]  transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs mr-2 md:mr-5">Login</a>
             <a href="../index.php" class="block bg-black text-white font-bold px-6 py-[9px] transition duration-300 ease-in-out transform hover:shadow-white hover:shadow-2xl rounded-md md:text-1xl text-xs">Home</a>
             </div>
         </nav>
