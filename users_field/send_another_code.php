@@ -38,6 +38,6 @@
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
     if(!isset($_GET['status']))
-        header('Location:./verification.php?email='.$_GET['email'].''); 
+        header('Location:./verification.php?email='.$_GET['email'].'&language='.$_GET['language'].''); 
     else
-        header('Location:./verification.php?email='.$_GET['email'].'&status=change_password');
+        header('Location:./verification.php?email='.$_GET['email'].'&status=change_password&language='.$_GET['language'].'');

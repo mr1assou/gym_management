@@ -68,11 +68,17 @@
                     </div>
                 </div>
                 <div class="px-3 w-full mt-2">
-                    <div class="flex w-full text-[11px]">
+                    <div class="flex w-full text-[11px]">';
+                if($_GET['language']=='en')
+                    echo '
                         <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">
-                        '.$row['client_first_name'] .' '.$row['client_last_name'].'</span></p>
-                    </div>
-                    <div class="flex  text-[13px] font-black mt-1">
+                        '.$row['client_first_name'] .' '.$row['client_last_name'].'</span></p>';
+                else
+                    echo '<p class=" basis-[90%]  text-green font-black"><span class=" text-black  font-bold full-name">
+                        '.$row['client_first_name'] .' '.$row['client_last_name'].'</span> <span class="ml-1">:الإسم</span></p>';
+                echo '</div>';
+                if($_GET['language']=="en")
+                echo '<div class="flex  text-[13px] font-black mt-1">
                         <div class=" basis-[55%] flex text-[11px]">
                             <p class="text-green font-black">start:</p>
                             <p class="text-center text-black ml-1 beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
@@ -81,18 +87,38 @@
                             <p class="text-green font-black">end:</p>
                             <p  class="text-center  text-black ml-1 end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         </div>
-                    </div>
-                    <div class="flex  text-[13px] font-black mt-1">
-                        <div class=" basis-[60%] flex">
-                            <p class="text-green font-black">Timer:</p>
+                    </div>';
+                else 
+                echo '<div class="flex  text-[13px] font-black mt-1">
+                <div class=" basis-[45%] flex text-[11px]">
+                    <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
+                    <p class="text-green font-black ml-1"> :النهاية</p>
+                </div>
+                 <div class=" basis-[55%] flex text-[11px]">
+                    <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                     <p class="text-green font-black ml-1"> :البداية</p>
+                </div>
+            </div>';
+            echo '<div class="flex  text-[13px] font-black mt-1">';
+                     echo  '<div class=" basis-[60%] flex">';
+                        if($_GET['language']=='en')
+                            echo '<p class="text-green font-black">Timer:</p>
                             <p class="text-center font-black timer text-green-dark">
-                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</pd>
-                        </div>
-                    </div>
-                        <div class="flex justify-end mt-2">
-                            <button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>
-                        </div>
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</p>';
+                        else
+                            echo '<p class="text-center font-black timer text-green-dark">
+                            <span class="days mx-0.5"></span>d:<span class="hrs mx-0.5"></span>hrs:<span class="minutes mx-0.5 "></span>min:<span class="secondes mx-0.5"></span>s</p>
+                            <p class="text-green font-black ml-1">:الوقت</p>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo'<div class="flex justify-end mt-2">';
+                    if($_GET['language']=="en")    
+                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
+                            <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                    else
+                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
+                        <a href="./details.php?client_id='.$row['client_id'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                        echo '</div>
                         <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
             </div>';

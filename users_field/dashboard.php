@@ -33,26 +33,54 @@
 <body>
     <!-- start pop up -->
     <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
-        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[65%]">
-            <p class="font-bold text-green name">Marwane Assou</p>
-            <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
-            <div class="flex mt-5">
-                <div class=" basis-[55%] flex text-[11px]">
-                    <p class="text-green font-black">start:</p>
-                    <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
-                </div>
-                <div class=" basis-[55%] flex text-[11px]">
-                    <p class="text-green font-black">end:</p>
-                    <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
-                </div>
-            </div>            
+        <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[55%]">
+            <?php
+                if($_GET['language']=="en"){
+                    echo '<p class="font-bold text-green name">Marwane Assou</p>
+                    <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
+                        <div class="flex mt-5">
+                        <div class=" basis-[55%] flex text-[11px]">
+                            <p class="text-green font-black">start:</p>
+                            <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
+                        </div>
+                    <div class=" basis-[55%] flex text-[11px]">
+                        <p class="text-green font-black">end:</p>
+                        <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
+                    </div>
+                    </div>';
+                }
+                else
+                    echo '
+                    <p class="font-bold text-green name text-end">Marwane Assou</p>
+                    <p class="font-bold text-[11px] text-green mt-10 text-end">:العملية الأخيرة</p>
+                    <div class="flex mt-5 ">
+                        <div class=" basis-[55%] flex text-[11px]  justify-end">
+                            <p class="text-center text-black ml-1 end font-bold">14-08-2024</p>
+                            <p class="text-green font-black ml-1">:النهاية</p>
+                        </div>
+                        <div class=" basis-[55%] flex text-[11px]  justify-end">
+                            <p class="text-center text-black ml-1 start font-bold">14-07-2024</p>
+                            <p class="text-green font-black ml-1">:البداية</p>
+                        </div>
+                    </div>';
+            ?>
+                        
             <form action="" method="post" class="flex-col mt-5">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-10">
-                    <label
-                        class="mt-2 after:content[' '] pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
+                <?php
+                if($_GET['language']=="en"){
+                    echo '<label
+                        class="mt-2 pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
                 baginning date:
-                </label>
+                </label>';
+                }
+                else
+                    echo '<label
+                        class="justify-center mt-2   pointer-events-none absolute -left-10  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
+                 :تاريخ البداية
+                </label>';
+            ?>
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
                     <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
@@ -79,9 +107,16 @@
                             </div>
                             <!-- end calendar -->
             </div>
-            <div class="flex justify-end mt-10">
-                <input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
-                <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
+            <div class="flex justify-end mt-14">
+                <?php
+                    if($_GET['language']=="en")
+                        echo '<input type="submit" value="تأكيد" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
+                        <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>';
+                    else{
+                        echo '<input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
+                        <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">إلغاء</button>';
+                    }
+                ?>    
             </div>
         </form>
     </div>
@@ -99,29 +134,68 @@
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2">
                     <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-2">
                         <div class="w-full p-5 md:flex flex-row items-center justify-between px-2 py-7 bg-white rounded-xl">
-                            <div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1">
-                                <div class="flex items-center">
+                        <div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1">
+                        <?php
+                            if($_GET['language']=='en'){
+                                echo ' <div class="flex items-center">
                                     <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
                                     <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
-                                <p class="md:mt-5 font-bold text-xs"><?php echo newClientsOfThisMonth($conn,$_SESSION['gym_id'])?><span></span></p>
-                            </div>
-                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
+                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>';
+                            }
+                            else{
+                                echo ' 
                                 <div class="flex items-center">
+                                    <p class="md:mr-3 ml-10 font-black md:text-[15px] text-[10px] ">  :المتدربين الجدد هذا الشهر</p>
+                                    <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
+                                </div>
+                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>';
+                            }
+                        ?>
+                    </div>
+                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
+                                <?php
+                                    if($_GET['language']=='en'){
+                                        echo '<div class="flex items-center">
                                     <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                     <p class="md:ml-3 ml-5 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
+                                        </div>
+                                        <p class="md:mt-3 font-bold text-xs"><span>'.earningThisMonth($conn,$_SESSION['gym_id'])
+                                        .'</span> DH</p>';
+                                    }
+                                    else{
+                                        echo '
+                                       
+                                <div class="flex items-center">
+                                    <p class="md:mr-3 ml-5 font-black md:text-[15px] text-[10px]"> :أرباح هذا الشهر</p>
+                                    <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                 </div>
-                                <p class="md:mt-3 font-bold text-xs"><span><?php echo earningThisMonth($conn,$_SESSION['gym_id']);
-                                ?></span> DH</p>
+                                      <p class="md:mt-3 font-bold text-xs"><span>'.earningThisMonth($conn,$_SESSION['gym_id'])
+                                        .'</span> DH</p>   ';
+                                    }
+                                ?>
                             </div>
                             <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
-                                <div class="flex items-center">
-                                <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
-                                    <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
-                                </div>
-                                <p class="md:mt-4 font-bold text-xs"><span><?php echo drawerMoney($conn,$_SESSION['gym_id']); ?>
-                                </span> DH</p>
-                            </div>
+                                <?php
+                                    if($_GET['language']=='en'){
+                                        echo '<div class="flex items-center">
+                                            <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
+                                            <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
+                                        </div>
+                                        <p class="md:mt-4 font-bold text-xs"><span>'.drawerMoney($conn,$_SESSION['gym_id']).'
+                                        </span> DH</p>';
+                                    }
+                                    else{
+                                        echo '
+                                        <div class="flex items-center">
+                                        <p class="mr-3 font-black md:text-[15px] text-[10px]">:المال في الدرج</p>
+                                            <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
+                                        </div>
+                                        <p class="md:mt-4 font-bold text-xs"><span>'.drawerMoney($conn,$_SESSION['gym_id']).'
+                                        </span> DH</p>';
+                                    }
+                                ?>
+                            </div>                    
                         </div>
             </div>
             <!-- information -->

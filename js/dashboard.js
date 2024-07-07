@@ -23,8 +23,7 @@ export default function countdown(){
     const oneHour=60*60*1000;
     const oneMinute=60*1000;
     const oneSecond=1000;
-
-    let endPeriod=new Date(endDate.textContent).getTime();
+    let endPeriod=new Date(endDate.textContent.split("-").reverse().join("-")).getTime();
     // to get the exact date timeNow-getHoursFromMidnight()-+oneHour
     let startPeriod=new Date().getTime()-oneDay;
     let intervalId=setInterval(()=>{
