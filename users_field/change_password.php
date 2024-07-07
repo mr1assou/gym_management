@@ -99,7 +99,7 @@
                     </div>
                     <div class="flex  gap-2 mt-10 items-center basis-[50%]">
                         <input type="text" name="repeat_new_password"  class="text-black font-bold basis-[60%] text-start bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value=""/>
-                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-end"> :اعد كلمة المرور الجديدة</p>
+                            <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-end">:اعد كلمة المرور الجديدة</p>
                     </div>
                 <div class="flex justify-end mt-5 items-center">  
                     <input  type="submit" value="تغيير" name="change_password" class="text-white bg-green px-4 py-2 cursor-pointer rounded-md transform transition-transform duration-300 hover:scale-110">

@@ -97,7 +97,14 @@
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
                     <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-5">
-                    <p class="text-center text-4xl text-green font-bold">Historical Data</p>
+                    <?php
+                        if($_GET['language']=="en")
+                            echo '<p class="text-center text-4xl text-green font-bold">Historical Data</p>';
+                        else
+                            echo '<p class="text-center text-4xl text-green font-bold">
+                        بيانات و عمليات</p>';
+                    ?>
+
                     <div class=" flex justify-center mt-5">
                             <?php  
                                 displaydates($conn,$_SESSION['user_id'],$_SESSION['gym_id'],$_GET['month'],$_GET['year']);
@@ -105,33 +112,72 @@
                     </div>
                         <!-- --------------------------------------- -->
                         <div class="w-full p-5  md:flex  md:justify-evenly px-2 py-7 bg-white rounded-xl flex-row ">
-                            <div class=" md:flex-col flex justify-between items-center">
+                        <?php
+                            if($_GET['language']=="en")
+                                echo ' <div class=" md:flex-col flex justify-between items-center">
                                 <div class="flex items-center">
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
                                     <p class="ml-5 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
                                 <p class="md:mt-5 mt-0 font-bold text-xs number-clients"><span></span></p>
-                            </div>
-                            <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
+                            </div>';
+                            else echo '<div class=" md:flex-col flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <p class="mr-3 font-black md:text-[15px] text-[10px] ">:العملاء الجدد لهذا الشهر</p>
+                                    <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
+                                </div>
+                                <p class="md:mt-5 mt-0 font-bold text-xs number-clients"><span></span></p>
+                            </div>';
+                        ?>
+                        <?php
+                            if($_GET['language']=='en')
+                                echo '<div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">
                                     <i class="fa-solid fa-money-bill-1-wave fa-4x  text-green"></i>
                                     <p class="ml-3 font-black md:text-[15px] text-[10px]">Earning of month:</p>
                                 </div>
                                 <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span> DH</p>
+                            </div>';
+                            else echo '<div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
+                            <div class="flex items-center">
+                                <p class="mr-3 font-black md:text-[15px] text-[10px]">:ربح الشهر</p>
+                                <i class="fa-solid fa-money-bill-1-wave fa-4x  text-green"></i>   
                             </div>
-                            <div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
+                            <p class="md:mt-3 mt-0 font-bold text-xs"><span class="earning"></span> DH</p>
+                        </div>';
+                        ?>
+                        <?php
+                            if($_GET['language']=="en"){
+                                echo '<div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
                                 <div class="flex items-center">  
                                     <i class="fa-sharp fa-solid fa-inbox fa-4x text-orange text-green"></i>
                                     <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
                                 </div>
                                 <p class="md:mt-3 mt-0 font-bold text-xs"><span class="drawer-money"></span> DH</p>
-                            </div>
+                            </div>';
+                            }
+                            else
+                                echo '<div class="md:flex-col flex justify-between items-center md:mt-0 mt-10">
+                                <div class="flex items-center"> 
+                                    <p class="mr-3 font-black md:text-[15px] text-[10px]">:المال     في الدرج </p> 
+                                    <i class="fa-sharp fa-solid fa-inbox fa-4x text-orange text-green"></i>
+                                </div>
+                                <p class="md:mt-3 mt-0 font-bold text-xs"><span class="drawer-money"></span> DH</p>
+                            </div>';
+                        ?>
+                            
                         </div>
-                        <p class="text-green text-center text-2xl font-black">New Clients of  Month:</p>
+                        <?php
+                            if($_GET['language']=="en")
+                                echo '<p class="text-green text-center text-2xl font-black">New Clients of  Month:</p>';
+                            else
+                                echo '<p class="text-green text-center text-2xl font-black">:المتدربين الجدد لهذا الشهر</p>';
+                        ?>
                             <?php
                                 newClientsHistoricalData($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);        
                             ?>
                 </div>
+                        
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
                 <p class="text-green text-center text-2xl font-black">Operations Of Month:</p>
