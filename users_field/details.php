@@ -3,12 +3,12 @@
     include '../vendor/connect.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php');
+        header('location:./login.php?language='.$_GET['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
     if($_SESSION['status']=='reject'){
-        header('location:./payment.php');
+        header('location:./payment.php?language='.$_GET['language'].'');
     }
     $query="{CALL selectInformationOfClient(?)}";
     $outcome=sqlsrv_query($conn,$query,array($_GET['client_id']));
@@ -24,7 +24,7 @@
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL updateClient(?,?,?,?)}";
         $result=sqlsrv_query($conn,$query,array($path,$phoneNumber,$price,$_GET['client_id']));
-        header("Location: ./details.php?client_id=" . $_GET['client_id']);
+        header("Location: ./details.php?client_id=" . $_GET['client_id'] . "&language=" . $_GET['language']);
     }
 ?>
 <!DOCTYPE html>
@@ -55,7 +55,13 @@
         <!-- second part-->
         <div class="px-1">
         <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-                <p class="text-center text-4xl text-green font-bold">Client Information</p>
+                <?php
+                    if($_GET['language']=="en")
+                        echo '  <p class="text-center text-4xl text-green font-bold">Client Information</p>';
+                    else
+                        echo '<p class="text-center text-4xl text-green font-bold">
+                معلومات المتدرب</p>';
+                ?>
                 <div class="w-full mt-2 text-[7px] md:text-[15px]">
                     <form class="md:flex flex-row p-5" action="" method="post" enctype="multipart/form-data">
                         <?php informationClient($conn,$_SESSION['gym_id'],$row);?> 
@@ -64,7 +70,14 @@
                 <?php displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id']) ?>
             </div>
         </div>
-            <p class="text-center text-black font-black text-2xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>
+            <?php
+                if($_GET['language']=="en"){
+                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>';
+                }
+                else{
+                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10"><span class="text-green"></span>ربحت من هذا المتدرب:<span class="text-green mt-5 mr-3 total-price"></span><span class="text-green">درهم</span></p>';
+                }
+            ?>
         </div> 
     </div>
     <!-- javascript -->

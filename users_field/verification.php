@@ -7,7 +7,7 @@
             $query="{CALL activateEmail(?,?)}";
             $result=sqlsrv_query($conn,$query,Array($_GET['email'],$code));
             if($result){
-                header('location:./login.php');
+                header('location:./login.php?language='.$_GET['language'].'');
             }        
             else{
                 $count++;

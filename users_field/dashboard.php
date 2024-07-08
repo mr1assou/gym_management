@@ -3,7 +3,7 @@
     include '../vendor/connect.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php');
+        header('location:./login.php?language='.$_GET['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
@@ -11,7 +11,7 @@
         pay($conn,$_SESSION['gym_id'],$_POST['client_id'],$_POST['beginning_date']);
     }
     if($_SESSION['status']=='reject'){
-        header('location:./payment.php');
+        header('location:./payment.php?language='.$_GET['language'].'');
     }
 ?>
 <!DOCTYPE html>
@@ -110,10 +110,10 @@
             <div class="flex justify-end mt-14">
                 <?php
                     if($_GET['language']=="en")
-                        echo '<input type="submit" value="تأكيد" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
+                        echo '<input type="submit" value="pay " name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
                         <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>';
                     else{
-                        echo '<input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
+                        echo '<input type="submit" value="تأكيد " name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md">
                         <button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">إلغاء</button>';
                     }
                 ?>    

@@ -68,7 +68,7 @@ function confirm(){
             const end=document.querySelector('.end');
             end.textContent=endDate.textContent;
             let link=e.currentTarget.nextElementSibling.getAttribute('href');
-            const clientId=link.split("?")[1].split("=")[1];
+            const clientId=link.split("?")[1].split("&")[0].split("=")[1];
             const clientIdField=document.querySelector('.client-id');
             clientIdField.value=clientId;
             const popUP=document.querySelector('.pop-up');

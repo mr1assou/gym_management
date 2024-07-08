@@ -3,7 +3,7 @@
     include '../functions/functions.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php');
+        header('location:./login.php?language='.$_GET['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
@@ -94,7 +94,7 @@
     </div>
     </div>
     <!-- javascript -->
-    <script src="../js/add_client.js" type="module"></script>
+    <script src="../js/payment.js" type="module"></script>
 </body>
 </html>
 

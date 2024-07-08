@@ -3,12 +3,12 @@
     include '../vendor/connect.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php');
+        header('location:./login.php?language='.$_GET['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
     if($_SESSION['status']=='reject'){
-        header('location:./payment.php');
+        header('location:./payment.php?language='.$_GET['language'].'');
     }
     if(isset($_POST['pay'])){
         pay($conn,$_SESSION['gym_id'],$_POST['client_id'],$_POST['beginning_date']);
