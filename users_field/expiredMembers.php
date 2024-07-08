@@ -96,7 +96,14 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-          <p class="text-center text-4xl text-green font-bold mt-3">Expired Members</p>
+        <?php
+            if($_GET['language']=="en")
+                echo '<p class="text-center text-4xl text-green font-bold mt-3">Expired Members</p>';
+            else
+                echo '<p class="text-center text-4xl text-green font-bold mt-3">
+            الأعضاء منتهية الصلاحية</p>';
+        ?> 
+          
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php

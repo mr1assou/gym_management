@@ -3,7 +3,7 @@
     include '../vendor/connect.php';
     session_start();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php');
+        header('location:./login.php?language='.$_POST['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
@@ -22,7 +22,7 @@
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL updateUser(?,?)}";
         $result=sqlsrv_query($conn,$query,array($_SESSION['user_id'],$path));
-        header("Location:./settings.php");
+        header('Location:./settings.php?language='.$_POST['language'].'');
     }
     $countActualPassword=0;
     $countCompatibility=0;
@@ -81,7 +81,14 @@
                         <?php informationUser($conn,$_SESSION['gym_id'],$row);?> 
                     </form>                         
                 </div>
-                <p class="text-center text-4xl text-green font-bold mt-5">Change Password</p>
+                <?php
+                    if($_GET['language']=="en")
+                        echo ' <p class="text-center text-4xl text-green font-bold mt-5">Change Password</p>';
+                    else
+                        echo '<p class="text-center text-4xl text-green font-bold mt-5">
+                    تغيير كلمة المرور</p>';
+                ?>
+               
                 <div class="flex justify-center">
                 <form class="  z-10  rounded-md  md:w-[40%] md:px-[2%] w-[100%] px-5 py-2 " action="" method="post">
                 <?php

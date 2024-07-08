@@ -108,28 +108,57 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-        <p class="text-center text-2xl text-green font-bold mt-3">Add Fees</p>
+         <?php
+            if($_GET['language']=="en"){
+                echo '<p class="text-center text-2xl text-green font-bold mt-3">Add Fees</p>';
+            }
+            else{
+                echo '<p class="text-center text-2xl text-green font-bold mt-3">إضافة مصاريف</p>';
+            }
+         ?>
+        
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">                                          
             <form class="w-full flex items-center" action="" method="post">
             <div class="basis-[70%] flex items-center justify-evenly">
                 <div class="mb-5">
-                    <label for="email" class="block mb-2 text-sm font-mediumdark:text-white text-gray-500">Your description:</label>
+                    <?php
+                        if($_GET['language']=="en")
+                            echo ' <label for="email" class="block mb-2 text-sm font-mediumdark:text-white text-gray-500 ">Your description:</label>';
+                        else
+                            echo ' <label for="email" class="block mb-2 text-sm font-medium dark:text-white text-gray-500 text-end">:الحدث</label>';
+                    ?>
                     <textarea name="description" class="text-sm rounded-lg  block w-full p-2.5  focus:border-green "   placeholder="description"></textarea>
                 </div>
                 <div class="mb-5">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-500 dark:text-white">amount:</label>
+                    <?php
+                        if($_GET['language']=="en")
+                            echo '<label for="password" class="block mb-2 text-sm font-medium text-gray-500 dark:text-white">amount:</label>';
+                        else
+                            echo '<label for="password" class="block mb-2 text-sm font-medium text-gray-500 dark:text-white text-end">:المبلغ</label>';
+                    ?>
                     <input type="number" name="amount"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                 </div>
             </div>
                 <div class="basis-[30%] items-center flex justify-center">
-                    <input type="submit" name="submit" value="Add" class="px-10 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
+                <?php
+                        if($_GET['language']=="en")
+                            echo '<input type="submit" name="submit" value="Add" class="px-10 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
+                        else
+                            echo '<input type="submit" name="submit" value="إضافة" class="px-10 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
+                    ?>  
                 </div>
             </form>
                 </div>
                 <!-- display fees of this month-->
-                <p class="text-green text-center text-2xl font-black mt-10">Fees Of This Month:</p>
+                <?php
+                    if($_GET['language']=="en")
+                        echo '<p class="text-green text-center text-2xl font-black mt-10">Fees Of This Month</p>';
+                    else
+                        echo '<p class="text-green text-center text-2xl font-black mt-10">
+                مصاريف هذا الشهر</p>'
+                ?>
                 <?php displayFee($conn,$_SESSION['gym_id'],date('m'),date('Y')); ?>
                 <!-- end -->
             </div>

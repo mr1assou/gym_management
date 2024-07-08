@@ -171,7 +171,7 @@
                             if($_GET['language']=="en")
                                 echo '<p class="text-green text-center text-2xl font-black">New Clients of  Month:</p>';
                             else
-                                echo '<p class="text-green text-center text-2xl font-black">:المتدربين الجدد لهذا الشهر</p>';
+                                echo '<p class="text-green text-center text-2xl font-black">المتدربين الجدد لهذا الشهر</p>';
                         ?>
                             <?php
                                 newClientsHistoricalData($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);        
@@ -180,13 +180,28 @@
                         
             <!-- information -->
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
-                <p class="text-green text-center text-2xl font-black">Operations Of Month:</p>
+                    <?php
+                        if($_GET['language']=="en")
+                            echo '<p class="text-green text-center text-2xl font-black">Operations Of Month:</p>';
+                        else
+                        echo '<p class="text-green text-center text-2xl font-black">
+                            عمليات هذا الشهر
+                   </p>';
+                    ?>
+                                                                                             
                 <?php
                     showOperations($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['month'],$_GET['year']);
                 ?>
                 </div>
         <div class="w-full bg-white  mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-10">
-                <p class="text-green text-center text-2xl font-black">Fees Of Month:</p>
+                <?php
+                    if($_GET['language']=="en")
+                        echo ' <p class="text-green text-center text-2xl font-black">Fees Of Month:</p>';
+                    else
+                        echo '<p class="text-green text-center text-2xl font-black">
+                        مصاريف هذا الشهر
+                    </p>';   
+                ?>
                 <?php
                     displayFee($conn,$_SESSION['gym_id'],$_GET['month'],$_GET['year']);
                 ?>
