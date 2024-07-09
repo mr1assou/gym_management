@@ -75,7 +75,7 @@
                     echo '<p class="text-center text-black font-black text-2xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>';
                 }
                 else{
-                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10"><span class="text-green"></span>ربحت من هذا المتدرب:<span class="text-green mt-5 mr-3 total-price"></span><span class="text-green">درهم</span></p>';
+                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10"><span class="text-green"></span>ربحت من هذا المتدرب:<span class="text-green mt-5 mr-3 total-price"></span><span class="text-green"> درهم  </span></p>';
                 }
             ?>
         </div> 
