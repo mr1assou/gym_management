@@ -2,6 +2,7 @@
     include "../functions/functions.php";
     include '../vendor/connect.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_GET['language'].'');
         exit;
@@ -29,6 +30,9 @@
 
 <body>
     <!-- start pop up -->
+    <?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[50%]">
             <p class="font-bold text-green name">Marwane Assou</p>
@@ -94,9 +98,9 @@
         <!-- second part-->
          <?php
             if($_GET['language']=="en")
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3">Active Members</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">Active Members</p>';
             else
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3">الأعضاء سارية الصلاحية</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">الأعضاء سارية الصلاحية</p>';
          ?>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
@@ -107,6 +111,8 @@
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/expiredMembers.js" type="module"></script>
+    <script 
+    src="../js/activeMembers.js"  
+    type="module"></script>
 </body>
 </html>

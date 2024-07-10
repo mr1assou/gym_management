@@ -106,3 +106,17 @@ function displaySideBar(){
     })
 }
 displaySideBar();
+
+let title=document.querySelector('.title');
+let dashboard=document.querySelector('.dashboard');
+let titleText=title.textContent.replace(/\s/g, "");
+let dashboardText=dashboard.textContent.replace(/\s/g, "");
+if(dashboardText===titleText){
+    dashboard.classList.add('bg-white');
+    dashboard.style.color='#74f814';
+    dashboard.classList.remove('hover:bg-white');
+    dashboard.classList.remove('hover:text-green');
+}
+
+
+

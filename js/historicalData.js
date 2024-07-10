@@ -76,3 +76,16 @@ function drawerMoney(){
     drawer.textContent=parseInt(earningOfMonth.textContent)-sum;
 }
 drawerMoney();
+
+
+
+let title=document.querySelector('.title');
+let historical_data=document.querySelector('.historical_data');
+let titleText=title.textContent.replace(/\s/g, "");
+let historicalDataText=historical_data.textContent.replace(/\s/g, "");
+if(historicalDataText===titleText){
+    historical_data.classList.add('bg-white');
+    historical_data.style.color='#74f814';
+    historical_data.classList.remove('hover:bg-white');
+    historical_data.classList.remove('hover:text-green');
+}

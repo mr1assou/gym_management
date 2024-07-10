@@ -1,9 +1,20 @@
 
 <?php
     session_start();
-    // if(isset($_SESSION['user_id'])){
-    //     header('location:./users_field/dashboard.php');
-    // }
+    if(isset($_SESSION['user_id'])){
+        if((time()-$_SESSION['last_login'])/60>=3)
+        {
+            header('location:./users_field/logout.php?language='.$_SESSION['language'].'');
+             exit;
+        }
+        else{
+            if($_SESSION['language']=="en")
+                header('location:./users_field/dashboard.php?language=en');
+            else
+                header('location:./users_field/dashboard.php?language=ar'); 
+            exit;
+         }
+    }
 
 ?>
 

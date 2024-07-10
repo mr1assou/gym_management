@@ -2,6 +2,7 @@
     include "../functions/functions.php";
     include '../vendor/connect.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_GET['language'].'');
         exit;
@@ -32,6 +33,9 @@
 
 <body>
     <!-- start pop up -->
+    <?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[50%]">
             <p class="font-bold text-green name">Marwane Assou</p>
@@ -58,6 +62,7 @@
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-400px] top-[-260px] hidden">
+                <p class="text-red font-bold text-1xl message"></p>
                                 <div class="w-full flex justify-between items-center mt-1">
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
                                 <div class="flex text-orange">
@@ -98,9 +103,9 @@
         <!-- second part-->
         <?php
             if($_GET['language']=="en")
-                echo '<p class="text-center text-4xl text-green font-bold mt-3">Expired Members</p>';
+                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">Expired Members</p>';
             else
-                echo '<p class="text-center text-4xl text-green font-bold mt-3">
+                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">
             الأعضاء منتهية الصلاحية</p>';
         ?> 
           

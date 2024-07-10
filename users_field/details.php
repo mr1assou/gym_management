@@ -2,6 +2,7 @@
     include "../functions/functions.php";
     include '../vendor/connect.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_GET['language'].'');
         exit;
@@ -44,6 +45,9 @@
 </head>
 
 <body>
+<?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 

@@ -2,6 +2,7 @@
     include "../functions/functions.php";
     include '../vendor/connect.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_GET['language'].'');
         exit;
@@ -32,7 +33,11 @@
 
 <body>
     <!-- start pop up -->
+    <?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+    
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-[35%] h-[55%]">
             <?php
                 if($_GET['language']=="en"){
@@ -64,18 +69,21 @@
                         </div>
                     </div>';
             ?>
-                        
+           
             <form action="" method="post" class="flex-col mt-5">
+           
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-10">
                 <?php
                 if($_GET['language']=="en"){
+                    echo '<p class="title hidden">Dashboard</p>';
                     echo '<label
                         class="mt-2 pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
                 baginning date:
                 </label>';
                 }
                 else
+                echo '<p class="title hidden">لوحة التحكم</p>';
                     echo '<label
                         class="justify-center mt-2   pointer-events-none absolute -left-10  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
                  :تاريخ البداية
@@ -86,7 +94,9 @@
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-400px] top-[-260px] hidden">
+                <p class="text-red font-bold text-1xl message"></p>
                                 <div class="w-full flex justify-between items-center mt-1">
+                             
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
                                 <div class="flex text-orange">
                                     <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>

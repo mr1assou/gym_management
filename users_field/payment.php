@@ -2,6 +2,7 @@
     include '../vendor/connect.php';
     include '../functions/functions.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_GET['language'].'');
         exit;
@@ -28,6 +29,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
+<?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 

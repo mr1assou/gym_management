@@ -10,37 +10,37 @@
                 </div>
                 <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
-            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-table block basis-[15%]"></i>
                         <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">Dashboard</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add-client
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user block basis-[15%]"></i>
-                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Add client</a>
+                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Add Client</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page historical_data
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
                         <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">Historical Data</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
                         <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer">Expired Members</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user-check block basis-[15%]"></i>
                         <a class="cursor-pointer block basis-[85%]" href="./activeMembers.php?language='.$_GET['language'].'">Active Members</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add_fees
             " style="border-top-right-radius:-20px;">
                         <i class="fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
                         <a class="cursor-pointer basis-[85%]" href="./add_fees.php?language='.$_GET['language'].'">Add Fees</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer settings  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-gear block basis-[15%]"></i>
                         <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Settings</a>
             </div>
@@ -53,44 +53,45 @@
         else 
         echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg md:sticky md:top-0
         fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-10 md:translate-x-[] sidebar transition duration-300">
-            <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full justify-between">
+            <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full
+             justify-between">
                 <div class="flex items-center">
                     <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
                     <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
                 </div>
                 <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
-            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-table block basis-[15%]"></i>
                         <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">لوحة التحكم</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add-client
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user block basis-[15%]"></i>
                         <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">إضافة متدرب</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page  historical_data
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
                         <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">بيانات و عمليات</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
                         <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer">الأعضاء منتهية الصلاحية</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-user-check block basis-[15%]"></i>
                         <a class="cursor-pointer block basis-[85%]" href="./activeMembers.php?language='.$_GET['language'].'">الأعضاء سارية الصلاحية</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add_fees
             " style="border-top-right-radius:-20px;">
                         <i class="fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
                         <a class="cursor-pointer basis-[85%]" href="./add_fees.php?language='.$_GET['language'].'">إضافة مصاريف</a>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page settings" style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-gear block basis-[15%]"></i>
                         <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">إعدادات</a>
             </div>
@@ -145,9 +146,9 @@
                         <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                         <p class="text-green font-black ml-1"> :النهاية</p>
                     </div>
-                    <div class=" basis-[45%] flex text-[11px]">
-                        <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                        <p class="text-green font-black ml-5"> :البداية</p>
+                    <div class=" basis-[45%] flex text-[11px] justify-end">
+                        <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                        <p class="text-green font-black">:البداية</p>
                     </div>
                 </div>';
                 echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -242,9 +243,9 @@
                     <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                     <p class="text-green font-black ml-1"> :النهاية</p>
                 </div>
-                 <div class=" basis-[45%] flex text-[11px]">
-                    <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                     <p class="text-green font-black ml-5"> :البداية</p>
+                 <div class=" basis-[45%] flex text-[11px] justify-end">
+                    <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                     <p class="text-green font-black">:البداية</p>
                 </div>
             </div>';
             echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -319,9 +320,9 @@
                     <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                     <p class="text-green font-black ml-1"> :النهاية</p>
                 </div>
-                 <div class=" basis-[45%] flex text-[11px]">
-                    <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                     <p class="text-green font-black ml-5"> :البداية</p>
+                 <div class=" basis-[45%] flex text-[11px] justify-end">
+                    <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                     <p class="text-green font-black">:البداية</p>
                 </div>
             </div>';
             echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -474,9 +475,9 @@
                     <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                     <p class="text-green font-black ml-1"> :النهاية</p>
                 </div>
-                 <div class=" basis-[45%] flex text-[11px]">
-                    <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                     <p class="text-green font-black ml-3"> :البداية</p>
+                 <div class=" basis-[45%] flex text-[11px] justify-end">
+                    <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                     <p class="text-green font-black "> :البداية</p>
                 </div>
             </div>';
             echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -880,4 +881,16 @@
                     </div>';
                     echo'</div>';
         echo'</div>';
+}
+
+function checkSession(){
+    if(isset($_SESSION['user_id'])){
+        if((time()-$_SESSION['last_login'])/60>=8)
+        {
+             header('location:./logout.php?language='.$_SESSION['language'].'');
+             exit;
+        }
+        else
+        $_SESSION['last_login']=time();
+    }
 }

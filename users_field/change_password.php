@@ -28,6 +28,9 @@
     <link rel="stylesheet" href="../output.css">
 </head>
 <body>
+<?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="absolute bg-green right-0 top-0 w-[70%]  z-0 h-full" style="clip-path: polygon(74% 0, 100% 0, 100% 100%, 22% 100%);"></div>
     <div class="w-full h-screen bg-black px-[3%] py-[2%]">
         <!-- nav bar -->

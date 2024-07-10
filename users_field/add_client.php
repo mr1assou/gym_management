@@ -2,6 +2,7 @@
     include '../vendor/connect.php';
     include '../functions/functions.php';
     session_start();
+    checkSession();
     $count=0;
     $clientFirstName="";
     $clientLastName="";
@@ -19,6 +20,8 @@
         $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
         $price=htmlspecialchars($_POST['price']);
         $paymentDate=htmlspecialchars($_POST['payment_date']);
+        if($_GET['language']!="en")
+            $paymentDate=implode("-",array_reverse(explode("-",$paymentDate)));
         $profile_image=$_FILES['profile_image'];
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
@@ -56,6 +59,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
 <body>
+    <?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
 <div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col p-10 rounded-lg">
             <p class="text-black font-bold">Are you Sure The client pay new month?</p>
@@ -77,10 +83,10 @@
              <form class=" mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
             <?php
                 if($_GET['language']=="en"){
-                    echo '<p class="text-center text-4xl text-green font-bold">Add Client</p>';
+                    echo '<p class="text-center text-4xl text-green font-bold title">Add Client</p>';
                 }
                 else
-                echo '<p class="text-center mb-5 text-4xl text-green font-bold">إضافة متدرب</p>';
+                echo '<p class="text-center mb-5 text-4xl text-green font-bold title">إضافة متدرب</p>';
             ?>
             
               <?php
@@ -212,12 +218,14 @@
                 </label>';
                     }
                 ?>
-                <div class=" absolute left-0 top-[39%] flex w-full items-center justify-between">
-                    <input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required value="<?php echo $paymentDate?>"/>
+                <div class=" absolute left-0 top-[60%] flex w-full items-center justify-between">
+                    <input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required value="<?php echo $paymentDate?>"/>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
-                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] top-[-320px] hidden">
-                                <div class="w-full flex justify-between items-center mt-1">
+                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] 
+                top-[-310px] hidden">
+                <p class="text-red font-bold text-1xl message"></p>
+                                <div class="w-full flex justify-between items-center mt-1">                               
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
                                 <div class="flex text-orange">
                                     <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>
@@ -225,13 +233,26 @@
                                 </div>
                                 </div>
                                 <div class="grid grid-cols-7 gap-3 w-full mt-2">
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
+                                <?php
+                                    if($_GET['language']=="en")
+                                        echo '<p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>
                                     <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">Thu</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Fri</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sat</p>
-                                    <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>
+                                    <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>';
+                                    else
+                                        echo '<p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">الإثنين</p>
+                                        <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">الثلاثاء</p>
+                                        <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">الأربعاء</p>
+                                        <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">الخميس</p>
+                                        <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">الجمعة</p>
+                                        <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">السبت</p>
+                                        <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">الأحد</p>';
+
+                                ?>
+                                    
                                 </div>           
                                 <div class="grid grid-cols-7 gap-4 w-full justify-between items-center mt-2 days">
                                 </div>           

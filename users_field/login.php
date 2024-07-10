@@ -25,6 +25,8 @@
                 $_SESSION['first_name']=$firstName;
                 $_SESSION['last_name']=$lastName;
                 $_SESSION['user_image']=$userImage;
+                $_SESSION['last_login']=time();
+                $_SESSION['language']=$_GET['language'];
                 $query="{CALL adjustStatus(?,?)}";
                 $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id'],$_SESSION['gym_id']));
                 $query="{CALL selectUserStatus(?)}";

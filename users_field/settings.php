@@ -2,6 +2,7 @@
     include "../functions/functions.php";
     include '../vendor/connect.php';
     session_start();
+    checkSession();
     if(!isset($_SESSION['user_id'])){
         header('location:./login.php?language='.$_POST['language'].'');
         exit;
@@ -64,6 +65,9 @@
 </head>
 
 <body>
+<?php   
+        echo '<p class="language hidden">'.$_GET['language'].'</p>';
+    ?>
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
@@ -73,6 +77,12 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
+         <?php
+            if($_GET['language']=="en")
+                echo '<p class="title hidden">Settings</p>';
+            else
+            echo '<p class="title hidden">إعدادات</p>';
+         ?>
         <div class="px-1">
         <div class="flex-col  justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 <?php

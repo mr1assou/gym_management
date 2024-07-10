@@ -47,4 +47,15 @@ function hideSideBar(){
 hideSideBar();
 
 
+let title=document.querySelector('.title');
+let settings=document.querySelector('.settings');
+let titleText=title.textContent.replace(/\s/g, "");
+let settingsText=settings.textContent.replace(/\s/g, "");
+if(settingsText===titleText){
+    settings.classList.add('bg-white');
+    settings.style.color='#74f814';
+    settings.classList.remove('hover:bg-white');
+    settings.classList.remove('hover:text-green');
+}
+
 

@@ -30,3 +30,15 @@ export function clickLinksSideBar(){
     })
 }
 clickLinksSideBar();
+
+
+let title=document.querySelector('.title');
+let add_fees=document.querySelector('.add_fees');
+let titleText=title.textContent.replace(/\s/g, "");
+let add_feesText=add_fees.textContent.replace(/\s/g, "");
+if(add_feesText===titleText){
+    add_fees.classList.add('bg-white');
+    add_fees.style.color='#74f814';
+    add_fees.classList.remove('hover:bg-white');
+    add_fees.classList.remove('hover:text-green');
+}
