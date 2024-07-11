@@ -118,5 +118,16 @@ if(dashboardText===titleText){
     dashboard.classList.remove('hover:text-green');
 }
 
+gsap.registerPlugin(ScrollTrigger);
+gsap.to('.row',{
+    opacity:1,
+    duration:4,
+    ScrollTrigger:".row"
+})
+
+
+
+
+
 
 

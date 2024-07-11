@@ -219,7 +219,13 @@
                     }
                 ?>
                 <div class=" absolute left-0 top-[60%] flex w-full items-center justify-between">
-                    <input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required value="<?php echo $paymentDate?>"/>
+                    <?php
+                        if($_GET['language']=="ar")
+                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required value="'.$paymentDate.'"/>';
+                        else
+                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required value="'.$paymentDate.'"/>';
+                    ?>
+                    
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] 
@@ -274,6 +280,8 @@
     </div>
     <!-- javascript -->
     <script src="../js/add_client.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </body>
 </html>
 

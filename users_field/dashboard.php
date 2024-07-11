@@ -20,6 +20,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -79,6 +80,7 @@
                     echo '<p class="title hidden">Dashboard</p>';
                     echo '<label
                         class="mt-2 pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
+                        
                 baginning date:
                 </label>';
                 }
@@ -138,71 +140,79 @@
             sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
-        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
+        <div class="xl:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2">
                     <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-2">
                         <div class="w-full p-5 md:flex flex-row items-center justify-between px-2 py-7 bg-white rounded-xl">
-                        <div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1">
+                       
                         <?php
                             if($_GET['language']=='en'){
-                                echo ' <div class="flex items-center">
+                                echo '<div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1"> 
+                                <div class="flex items-center">
                                     <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
                                     <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
                                 </div>
-                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>';
+                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p></div>';
                             }
                             else{
-                                echo ' 
-                                <div class="flex items-center">
-                                    <p class="md:mr-3 ml-10 font-black md:text-[15px] text-[10px] ">  :المتدربين الجدد هذا الشهر</p>
-                                    <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
-                                </div>
-                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>';
+                                echo '  <div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center mt-1 ">
+                                    <div class="flex items-center">
+                                        <p class="md:mr-3 mr-10 font-black md:text-[15px] text-[10px] ">  :المتدربين الجدد هذا الشهر</p>
+                                        <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x     text-green"></i>
+                                    </div>
+                                    <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>
+                                 </div>';
                             }
                         ?>
-                    </div>
+                    
                             <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
                                 <?php
                                     if($_GET['language']=='en'){
-                                        echo '<div class="flex items-center">
+                                        echo '<div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
+                               
+                                <div class="flex items-center">
                                     <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                     <p class="md:ml-3 ml-5 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
                                         </div>
                                         <p class="md:mt-3 font-bold text-xs"><span>'.earningThisMonth($conn,$_SESSION['gym_id'])
-                                        .'</span> DH</p>';
+                                        .'</span> DH</p></div> ';
                                     }
                                     else{
                                         echo '
-                                       
+                               <div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center ">
                                 <div class="flex items-center">
-                                    <p class="md:mr-3 ml-5 font-black md:text-[15px] text-[10px]"> :أرباح هذا الشهر</p>
+                                    <p class="md:mr-3 mr-5  font-black md:text-[15px] text-[10px]"> :أرباح هذا الشهر</p>
                                     <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
                                 </div>
-                                      <p class="md:mt-3 font-bold text-xs"><span>'.earningThisMonth($conn,$_SESSION['gym_id'])
-                                        .'</span> DH</p>   ';
+                                       <p class="md:mt-5 font-bold text-xs" dir="rtl"
+                lang="ar"><span class="ml-1">'.earningThisMonth($conn,$_SESSION['gym_id'])
+                                        .'</span>درهم</p>
+                                        </div> ';
                                     }
                                 ?>
                             </div>
-                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
+                            
                                 <?php
                                     if($_GET['language']=='en'){
-                                        echo '<div class="flex items-center">
+                                        echo '<div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10"><div class="flex items-center">
                                             <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
-                                            <p class="ml-3 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
+                                            <p class="ml-8 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
                                         </div>
                                         <p class="md:mt-4 font-bold text-xs"><span>'.drawerMoney($conn,$_SESSION['gym_id']).'
-                                        </span> DH</p>';
+                                        </span> DH</p></div> ';
                                     }
                                     else{
-                                        echo '
+                                        echo '<div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center mt-5">
                                         <div class="flex items-center">
-                                        <p class="mr-3 font-black md:text-[15px] text-[10px]">:المال في الدرج</p>
+                                        <p class="mr-7 font-black md:text-[15px] text-[10px]">:المال في الدرج</p>
                                             <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
                                         </div>
-                                        <p class="md:mt-4 font-bold text-xs"><span>'.drawerMoney($conn,$_SESSION['gym_id']).'
-                                        </span> DH</p>';
+                                        <p class="font-bold text-xs md:mt-3" dir="rtl"
+                lang="ar"><span >'.drawerMoney($conn,$_SESSION['gym_id']).'
+                                        </span>درهم</p></div> 
+                                       ';
                                     }
                                 ?>
                             </div>                    
@@ -217,5 +227,7 @@
     </div>
     <!-- javascript -->
     <script src="../js/dashboard.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </body>
 </html>

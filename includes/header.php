@@ -1,5 +1,5 @@
-<div class="w-full bg-white p-4 flex justify-between items-center gap-6">
-                <i class="fa-solid fa-bars text-black  md:invisible visible toggleButton"></i>
+<div class="w-full bg-white p-4 flex justify-between items-center gap-6 ">
+                <i class="fa-solid fa-bars text-black cursor-pointer xl:invisible visible toggleButton"></i>
                 <form class="flex items-center max-w-sm mx-auto" action="" method="post">   
                     <div class="relative w-full">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

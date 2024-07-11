@@ -98,10 +98,12 @@
                 ?>
             </div>
             <div class="md:basis-[60%] basis-[65%]  z-10 w-full flex md:items-center items-start justify-end" md:style="clip-path: polygon(43% 0, 100% 0, 100% 100%, 0% 100%);" style="clip-path: polygon(0 0, 100% 0%, 99% 100%, 0% 100%);">
-                <img src="./images/home-img.png" alt="image" class="md:h-[100%] h-[60%] md:w-[70%] w-[100%] object-top md:mr-5">
+                <img src="./images/home-img.png" alt="image" class="md:h-[100%] h-[60%] md:w-[70%] w-[100%] object-top md:mr-5 md:opacity-0 row">
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>

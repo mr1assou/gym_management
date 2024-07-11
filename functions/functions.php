@@ -1,14 +1,14 @@
 <?php
     function sidebar($userId,$gymId){
     if($_GET['language']=="en")
-        echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg md:sticky md:top-0
-        fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-10 md:translate-x-[] sidebar transition duration-300">
+        echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg xl:sticky xl:top-0
+        fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-10 xl:translate-x-[] sidebar transition duration-300">
             <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full justify-between">
                 <div class="flex items-center">
                     <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
-                    <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
+                    <p class="ml-3 text-1xl font-bold text-white xl:text-md">Gym Manager</p>
                 </div>
-                <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
+                <i class="fa-sharp fa-solid fa-xmark text-white cursor-pointer fa-1x xl:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
             <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
             " style="border-top-right-radius:-20px;">
@@ -57,7 +57,7 @@
              justify-between">
                 <div class="flex items-center">
                     <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
-                    <p class="ml-3 text-1xl font-bold text-white">Gym Manager</p>
+                    <p class="ml-3 text-1xl xl:text-md font-bold text-white">Gym Manager</p>
                 </div>
                 <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
@@ -110,13 +110,14 @@
             echo '<div class="text-1xl text-center mt-5 text-grey-light font-bold">You don\'t have any client</div>';
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-5  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+            gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                     echo '
-                    <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
-                    <div class="h-[45%] px-10 mt-2">
-                        <div class="h-full w-full p-1 rounded-full  bg-green">    
-                            <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                    <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  md:transition md:duration-300 md:ease-in-out md:hover:scale-110 cursor-pointer h-96 relative ">
+                    <div class="h-[45%] px-10 mt-2 flex justify-center">
+                        <div class="h-full w-[75%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
+                            <img src="'.$row['client_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
                         </div>
                     </div>
                     <div class="px-3 w-full mt-2">
@@ -163,11 +164,11 @@
                         echo '</div>';
                         echo'<div class="flex justify-end mt-2">';
                         if($_GET['language']=="en")    
-                            echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                                <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
+                                <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
                         else
-                            echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
-                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
+                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
                             echo '</div>
                             <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                     </div>
@@ -207,7 +208,7 @@
                 </div>';
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
@@ -245,7 +246,7 @@
                 </div>
                  <div class=" basis-[45%] flex text-[11px] justify-end">
                     <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                     <p class="text-green font-black">:البداية</p>
+                     <p class="text-green font-black ">:البداية</p>
                 </div>
             </div>';
             echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -284,7 +285,7 @@
                 echo '<div class="text-xl text-center text-grey-light font-bold">ليس لديك أعضاء سارية الصلاحية</div>'; 
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
@@ -439,7 +440,7 @@
             ليس لديك أي أعضاء جدد في هذا الشهر</div>';
         }
         else{
-            echo '<div class="w-full  p-3 mt-5 rounded-md grid grid-cols-4 gap-3">';
+            echo '<div class="w-full  p-3 mt-5 rounded-md grid grid-cols-4 gap-3 opacity-0 row">';
             while($row=sqlsrv_fetch_array($result)){
             echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
@@ -675,7 +676,7 @@
     function searchClient($conn,$userId,$gymId,$clientName){
             $query="{CALL search(?,?)}";
             $result=sqlsrv_query($conn,$query,array($gymId,$clientName));
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 opacity-0 row">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
@@ -711,9 +712,9 @@
                     <p  class="text-center  text-black  end-date font-bold">'.$row['end_period_date']->format('d-m-Y').'</p>
                     <p class="text-green font-black ml-1"> :النهاية</p>
                 </div>
-                 <div class=" basis-[45%] flex text-[11px]">
-                    <p class="text-center text-black  beginning-date font-bold">'.$row['beginning_period_date']->format('d-m-Y').'</p>
-                     <p class="text-green font-black ml-3"> :البداية</p>
+                 <div class=" basis-[45%] flex text-[11px] justify-end">
+                    <p class="text-center text-black  beginning-date font-bold mr-1">'.$row['beginning_period_date']->format('d-m-Y').'</p>
+                     <p class="text-green font-black"> :البداية</p>
                 </div>
             </div>';
             echo '<div class="flex  text-[13px] font-black mt-1">';
@@ -753,7 +754,7 @@
                 echo '<div class="mt-5 text-1xl text-center  text-grey-light font-bold">You don\'t have any fee in this month</div>';
             else
                 echo '<div class="mt-5 text-1xl text-center  text-grey-light font-bold">
-            ليس لديك أي مصاريف  في هذا الشهر:</div>';
+             ليس لديك أي مصاريف  في هذا الشهر</div>';
         }
         else{
             echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full mt-5"
@@ -885,7 +886,7 @@
 
 function checkSession(){
     if(isset($_SESSION['user_id'])){
-        if((time()-$_SESSION['last_login'])/60>=8)
+        if((time()-$_SESSION['last_login'])/60>=10)
         {
              header('location:./logout.php?language='.$_SESSION['language'].'');
              exit;

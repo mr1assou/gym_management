@@ -4,6 +4,15 @@ module.exports = {
     "./includes/**/*.{html,js,php}","./js/**/*.{html,js,php}"
    ],
   theme: {
+    screens:{
+      'sm':'640px',
+      'md':'900px',
+      'lg':'1024px',
+      'xl':'1280px',
+      '2xl':'1700px',
+      '3xl':'2100px',
+      '4xl':'2650px',
+    },
     extend: {
       colors:{
         'green':'#74f814',

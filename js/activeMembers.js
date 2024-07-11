@@ -64,6 +64,30 @@ displaySideBar();
 
 
 
+export function clickLinksSideBar(){
+    const links=document.querySelectorAll('.link-page');
+    links.forEach((link)=>{
+    link.addEventListener('click',(e)=>{
+            const sibling=e.currentTarget.children[1];
+            sibling.click();
+        })
+    })
+}
+clickLinksSideBar();
+
+
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.to('.row',{
+    opacity:1,
+    duration:4,
+    ScrollTrigger:".row"
+})
+
+
+
+
+
 let titleActive=document.querySelector('.active');
 let active_member=document.querySelector('.active_member');
 let titleActiveText=titleActive.textContent.replace(/\s/g, "");

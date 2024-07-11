@@ -8,3 +8,11 @@ function selectLanguage(){
     })
 }
 selectLanguage();
+
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.to('.row',{
+    opacity:1,
+    duration:3,
+    ScrollTrigger:".row"
+})

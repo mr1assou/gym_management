@@ -4,7 +4,7 @@
     session_start();
     checkSession();
     if(!isset($_SESSION['user_id'])){
-        header('location:./login.php?language='.$_POST['language'].'');
+        header('location:./login.php?language='.$_GET['language'].'');
         exit;
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
@@ -23,7 +23,7 @@
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL updateUser(?,?)}";
         $result=sqlsrv_query($conn,$query,array($_SESSION['user_id'],$path));
-        header('Location:./settings.php?language='.$_POST['language'].'');
+        header('Location:./settings.php?language='.$_GET['language'].'');
     }
     $countActualPassword=0;
     $countCompatibility=0;

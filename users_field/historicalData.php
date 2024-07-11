@@ -129,7 +129,7 @@
                             </div>';
                             else echo '<div class=" md:flex-col flex justify-between items-center">
                                 <div class="flex items-center">
-                                    <p class="mr-3 font-black md:text-[15px] text-[10px] ">:العملاء الجدد لهذا الشهر</p>
+                                    <p class="mr-3 font-black md:text-[15px] text-[10px] ">:المتدربين الجدد لهذا الشهر</p>
                                     <i class="fa-regular fa-user text-orange fa-4x text-green"></i>
                                 </div>
                                 <p class="md:mt-5 mt-0 font-bold text-xs number-clients"><span></span></p>
@@ -217,5 +217,7 @@
     </div>
     <!-- javascript -->
     <script type="module" src="../js/historicalData.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </body>
 </html>
