@@ -110,7 +110,7 @@
             echo '<div class="text-1xl text-center mt-5 text-grey-light font-bold">You don\'t have any client</div>';
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-5  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                     echo '
@@ -208,15 +208,16 @@
                 </div>';
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 row opacity-0">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+            gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
-                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
-                <div class="h-[45%] px-10 mt-2">
-                    <div class="h-full w-full p-1 rounded-full  bg-green">    
-                        <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  md:transition md:duration-300 md:ease-in-out md:hover:scale-110 cursor-pointer h-96 relative ">
+                    <div class="h-[45%] px-10 mt-2 flex justify-center">
+                        <div class="h-full w-[75%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
+                            <img src="'.$row['client_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
+                        </div>
                     </div>
-                </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">';
                 if($_GET['language']=='en')
@@ -261,13 +262,13 @@
                     echo '</div>';
                     echo'<div class="flex justify-end mt-2">';
                     if($_GET['language']=="en")    
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
-                    else
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
-                        <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
-                        echo '</div>
-                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
+                                <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                        else
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
+                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                            echo '</div>
+                            <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
             </div>';
             }
@@ -285,15 +286,16 @@
                 echo '<div class="text-xl text-center text-grey-light font-bold">ليس لديك أعضاء سارية الصلاحية</div>'; 
         }
         else{
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 row opacity-0">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+            gap-3 row opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
-                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
-                <div class="h-[45%] px-10 mt-2">
-                    <div class="h-full w-full p-1 rounded-full  bg-green">    
-                        <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  md:transition md:duration-300 md:ease-in-out md:hover:scale-110 cursor-pointer h-96 relative ">
+                    <div class="h-[45%] px-10 mt-2 flex justify-center">
+                        <div class="h-full w-[75%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
+                            <img src="'.$row['client_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
+                        </div>
                     </div>
-                </div>
                 <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">';
                 if($_GET['language']=='en')
@@ -338,13 +340,13 @@
                     echo '</div>';
                     echo'<div class="flex justify-end mt-2">';
                     if($_GET['language']=="en")    
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
-                    else
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
-                        <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
-                        echo '</div>
-                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                    echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
+                    <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+            else
+                echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
+                <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                echo '</div>
+                <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
             </div>';
             }
@@ -676,16 +678,17 @@
     function searchClient($conn,$userId,$gymId,$clientName){
             $query="{CALL search(?,?)}";
             $result=sqlsrv_query($conn,$query,array($gymId,$clientName));
-            echo '<div class="w-full  p-3 mt-3 rounded-md grid grid-cols-4 gap-3 opacity-0 row">';
+            echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+            gap-3 row md:opacity-0">';
             while($row=sqlsrv_fetch_array($result)){
                 echo '
-                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  transition duration-300 ease-in-out hover:scale-110 cursor-pointer h-96 relative">
-                <div class="h-[45%] px-10 mt-2">
-                    <div class="h-full w-full p-1 rounded-full  bg-green">    
-                        <img src="'.$row['client_image'].'" class=" h-full w-full object-center rounded-full brightness-125">
+                    <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  md:transition md:duration-300 md:ease-in-out md:hover:scale-110 cursor-pointer h-96 relative ">
+                    <div class="h-[45%] px-10 mt-2 flex justify-center">
+                        <div class="h-full w-[85%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
+                            <img src="'.$row['client_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
+                        </div>
                     </div>
-                </div>
-                <div class="px-3 w-full mt-2">
+                    <div class="px-3 w-full mt-2">
                     <div class="flex w-full text-[11px]">';
                 if($_GET['language']=='en')
                     echo '
@@ -729,13 +732,13 @@
                     echo '</div>';
                     echo'<div class="flex justify-end mt-2">';
                     if($_GET['language']=="en")    
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
-                    else
-                        echo '<button class="block  md:px-3 md:py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
-                        <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  md:px-3 md:py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
-                        echo '</div>
-                        <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">confirm</button>
+                                <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                        else
+                            echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm hidden bg-green-dark mr-2">الدفع</button>
+                            <a href="./details.php?client_id='.$row['client_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                            echo '</div>
+                            <div class="bg-green-dark h-[10%] w-full bottom absolute bottom-3 left-0"></div>
                 </div>
             </div>';
             }
