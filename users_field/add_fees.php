@@ -54,7 +54,7 @@
                     <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
                 </div>
             </div>            
-            <form action="" method="post" class="flex-col mt-5">
+            <form action="" method="post" class="flex-col mt-5 ">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                     <label
@@ -124,9 +124,9 @@
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
         <div class="w-full bg-white p-3 mt-3 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)]">                                          
-            <form class="w-full flex items-center" action="" method="post">
-            <div class="basis-[70%] flex items-center justify-evenly">
-                <div class="mb-5">
+            <form class="w-full xl:flex xl:flex-row xl:items-center flex flex-col" action="" method="post">
+            <div class="basis-[70%] xl:flex xl:flex-row xl:items-center xl:justify-evenly">
+                <div class="mb-5 ">
                     <?php
                         if($_GET['language']=="en")
                             echo ' <label for="email" class="block mb-2 text-sm font-mediumdark:text-white text-gray-500 ">Your description:</label>';

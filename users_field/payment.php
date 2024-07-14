@@ -70,26 +70,28 @@
         <p class="mb-6 text-green"><strong>Ready to transform your gym management? Subscribe today!</strong></p>
         <p class="mb-6">Thank you for choosing our app. We look forward to being a part of your gym’s success story.</p>
         <p class="mb-6">Best regards,<br>
-        <div class="flex justify-between items-center">
+        <div class="xl:flex  xl:flex-row xl:justify-between flex flex-col items-center">
         <div class="flex-col  items-center justify-center" >
-            <div class="md:w-[150px] md:h-[150px] w-[40px] h-[30px] bg-green  rounded-full p-[2px] mr-2">
+            <div class="xl:w-[150px] xl:h-[150px] w-[200px] h-[200px] bg-green  rounded-full p-[2px] mr-2">
             <img src="../images/marwane_assou.jpeg" alt="" class="rounded-full object-cover brightness-100 w-full h-full">
             </div>
-            <p class="text-green font-bold text-[7px] md:text-[15px] ml-5 mt-1">Marwane Assou</p>
+            <p class="text-green font-bold text-[10px] xl:text-[15px] ml-5 mt-1">Marwane Assou</p>
             <p class="font-bold text-black ml-5 mt-1 text-[12px]">Creator of Gym Manager</p>
+           
+          
             </div>
-            <div class="w-[50%]">
+            <div class="xl:w-[50%] w-[100%] p-2 mt-10 text-sm xl:text-lg">
                 <div class="flex ">
-                    <span class="basis-[35%] font-bold text-green">Bank Account:</span></p>
-                    <span class="basis-[65%] font-bold">5110371211013900</span></p>
+                    <span class="xl:basis-[35%] basis-[40%] font-bold text-green">Bank Account:</span></p>
+                    <span class="xl:basis-[65%] basis-[60%] font-bold">5110371211013900</span></p>
                 </div>
                 <div class="flex mt-2">
-                    <span class="basis-[35%] font-bold text-green">Contact:</span></p>
-                    <span class="basis-[65%] font-bold">+212635103092</span></p>
+                    <span class="xl:basis-[35%] basis-[40%] font-bold text-green">Contact:</span></p>
+                    <span class="xl:basis-[65%] basis-[60%] font-bold">+212635103092</span></p>
                 </div>
                 <div class="flex mt-2 ">
-                    <span class="basis-[35%] font-bold text-green">Email:</span></p>
-                    <span class="basis-[65%] font-bold">marwane.assou@gmail.com</span></p>
+                    <span class="xl:basis-[35%] basis-[40%] font-bold text-green">Email:</span></p>
+                    <span class="xl:basis-[65%] basis-[60%] font-bold">marwane.assou@gmail.com</span></p>
                 </div>
             </div>
             </div>';
@@ -132,31 +134,31 @@
         <p class="mb-6 text-start" dir="rtl" lang="ar">
         شكرا لاختيارك تطبيقنا. نحن نتطلع إلى أن نكون جزءًا من قصة نجاح صالة الألعاب الرياضية الخاصة بك .</p>
         <p class="mb-6 text-start" dir="rtl" lang="ar"> أطيب التحيات ،<br>
-        <div class="flex justify-between items-center">
-        
-            <div class="w-[50%]">
+        <div class="xl:flex-row xl:flex xl:justify-between flex flex-col-reverse items-center">
+            <div class="xl:w-[50%] w-[100%] p-2 mt-10 text-sm xl:text-lg">
                 <div class="flex ">
-                    <span class="basis-[35%] font-bold ">5110371211013900</span></p>
-                    <span class="basis-[65%] font-bold text-green text-end">:الحساب البنكي</span></p>
+                    <span class="xl:basis-[35%] basis-[40%] font-bold ">5110371211013900</span></p>
+                    <span class="xl:basis-[65%] basis-[60%] font-bold text-green text-end">:الحساب البنكي</span></p>
                 </div>
                 <div class="flex mt-2">
-                    <span class="basis-[35%] font-bold ">+212635103092</span></p>
-                    <span class="basis-[65%] font-bold text-green  text-end">:رقم الهاتف</span></p>
+                    <span class="xl:basis-[35%] basis-[40%] font-bold ">+212635103092</span></p>
+                    <span class="xl:basis-[65%] basis-[60%] font-bold text-green  text-end">:رقم الهاتف</span></p>
                 </div>
                 <div class="flex mt-2 ">
-                       <span class="basis-[35%] font-bold ">marwane.assou@gmail.com</span></p>
-                    <span class="basis-[65%] font-bold text-green text-end">:البريد الإلكتروني</span></p>
+                       <span class="xl:basis-[35%] basis-[50%] font-bold ">marwane.assou@gmail.com</span></p>
+                    <span class="xl:basis-[65%] basis-[50%] font-bold text-green text-end">:البريد الإلكتروني</span></p>
                 </div>
             </div>
-            <div class="flex-col  items-center justify-center" >
-            <div class="md:w-[150px] md:h-[150px] w-[40px] h-[30px] bg-green  rounded-full p-[2px] mr-2">
+            <div class="flex-col  items-center justify-center ">
+            <div class="xl:w-[150px] xl:h-[150px] w-[200px] h-[200px] bg-green  rounded-full p-[2px] mr-2">
             <img src="../images/marwane_assou.jpeg" alt="" class="rounded-full object-cover brightness-100 w-full h-full">
             </div>
-            <p class="text-green font-bold text-[7px] md:text-[15px] ml-5 mt-1">Marwane Assou</p>
+            <p class="text-green font-bold text-[10px] xl:text-[15px] ml-5 mt-1">Marwane Assou</p>
             <p class="font-bold text-black ml-5 mt-1 text-[12px]  text-end" dir="rtl" lang="ar">مؤسس Gym Manager</p>
             </div>
             </div>';
             }
+           
         ?>  
             </form> 
         </div>         

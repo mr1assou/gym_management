@@ -58,7 +58,7 @@
             <?php include '../includes/header.php'?>
         <!-- second part-->
         <div class="px-1">
-        <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-10 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="flex-col justify-between w-full  gap-2 mt-3 relative xl:p-10 p-5 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
                 <?php
                     if($_GET['language']=="en")
                         echo '  <p class="text-center text-4xl text-green font-bold">Client Information</p>';
@@ -66,8 +66,8 @@
                         echo '<p class="text-center text-4xl text-green font-bold">
                 معلومات المتدرب</p>';
                 ?>
-                <div class="w-full mt-2 text-[7px] md:text-[15px]">
-                    <form class="md:flex flex-row p-5" action="" method="post" enctype="multipart/form-data">
+                <div class="w-full mt-2 text-[10px] md:text-[15px]">
+                    <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 " action="" method="post" enctype="multipart/form-data">
                         <?php informationClient($conn,$_SESSION['gym_id'],$row);?> 
                     </form>                         
                 </div>
@@ -76,10 +76,10 @@
         </div>
             <?php
                 if($_GET['language']=="en"){
-                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>';
+                    echo '<p class="text-center text-black font-black xl:text-2xl text-xl mt-5 p-10">Earning from this client:<span class="text-green ml-3 total-price"></span><span class="text-green">DH</span></p>';
                 }
                 else{
-                    echo '<p class="text-center text-black font-black text-2xl mt-5 p-10"><span class="text-green"></span>ربحت من هذا المتدرب:<span class="text-green mt-5 mr-3 total-price"></span><span class="text-green"> درهم  </span></p>';
+                    echo '<p class="text-center text-black font-black xl:text-2xl text-xl mt-5 p-10"><span class="text-green"></span>ربحت من هذا المتدرب:<span class="text-green mt-5 mr-3 total-price"></span><span class="text-green"> درهم  </span></p>';
                 }
             ?>
         </div> 

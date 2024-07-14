@@ -105,23 +105,19 @@
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php
-                    selectActiveClients($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
-                    $sql = "SELECT dbo.numActiveClients(?) AS activeClients";
-                    $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
-                    $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
-                    $rowCount=$result['activeClients'];
+                    selectActiveClientsAlternative($conn,$_SESSION['gym_id'],$_GET['skip']);
                     echo '
-                    <nav class="p-10">
+                <nav class="p-10">
                     <ul class="h-10 flex justify-center flex-wrap w-[90%]">
                         <li>
-                        <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                        <a href="./activeMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                         </li>';
                     $p=150;
                     $pageNumber=2;
-                    while($p<=$rowCount){
+                    while($p<=$_GET['total']){
                         echo '<li>
                             <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
-                            total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$pageNumber.'</a>
+                            total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$pageNumber.'</a>
                         </li>';
                         $p+=150;
                         $pageNumber++;

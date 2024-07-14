@@ -18,6 +18,7 @@
         $clientFirstName=htmlspecialchars($_POST['client_first_name']);
         $clientLastName=htmlspecialchars($_POST['client_last_name']);
         $clientPhoneNumber=htmlspecialchars($_POST['phone_number']);
+        $kind=$_POST['kind'];
         $price=htmlspecialchars($_POST['price']);
         $paymentDate=htmlspecialchars($_POST['payment_date']);
         if($_GET['language']!="en")
@@ -28,8 +29,8 @@
         if($profile_image['size']==0){
             $path='../images/empty_profile.png';
         }
-        $query="{CALL addClientForGym(?,?,?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate));
+        $query="{CALL addClientForGym(?,?,?,?,?,?,?,?)}";
+        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate,$kind));
         if($result){
             echo "<script>window.open('./add_client.php?status=success&language=" . $_GET['language'] . "','_self');</script>";
 
@@ -184,14 +185,37 @@
                     }
                 ?>
             </div>
-            <div class="relative h-11 w-full min-w-[200px] mt-5">
-                    <input   name="price" type="number" min="0"  required value="<?php ?>"
-                    class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" value="<?php echo $price?>"/>
+            <div class="relative h-11 w-full min-w-[200px] mt-5"> 
+            <div class="flex  items-center justify-center mt-2 py-2">    
+            <?php
+                if($_GET['language']=="ar")
+                    echo '<div class="flex items-center mt-3">
+                    <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role " required>
+                    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">سنوي</label>
+                </div>
+                <div class="flex items-center mt-3 ml-10">
+                    <input name="kind" type="radio" value="monthly"  class=" role w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
+                    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">شهري</label>
+                </div>';
+                else
+                    echo '<div class="flex items-center mt-3">
+                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">yearly</label>
+                        <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role" required>
+                        
+                    </div>
+                    <div class="flex items-center mt-3 ml-10">
+                         <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">monthly</label>
+                        <input name="kind" type="radio" value="monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
+                    
+                    </div>';
+            ?>     
+                
+            </div>
                 <?php
                 if($_GET['language']=='ar'){
                     echo '<label
                         class="justify-end pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                :الواجب الشهري للمتدرب
+                :نوع الدفع
                 </label>';
                 }
                     else{
@@ -202,8 +226,12 @@
                     }
                 ?>
             </div>
-                <div class="relative h-11 w-full min-w-[200px] mt-5">
-                    
+            <div class="price-field">
+
+            </div>
+            
+
+                <div class="relative h-11 w-full min-w-[200px] mt-5">  
                 <?php
                 if($_GET['language']=='ar'){
                     echo '<label
@@ -221,9 +249,9 @@
                 <div class=" absolute left-0 top-[60%] flex w-full items-center justify-between">
                     <?php
                         if($_GET['language']=="ar")
-                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required value="'.$paymentDate.'"/>';
+                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required/>';
                         else
-                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required value="'.$paymentDate.'"/>';
+                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required/>';
                     ?>
                     
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  

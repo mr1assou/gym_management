@@ -6,7 +6,6 @@ countdown();
 function hideSideBar(){
     const cross=document.querySelector('.cross');
     const sidebar=document.querySelector('.sidebar');
-    console.log(cross);
     cross.addEventListener('click',()=>{
         sidebar.classList.remove('translate-x-[0%]');
         sidebar.classList.add('translate-x-[-100%]');
