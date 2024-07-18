@@ -98,9 +98,9 @@
         <!-- second part-->
          <?php
             if($_GET['language']=="en")
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">Active Members</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold mt-10 active">Active Members</p>';
             else
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">الأعضاء سارية الصلاحية</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold mt-10 active">الأعضاء سارية الصلاحية</p>';
          ?>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
@@ -110,21 +110,25 @@
                     $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
                     $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
                     $rowCount=$result['activeClients'];
-                    echo '
-                    <nav class="p-10">
-                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
-                        <li>
-                        <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>';
-                    $p=150;
                     $pageNumber=2;
-                    while($p<=$rowCount){
-                        echo '<li>
-                            <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
-                            total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$pageNumber.'</a>
-                        </li>';
-                        $p+=150;
-                        $pageNumber++;
+                    $p=0;
+                    if($rowCount>172){
+                        if($p==0){
+                            echo '<nav class="p-10">
+                                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
+                                <li>
+                                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white text-black font-bold">1</a>
+                            </li>';
+                            $p+=172;
+                        }   
+                        for($i=1;$i<ceil($rowCount/172);$i++){
+                            echo '<li>
+                                    <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
+                                    total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
+                                </li>';
+                                $pageNumber++;
+                                $p+=172;
+                        }
                     }
                 echo'</ul></nav>';
                 ?>

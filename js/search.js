@@ -115,12 +115,6 @@ function clickDays(selectDays) {
 
 
 
-
-
-
-
-
-
 function countdown(){
     const parents=document.querySelectorAll('.parent');
     parents.forEach(parent=>{
@@ -136,7 +130,7 @@ function countdown(){
     const oneSecond=1000;
     let endPeriod=new Date(endDate.textContent.split("-").reverse().join("-")).getTime();
     // to get the exact date timeNow-getHoursFromMidnight()-+oneHour
-    let startPeriod=new Date().getTime()-oneDay;
+    let startPeriod=new Date().getTime()-oneDay+oneHour;
     let intervalId=setInterval(()=>{
     let t=endPeriod-startPeriod;
     let restDays=Math.floor(t/oneDay);
@@ -149,6 +143,10 @@ function countdown(){
     secondes.textContent=restSecondes;
     startPeriod+=1000;
         if(t<=0){
+            days.textContent = 0;
+            hours.textContent = 0;
+            minutes.textContent = 0;
+            secondes.textContent = 0;
             const bottom=parent.querySelector('.bottom');
             bottom.classList.remove('bg-green-dark');
             bottom.classList.add('bg-red-light');
@@ -157,6 +155,7 @@ function countdown(){
             const confirm=parent.querySelector('.confirm');
             confirm.classList.remove('hidden');
             confirm.classList.add('block');
+            clearInterval(intervalId);
         }
         },1000)
     })

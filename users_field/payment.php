@@ -38,10 +38,10 @@
              sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
-        <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%] " style="padding-left:10px;">
             <?php include '../includes/header.php'?>
-            <div class="flex justify-center w-full px-3 py-10">
-        <form class=" mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[80%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
+            <div class="flex justify-center w-full px-3 py-10 z-15">
+        <form class=" mr-0 md:mr-20 z-15 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[80%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
         <?php
             if($_GET['language']=="en"){
                 echo '<h1 class="text-3xl font-bold mb-6 text-green">Unlock the Full Potential of Your Gym with Our All-In-One Management App!</h1>

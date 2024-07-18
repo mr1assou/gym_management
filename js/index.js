@@ -16,3 +16,6 @@ gsap.to('.row',{
     duration:3,
     ScrollTrigger:".row"
 })
+
+
+console.log(new Date().getHours());

@@ -13,7 +13,7 @@ function countdown(){
     const oneSecond=1000;
     let endPeriod=new Date(endDate.textContent.split("-").reverse().join("-")).getTime();
     // to get the exact date timeNow-getHoursFromMidnight()-+oneHour
-    let startPeriod=new Date().getTime()-oneDay;
+    let startPeriod=new Date().getTime()-oneDay+oneHour;
     let intervalId=setInterval(()=>{
     let t=endPeriod-startPeriod;
     let restDays=Math.floor(t/oneDay);

@@ -40,12 +40,12 @@
     <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
-    <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+    <div class="fixed bg-black w-full h-full z-50 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
         xl:h-[70%] h-[70%]">
             <?php
                 if($_GET['language']=="en"){ 
-                echo '<p class="title hidden">Dashboard</p>';
+                echo '<p class="title hidden">Historical Data</p>';
                     echo ' <p class="font-bold text-green name">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
                     <div class="flex mt-2">
@@ -59,7 +59,7 @@
                     </div>
                     </div>';}
                 else{
-                    echo '<p class="title hidden">لوحة التحكم</p>';
+                    echo '<p class="title hidden">بيانات و عمليات</p>';
                     echo ' <p class="font-bold text-green name text-end">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10 text-end">:أخر عملية</p>
                     <div class="flex mt-2">
@@ -136,7 +136,12 @@
                 ?>
                     
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
-                    <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />
+                <?php
+                        if($_GET['language']=="ar")
+                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
+                        else
+                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
+                    ?>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden">

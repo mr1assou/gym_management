@@ -89,3 +89,5 @@ if(historicalDataText===titleText){
     historical_data.classList.remove('hover:bg-white');
     historical_data.classList.remove('hover:text-green');
 }
+
+console.log(title.textContent);

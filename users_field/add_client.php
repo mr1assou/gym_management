@@ -63,7 +63,7 @@
     <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
-<div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+<div class="absolute bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden ">
         <div class="bg-white flex-col p-10 rounded-lg">
             <p class="text-black font-bold">Are you Sure The client pay new month?</p>
             <div class="flex mt-5">
@@ -81,7 +81,7 @@
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
             <div class="flex justify-center w-full px-3 py-10">
-             <form class=" mr-0 md:mr-20 z-10 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2" action="" method="post"  enctype="multipart/form-data">
+             <form class=" mr-0 md:mr-20 z-5 bg-white rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] md:w-[40%] md:px-[2%] md:py-[1%] w-[100%] px-5 py-2 " action="" method="post"  enctype="multipart/form-data">
             <?php
                 if($_GET['language']=="en"){
                     echo '<p class="text-center text-4xl text-green font-bold title">Add Client</p>';
@@ -256,8 +256,8 @@
                     
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
-                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar right-[-360px] 
-                top-[-310px] hidden">
+                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-360px] 
+                xl:top-[-310px] hidden top-[-310px]">
                 <p class="text-red font-bold text-1xl message"></p>
                                 <div class="w-full flex justify-between items-center mt-1">                               
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>

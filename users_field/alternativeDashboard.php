@@ -137,13 +137,7 @@
                 ?>
                     
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
-                    <?php
-                        if($_GET['language']=="ar")
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
-                        else
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
-                    ?>
-                   
+                    <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden">
@@ -269,31 +263,29 @@
             </div>
             <!-- information -->
                 <?php
-                    selectClientsDashboard($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
-                    $sql = "SELECT dbo.totalClients(?) AS clients";
-                    $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
-                    $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
-                    $rowCount=$result['clients'];
+                    selectAlternativeDashboard($conn,$_SESSION['gym_id'],$_GET['skip']);
                     $pageNumber=2;
                     $p=0;
-                    if($rowCount>204){
-                        if($p==0){
                             echo '<nav class="p-10">
                                     <ul class="h-10 flex justify-center flex-wrap w-[90%]">
                                 <li>
-                                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 text-black font-black">1</a>
+                                <a href="./dashboard.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                             </li>';
                             $p+=204;
-                        }   
-                        for($i=1;$i<ceil($rowCount/204);$i++){
+                            $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/204))/$_GET['total']);
+                        for($i=1;$i<ceil($_GET['total']/204);$i++){
+                            if($pageNumber==$operation)
                             echo '<li>
+                            <a href="./alternativeDashboard.php?language='.$_GET['language'].'&
+                            total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tightbg-white border border-gray-300 hover:bg-gray-100 text-black font-black">'.$pageNumber.'</a>
+                            </li>';
+                            else echo '<li>
                                     <a href="./alternativeDashboard.php?language='.$_GET['language'].'&
-                                    total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
+                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
                                 </li>';
                                 $pageNumber++;
                                 $p+=204;
                         }
-                    }
                 echo'</ul></nav>';
                 ?>
             </div>

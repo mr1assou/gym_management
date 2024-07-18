@@ -106,23 +106,29 @@
             <!-- information -->
                 <?php
                     selectActiveClientsAlternative($conn,$_SESSION['gym_id'],$_GET['skip']);
-                    echo '
-                <nav class="p-10">
-                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
-                        <li>
-                        <a href="./activeMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                        </li>';
-                    $p=150;
-                    $pageNumber=2;
-                    while($p<=$_GET['total']){
-                        echo '<li>
-                            <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
-                            total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">'.$pageNumber.'</a>
-                        </li>';
-                        $p+=150;
-                        $pageNumber++;
-                    }
-                echo'</ul></nav>';
+                            echo '<nav class="p-10">
+                                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
+                                <li>
+                                <a href="./activeMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                            </li>';
+                        $p=172;
+                        $pageNumber=2;
+                        $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/172))/$_GET['total']);
+                        for($i=1;$i<ceil($_GET['total']/172);$i++){
+                        if($operation==$pageNumber)
+                            echo '<li>
+                                    <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
+                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 text-black font-black">'.$pageNumber.'</a>
+                                </li>';    
+                        else
+                            echo '<li>
+                                    <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
+                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
+                                </li>';
+                                $pageNumber++;
+                                $p+=172;
+                        }
+                    echo'</ul></nav>';
                 ?>
             </div>
         </div> 

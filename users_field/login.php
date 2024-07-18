@@ -46,6 +46,18 @@
                 header("Location: ./send_another_code.php?email=$email");
                 exit;
             }    
+            else if(password_verify($password,$passwordInDb)  && $role='admin'){
+                session_start();
+                $_SESSION['role']=$role;
+                $_SESSION['user_id']=$userId;
+                $_SESSION['first_name']=$firstName;
+                $_SESSION['last_name']=$lastName;
+                $_SESSION['user_image']=$userImage;
+                $_SESSION['last_login']=time();
+                $_SESSION['language']=$_GET['language'];
+                header('Location:../admin_field/admin_dashboard.php?language='.$_GET['language'].'');
+                exit;
+            }    
             else{
                 $count++;
             }    

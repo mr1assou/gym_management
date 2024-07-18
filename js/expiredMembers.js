@@ -22,7 +22,6 @@ function displaySideBar(){
 }
 displaySideBar();
 
-
 let title=document.querySelector('.title');
 let expired_members=document.querySelector('.expired_members');
 let titleText=title.textContent.replace(/\s/g, "");

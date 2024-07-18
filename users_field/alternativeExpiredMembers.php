@@ -23,8 +23,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Dashboard</title>
+    <title>Expired Members</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -37,7 +36,6 @@
 
 <body>
     <!-- start pop up -->
-    <!-- start pop up -->
     <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
@@ -45,35 +43,32 @@
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
         xl:h-[70%] h-[70%]">
             <?php
-                if($_GET['language']=="en"){ 
-                echo '<p class="title hidden">Dashboard</p>';
+                if($_GET['language']=="en")
                     echo ' <p class="font-bold text-green name">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
                     <div class="flex mt-2">
                     <div class=" basis-[55%] flex text-[11px]">
                         <p class="text-green font-black">start:</p>
-                        <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
+                        <p class="textx-center text-black ml-1 start font-bold">14-07-2044</p>
                     </div>
                     <div class=" basis-[55%] flex text-[11px]">
                         <p class="text-green font-black">end:</p>
-                        <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
+                        <p class="textx-center text-black ml-1 end font-bold">14-08-2044</p>
                     </div>
-                    </div>';}
-                else{
-                    echo '<p class="title hidden">لوحة التحكم</p>';
+                    </div>';
+                else
                     echo ' <p class="font-bold text-green name text-end">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10 text-end">:أخر عملية</p>
                     <div class="flex mt-2">
                     <div class=" basis-[55%] flex text-[11px] justify-end">
-                        <p class="textx-center text-black ml-1 end font-bold mr-1">14-08-2024</p>
+                        <p class="textx-center text-black ml-1 end font-bold mr-1">14-08-2044</p>
                         <p class="text-green font-black">:النهاية</p>
                     </div>
                     <div class=" basis-[55%] flex text-[11px] justify-end">
-                        <p class="textx-center text-black ml-1 start font-bold mr-1">14-07-2024</p>
+                        <p class="textx-center text-black ml-1 start font-bold mr-1">14-07-2044</p>
                           <p class="text-green font-black">:البداية</p>
                     </div>
                     </div>';
-                }
             ?>
                     
             <form action="" method="post" class="flex-col mt-5">
@@ -137,13 +132,12 @@
                 ?>
                     
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
-                    <?php
+                <?php
                         if($_GET['language']=="ar")
                             echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
                         else
                             echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
                     ?>
-                   
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden">
@@ -176,8 +170,6 @@
                     else
                         echo '<input type="submit" value="تأكيد" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md"><button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">إلغاء</button>';
                 ?>
-                
-                
             </div>
         </form>
     </div>
@@ -189,119 +181,58 @@
             sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
-        <div class="xl:basis-[82%] basis-[100%]" style="padding-left:10px;">
+        <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2">
-                    <div class="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] p-2">
-                        <div class="w-full p-5 md:flex flex-row items-center justify-between px-2 py-7 bg-white rounded-xl">
-                       
-                        <?php
-                            if($_GET['language']=='en'){
-                                echo '<div class="md:basis-[30%] basis-[100%]  flex md:flex-col justify-between items-center mt-1"> 
-                                <div class="flex items-center">
-                                    <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x text-green"></i>
-                                    <p class="md:ml-3 ml-10 font-black md:text-[15px] text-[10px] ">New Clients This month:</p>
-                                </div>
-                                <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p></div>';
-                            }
-                            else{
-                                echo '  <div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center mt-1 ">
-                                    <div class="flex items-center">
-                                        <p class="md:mr-3 mr-10 font-black md:text-[15px] text-[10px] ">  :المتدربين الجدد هذا الشهر</p>
-                                        <i class="fa-regular fa-user text-orange fa-6x lg:fa-4x     text-green"></i>
-                                    </div>
-                                    <p class="md:mt-5 font-bold text-xs">'.newClientsOfThisMonth($conn,$_SESSION['gym_id']).'<span></span></p>
-                                 </div>';
-                            }
-                        ?>
-                    
-                            <div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
-                                <?php
-                                    if($_GET['language']=='en'){
-                                        echo '<div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10">
-                               
-                                <div class="flex items-center">
-                                    <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
-                                    <p class="md:ml-3 ml-5 font-black md:text-[15px] text-[10px]">Earning of this month:</p>
-                                        </div>
-                                        <p class="md:mt-3 font-bold text-xs"><span>'.earningThisMonth($conn,$_SESSION['gym_id'])
-                                        .'</span> DH</p></div> ';
-                                    }
-                                    else{
-                                        echo '
-                               <div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center ">
-                                <div class="flex items-center">
-                                    <p class="md:mr-3 mr-5  font-black md:text-[15px] text-[10px]"> :أرباح هذا الشهر</p>
-                                    <i class="fa-solid fa-money-bill-1-wave fa-6x md:fa-4x text-orange text-green"></i>
-                                </div>
-                                       <p class="md:mt-5 font-bold text-xs" dir="rtl"
-                lang="ar"><span class="ml-1">'.earningThisMonth($conn,$_SESSION['gym_id'])
-                                        .'</span>درهم</p>
-                                        </div> ';
-                                    }
-                                ?>
-                            </div>
-                            
-                                <?php
-                                    if($_GET['language']=='en'){
-                                        echo '<div class="md:basis-[30%] basis-[100%] flex md:flex-col  justify-between items-center md:mt-0 mt-10"><div class="flex items-center">
-                                            <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
-                                            <p class="ml-8 font-black md:text-[15px] text-[10px]">Money in drawer:</p>
-                                        </div>
-                                        <p class="md:mt-4 font-bold text-xs"><span>'.drawerMoney($conn,$_SESSION['gym_id']).'
-                                        </span> DH</p></div> ';
-                                    }
-                                    else{
-                                        echo '<div class="md:basis-[30%] basis-[100%]  flex flex-row-reverse md:flex-col justify-between items-center mt-5">
-                                        <div class="flex items-center">
-                                        <p class="mr-7 font-black md:text-[15px] text-[10px]">:المال في الدرج</p>
-                                            <i class="fa-sharp fa-solid fa-inbox fa-6x text-orange text-green"></i>
-                                        </div>
-                                        <p class="font-bold text-xs md:mt-3" dir="rtl"
-                lang="ar"><span >'.drawerMoney($conn,$_SESSION['gym_id']).'
-                                        </span>درهم</p></div> 
-                                       ';
-                                    }
-                                ?>
-                            </div>                    
-                        </div>
-            </div>
+        <?php
+            if($_GET['language']=="en")
+                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">Expired Members</p>';
+            else
+                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">
+            الأعضاء منتهية الصلاحية</p>';
+        ?> 
+          
+     <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php
-                    selectClientsDashboard($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
-                    $sql = "SELECT dbo.totalClients(?) AS clients";
+                    alternativeExpiredClients($conn,$_SESSION['gym_id'],$_GET['skip']);
+                    $sql = "SELECT dbo.numExpiredMembers(?) AS expiredClients";
                     $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
                     $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
-                    $rowCount=$result['clients'];
+                    $rowCount=$result['expiredClients'];
                     $pageNumber=2;
                     $p=0;
-                    if($rowCount>204){
-                        if($p==0){
-                            echo '<nav class="p-10">
-                                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
-                                <li>
-                                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 text-black font-black">1</a>
+                    echo '<nav class="p-10">
+                                <ul class="h-10 flex justify-center flex-wrap w-[90%]">
+                            <li>
+                            <a href="./expiredMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
                             </li>';
                             $p+=204;
-                        }   
-                        for($i=1;$i<ceil($rowCount/204);$i++){
+                        $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/204))/$_GET['total']);
+                     for($i=1;$i<ceil($rowCount/204);$i++){
+                        if($pageNumber==$operation)
+                         echo '<li>
+                                 <a href="./alternativeExpiredMembers.php?language='.$_GET ['language'].'&
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 text-black font-bold">'.$pageNumber.'
+                                 </a>
+                             </li>';
+                        else 
                             echo '<li>
-                                    <a href="./alternativeDashboard.php?language='.$_GET['language'].'&
-                                    total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
-                                </li>';
-                                $pageNumber++;
-                                $p+=204;
+                                 <a href="./alternativeExpiredMembers.php?language='.$_GET ['language'].'&
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'
+                                 </a>
+                             </li>';
+                            $pageNumber++;
+                            $p+=204;
                         }
-                    }
                 echo'</ul></nav>';
                 ?>
             </div>
         </div> 
     </div>
     <!-- javascript -->
-    <script src="../js/dashboard.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="../js/expiredMembers.js" type="module"></script>
 </body>
 </html>

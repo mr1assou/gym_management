@@ -43,7 +43,7 @@
     <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
-    <div class="fixed bg-black w-full h-full z-20 opacity-100 flex items-center justify-center pop-up hidden">
+    <div class="fixed bg-black w-full h-full z-50 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
         xl:h-[70%] h-[70%]">
             <?php
@@ -139,7 +139,12 @@
                 ?>
                     
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
-                    <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />
+                <?php
+                        if($_GET['language']=="ar")
+                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
+                        else
+                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
+                    ?>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden">
@@ -190,7 +195,12 @@
         <!-- second part-->
      <div class="flex-col justify-between w-full  gap-2 mt-5 relative p-2 ">
             <!-- information -->
-              <p class="text-center text-4xl text-green font-bold">Search Client</p>
+            <?php
+                if($_GET['language']=="en")
+                    echo ' <p class="text-center text-4xl text-green font-bold">Search Client</p>';
+                else
+                echo ' <p class="text-center text-4xl text-green font-bold">:البحث عن متدرب</p>';
+            ?>
         <div class="w-full bg-white p-3 mt-5 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] content">
                 <?php
                     searchClient($conn,$_SESSION['user_id'],$_SESSION['gym_id'],$clientName);
