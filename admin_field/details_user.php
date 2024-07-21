@@ -9,11 +9,14 @@
     }
     searchFormUser();
     if(isset($_POST['pay'])){
-        userPay($conn,$_POST['client_id'],$_POST['kind']);
+        $query="{CALL resetUser(?)}";
+        $stmt1=sqlsrv_prepare($conn,$query,array($_GET['client_id']));
+        $result=sqlsrv_execute($stmt1);
     }
     $query="{CALL selectInformationEachUser(?)}";
-    $outcome=sqlsrv_query($conn,$query,array($_GET['client_id']));
-    $row=sqlsrv_fetch_array($outcome);
+    $stmt2=sqlsrv_prepare($conn,$query,array($_GET['client_id']));
+    $outcome=sqlsrv_execute($stmt2);
+    $row=sqlsrv_fetch_array($stmt2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +35,23 @@
 </head>
 
 <body>
+    <!-- start pop up -->
+    
+    <div class="fixed bg-black w-full h-full z-50 opacity-100 flex items-center justify-center pop-up hidden">
+        <div class=" flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
+        xl:h-[40%] h-[50%] bg-white">
+            
+            <!-- ------------------------------------------------------------ -->
+            <form action="" method="post" class="flex-col mt-5">
+            <input type="text" name="client_id" value="0" class="client-id invisible"/>
+            <p class="text-red font-bold">you want to reset informations of client?</p>
+            <div class="flex justify-end mt-20">
+                    <input type="submit" value="pay" name="pay" class="block cursor-pointer bg-green-dark  text-white  transition duration-100 ease-in-out hover:scale-110 px-5 py-2 rounded-md"><button href="" class="block text-black bg-grey  transition duration-100 ease-in-out hover:scale-110 ml-5 px-5 py-2 rounded-md no">no</button>
+            </div>
+        </form>
+    </div>
+    </div>
+    <!-- end pop up -->
 <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
@@ -41,6 +61,9 @@
             sidebarUser();
         ?>
         <!-- content -->
+         <?php 
+            echo '<p class="user_id hidden">'.$_GET['client_id'].'</p>';
+         ?>
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
@@ -55,14 +78,17 @@
                 ?>
                 <div class="w-full mt-2 text-[10px] md:text-[15px]">
                     <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 " action="" method="post" enctype="multipart/form-data">
+                        <input type="number" class="input hidden">
                         <?php informationEachUser($conn,$row);?> 
                     </form>                         
                 </div>
-                <?php //displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id']) ?>
+                <?php displayDetailsEachUser($conn,$_GET['client_id']) ?>
             </div>
         </div>
         </div> 
     </div>
+    <script src="../js/responsive_admin.js"></script>
+    <script src="../js/reset.js"></script>
     <!-- javascript -->
 </body>
 </html>

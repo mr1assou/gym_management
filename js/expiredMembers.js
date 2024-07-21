@@ -25,7 +25,7 @@ displaySideBar();
 let title=document.querySelector('.title');
 let expired_members=document.querySelector('.expired_members');
 let titleText=title.textContent.replace(/\s/g, "");
-let historicalDataText=expired_members.textContent.replace(/\s/g, "");
+let historicalDataText=expired_members.textContent.replace(/\s|\d/g, "");
 if(historicalDataText===titleText){
     expired_members.classList.add('bg-white');
     expired_members.style.color='#74f814';

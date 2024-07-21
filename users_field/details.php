@@ -12,19 +12,20 @@
         header('location:./payment.php?language='.$_GET['language'].'');
     }
     $query="{CALL selectInformationOfClient(?)}";
-    $outcome=sqlsrv_query($conn,$query,array($_GET['client_id']));
-    $row=sqlsrv_fetch_array($outcome);
+    $stmt1=sqlsrv_prepare($conn,$query,array($_GET['client_id']));
+    $outcome=sqlsrv_execute($stmt1);
+    $row=sqlsrv_fetch_array($stmt1);
     if(isset($_POST['change'])){
         $phoneNumber=$_POST['phone_number'];
-        $price=$_POST['price'];
         $profile_image=$_FILES['image'];
         $path='../images/'.$profile_image['name'];
         if($profile_image['size']==0){
             $path=$row['client_image'];
         }
         move_uploaded_file($profile_image['tmp_name'], $path);
-        $query="{CALL updateClient(?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($path,$phoneNumber,$price,$_GET['client_id']));
+        $query="{CALL updateClient(?,?,?)}";
+        $stmt2=sqlsrv_prepare($conn,$query,array($path,$phoneNumber,$_GET['client_id']));
+        $result=sqlsrv_execute($stmt2);
         header("Location: ./details.php?client_id=" . $_GET['client_id'] . "&language=" . $_GET['language']);
     }
 ?>
@@ -51,7 +52,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">

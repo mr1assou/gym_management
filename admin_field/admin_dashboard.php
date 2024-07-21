@@ -75,6 +75,8 @@
             </div>
         </div> 
     </div>
+    <script src="../js/responsive_admin.js"></script>
+    <script src="../js/user_status_color.js"></script>
     <!-- javascript -->
 </body>
 </html>

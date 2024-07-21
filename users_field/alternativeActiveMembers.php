@@ -90,7 +90,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -98,37 +98,41 @@
         <!-- second part-->
          <?php
             if($_GET['language']=="en")
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">Active Members</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold  active mt-10">Active Members</p>';
             else
-                echo '  <p class="text-center text-4xl text-green font-bold mt-3 active">الأعضاء سارية الصلاحية</p>';
+                echo '  <p class="text-center text-4xl text-green font-bold mt-10 active">الأعضاء سارية الصلاحية</p>';
          ?>
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php
                     selectActiveClientsAlternative($conn,$_SESSION['gym_id'],$_GET['skip']);
-                            echo '<nav class="p-10">
-                                    <ul class="h-10 flex justify-center flex-wrap w-[90%]">
-                                <li>
-                                <a href="./activeMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                            </li>';
-                        $p=172;
+                        $rowCount=$_GET['total'];
+                        $p=0;
                         $pageNumber=2;
+                        echo '<nav class="p-10">
+                                <ul class="h-10 flex justify-center flex-wrap w-[90%]">
+                            <li>
+                            <a href="./activeMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray- 800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white sm:px-3 px-2">1</a>
+                            </li>';
+                        $p+=172;
                         $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/172))/$_GET['total']);
                         for($i=1;$i<ceil($_GET['total']/172);$i++){
-                        if($operation==$pageNumber)
+                            if($pageNumber==$operation)
+                                echo '<li>
+                                 <a href="./alternativeActiveMembers.php?language='.$_GET ['language'].'&
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 text-black font-bold sm:px-3 px-2">'.$pageNumber.'
+                                 </a>
+                             </li>';
+                        else 
                             echo '<li>
-                                    <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
-                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 text-black font-black">'.$pageNumber.'</a>
-                                </li>';    
-                        else
-                            echo '<li>
-                                    <a href="./alternativeActiveMembers.php?language='.$_GET['language'].'&
-                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
-                                </li>';
-                                $pageNumber++;
-                                $p+=172;
+                                 <a href="./alternativeActiveMembers.php?language='.$_GET ['language'].'&
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white sm:px-3 px-2">'.$pageNumber.'
+                                 </a>
+                             </li>';
+                            $pageNumber++;
+                            $p+=172;
                         }
-                    echo'</ul></nav>';
+                        echo'</ul></nav>';
                 ?>
             </div>
         </div> 

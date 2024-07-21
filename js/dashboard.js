@@ -3,7 +3,7 @@ export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
     link.addEventListener('click',(e)=>{
-            const sibling=e.currentTarget.children[1];
+            const sibling=e.currentTarget.children[0].children[1];
             sibling.click();
         })
     })

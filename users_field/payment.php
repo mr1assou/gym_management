@@ -9,8 +9,9 @@
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
     $query="{CALL selectSubscriptionPrice(?)}";
-    $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id']));
-    $row=sqlsrv_fetch_array($result);
+    $stmt=sqlsrv_prepare($conn,$query,Array($_SESSION['user_id']));
+    $result=sqlsrv_execute($stmt);
+    $row=sqlsrv_fetch_array($stmt);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +36,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-             sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+             sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%] " style="padding-left:10px;">
@@ -94,7 +95,9 @@
                     <span class="xl:basis-[65%] basis-[60%] font-bold">marwane.assou@gmail.com</span></p>
                 </div>
             </div>
-            </div>';
+           
+            </div>
+              <p class="font-bold text-red ml-5 mt-10 text-[15px]">Please send the subscription price to the account number provided and don\'t forget to send a photo of the payment receipt along with the name on the account to Gym Manager at the phone number above.</p>';
             }
             else{
             echo '<h1 class="text-3xl font-bold mb-6 text-green" dir="rtl"
@@ -156,7 +159,12 @@
             <p class="text-green font-bold text-[10px] xl:text-[15px] ml-5 mt-1">Marwane Assou</p>
             <p class="font-bold text-black ml-5 mt-1 text-[12px]  text-end" dir="rtl" lang="ar">مؤسس Gym Manager</p>
             </div>
-            </div>';
+            </div>
+            <p class="font-bold text-red ml-5 mt-10 text-[15px]" dir="rtl" lang="ar">
+            يرجى إرسال سعر الاشتراك إلى رقم الحساب البنكي، ولا تنسى إرسال صورة من توصيل الدفع مع 
+            إسم حسابك على تطبيقنا Gym Manager 
+            إلى رقم الهاتف أعلاه عن طريق الواتساب
+            .</p>';
             }
            
         ?>  

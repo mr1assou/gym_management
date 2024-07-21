@@ -138,7 +138,7 @@
         <!-- second part-->
         <?php
             if($_GET['language']=="en")
-                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">Active Users: <span class="number"></span></p>';
+                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">Inactive Users: <span class="number"></span></p>';
             else
                 echo '<p class="text-center text-4xl text-green font-bold mt-10 title">
             الأعضاء سارية الصلاحية</p>';
@@ -147,7 +147,7 @@
      <div class="flex-col justify-between w-full  gap-2 mt-3 relative p-2 ">
             <!-- information -->
                 <?php
-                    selectActiveUsers($conn);
+                    selectInactiveUsers($conn);
                 ?>
             </div>
         </div> 

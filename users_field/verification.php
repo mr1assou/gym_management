@@ -5,7 +5,8 @@
         $code=$_POST['code'];
         if(!isset($_GET['status'])){
             $query="{CALL activateEmail(?,?)}";
-            $result=sqlsrv_query($conn,$query,Array($_GET['email'],$code));
+            $stmt=sqlsrv_prepare($conn,$query,Array($_GET['email'],$code));
+            $result=sqlsrv_execute($stmt);
             if($result){
                 header('location:./login.php?language='.$_GET['language'].'');
             }        
@@ -15,7 +16,8 @@
         }
         else{
             $query="{CALL checkCode(?,?)}";
-            $result=sqlsrv_query($conn,$query,Array($_GET['email'],$code));
+            $stmt=sqlsrv_prepare($conn,$query,Array($_GET['email'],$code));
+            $result=sqlsrv_execute($stmt);
             if($result){
                 header('location:./change_password.php?email='.$_GET['email'].'&code='.$code.'&language='.$_GET['language'].'');
             }        
@@ -157,7 +159,7 @@
                 <?php 
                     if(!isset($_GET['status'])){
                         if(isset($_GET['language']) && $_GET['language']=='ar'){
-                            echo '<a href="./send_another_code.php?email='.$_GET['email'].'&language'.$_GET['language'].'" class="block text-green hover:underline">إرسال رمز آخر</a>';
+                            echo '<a href="./send_another_code.php?email='.$_GET['email'].'&language='.$_GET['language'].'" class="block text-green hover:underline">إرسال رمز آخر</a>';
                         }
                         else if(!isset($_GET['language']) || $_GET['language']=='en'){
                             echo '<a href="./send_another_code.php?email='.$_GET['email'].'&language'.$_GET['language'].'" class="block text-green hover:underline">send another code</a>';
@@ -165,7 +167,7 @@
                     }
                     else{
                         if(isset($_GET['language']) && $_GET['language']=='ar'){
-                            echo '<a href="./send_another_code.php?email='.$_GET['email'].'&status='.$_GET['status'].'&language='.$_GET['language'].'" class="block text-green hover:underline">إرسال رمز آخر</a>';
+                            echo '<a href="./send_another_code.php?email='.$_GET['email'].'&status='.$_GET['status'].'&language='.$_GET['language'].'" class="block text-green  hover:underline">إرسال رمز آخر</a>';
                         }
                         else if(!isset($_GET['language']) || $_GET['language']=='en'){
                             echo '<a href="./send_another_code.php?email='.$_GET['email'].'&status='.$_GET['status'].'&language='.$_GET['language'].'" class="block text-green hover:underline">send another code</a>';

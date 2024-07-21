@@ -76,7 +76,7 @@
             <form action="" method="post" class="flex-col mt-5">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-5"> 
-            <div class="flex items-center justify-center mt-2 py-2">    
+            <div class="flex items-center justify-between mt-2 py-2">    
             <?php
                 if($_GET['language']=="ar")
                     echo '<div class="flex items-center mt-3">
@@ -88,16 +88,29 @@
                     <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">شهري</label>
                 </div>';
                 else
-                    echo '<div class="flex items-center mt-3">
+                    echo '
+                <div class="flex items-center mt-3">
                         <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">yearly</label>
                         <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role" required>
                         
                     </div>
+         
                     <div class="flex items-center mt-3 ml-10">
                          <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">monthly</label>
                         <input name="kind" type="radio" value="monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
                     
-                    </div>';
+                    </div>
+                           <div class="flex items-center mt-3">
+                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">ext m</label>
+                        <input name="kind" type="radio" value="extend_monthly"  class="w-4 h-4 text-green bg-green role" required>
+                        
+                    </div>
+                           <div class="flex items-center mt-3">
+                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">ext y</label>
+                        <input name="kind" type="radio" value="extend_yearly"  class="w-4 h-4 text-green bg-green role" required>
+                        
+                    </div>
+                    ';
             ?>     
                 
             </div>
@@ -116,55 +129,8 @@
                     }
                 ?>
             </div>
-            <div class="price-field">
-
-            </div>
-            <div class="relative h-11 w-full min-w-[200px] mt-5">
-                <?php
-                    if($_GET['language']=="en")
-                        echo '<label
-                        class="mt-2 pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
-                baginning date:
-                     </label>';
-                    else
-                    echo '<label
-                    class="mt-2 justify-end pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 text-[11px]">
-            :تاريخ البداية
-            </label>';
-                ?>
-                    
-                <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
-                <?php
-                        if($_GET['language']=="ar")
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
-                        else
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
-                    ?>
-                    <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
-                </div>
-                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden">
-                <p class="text-red font-bold text-1xl message"></p>
-                                <div class="w-full flex justify-between items-center mt-1">
-                                <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
-                                <div class="flex text-orange">
-                                    <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>
-                                    <button class="text-lg bg-white rounded-full p-2 hover:bg-orange text-green   cursor-pointer next hover:bg-green hover:text-white font-black">></button>
-                                </div>
-                                </div>
-                                <div class="grid grid-cols-7 gap-3 w-full mt-2">
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>
-                                    <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">Thu</p>
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Fri</p>
-                                    <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sat</p>
-                                    <p class=" text-brown font-bold  w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Sun</p>
-                                </div>           
-                                <div class="grid grid-cols-7 gap-4 w-full justify-between items-center mt-2 days">
-                                </div>           
-                            </div>
-                            <!-- end calendar -->
-            </div>
+            
+            
             <div class="flex justify-end mt-20">
                 <?php
                     if($_GET['language']=="en")
@@ -206,6 +172,8 @@
         </div> 
     </div>
     <!-- javascript -->
-    
+    <script src="../js/expired_users.js"></script>
+    <script src="../js/responsive_admin.js"></script>
+    <script src="../js/user_status_color.js"></script>
 </body>
 </html>

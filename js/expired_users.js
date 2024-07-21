@@ -33,3 +33,8 @@ function deletePopUp(){
     })
 }
 deletePopUp();
+
+
+const parent=document.querySelectorAll('.parent');
+const number=document.querySelector('.number');
+number.textContent=parent.length;

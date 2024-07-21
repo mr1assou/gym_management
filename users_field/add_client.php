@@ -30,10 +30,10 @@
             $path='../images/empty_profile.png';
         }
         $query="{CALL addClientForGym(?,?,?,?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate,$kind));
+        $stmt=sqlsrv_prepare($conn,$query,array($clientFirstName,$clientLastName,$clientPhoneNumber,$_SESSION['gym_id'],$path,$price,$paymentDate,$kind));
+        $result=sqlsrv_execute($stmt);
         if($result){
             echo "<script>window.open('./add_client.php?status=success&language=" . $_GET['language'] . "','_self');</script>";
-
         }
         else{
             $count++;
@@ -75,7 +75,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-             sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+             sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%] z-0" style="padding-left:10px;">

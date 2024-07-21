@@ -5,11 +5,12 @@
         $email=$_POST['email'];
         $password=$_POST['password'];
         $query="{CALL Login(?)}";
-        $result=sqlsrv_query($conn,$query,Array($email),array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $numRows=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,Array($email),array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $numRows=sqlsrv_num_rows($stmt);
         if($numRows==0) $count++;
         else{
-            $data=sqlsrv_fetch_array($result);
+            $data=sqlsrv_fetch_array($stmt);
             $gymId=$data['gym_id'];
             $userId=$data['user_id'];
             $role=$data['role'];
@@ -28,10 +29,12 @@
                 $_SESSION['last_login']=time();
                 $_SESSION['language']=$_GET['language'];
                 $query="{CALL adjustStatus(?,?)}";
-                $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id'],$_SESSION['gym_id']));
+                $stmt=sqlsrv_prepare($conn,$query,Array($_SESSION['user_id'],$_SESSION['gym_id']));
+                $result=sqlsrv_execute($stmt);
                 $query="{CALL selectUserStatus(?)}";
-                $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id']));
-                $row=sqlsrv_fetch_array($result);
+                $stmt=sqlsrv_prepare($conn,$query,Array($_SESSION['user_id']));
+                $result=sqlsrv_execute($stmt);
+                $row=sqlsrv_fetch_array($stmt);
                 $_SESSION['status']=$row['status'];
                 $status=$_SESSION['status'];
                 if($status=='trial' || $status=='access'){
@@ -43,7 +46,7 @@
                 }
             }
             else if(password_verify($password,$passwordInDb) && $status=='inactive' && $role='supervisor'){
-                header("Location: ./send_another_code.php?email=$email");
+                header('Location: ./send_another_code.php?email='.$email.'&language='.$_GET['language'].'');
                 exit;
             }    
             else if(password_verify($password,$passwordInDb)  && $role='admin'){

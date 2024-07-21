@@ -178,7 +178,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -186,9 +186,9 @@
         <!-- second part-->
         <?php
             if($_GET['language']=="en")
-                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">Expired Members</p>';
+                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">Expired Members</p>';
             else
-                echo '<p class="text-center text-4xl text-green font-bold mt-3 title">
+                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">
             الأعضاء منتهية الصلاحية</p>';
         ?> 
           
@@ -196,16 +196,14 @@
             <!-- information -->
                 <?php
                     alternativeExpiredClients($conn,$_SESSION['gym_id'],$_GET['skip']);
-                    $sql = "SELECT dbo.numExpiredMembers(?) AS expiredClients";
-                    $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
-                    $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
-                    $rowCount=$result['expiredClients'];
+                    $rowCount=$_GET['total'];
+                    echo $rowCount;
                     $pageNumber=2;
                     $p=0;
                     echo '<nav class="p-10">
                                 <ul class="h-10 flex justify-center flex-wrap w-[90%]">
                             <li>
-                            <a href="./expiredMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                            <a href="./expiredMembers.php?language='.$_GET['language'].'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white sm:px-3 px-2">1</a>
                             </li>';
                             $p+=204;
                         $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/204))/$_GET['total']);
@@ -213,13 +211,13 @@
                         if($pageNumber==$operation)
                          echo '<li>
                                  <a href="./alternativeExpiredMembers.php?language='.$_GET ['language'].'&
-                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 text-black font-bold">'.$pageNumber.'
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center h-10 leading-tight  bg-white border border-gray-300 hover:bg-gray-100 text-black font-bold sm:px-3 px-2">'.$pageNumber.'
                                  </a>
                              </li>';
                         else 
                             echo '<li>
                                  <a href="./alternativeExpiredMembers.php?language='.$_GET ['language'].'&
-                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'
+                                 total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white sm:px-3 px-2">'.$pageNumber.'
                                  </a>
                              </li>';
                             $pageNumber++;

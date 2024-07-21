@@ -136,7 +136,7 @@
         <!-- second part-->
         <?php
             if($_GET['language']=="en")
-                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">Expired Users</p>';
+                echo '<p class="text-center text-4xl text-green font-bold mt-10 title">Expired Users: <span class="number"></span></p>';
             else
                 echo '<p class="text-center text-4xl text-green font-bold mt-10 title">
             الأعضاء منتهية الصلاحية</p>';
@@ -152,5 +152,6 @@
     </div>
     <!-- javascript -->
      <script src="../js/expired_users.js"></script>
+        <script src="../js/responsive_admin.js"></script>
 </body>
 </html>

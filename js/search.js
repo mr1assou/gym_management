@@ -167,7 +167,7 @@ export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
     link.addEventListener('click',(e)=>{
-            const sibling=e.currentTarget.children[1];
+            const sibling=e.currentTarget.children[0].children[1];
             sibling.click();
         })
     })
@@ -188,7 +188,10 @@ function checkSearchField(){
     const parent=document.querySelector('.parent');
     if(parent===null){
         const content=document.querySelector('.content');
-        content.innerHTML=`<div class="text-1xl text-center text-grey font-bold">There is no client with this name</div>`;
+        if(language.textContent=="en")
+            content.innerHTML=`<div class="text-1xl text-center text-grey font-bold">There is no client with this name</div>`;
+        else
+            content.innerHTML=`<div class="text-1xl text-center text-grey font-bold">لا يوجد متدرب بهذا الاسم</div>`;
     }
 }
 checkSearchField();

@@ -1,5 +1,15 @@
 <?php
-    function sidebar($userId,$gymId){
+    function sidebar($conn,$userId,$gymId){
+    $sql = "SELECT dbo.numActiveClients(?) AS activeClients";
+    $stmt1=sqlsrv_prepare($conn,$sql,array($_SESSION['gym_id']));
+    $result=sqlsrv_execute($stmt1);
+    $result=sqlsrv_fetch_array($stmt1);
+    $rowCount=$result['activeClients'];
+    $sql = "SELECT dbo.numExpiredMembers(?) AS expiredClients";
+    $stmt2=sqlsrv_prepare($conn,$sql,array($_SESSION['gym_id']));
+    $result=sqlsrv_execute($stmt2);
+    $result=sqlsrv_fetch_array($stmt2);
+    $rowCount2=$result['expiredClients'];
     if($_GET['language']=="en")
         echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg xl:sticky xl:top-0
         fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-20 xl:translate-x-[] sidebar transition duration-300">
@@ -12,48 +22,66 @@
             </div>
             <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-table block basis-[15%]"></i>
-                        <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">Dashboard</a>
+                    <div>
+                        <i class="fa-solid fa-table ml-1 basis-[15%]"></i>
+                        <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer ml-1 basis-[85%]">Dashboard</a>
+                    </div>
             </div>
             <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add-client
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user block basis-[15%]"></i>
-                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Add Client</a>
+                    <div>
+                        <i class="fa-solid fa-user  basis-[15%] ml-1"></i>
+                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer  basis-[85] ml-1">Add Client</a>
+                    </div>
             </div>
             <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page historical_data
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
-                        <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">Historical Data</a>
+                    <div>
+                        <i class="fa-solid fa-calendar-day ml-1 basis-[15%]"></i>
+                        <a class="basis-[85%] cursor-pointer ml-1" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">Historical Data</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
+            <div class="flex items-center justify-between text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
+                    <div>
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
-                        <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer">Expired Members</a>
+                        <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer ml-1">Expired Members</a>
+                    </div>
+                    <p class="font-bold">'.$rowCount2.'</p>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
+            <div class="flex items-center justify-between  text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user-check block basis-[15%]"></i>
-                        <a class="cursor-pointer block basis-[85%]" href="./activeMembers.php?language='.$_GET['language'].'">Active Users</a>
+                    <div>
+                        <i class="fa-solid fa-user-check  basis-[15%]"></i>
+                        <a class="cursor-pointer ml-1 basis-[85%]" href="./activeMembers.php?language='.$_GET['language'].'">Active Members</a>
+                    </div>
+                    <p class="ml-1 font-bold">'.$rowCount.'</p>
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add_fees
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
-                        <a class="cursor-pointer basis-[85%]" href="./add_fees.php?language='.$_GET['language'].'">Add Fees</a>
+                    <div>
+                        <i class=" fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
+                        <a class="cursor-pointer basis-[85%] ml-1" href="./add_fees.php?language='.$_GET['language'].'">Add Fees</a>
+                    </div>
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer settings  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-gear block basis-[15%]"></i>
-                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Settings</a>
+                    <div>
+                        <i class="fa-solid fa-gear  basis-[15%]"></i>
+                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer  basis-[85] ml-2">Settings</a>
+                    </div>
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
+                    <div>
                         <i class="fa-solid fa-right-from-bracket block basis-[15%]"></i>
-                        <a href="./logout.php?language='.$_GET['language'].'" class="cursor-pointer basis-[85%]">Log out</a>
-            </div>
+                        <a href="./logout.php?language='.$_GET['language'].'" class="cursor-pointer basis-[85%] ml-2">Log out</a>
+                    </div>
+                </div>
         </div>';
         else 
         echo '<div class="md:basis-[18%] bg-green  h-screen rounded-lg md:sticky md:top-0
-        fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-20 md:translate-x-[] sidebar transition duration-300">
-            <div class="flex items-center z-10 px-3 bg-black py-5 rounded-bl-full
+        fixed top-0 left-0 basis-[50%] translate-x-[-100%] z-20 md:translate-x-[] sidebar transition duration-300 ">
+            <div class="flex items-center z-10 px-1 bg-black py-5 rounded-bl-full
              justify-between">
                 <div class="flex items-center">
                     <img src="../images/logo.png"  class="block w-[50px] h-[50px]">
@@ -61,51 +89,70 @@
                 </div>
                 <i class="fa-sharp fa-solid fa-xmark text-white fa-1x md:invisible visible cross hover:scale-125 transform transition duration-100 fa-2x ml-5"></i>
             </div>
-            <div class="flex items-center text-white  w-[97%]   mt-5  px-6 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
+            <div class="flex items-center text-white  w-[97%]   mt-5  px-2 py-2 hover:bg-white mx-2 rounded-l-full cursor-pointer   hover:text-green transform transition duration-300 link-page dashboard
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-table block basis-[15%]"></i>
-                        <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">لوحة التحكم</a>
+                    <div>
+                        <i class="fa-solid fa-table  basis-[15%]"></i>
+                        <a href="./dashboard.php?language='.$_GET['language'].'" class="cursor-pointer  basis-[85%] ml-1 sm:text-[15px] text-[13px]">لوحة التحكم</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add-client
+            <div class="flex items-center text-white  w-[97%]   px-2 py-2 hover:bg-white mx-2 mt-3 rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add-client
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user block basis-[15%]"></i>
-                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">إضافة متدرب</a>
+                    <div>
+                        <i class="fa-solid fa-user  basis-[15%]"></i>
+                        <a href="./add_client.php?language='.$_GET['language'].'" class="cursor-pointer  basis-[85] ml-1 sm:text-[15px] text-[13px]">إضافة متدرب</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page  historical_data
+            <div class="flex items-center text-white  w-[97%]   px-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page  historical_data
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
-                        <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">بيانات و عمليات</a>
+                    <div>
+                        <i class="fa-solid fa-calendar-day basis-[15%]"></i>
+                        <a class="ml-1 basis-[85%] cursor-pointer sm:text-[15px] text-[13px]" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].' ">بيانات و عمليات</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
+            <div class="flex items-center text-white  w-[97%]   pl-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
+                    <div class="w-[82%]">
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
-                        <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer">الأعضاء منتهية الصلاحية</a>
+                        <a href="./expiredMembers.php?language='.$_GET['language'].'" class="basis-[85%] cursor-pointer sm:text-[15px] text-[13px]">الأعضاء منتهية الصلاحية</a>
+                    </div>
+                    <p class="font-bold  text-end w-[18%] mr-0.5 pr-1.5">'.$rowCount2.'</p>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
+            <div class="flex items-center text-white  w-[98%]  text-orange pl-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-user-check block basis-[15%]"></i>
-                        <a class="cursor-pointer block basis-[85%]" href="./activeMembers.php?language='.$_GET['language'].'">الأعضاء سارية الصلاحية</a>
+                     <div class="w-[82%]">   
+                        <i class="fa-solid fa-user-check  basis-[10%]"></i>
+                        <a class="cursor-pointer  basis-[90%] sm:text-[15px] text-[13px]" href="./activeMembers.php?language='.$_GET['language'].' ">الأعضاء سارية الصلاحية</a>
+                    </div>
+                    <p class="font-bold  text-end w-[18%] mr-1 pr-1">'.$rowCount.'</p>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add_fees
+            <div class="flex items-center text-white  w-[97%]  text-orange px-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page add_fees
             " style="border-top-right-radius:-20px;">
-                        <i class="fa-sharp fa-solid fa-comments-dollar block basis-[15%]"></i>
-                        <a class="cursor-pointer basis-[85%]" href="./add_fees.php?language='.$_GET['language'].'">إضافة مصاريف</a>
+                    <div>
+                        <i class="fa-sharp fa-solid fa-comments-dollar  basis-[15%]"></i>
+                        <a class="cursor-pointer basis-[85%] ml-1 sm:text-[15px] text-[13px]" href="./add_fees.php?language='.$_GET['language'].'">إضافة مصاريف</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page settings" style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-gear block basis-[15%]"></i>
-                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">إعدادات</a>
+            <div class="flex items-center text-white  w-[97%]  text-orange px-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page settings" style="border-top-right-radius:-20px;">
+                    <div>
+                        <i class="fa-solid fa-gear  basis-[15%]"></i>
+                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer  basis-[85] ml-2 sm:text-[15px] text-[13px]">إعدادات</a>
+                    </div>
             </div>
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
+            <div class="flex items-center text-white  w-[97%]  text-orange px-2 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
+                    <div>
                         <i class="fa-solid fa-right-from-bracket block basis-[15%]"></i>
-                        <a href="./logout.php?language='.$_GET['language'].'" class="cursor-pointer basis-[85%]">تسجيل خروج</a>
+                        <a href="./logout.php?language='.$_GET['language'].'" class="cursor-pointer basis-[85%] ml-2 sm:text-[15px] text-[13px]">تسجيل خروج</a>
+                    </div>
             </div>
         </div>';
     }
     function selectClientsDashboard($conn,$gymId,$userId){
         $query="{CALL selectClients(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0){
             if($_GET['language']=="en")
                 echo '<div class="text-1xl text-center mt-5 text-grey-light font-bold">You don\'t have any client</div>';
@@ -115,7 +162,7 @@
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                     echo '
                     <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -182,10 +229,11 @@
     }
     function selectAlternativeDashboard($conn,$gymId,$skip){
         $query="{CALL selectClientsAnotherPage(?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$skip));
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId,$skip));
+        $result=sqlsrv_execute($stmt);
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                     echo '
                     <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent   h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -251,26 +299,30 @@
         }
     function drawerMoney($conn,$gymId){
         $query="SELECT dbo.calculateFee(?) as sum";
-        $result=sqlsrv_query($conn,$query,array($gymId));
-        $row=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId));
+        $result=sqlsrv_execute($stmt);
+        $row=sqlsrv_fetch_array($stmt,SQLSRV_FETCH_ASSOC);
         return $row['sum'];   
     }
     function newClientsOfThisMonth($conn,$gymId){
         $query="{CALL newClientOfThisMonth(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_fetch_array($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_fetch_array($stmt);
         return $rowCount['number'];
     }
     function earningThisMonth($conn,$gymId){
         $query="SELECT dbo.earningOfMonth(?) as sum";
-        $result=sqlsrv_query($conn,$query,array($gymId));
-        $row=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId));
+        $result=sqlsrv_execute($stmt);
+        $row=sqlsrv_fetch_array($stmt,SQLSRV_FETCH_ASSOC);
         return $row['sum'];
     }
     function selectExpiredClients($conn,$gymId,$userId){
         $query="{CALL searchClientsMonthExpired(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0){
             if($_GET['language']=="en")
                 echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any expired members</div>';
@@ -282,7 +334,7 @@
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -349,10 +401,11 @@
     }    
     function alternativeExpiredClients($conn,$gymId,$skip){
         $query="{CALL clientsMonthsExpiredAnotherPage(?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$skip));
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId,$skip));
+        $result=sqlsrv_execute($stmt);
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -418,8 +471,9 @@
         }
     function selectActiveClients($conn,$gymId,$userId){
         $query="{CALL searchClientsWhoTheyHaveAccess(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0){
             if($_GET['language']=="en")
                 echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any active members</div>';
@@ -429,7 +483,7 @@
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -497,8 +551,9 @@
     }   
     function showOperations($conn,$gymId,$userId,$month,$year){
         $query="{CALL calculateTotalOfMonth(?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0 ){
             if($_GET['language']=="en")
                 echo '<div class="text-1xl mt-5 text-center text-grey-light font-bold">You don\'t have any expired operations</div>';
@@ -552,7 +607,7 @@
                         }                
              echo '</thead>';
                 echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
-                while($row=sqlsrv_fetch_array($result)){
+                while($row=sqlsrv_fetch_array($stmt)){
                     echo '<tr class=" border-b dark:border-gray-70 text-[7px] md:text-sm">
                                 <td class="py-2 text-center font-bold flex gap-1 items-center ">
                                     <div class="h-[20px] w-[20px] sm:w-[55px] sm:h-[55px] bg-green p-[1px] md:p-[3px] rounded-full">
@@ -574,8 +629,9 @@
     }    
     function newClientsHistoricalData($conn,$gymId,$userId,$month,$year){
         $query="{CALL newClientsHistoricalData(?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0 && $_GET['language']=="en"){
             echo '<div class="text-1xl mt-5 text-center text-grey-light  font-bold">You don\'t have any new members</div>';
         }
@@ -586,7 +642,7 @@
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
             echo '
                  <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -653,10 +709,11 @@
     }    
     function displaydates($conn,$userId,$gymId,$month,$year){
         $query="{CALL datesHistoricalData(?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId));
+        $stmt=sqlsrv_prepare($conn,$query,array($gymId));
+        $result=sqlsrv_execute($stmt);
         echo '<select  class=" text-md mt-2 select bg-white border-2 rounded-md px-2 py-1">';
         echo '<option value="" selected disabled hidden>'.$year.'-'.$month.'</option>';
-        while($row=sqlsrv_fetch_array($result)){
+        while($row=sqlsrv_fetch_array($stmt)){
             echo "<option value='./historicalData.php?month=" . $row['month'] . "&year=" . $row['year'] . "&language=" . $_GET['language'] . "'>
             " . $row['year'] . '-' . $row['month'] . "
             </option>";
@@ -667,7 +724,7 @@
     }
     function informationClient($conn,$gymId,$row){
             echo '
-            <div class="xl:basis-[25%] md:w-[40%] sm:w-[50%] w-[85%]  rounded-full p-[4px] bg-green relative 
+            <div class="2xl:w-[20%] md:w-[40%] sm:w-[50%] w-[85%]   rounded-full p-[4px]  relative bg-green xl:w-[25%]
                 ">
                 <img src="'.$row['client_image'].'" class="w-full h-[230px]  rounded-full object-center image-field"/>
                 <button class="absolute bottom-2 right-2 image-button bg-white text-green rounded-full hover:text-white hover:bg-green">
@@ -677,7 +734,7 @@
                 <input  type="file" name="image" 
                 class="image-input hidden"/>
             </div>
-            <div class="xl:basis-[75%] w-full ">
+            <div class="2xl:w-[75%] w-full xl:w-[70%]">
                         <div class="xl:flex xl:flex-row flex flex-col-reverse  gap-2 mt-5 ">';
                         if($_GET['language']=="en")
                             echo'<div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
@@ -716,25 +773,26 @@
                                 echo'
                             <div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
                                   <p class="text-black font-bold basis-[40%] text-end">'.$row['joinning_date']->format('d-m-Y').'</p>
-                                <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5">:تاريخ الانضمام</p>
+                                <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5 ">:تاريخ الانضمام</p>
                             </div>
                             <div class="flex  gap-2 mt-5 items-center xl:basis-[50%]">
                                 <input type="text" pattern="0[0-9]{9}" name="phone_number"  class="text-black font-bold xl:basis-[50%] basis-[50%] text-center bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required value="'.$row['client_phone_number'].'"/>
-                                <p class="text-green text-1xl md:text-sm  font-bold xl:basis-[50%] basis-[50%] text-end xl:mr-0 mr-5">:رقم الهاتف(0123456789)</p>
+                                <p class="text-green text-1xl md:text-sm  font-bold xl:basis-[50%] basis-[50%] text-end xl:mr-0 mr-5">:رقم الهاتف</p>
                             </div>';
                         echo'</div>
                         <div class="xl:flex xl:flex-row flex flex-col  gap-2 mt-5 px-5">';
                         if($_GET['language']=="en")
                             echo'<div class="flex  gap-2 mt-5 items-center basis-[50%] ">
                                 <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Price:</p>
-                                 <p class="text-black font-bold xl:basis-[60%] basis-[70%] text-start ml-5">'.$row['price'].'<span class="text-black font-bold"> DH</span></p>
+                                 <p class="text-black font-bold xl:basis-[60%] basis-[70%] 
+                                 text-start ml-5">'.$row['price'].'<span class="text-black font-bold"> DH</span></p>
                             </div>
                             <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
                                 <input type="submit" name="change" value="Change" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
                             </div>';
                         else
                         echo'<div class="flex  gap-2 mt-5 items-center  xl:basis-[50%]">
-                             <p class="text-black font-bold basis-[40%] text-center ml-5" dir="rtl" lang="ar">'.$row['price'].'<span class="text-black font-bold"> درهم</span></p>
+                             <p class="text-black  font-bold basis-[40%] text-center 2xl:ml-10 ml-5" dir="rtl" lang="ar">'.$row['price'].'<span class="text-black font-bold"> درهم</span></p>
                             <p class="text-green text-1xl md:text-sm font-bold basis-[50%]   text-end xl:mr-5">:الواجب الشهري</p>
                         </div>
                         <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
@@ -824,10 +882,11 @@
     }
     function searchClient($conn,$userId,$gymId,$clientName){
             $query="{CALL search(?,?)}";
-            $result=sqlsrv_query($conn,$query,array($gymId,$clientName));
+            $stmt=sqlsrv_prepare($conn,$query,array($gymId,$clientName));
+            $result=sqlsrv_execute($stmt);
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row md:opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                     <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
@@ -893,12 +952,14 @@
     }
     function pay($conn,$gymId,$clientId,$beginningDate,$kind,$price){
         $query="{CALL pay(?,?,?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$clientId,$beginningDate,$kind,$price));
+        $stmt1=sqlsrv_prepare($conn,$query,array($gymId,$clientId,$beginningDate,$kind,$price));
+        $result=sqlsrv_execute($stmt1);
     }
     function displayFee($conn,$gymId,$month,$year){
         $query="{CALL displayFees(?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_query($conn,$query,array($gymId,$month,$year),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0 ){
             if($_GET['language']=="en")
                 echo '<div class="mt-5 text-1xl text-center  text-grey-light font-bold">You don\'t have any fee in this month</div>';
@@ -937,7 +998,7 @@
                 echo'</thead>';
                  echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
                 $count=1;
-                while($row=sqlsrv_fetch_array($result)){
+                while($row=sqlsrv_fetch_array($stmt)){
                     echo '<tr class=" border-b dark:border-gray-70 md:text-sm text-[7px] ">
                         <td class=" py-5 text-center font-bold max-w-32">'.$row['description'].'</td>
                         <td class=" py-5 text-center font-bold">'.$row['date_of_fee']->format('d-m-Y').'</td>
@@ -951,7 +1012,7 @@
     }
     function informationUser($conn,$userId,$row){
         echo '
-        <div class="xl:basis-[25%]  xl:flex w-[100%] flex flex-col items-center">
+        <div class="2xl:w-[23%] xl:w-[25%]  xl:flex w-[100%] flex flex-col items-center">
             <div class="xl:w-[100%] w-[85%] rounded-full p-[4px] bg-green relative">
                 <img src="'.$row['user_image'].'" class="w-full h-[250px] rounded-full object-center image-field"/>
                 <button class="absolute bottom-2 right-2 image-button bg-white text-green rounded-full hover:text-white hover:bg-green">
@@ -968,7 +1029,7 @@
                                  echo '<input type="submit" name="change" value="تغيير الصورة" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
                        echo' </div>
         </div>
-        <div class="xl:basis-[75%] w-full px-5 text-md">
+        <div class="2xl:w-[75%] xl:w-[74%] w-full px-5 text-md">
                     <div class="xl:flex xl:flex-row flex flex-col-reverse  gap-2 mt-5 ">';
                         if($_GET['language']=="en")
                             echo '<div class="flex  gap-2 mt-5 items-center xl:basis-[50%]">
@@ -1048,12 +1109,13 @@ function checkSession(){
 
 function selectActiveClientsAlternative($conn,$gymId,$skipNum){
     $query="{CALL selectActiveMembersAnotherPage(?,?)}";
-    $result=sqlsrv_query($conn,$query,array($gymId,$skipNum));
+    $stmt=sqlsrv_prepare($conn,$query,array($gymId,$skipNum));
+    $result=sqlsrv_execute($stmt);
     echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 row opacity-0">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
-                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  md:transition md:duration-300 md:ease-in-out md:hover:scale-110 cursor-pointer h-96 relative ">
+                <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent   h-96 relative ">
                     <div class="h-[45%] px-10 mt-2 flex justify-center">
                         <div class="h-full w-[75%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
                             <img src="'.$row['client_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
@@ -1128,14 +1190,16 @@ function checkSessionAdmin(){
 }
 function newUsersOfThisMonth($conn){
     $query="{CALL newUsersOfThisMonth}";
-    $result=sqlsrv_query($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-    $rowCount=sqlsrv_fetch_array($result);
+    $stmt=sqlsrv_prepare($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+    $result=sqlsrv_execute($stmt);
+    $rowCount=sqlsrv_fetch_array($stmt);
     return $rowCount['number'];
 }
 function selectUsersDashboard($conn){
     $query="{CALL selectUsers}";
-    $result=sqlsrv_query($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-    $rowCount=sqlsrv_num_rows($result);
+    $stmt=sqlsrv_prepare($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+    $result=sqlsrv_execute($stmt);
+    $rowCount=sqlsrv_num_rows($stmt);
     if($rowCount==0){
         if($_GET['language']=="en")
             echo '<div class="text-1xl text-center mt-5 text-grey-light font-bold">You don\'t have any Users</div>';
@@ -1145,7 +1209,7 @@ function selectUsersDashboard($conn){
     else{
         echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
         gap-3 ">';
-        while($row=sqlsrv_fetch_array($result)){
+        while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-80 relative ">
                 <div class="h-[50%] px-10 mt-2 flex justify-center">
@@ -1187,10 +1251,10 @@ function selectUsersDashboard($conn){
             </div>';
                     echo'<div class="flex justify-between mt-2">';
                     if($_GET['language']=="en")    
-                        echo '<p class="block  px-3 py-2   mt-3 rounded-md font-bold  mr-2">'.$row['status'].'</p>
+                        echo '<p class="block  px-3 py-2   mt-3 rounded-md font-bold  mr-2 status">'.$row['status'].'</p>
                             <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
                     else
-                        echo '<p class="block  px-3 py-2  mt-3 rounded-md font-bold    mr-2">'.$row['status'].'</p>
+                        echo '<p class="block  px-3 py-2  mt-3 rounded-md font-bold  status  mr-2">'.$row['status'].'</p>
                         <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
                         echo '<div></div>
                         </div>';
@@ -1216,12 +1280,6 @@ function sidebarUser(){
                         <i class="fa-solid fa-table block basis-[15%]"></i>
                         <a href="./admin_dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">Dashboard</a>
             </div>
-           
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page historical_data
-            " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
-                        <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">Historical Data</a>
-            </div>
             <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
@@ -1232,10 +1290,10 @@ function sidebarUser(){
                         <i class="fa-solid fa-user-check block basis-[15%]"></i>
                         <a class="cursor-pointer block basis-[85%]" href="../admin_field/active_users.php?language='.$_GET['language'].'">Active Users</a>
             </div>
-         
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer settings  hover:text-green transform transition duration-300 link-page" style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-gear block basis-[15%]"></i>
-                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">Settings</a>
+            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page active_member
+            " style="border-top-right-radius:-20px;">
+                        <i class="fa-solid fa-user-check block basis-[15%]"></i>
+                        <a class="cursor-pointer block basis-[85%]" href="../admin_field/inactive_users.php?language='.$_GET['language'].'">Inactive Users</a>
             </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
@@ -1259,12 +1317,6 @@ function sidebarUser(){
                         <i class="fa-solid fa-table block basis-[15%]"></i>
                         <a href="./admin_dashboard.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85%]">لوحة التحكم</a>
             </div>
-         
-            <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page  historical_data
-            " style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-calendar-day block basis-[15%]"></i>
-                        <a class="basis-[85%] cursor-pointer block" href="./historicalData.php?month='.date('m').'&year='.date('Y').'&language='.$_GET['language'].'">بيانات و عمليات</a>
-            </div>
             <div class="flex items-center text-white  w-[97%]   px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page expired_members
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-eye-slash basis-[15%]"></i>
@@ -1275,11 +1327,6 @@ function sidebarUser(){
                         <i class="fa-solid fa-user-check block basis-[15%]"></i>
                         <a class="cursor-pointer block basis-[85%]" href="../admin_field/active_users.php?language='.$_GET['language'].'">الأعضاء سارية الصلاحية</a>
             </div>
-         
-            <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page settings" style="border-top-right-radius:-20px;">
-                        <i class="fa-solid fa-gear block basis-[15%]"></i>
-                        <a href="./settings.php?language='.$_GET['language'].'" class="cursor-pointer block basis-[85]">إعدادات</a>
-            </div>
             <div class="flex items-center text-white  w-[97%]  text-orange px-6 py-2 hover:bg-white mx-2 mt-3  rounded-l-full cursor-pointer  hover:text-green transform transition duration-300 link-page
             " style="border-top-right-radius:-20px;">
                         <i class="fa-solid fa-right-from-bracket block basis-[15%]"></i>
@@ -1289,8 +1336,9 @@ function sidebarUser(){
     }
     function selectExpiredUsers($conn){
         $query="{CALL expiredUsers}";
-        $result=sqlsrv_query($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $rowCount=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $rowCount=sqlsrv_num_rows($stmt);
         if($rowCount==0){
             if($_GET['language']=="en")
                 echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any expired users</div>';
@@ -1302,7 +1350,7 @@ function sidebarUser(){
         else{
             echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
             gap-3 ">';
-            while($row=sqlsrv_fetch_array($result)){
+            while($row=sqlsrv_fetch_array($stmt)){
                 echo '
                 <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-80 relative ">
                     <div class="h-[50%] px-10 mt-2 flex justify-center">
@@ -1345,7 +1393,7 @@ function sidebarUser(){
                     echo'<div class="flex justify-end mt-2">';
                     if($_GET['language']=="en")    
                             echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">confirm</button>
-                                <a href="./details.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                                <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
                         else
                             echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">الدفع</button>
                             <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
@@ -1361,24 +1409,27 @@ function sidebarUser(){
 
 function userPay($conn,$clientId,$kind){
     $query="{CALL userPay(?,?)}";
-    $result=sqlsrv_query($conn,$query,array($clientId,$kind));
+    $stmt=sqlsrv_prepare($conn,$query,array($clientId,$kind));
+    $result=sqlsrv_execute($stmt);
 }
 function selectActiveUsers($conn){
     $query="{CALL activeUsers}";
-    $result=sqlsrv_query($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
-    $rowCount=sqlsrv_num_rows($result);
+    $stmt=sqlsrv_prepare($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+    $result=sqlsrv_execute($stmt);
+    $rowCount=sqlsrv_num_rows($stmt);
     if($rowCount==0){
         if($_GET['language']=="en")
             echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any active users</div>';
         else
             echo '<div class="text-xl text-center text-grey-light font-bold">
-            ليس لديك أي أعضاء منتهية الصلاحية
+            ليس لديك أي أعضاء
+            سارية الصلاحية    
             </div>';
     }
     else{
         echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
         gap-3 ">';
-        while($row=sqlsrv_fetch_array($result)){
+        while($row=sqlsrv_fetch_array($stmt)){
             echo '
             <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-80 relative ">
                 <div class="h-[50%] px-10 mt-2 flex justify-center">
@@ -1421,10 +1472,61 @@ function selectActiveUsers($conn){
                 echo'<div class="flex justify-end mt-2">';
                 if($_GET['language']=="en")    
                         echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                            <a href="../admin_field/details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
                     else
                         echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">الدفع</button>
-                        <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                        <a href="../admin_field/details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
+                        echo '</div>  
+            </div>';
+            echo '<p class="text-green-dark mt-2 ml-2 font-bold">'.$row['status'].'</p>';
+        echo'</div>';
+        }
+        echo ' </div>';
+    }
+}
+function selectInactiveUsers($conn){
+    $query="{CALL inactiveUsers}";
+    $stmt=sqlsrv_prepare($conn,$query,array(),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+    $result=sqlsrv_execute($stmt);
+    $rowCount=sqlsrv_num_rows($stmt);
+    if($rowCount==0){
+        if($_GET['language']=="en")
+            echo '<div class="text-xl text-center text-grey-light font-bold">You don\'t have any active users</div>';
+        else
+            echo '<div class="text-xl text-center text-grey-light font-bold">
+            ليس لديك أي أعضاء
+            سارية الصلاحية    
+            </div>';
+    }
+    else{
+        echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
+        gap-3 ">';
+        while($row=sqlsrv_fetch_array($stmt)){
+            echo '
+            <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-80 relative ">
+                <div class="h-[50%] px-10 mt-2 flex justify-center">
+                    <div class="h-full w-[75%] sm:w-[70%] md:w-[85%] lg:w-[90%] xl:w-[90%] 2xl:w-[75%] 3xl:w-[80%] p-1 4xl:w-[80%] rounded-full  bg-green">    
+                        <img src="'.$row['user_image'].'" class=" h-full w-full  object-center rounded-full brightness-125">
+                    </div>
+                </div>
+            <div class="px-3 w-full mt-2">
+                <div class="flex w-full text-[11px]">';
+            if($_GET['language']=='en')
+                echo '
+                    <p class=" basis-[90%]  text-green font-black">name:<span class=" text-black ml-1 font-bold full-name">
+                    '.$row['first_name'] .' '.$row['Last_name'].'</span></p>';
+            else
+                echo '<p class=" basis-[100%]  text-green font-black text-end"><span class=" text-black  font-bold full-name">
+                    '.$row['first_name'] .' '.$row['Last_name'].'</span> <span class="ml-1">:الإسم</span></p>';
+            echo '</div>';
+           
+                echo'<div class="flex justify-end mt-2">';
+                if($_GET['language']=="en")    
+                        echo '
+                            <a href="../admin_field/details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                    else
+                        echo '
+                        <a href="../admin_field/details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
                         echo '</div>  
             </div>';
             echo '<p class="text-green-dark mt-2 ml-2 font-bold">'.$row['status'].'</p>';
@@ -1442,10 +1544,11 @@ function searchFormUser(){
 
 function searchUser($conn,$userName){
     $query="{CALL searchUser(?)}";
-    $result=sqlsrv_query($conn,$query,array($userName));
+    $stmt=sqlsrv_prepare($conn,$query,array($userName));
+    $result=sqlsrv_execute($stmt);
     echo '<div class="w-full  p-3 mt-3 rounded-md grid xl:grid-cols-4 2xl:grid-cols-4  3xl:grid-cols-6 4xl:grid-cols-7 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 
     gap-3">';
-    while($row=sqlsrv_fetch_array($result)){
+    while($row=sqlsrv_fetch_array($stmt)){
         echo '
             <div class="shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex-col items-center rounded-md  parent  h-80 relative ">
                 <div class="h-[50%] px-10 mt-2 flex justify-center">
@@ -1488,13 +1591,13 @@ function searchUser($conn,$userName){
                 echo'<div class="flex justify-end mt-2">';
                 if($_GET['language']=="en")    
                         echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">confirm</button>
-                            <a href="./details.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
+                            <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">details</a>';
                     else
                         echo '<button class="block  px-3 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold confirm  bg-green-dark mr-2">الدفع</button>
                         <a href="./details_user.php?client_id='.$row['user_id'].'&language='.$_GET['language'].'" class="block  px-3 py-2 p text-black bg-grey  transition duration-100 ease-in hover:scale-110 mt-3 rounded-md font-bold">تفاصيل</a>';
                         echo '</div>  
             </div>';
-            echo '<p class="text-green-dark mt-2 ml-2 font-bold">'.$row['status'].'</p>';
+            echo '<p class="mt-2 ml-2 font-bold status">'.$row['status'].'</p>';
         echo'</div>';
         }
         echo ' </div>';       
@@ -1561,17 +1664,16 @@ function informationEachUser($conn,$row){
                 if($_GET['language']=="en")
                     echo'<div class="flex  gap-2 mt-5 items-center basis-[50%] ">
                         <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Email:</p>
-                         <p class="text-black font-bold xl:basis-[60%] basis-[70%] text-start ml-5">'.$row['email'].'</p>
+                         <p class="text-black font-bold xl:basis-[60%] basis-[70%] text-start ">'.$row['email'].'</p>
                     </div>
+                  
                        <div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
-                          <p class="text-black font-bold basis-[40%] text-end">'.$row['joinning_date']->format('d-m-Y').'</p>
-                        <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5">:تاريخ الانضمام</p>
+                        <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start mr-5">city:</p>
+                           <p class="text-black font-bold basis-[60%] text-start">'.$row['city'].'</p>
                     </div>
-                       <div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
-                          <p class="text-black font-bold basis-[40%] text-end">'.$row['city'].'</p>
-                        <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5">city:</p>
-                    </div>
+                    
                     ';
+               
                 else
                 echo'<div class="flex  gap-2 mt-5 items-center  xl:basis-[50%]">
                      <p class="text-black font-bold basis-[40%] text-center ml-5" dir="rtl" lang="ar">'.$row['email'].'<span class="text-black font-bold"> </span></p>
@@ -1582,6 +1684,145 @@ function informationEachUser($conn,$row){
                         <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5">:المدينة</p>
                     </div>
         ';
-                echo'</div>
-    </div>';
+        ;
+                echo'</div>';
+                echo'<button class="block  px-10 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-20  font-bold reset  bg-red mr-2">reset</button>';
+                echo'</div>';
+    
+}
+
+
+function displayDetailsUser(){
+    $query="{CALL detailsClient(?)}";
+        $result=sqlsrv_query($conn,$query,array($clientId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $rowCount=sqlsrv_num_rows($result);
+        if($rowCount==0){
+            echo '<div class="mt-10 text-xl text-center text-grey-light font-bold">This Client don\'t have any operations</div>';
+        }
+        else{
+            echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full mt-10"
+            style="border-radius:20px;">
+                <thead class="capitalise rounded-xl bg-white text-green font-black md:text-sm text-[6px]">
+                            <tr>';
+                            if($_GET['language']=="en")
+                                echo'  <th class=" text-center">
+                                    operation number: 
+                                </th>
+                                <th class=" text-center">
+                                    Beginning period date: 
+                                </th>
+                                <th class=" text-center">
+                                    End period date: 
+                                </th>
+                                <th class=" text-center">
+                                    checkout_date: 
+                                </th>
+                                <th class=" text-center">
+                                    Operation status: 
+                                </th>
+                                <th class=" text-center">
+                                    price: 
+                                </th>';
+                                else
+                                    echo'  <th class=" text-center">
+                                       :رقم العملية
+                                    </th>
+                                    <th class=" text-center">
+                                        :تاريخ البداية
+                                    </th>
+                                    <th class=" text-center">
+                                         :تاريخ النهاية
+                                    </th>
+                                    <th class=" text-center">
+                                        :تاريخ الأداء 
+                                    </th>
+                                    <th class=" text-center">
+                                        :حالة العملية
+                                    </th>
+                                    <th class=" text-center">
+                                        :المبلغ
+                                    </th>';
+                 echo'           </tr>
+                </thead>';
+                echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+                $count=1;
+                while($row=sqlsrv_fetch_array($result)){
+                    echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[7px]">
+                                <td class=" text-center  font-bold py-3">'.$count.'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['beginning_period_date']->format('d-m-Y').'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['end_period_date']->format('d-m-Y').'</td>
+                                <td class=" text-center  font-bold py-3">'.$row['checkout_date']->format('d-m-Y').'</td>';
+                            if($_GET['language']=="en")
+                                echo '<td class=" text-center  font-bold beginning-date status py-3">'.$row['real_operations_status'].'</td>';
+                            else
+                                echo '<td class=" text-center  font-bold beginning-date status py-3">خالص</td>';
+                            echo'
+                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].' DH</td>
+                    </tr>';
+                    $count++;
+                }
+                echo '</tbody>';
+                echo '</table>';
+        }    
+
+}
+
+function displayDetailsEachUser($conn,$clientId){
+    $query="{CALL detailsEachUser(?)}";
+    $stmt=sqlsrv_prepare($conn,$query,array($clientId),array("Scrollable" => SQLSRV_CURSOR_KEYSET));
+    $result=sqlsrv_execute($stmt);
+    $rowCount=sqlsrv_num_rows($stmt);
+    if($rowCount==0){
+        echo '<div class="mt-10 text-xl text-center text-grey-light font-bold">This Client don\'t have any operations</div>';
+    }
+    else{
+        echo '<table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400  bg-white w-full mt-10"
+        style="border-radius:20px;">
+            <thead class="capitalise rounded-xl bg-white text-green font-black md:text-sm text-[6px]">
+                        <tr>';
+                        if($_GET['language']=="en")
+                            echo'  <th class=" text-center">
+                                operation number: 
+                            </th>
+                            <th class=" text-center">
+                                Beginning  date: 
+                            </th>
+                            <th class=" text-center">
+                                End  date: 
+                            </th>
+                            <th class=" text-center">
+                                payment type: 
+                            </th>
+                            ';
+                            else
+                                echo'  <th class=" text-center">
+                                   :رقم العملية
+                                </th>
+                                <th class=" text-center">
+                                    :تاريخ البداية
+                                </th>
+                                <th class=" text-center">
+                                     :تاريخ النهاية
+                                </th>
+                                <th class=" text-center">
+                                    :حالة العملية
+                                </th>
+                               ';
+             echo'           </tr>
+            </thead>';
+            echo '<tbody class="dark:bg-gray-700 dark:text-gray-400 ">';
+            $count=1;
+            while($row=sqlsrv_fetch_array($stmt)){
+                echo '<tr class=" border-b dark:border-gray-70 parent md:text-sm text-[7px]">
+                            <td class=" text-center  font-bold py-3">'.$count.'</td>
+                            <td class=" text-center  font-bold py-3">'.$row['beginning_DATE']->format('d-m-Y').'</td>
+                            <td class=" text-center  font-bold py-3">'.$row['end_date']->format('d-m-Y').'</td>';
+                            echo '<td class=" text-center  font-bold beginning-date status py-3">'.$row['payment_type'].'</td>';
+                            echo'
+                </tr>';
+                $count++;
+            }
+            echo '</tbody>';
+            echo '</table>';
+    }
 }

@@ -180,7 +180,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="xl:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -269,7 +269,7 @@
                             echo '<nav class="p-10">
                                     <ul class="h-10 flex justify-center flex-wrap w-[90%]">
                                 <li>
-                                <a href="./dashboard.php?language='.$_GET['language'].'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                                <a href="./dashboard.php?language='.$_GET['language'].'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white sm:px-3 px-2">1</a>
                             </li>';
                             $p+=204;
                             $operation=ceil(($_GET['skip']+1)*(ceil($_GET['total']/204))/$_GET['total']);
@@ -277,11 +277,11 @@
                             if($pageNumber==$operation)
                             echo '<li>
                             <a href="./alternativeDashboard.php?language='.$_GET['language'].'&
-                            total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tightbg-white border border-gray-300 hover:bg-gray-100 text-black font-black">'.$pageNumber.'</a>
+                            total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center  h-10 leading-tightbg-white border border-gray-300 hover:bg-gray-100 text-black font-black sm:px-3 px-2">'.$pageNumber.'</a>
                             </li>';
                             else echo '<li>
                                     <a href="./alternativeDashboard.php?language='.$_GET['language'].'&
-                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
+                                    total='.$_GET['total'].'&skip='.$p.'" class="flex items-center justify-center  h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white sm:px-3 px-2">'.$pageNumber.'</a>
                                 </li>';
                                 $pageNumber++;
                                 $p+=204;

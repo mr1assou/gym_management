@@ -68,7 +68,7 @@ export function clickLinksSideBar(){
     const links=document.querySelectorAll('.link-page');
     links.forEach((link)=>{
     link.addEventListener('click',(e)=>{
-            const sibling=e.currentTarget.children[1];
+            const sibling=e.currentTarget.children[0].children[1];
             sibling.click();
         })
     })
@@ -91,10 +91,13 @@ gsap.to('.row',{
 let titleActive=document.querySelector('.active');
 let active_member=document.querySelector('.active_member');
 let titleActiveText=titleActive.textContent.replace(/\s/g, "");
-let active_memberText=active_member.textContent.replace(/\s/g, "");
+let active_memberText = active_member.textContent.replace(/\s|\d/g, "");
+console.log(active_memberText);
+console.log(titleActiveText);
 if(active_memberText===titleActiveText){
     active_member.classList.add('bg-white');
     active_member.style.color='#74f814';
     active_member.classList.remove('hover:bg-white');
     active_member.classList.remove('hover:text-green');
 }
+console.log(titleActive);

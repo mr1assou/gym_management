@@ -35,7 +35,8 @@
         if($password==$repeatPassword){
             $password=password_hash($password,PASSWORD_DEFAULT);
             $query="{CALL addSupervisorAndGym (?,?,?,?,?,?,?,?,?)}";
-            $result=sqlsrv_query($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$verificationCode,$path,$city));
+            $stmt=sqlsrv_prepare($conn,$query,array($firstName,$lastName,$phoneNumber,$email,$password,$gymName,$verificationCode,$path,$city));
+            $result=sqlsrv_execute($stmt);
             if($result){
                 header('location:./send_another_code.php?email='.$email.'&language='.$_GET['language'].'');
                 exit;

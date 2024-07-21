@@ -22,8 +22,9 @@
         <div>
             <?php 
              $query="{CALL selectImageUser(?)}";
-             $result=sqlsrv_query($conn,$query,Array($_SESSION['user_id']));
-            $output=sqlsrv_fetch_array($result);
+             $stmt=sqlsrv_prepare($conn,$query,Array($_SESSION['user_id']));
+             $result=sqlsrv_execute($stmt);
+            $output=sqlsrv_fetch_array($stmt);
             echo '<div class="flex items-center">
             <div class="md:w-[45px] md:h-[45px] w-[40px] h-[30px] bg-green  rounded-full p-[2px] mr-2">
                                     <img src="'.$output['user_image'].'" alt="" class="rounded-full object-center brightness-100 w-full h-full">

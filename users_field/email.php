@@ -4,8 +4,9 @@
     if(isset($_POST['submit'])){
         $email=htmlspecialchars($_POST['email']);
         $query="{CALL Login(?)}";
-        $result=sqlsrv_query($conn,$query,Array($email),array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
-        $numRows=sqlsrv_num_rows($result);
+        $stmt=sqlsrv_prepare($conn,$query,Array($email),array( "Scrollable" => SQLSRV_CURSOR_KEYSET));
+        $result=sqlsrv_execute($stmt);
+        $numRows=sqlsrv_num_rows($stmt);
         if($numRows==0) 
             $count++;
         else

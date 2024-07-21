@@ -12,8 +12,9 @@
         header('location:./payment.php?language='.$_GET['language'].'');
     }
     $query="{CALL selectInformationOfUser(?)}";
-    $outcome=sqlsrv_query($conn,$query,array($_SESSION['user_id']));
-    $row=sqlsrv_fetch_array($outcome);
+    $stmt1=sqlsrv_prepare($conn,$query,array($_SESSION['user_id']));
+    $outcome=sqlsrv_execute($stmt1);
+    $row=sqlsrv_fetch_array($stmt1);
     if(isset($_POST['change'])){
         $profile_image=$_FILES['image'];
         $path='../images/'.$profile_image['name'];
@@ -22,7 +23,8 @@
         }
         move_uploaded_file($profile_image['tmp_name'], $path);
         $query="{CALL updateUser(?,?)}";
-        $result=sqlsrv_query($conn,$query,array($_SESSION['user_id'],$path));
+        $stmt2=sqlsrv_prepare($conn,$query,array($_SESSION['user_id'],$path));
+        $result=sqlsrv_execute($stmt2);
         header('Location:./settings.php?language='.$_GET['language'].'');
     }
     $countActualPassword=0;
@@ -33,8 +35,9 @@
         $newPassword=htmlspecialchars($_POST['new_password']);
         $repeatNewPassword=htmlspecialchars($_POST['repeat_new_password']);
         $query="{CALL checkActualPassword(?)}";
-        $result=sqlsrv_query($conn,$query,array($_SESSION['user_id']));
-        $password=sqlsrv_fetch_array($result);
+        $stmt=sqlsrv_prepare($conn,$query,array($_SESSION['user_id']));
+        $result=sqlsrv_execute($stmt);
+        $password=sqlsrv_fetch_array($stmt);
         if(!password_verify($actualPassword,$password['password'])){
             $countActualPassword++;
         }
@@ -43,7 +46,8 @@
         }
         else{
             $query="{CALL changePassword(?,?)}";
-            $result=sqlsrv_query($conn,$query,array($_SESSION['user_id'],password_hash( $newPassword,PASSWORD_DEFAULT)));
+            $stmt=sqlsrv_prepare($conn,$query,array($_SESSION['user_id'],password_hash( $newPassword,PASSWORD_DEFAULT)));
+            $result=sqlsrv_execute($stmt);
             $countSuccess++;
         }
     }
@@ -71,7 +75,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -121,7 +125,10 @@
                         echo '<p class="font-bold text-red mt-5">يرجى تكرار كلمة المرور الجديدة مرتين</p>';
                 }
                 else if($countSuccess!=0){
-                    echo '<p class="text-green-dark mt-2 font-bold text-2xl alert hidden">you change your password succefully</p>';
+                    if($_GET['language']=="en")
+                        echo '<p class="text-green-dark mt-2 font-bold text-2xl alert hidden">you change your password succefully</p>';
+                    else
+                        echo '<p class="text-green-dark mt-2 font-bold text-2xl alert hidden">قمت بتغيير كلمة المرور الخاصة بك بنجاح</p>';
                      echo '<script>const alert=document.querySelector(".alert");
                         function alertDanger(aler){
                             alert.classList.remove("hidden");

@@ -140,7 +140,7 @@
                     ?>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>
-                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-400px] xl:top-[-260px] top-[-300px]    hidden ">
+                <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[0px] xl:top-[-300px] top-[-300px]    hidden ">
                 <p class="text-red font-bold text-1xl message"></p>
                                 <div class="w-full flex justify-between items-center mt-1">
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
@@ -178,7 +178,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -197,8 +197,9 @@
                 <?php
                     selectExpiredClients($conn,$_SESSION['gym_id'],$_SESSION['user_id']);
                     $sql = "SELECT dbo.numExpiredMembers(?) AS expiredClients";
-                    $result=sqlsrv_query($conn,$sql,array($_SESSION['gym_id']));
-                    $result=sqlsrv_fetch_array($result,SQLSRV_FETCH_ASSOC);
+                    $stmt=sqlsrv_prepare($conn,$sql,array($_SESSION['gym_id']));
+                    $result=sqlsrv_execute($stmt);
+                    $result=sqlsrv_fetch_array($stmt,SQLSRV_FETCH_ASSOC);
                     $rowCount=$result['expiredClients'];
                     $pageNumber=2;
                     $p=0;
@@ -207,14 +208,14 @@
                             echo '<nav class="p-10">
                                     <ul class="h-10 flex justify-center flex-wrap w-[90%]">
                                 <li >
-                                <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight  border border-gray-300 hover:bg-gray-100  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white text-black font-bold">1</a>
+                                <a href="#" class="flex items-center justify-center  h-10 leading-tight  border border-gray-300 hover:bg-gray-100  dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white text-black font-bold sm:px-3 px-2">1</a>
                             </li>';
                             $p+=204;
                         }   
                         for($i=1;$i<ceil($rowCount/204);$i++){
                             echo '<li>
                                     <a href="./alternativeExpiredMembers.php?language='.$_GET['language'].'&
-                                    total='.$rowCount.'&skip='.$p.'" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
+                                    total='.$rowCount.'&skip='.$p.'" class="sm:px-3 px-2 flex items-center justify-center h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700    dark:hover:text-white">'.$pageNumber.'</a>
                                 </li>';
                                 $pageNumber++;
                                 $p+=204;

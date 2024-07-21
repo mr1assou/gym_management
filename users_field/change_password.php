@@ -10,7 +10,8 @@
         }
         else{
             $query="{CALL changePsw(?,?,?)}";
-            $result=sqlsrv_query($conn,$query,array($_GET['email'],$_GET['code'],password_hash( $newPassword,PASSWORD_DEFAULT)));
+            $stmt=sqlsrv_prepare($conn,$query,array($_GET['email'],$_GET['code'],password_hash( $newPassword,PASSWORD_DEFAULT)));
+            $result=sqlsrv_execute($stmt);
             header('location:./login.php?language='.$_GET['language'].'');
             exit;
         }

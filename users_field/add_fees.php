@@ -11,7 +11,8 @@
         $description=htmlspecialchars($_POST['description']);
         $amount=htmlspecialchars($_POST['amount']);
         $query="{CALL addFee(?,?,?)}";
-        $result=sqlsrv_query($conn,$query,array($description,$amount,$_SESSION['gym_id']));
+        $stmt=sqlsrv_prepare($conn,$query,array($description,$amount,$_SESSION['gym_id']));
+        $result=sqlsrv_execute($stmt);
     }
     searchForm($_SESSION['user_id'],$_SESSION['gym_id']);
     if($_SESSION['status']=='reject'){
@@ -106,7 +107,7 @@
     <div class="min-h-[100vh] flex gap-1">
         <!-- sidebar -->
         <?php 
-            sidebar($_SESSION['user_id'],$_SESSION['gym_id']);
+            sidebar($conn,$_SESSION['user_id'],$_SESSION['gym_id']);
         ?>
         <!-- content -->
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
@@ -114,10 +115,10 @@
         <!-- second part-->
          <?php
             if($_GET['language']=="en"){
-                echo '<p class="text-center text-2xl text-green font-bold mt-3 title">Add Fees</p>';
+                echo '<p class="mt-10 text-center text-2xl text-green font-bold  title">Add Fees</p>';
             }
             else{
-                echo '<p class="text-center text-2xl text-green font-bold mt-3 title">إضافة مصاريف</p>';
+                echo '<p class="mt-10 text-center text-2xl text-green font-bold  title">إضافة مصاريف</p>';
             }
          ?>
         
