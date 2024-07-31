@@ -58,8 +58,8 @@
         <div class="md:basis-[82%] basis-[100%]" style="padding-left:10px;">
             <?php include '../includes/header.php'?>
         <!-- second part-->
-        <div class="px-1">
-        <div class="flex-col justify-between w-full  gap-2 mt-3 relative xl:p-10 p-5 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div class="px-1 ">
+        <div class="flex-col justify-between w-full  gap-2 mt-3 relative xl:p-10 p-5 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
                 <?php
                     if($_GET['language']=="en")
                         echo '  <p class="text-center text-4xl text-green font-bold">Client Information</p>';
@@ -67,12 +67,12 @@
                         echo '<p class="text-center text-4xl text-green font-bold">
                 معلومات المستخدم</p>';
                 ?>
-                <div class="w-full mt-2 text-[10px] md:text-[15px]">
-                    <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 " action="" method="post" enctype="multipart/form-data">
+                <div class="w-full mt-2 text-[10px] md:text-[15px] ">
+                    <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 b" action="" method="post" enctype="multipart/form-data">
                         <?php informationClient($conn,$_SESSION['gym_id'],$row);?> 
                     </form>                         
                 </div>
-                <?php displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id']) ?>
+                <?php displayDetailsClients($conn,$_SESSION['gym_id'],$_SESSION['user_id'],$_GET['client_id'],$row) ?>
             </div>
         </div>
             <?php

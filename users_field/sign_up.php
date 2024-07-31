@@ -121,7 +121,7 @@
             ?>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
                 <input required
-                class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="first_name" value="<?php echo $firstName?>"/>
+                class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="first_name" value="<?php echo $firstName?>" pattern="[A-Za-z]+"/>
                 
                 <?php
                 if(isset($_GET['language']) && $_GET['language']=='ar'){
@@ -140,8 +140,8 @@
                 ?>
             </div>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
-                <input required  
-                class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="last_name" value="<?php echo $lastName?>"/>
+                <input required   pattern="[A-Za-z]+"
+                class=" peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" name="last_name" value="<?php echo $lastName?>"/>
                 <?php
                 if(isset($_GET['language']) && $_GET['language']=='ar'){
                     echo '<label

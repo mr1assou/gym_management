@@ -7,7 +7,8 @@
     use PHPMailer\PHPMailer\PHPMailer;
     $verificationCode=rand(100000, 999999);
     $query="{CALL sendAnotherCode (?,?)}";
-    $result=sqlsrv_query($conn,$query,array($_GET['email'],$verificationCode));
+    $stmt=sqlsrv_prepare($conn,$query,array($_GET['email'],$verificationCode));
+    $result=sqlsrv_execute($stmt);
     $mail = new PHPMailer(true);
     $mail->isSMTP();                                           
     $mail->Host = 'smtp-relay.brevo.com';                    
@@ -16,18 +17,17 @@
     $mail->Password =$_ENV["PASSWORDSMTP"];                             
     $mail->SMTPSecure = 'ssl';            
     $mail->Port = 465;                
-    $mail->setFrom('marwane.assou@gmail.com', 'Gym Manager');
-    $mail->addAddress($_GET['email'],"");
+    $mail->setFrom('marwane.assou@gym-manager.com', 'Gym Manager');
+    //$mail->addReplyTo('info@gym-manager.com', 'Gym Manager');
+    // $mail->addAddress($_GET['email'],"");
     $mail->addBCC($_GET['email']);
     $mail->isHTML(true);
-    $mail->Subject = 'Verification Code';
+    $mail->Subject = 'Verification code';
     $mail->Encoding = 'base64';
     $mail->Body = 
     '
     <div style="display: flex;justify-content: center;">
-        <div style="display:flex;flex-direction: column;align-items: center;background-color: #eee;width: 50%;border-radius: 2%;padding:10px;">
-            <p style="font-weight:bold;">Code:<b style="color:#00FC3A;font-size:20px;font-weight:bold;">'.$verificationCode.'</b></p>
-            </div>
+            <p style="font-weight:bold;">'.$verificationCode.'</p>
         </div>
     ';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

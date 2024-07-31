@@ -41,17 +41,17 @@
     ?>
     <div class="fixed bg-black w-full h-full z-50 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
-        xl:h-[70%] h-[70%]">
+        xl:h-[80%] h-[80%]">
             <?php
                 if($_GET['language']=="en")
                     echo ' <p class="font-bold text-green name">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
-                    <div class="flex mt-2">
-                    <div class=" basis-[55%] flex text-[11px]">
+                    <div class="flex mt-5 justify-center">
+                    <div class="  flex text-[11px]">
                         <p class="text-green font-black">start:</p>
                         <p class="textx-center text-black ml-1 start font-bold">14-07-2044</p>
                     </div>
-                    <div class=" basis-[55%] flex text-[11px]">
+                    <div class="  flex text-[11px] ml-5">
                         <p class="text-green font-black">end:</p>
                         <p class="textx-center text-black ml-1 end font-bold">14-08-2044</p>
                     </div>
@@ -59,19 +59,19 @@
                 else
                     echo ' <p class="font-bold text-green name text-end">Marwane Assou</p>
                     <p class="font-bold text-[11px] text-green mt-10 text-end">:أخر عملية</p>
-                    <div class="flex mt-2">
-                    <div class=" basis-[55%] flex text-[11px] justify-end">
+                    <div class="flex mt-5 justify-center">
+                    <div class=" flex text-[11px] justify-end mr-5">
                         <p class="textx-center text-black ml-1 end font-bold mr-1">14-08-2044</p>
                         <p class="text-green font-black">:النهاية</p>
                     </div>
-                    <div class=" basis-[55%] flex text-[11px] justify-end">
+                    <div class=" flex text-[11px] justify-end">
                         <p class="textx-center text-black ml-1 start font-bold mr-1">14-07-2044</p>
                           <p class="text-green font-black">:البداية</p>
                     </div>
                     </div>';
             ?>
                     
-            <form action="" method="post" class="flex-col mt-5">
+            <form action="" method="post" class="flex-col mt-8">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-5"> 
             <div class="flex items-center justify-center mt-2 py-2">    
@@ -130,13 +130,12 @@
             :تاريخ البداية
             </label>';
                 ?>
-                    
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
                 <?php
                         if($_GET['language']=="ar")
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
+                            echo ' <input type="text" name="beginning_date" class=" input-date px-2  bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
                         else
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
+                            echo ' <input type="text" name="beginning_date" class=" input-date px-2 bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{4}-\d{1,2}-\d{1,2} bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" required />';
                     ?>
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
                 </div>

@@ -1,4 +1,4 @@
-<div class="w-full p-4 flex justify-between items-center gap-6 bg-white sticky top-0 z-10 shadow-xl">
+<div class="invisible w-full p-4 flex justify-between items-center gap-6 bg-white sticky top-0 z-10 shadow-xl">
                 <i class="fa-solid fa-bars text-black cursor-pointer xl:invisible visible toggleButton"></i>
                 <form class="flex items-center max-w-sm mx-auto" action="" method="post">   
                     <div class="relative w-full">

@@ -43,18 +43,18 @@
     ?>
     <div class="fixed bg-black w-full h-full z-50 opacity-100 flex items-center justify-center pop-up hidden">
         <div class="bg-white flex-col rounded-lg items-center py-5 px-10 w-full xl:w-[35%] 
-        xl:h-[70%] h-[70%]">
+        xl:h-[80%] h-[80%] ">
             <?php
                 if($_GET['language']=="en"){ 
                 echo '<p class="title hidden">Dashboard</p>';
                     echo ' <p class="font-bold text-green name">Marwane Assou</p>
-                    <p class="font-bold text-[11px] text-green mt-10">Last Operation:</p>
-                    <div class="flex mt-2">
-                    <div class=" basis-[55%] flex text-[11px]">
+                    <p class="font-bold text-[11px]  mt-10 text-gray-500">Last Operation:</p>
+                    <div class="flex mt-5 justify-center ">
+                    <div class="flex text-[11px]">
                         <p class="text-green font-black">start:</p>
                         <p class="textx-center text-black ml-1 start font-bold">14-07-2024</p>
                     </div>
-                    <div class=" basis-[55%] flex text-[11px]">
+                    <div class="  flex text-[11px] ml-5">
                         <p class="text-green font-black">end:</p>
                         <p class="textx-center text-black ml-1 end font-bold">14-08-2024</p>
                     </div>
@@ -62,13 +62,13 @@
                 else{
                     echo '<p class="title hidden">لوحة التحكم</p>';
                     echo ' <p class="font-bold text-green name text-end">Marwane Assou</p>
-                    <p class="font-bold text-[11px] text-green mt-10 text-end">:أخر عملية</p>
-                    <div class="flex mt-2">
-                    <div class=" basis-[55%] flex text-[11px] justify-end">
+                    <p class="font-bold text-[11px] text-gray-500 mt-10 text-end">:أخر عملية</p>
+                    <div class="flex mt-3 justify-center">
+                    <div class=" flex text-[11px] justify-end mr-5">
                         <p class="textx-center text-black ml-1 end font-bold mr-1">14-08-2024</p>
                         <p class="text-green font-black">:النهاية</p>
                     </div>
-                    <div class=" basis-[55%] flex text-[11px] justify-end">
+                    <div class=" flex text-[11px] justify-end">
                         <p class="textx-center text-black ml-1 start font-bold mr-1">14-07-2024</p>
                           <p class="text-green font-black">:البداية</p>
                     </div>
@@ -76,7 +76,7 @@
                 }
             ?>
                     
-            <form action="" method="post" class="flex-col mt-5">
+            <form action="" method="post" class="flex-col mt-8">
             <input type="text" name="client_id" value="0" class="client-id hidden"/>
             <div class="relative h-11 w-full min-w-[200px] mt-5"> 
             <div class="flex items-center justify-center mt-2 py-2">    
@@ -94,12 +94,10 @@
                     echo '<div class="flex items-center mt-3">
                         <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">yearly</label>
                         <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role" required>
-                        
                     </div>
                     <div class="flex items-center mt-3 ml-10">
                          <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">monthly</label>
                         <input name="kind" type="radio" value="monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
-                    
                     </div>';
             ?>     
                 
@@ -107,19 +105,19 @@
                 <?php
                 if($_GET['language']=='ar'){
                     echo '<label
-                        class="justify-end pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        class="justify-end pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm  leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent ">
                 :نوع الدفع
                 </label>';
                 }
                     else{
                         echo '<label
-                        class=" pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
+                        class=" pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm  leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2  after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight  peer-focus:after:scale-x-100 peer-disabled:text-transparent ">
                 kind of payment:
                 </label>';
                     }
                 ?>
             </div>
-            <div class="price-field">
+            <div class="price-field ">
 
             </div>
             <div class="relative h-11 w-full min-w-[200px] mt-5">
@@ -139,9 +137,9 @@
                 <div class=" absolute left-0 top-[70%] flex w-full items-center justify-between">
                     <?php
                         if($_GET['language']=="ar")
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
+                            echo ' <input type="text" name="beginning_date" class=" input-date px-2  bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{1,2}-\d{1,2}-\d{4}" required />';
                         else
-                            echo ' <input type="text" name="beginning_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required />';
+                            echo ' <input type="text" name="beginning_date" class=" input-date px-2 bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{4}-\d{1,2}-\d{1,2} bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" required />';
                     ?>
                    
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  

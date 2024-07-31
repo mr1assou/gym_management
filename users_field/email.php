@@ -73,10 +73,10 @@
             </nav>
                 <?php
                     if(isset($_GET['language']) && $_GET['language']=='ar'){
-                        echo '<p class="text-green text-4xl text-center md:mt-2 mt-10">بريدك الالكتروني</p>';
+                        echo '<p class="text-white z-50 text-4xl text-center md:mt-2 mt-10 invisible">بريدك الالكتروني</p>';
                     }
                     else if(!isset($_GET['language']) || $_GET['language']=='en'){
-                        echo '<p class="text-green text-4xl text-center md:mt-2 mt-10">Your Email</p>';
+                        echo '<p class="text-green text-4xl z-50 text-center md:mt-2 mt-10 invisible">Your Email</p>';
                     }
             ?>
         <div class=" h-[100%] w-full  flex pt-3 px-2 items-center justify-center">

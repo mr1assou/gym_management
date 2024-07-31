@@ -107,18 +107,18 @@
         <?php 
             if(!isset($_GET['status'])){
                 if(isset($_GET['language']) && $_GET['language']=='ar'){
-                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">تفعيل البريد الإلكتروني الخاص بك</p>';
+                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">تفعيل البريد الإلكتروني الخاص بك</p>';
                 }
                 else if(!isset($_GET['language']) || $_GET['language']=='en'){
-                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">Activate your email</p>';
+                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">Activate your email</p>';
                 }
             }
             else{
                 if(isset($_GET['language']) && $_GET['language']=='ar'){
-                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">أدخل الرمز لتغيير كلمة المرور الخاصة بك</p>';
+                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">أدخل الرمز لتغيير كلمة المرور الخاصة بك</p>';
                 }
                 else if(!isset($_GET['language']) || $_GET['language']=='en'){
-                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">enter code to change your password</p>';
+                    echo'<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">enter code to change your password</p>';
                 }
             }
         ?>

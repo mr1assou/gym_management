@@ -59,7 +59,7 @@
     <!-- cdn font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body>
+<body class="body">
     <?php   
         echo '<p class="language hidden">'.$_GET['language'].'</p>';
     ?>
@@ -106,10 +106,7 @@
                         function alertDanger(aler){
                             alert.classList.remove("hidden");
                             alert.classList.add("block");
-                            setTimeout(()=>{
-                                alert.classList.remove("block");
-                                alert.classList.add("hidden");
-                            },5000)
+                            
                         }
                        alertDanger(alert);
                     </script>';
@@ -230,7 +227,6 @@
 
             </div>
             
-
                 <div class="relative h-11 w-full min-w-[200px] mt-5">  
                 <?php
                 if($_GET['language']=='ar'){
@@ -249,9 +245,9 @@
                 <div class=" absolute left-0 top-[60%] flex w-full items-center justify-between">
                     <?php
                         if($_GET['language']=="ar")
-                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{1,2}-\d{1,2}-\d{4}" required/>';
+                            echo '<input type="text" name="payment_date" class="bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{1,2}-\d{1,2}-\d{4}" required/>';
                         else
-                            echo '<input type="text" name="payment_date" class="bg-green input-date px-2 text-white" pattern="\d{4}-\d{1,2}-\d{1,2}" required/>';
+                            echo '<input type="text" name="payment_date" class="bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center"  pattern="\d{4}-\d{1,2}-\d{1,2}" required/>';
                     ?>
                     
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  
@@ -259,17 +255,17 @@
                 <div class="absolute w-full flex items-center justify-between flex-col bg- z-10 bg-grey text-black border-orange rounded-xl p-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] calendar xl:right-[-360px] 
                 xl:top-[-310px] hidden top-[-310px]">
                 <p class="text-red font-bold text-1xl message"></p>
-                                <div class="w-full flex justify-between items-center mt-1">                               
+                                <div class="w-full flex justify-between items-center mt-1 ">                               
                                 <p class="text-xl font-bold text-orange text-left w-full current-date text-green"></p>
-                                <div class="flex text-orange">
+                                <div class="flex arrows">
                                     <button class="text-lg bg-white mr-2 rounded-full p-2 hover:bg-orange text-green   cursor-pointer prev hover:bg-green hover:text-white font-black"><</p>
                                     <button class="text-lg bg-white rounded-full p-2 hover:bg-orange text-green   cursor-pointer next hover:bg-green hover:text-white font-black">></button>
                                 </div>
                                 </div>
-                                <div class="grid grid-cols-7 gap-3 w-full mt-2">
+                                <div class="grid grid-cols-7 gap-3 w-full">
                                 <?php
                                     if($_GET['language']=="en")
-                                        echo '<p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
+                                        echo '<p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ds">Mon</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>
                                     <p class=" text-brown font-bold w-[2rem]  col-span-1 text-center flex items-center justify-center text-xs">Thu</p>

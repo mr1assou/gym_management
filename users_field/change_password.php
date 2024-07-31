@@ -81,10 +81,10 @@
         
         <?php
             if(isset($_GET['language']) && $_GET['language']=='ar'){
-                echo '<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">غير كلمة المرور الخاصة بك</p>';
+                echo '<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">غير كلمة المرور الخاصة بك</p>';
             }
             else if(!isset($_GET['language']) || $_GET['language']=='en'){
-                echo '<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 ">Change your password</p>';
+                echo '<p class="text-green  md:text-4xl md:text-center text-start text-2xl md:mt-1 mt-10 invisible">Change your password</p>';
             }
         ?>
         <div class=" w-full mt-2 flex pt-7">

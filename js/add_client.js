@@ -7,7 +7,8 @@ clickLinksSideBar();
 // display calendar
 const calendar=document.querySelector('.calendar');
 const toggleCalendar=document.querySelector('.toggle-calendar');
-toggleCalendar.addEventListener('click',()=>{
+toggleCalendar.addEventListener('click',(e)=>{
+    e.stopPropagation();
     if(calendar.classList.contains('hidden')){
         calendar.classList.remove('hidden');
         calendar.classList.add('block');
@@ -153,7 +154,7 @@ roles.forEach(role=>{
                 Price client per month:
                 </label></div>`
         if(role.value==="yearly" && language.textContent==="ar")
-            priceField.innerHTML=`<div class="relative h-11 w-full min-w-[200px] mt-5"><input   name="price" type="number" min="0"  required value="<?php ?>"
+            priceField.innerHTML=`<div class="relative h-11 w-full min-w-[200px] mt-5 "><input   name="price" type="number" min="0"  required value="<?php ?>"
                     class="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-900 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50" value="<?php echo $price?>"/>
                     <label
                         class="justify-end pointer-events-none absolute left-0  -top-2.5 flex h-full w-full select-none !overflow-visible truncate text-sm font-normal leading-tight text-gray-500 transition-all after:absolute after:-bottom-2.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:leading-tight peer-placeholder-shown:text-blue-gray-500 peer-focus:text-sm peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:after:scale-x-100 peer-focus:after:border-gray-900 peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -167,6 +168,27 @@ roles.forEach(role=>{
                 </label></div>`
     })
 })
+
+
+
+// document.addEventListener('click',(e)=>{
+//     e.stopPropagation();
+//     if(calendar.classList.contains('block')){
+//         toggleCalendar.click();
+//     }
+// });
+
+// calendar.addEventListener('click',(e)=>{
+//     e.preventDefault();
+//     console.log(e.target.parentElement);
+//     if(e.target.classList.contains('text-grey') || e.target.classList.contains('prev') || e.target.classList.contains('next') || e.target.classList.contains('current-date') || e.target.parentElement.classList.contains('calendar')){
+//         calendar.classList.add('block');
+//         calendar.classList.add('hidden');
+//     }
+// })
+
+
+
 
 
 
