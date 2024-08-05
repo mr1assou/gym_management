@@ -21,8 +21,7 @@
         $kind=$_POST['kind'];
         $price=htmlspecialchars($_POST['price']);
         $paymentDate=htmlspecialchars($_POST['payment_date']);
-        if($_GET['language']!="en")
-            $paymentDate=implode("-",array_reverse(explode("-",$paymentDate)));
+        $paymentDate=implode("-",array_reverse(explode("-",$paymentDate)));
         $profile_image=$_FILES['profile_image'];
         $path='../images/'.$profile_image['name'];
         move_uploaded_file($profile_image['tmp_name'], $path);
@@ -183,28 +182,46 @@
                 ?>
             </div>
             <div class="relative h-11 w-full min-w-[200px] mt-5"> 
-            <div class="flex  items-center justify-center mt-2 py-2">    
+            <div class="flex  items-center justify-between mt-2 py-2">    
             <?php
                 if($_GET['language']=="ar")
                     echo '<div class="flex items-center mt-3">
                     <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role " required>
-                    <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">سنوي</label>
+                    <label for="default-radio-1" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300">سنوي</label>
                 </div>
-                <div class="flex items-center mt-3 ml-10">
+                <div class="flex items-center mt-3">
                     <input name="kind" type="radio" value="monthly"  class=" role w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
-                    <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">شهري</label>
-                </div>';
+                    <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 ml-1" dir="rtl" lang="ar"> 1 شهر </label>
+                </div>
+                <div class="flex items-center mt-3">
+                    <input name="kind" type="radio" value="3monthly"  class=" role w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
+                    <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 ml-1" dir="rtl" lang="ar">3 شهر </label>
+                </div>
+                <div class="flex items-center mt-3">
+                    <input name="kind" type="radio" value="6monthly"  class=" role w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" required>
+                    <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 ml-1" dir="rtl" lang="ar">6 شهر </label>
+                </div>
+                
+                ';
                 else
                     echo '<div class="flex items-center mt-3">
-                        <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">yearly</label>
+                        <label for="default-radio-1" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 mr-2">yearly</label>
                         <input name="kind" type="radio" value="yearly"  class="w-4 h-4 text-green bg-green role" required>
-                        
                     </div>
-                    <div class="flex items-center mt-3 ml-10">
-                         <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300 mr-2">monthly</label>
+                    <div class="flex items-center mt-3">
+                         <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 mr-2">1 month</label>
                         <input name="kind" type="radio" value="monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
+                    </div>
+                    <div class="flex items-center mt-3">
+                         <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 mr-2">3 month</label>
+                        <input name="kind" type="radio" value="3monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
+                    </div>
+                    <div class="flex items-center mt-3">
+                         <label for="default-radio-2" class="ms-2 text-[10px] xl:text-[13px] font-medium text-gray-900 dark:text-gray-300 mr-2">6 month</label>
+                        <input name="kind" type="radio" value="6monthly"  class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 role" required>
+                    </div>
                     
-                    </div>';
+                    ';
             ?>     
                 
             </div>
@@ -247,7 +264,7 @@
                         if($_GET['language']=="ar")
                             echo '<input type="text" name="payment_date" class="bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center" pattern="\d{1,2}-\d{1,2}-\d{4}" required/>';
                         else
-                            echo '<input type="text" name="payment_date" class="bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center"  pattern="\d{4}-\d{1,2}-\d{1,2}" required/>';
+                            echo '<input type="text" name="payment_date" class="bg-gray-50 border  text-sm rounded-lg w-1/2 block py-2 input-date text-center"  pattern="\d{1,2}-\d{1,2}-\d{4}" required/>';
                     ?>
                     
                     <i class="fa-solid fa-calendar text-green fa-2x cursor-pointer transition duration-200 hover:scale-125  toggle-calendar block toggle-calendar"></i>  

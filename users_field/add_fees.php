@@ -134,7 +134,7 @@
                         else
                             echo ' <label for="email" class="block mb-2 text-sm font-medium dark:text-white text-gray-500 text-end">:الحدث</label>';
                     ?>
-                    <textarea name="description" class="text-sm rounded-lg  block w-full p-2.5  focus:border-green "   placeholder="description"></textarea>
+                    <textarea name="description" class=" border text-sm rounded-lg  block w-full ps-10 p-2.5 dark:placeholder-gray-4"   placeholder="description"></textarea>
                 </div>
                 <div class="mb-5">
                     <?php
