@@ -27,7 +27,7 @@
     $mail->Body = 
     '
     <div style="display: flex;justify-content: center;">
-            <p style="font-weight:bold;">'.$verificationCode.'</p>
+            <p class="bg-red" style="font-weight:bold;">'.$verificationCode.'</p>
         </div>
     ';
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

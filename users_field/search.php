@@ -173,7 +173,7 @@
                                     <button class="text-lg bg-white rounded-full p-2 hover:bg-orange text-green   cursor-pointer next hover:bg-green hover:text-white font-black">></button>
                                 </div>
                                 </div>
-                                <div class="grid grid-cols-7 gap-3 w-full mt-2">
+                                <div class="invisible grid grid-cols-7 gap-3 w-full mt-2">
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center">Mon</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">Thu</p>
                                     <p class=" text-brown font-bold w-[2rem] text-xs   col-span-1 text-center flex items-center justify-center ">wed</p>

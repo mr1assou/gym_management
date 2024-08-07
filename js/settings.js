@@ -7,7 +7,9 @@ const imageInput=document.querySelector('.image-input');
 imageInput.click();
 imageInput.addEventListener('change',()=>{
         const imageField=document.querySelector('.image-field');
-        imageField.src=URL.createObjectURL(imageInput.files[0]);     
+        imageField.src=URL.createObjectURL(imageInput.files[0]);
+        const change=document.querySelector('.change');
+        change.click();
     })
 })
 

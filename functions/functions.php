@@ -972,7 +972,7 @@
                             <p class="text-green text-1xl md:text-sm font-bold basis-[50%]   text-end xl:mr-5">:الواجب الشهري</p>
                         </div>
                         <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
-                            <input type="submit" name="change" value="تغيير" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
+                            <input type="submit" name="change" value="تغيير" class="change px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>
                         </div>';
                         echo'</div>
             </div>';
@@ -1051,7 +1051,7 @@
                             <p class="text-red text-1xl md:text-sm font-bold basis-[50%]   text-end xl:mr-5">:الواجب الشهري</p>
                         </div>
                         <div class="flex justify-end gap-2 mt-5 items-center basis-[50%]">
-                            <input type="submit" name="change" value="تغيير" class="px-5 py-2 block text-white rounded-md  bg-red scale-110 cursor-pointer hover:bg-white border border-solid hover:text-red font-bold"/>
+                            <input type="submit" name="change" value="تغيير" class="change px-5 py-2 block text-white rounded-md  bg-red scale-110 cursor-pointer hover:bg-white border border-solid hover:text-red font-bold"/>
                         </div>';
                         echo'</div>
             </div>';
@@ -1168,9 +1168,13 @@
                             if($_GET['language']=="en")
                                 echo '<td class=" text-center  font-bold beginning-date status py-3">'.$row['real_operations_status'].'</td>';
                             else
-                                echo '<td class=" text-center  font-bold beginning-date status py-3">خالص</td>';
+                                echo '<td class=" text-center  font-bold beginning-date status py-3 ">خالص</td>';
+                            if($_GET['language']=="en")
                             echo'
-                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].' DH</td>
+                                <td class=" text-center  font-bold price py-3">'.$row['actual_price'].' DH</td>';
+                            else
+                                echo '<td class=" text-center  font-bold price py-3" dir="rtl" lan="ar">
+                             '.$row['actual_price'].' درهم</td>
                     </tr>';
                     $count++;
                 }
@@ -1391,9 +1395,9 @@
             </div>
             <div class="flex justify-center gap-2 mt-2 items-center basis-[50%]">';
                         if($_GET['language']=="en")
-                            echo '<input type="submit" name="change" value="Change image" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
+                            echo '<input type="submit" name="change" value="Change image" class="hidden change px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
                             else
-                                 echo '<input type="submit" name="change" value="تغيير الصورة" class="px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
+                                 echo '<input type="submit" name="change" value="تغيير الصورة" class="hidden change px-5 py-2 block text-white rounded-md  bg-green scale-110 cursor-pointer hover:bg-white border border-solid hover:text-green font-bold"/>';
                        echo' </div>
         </div>
         <div class="2xl:w-[75%] xl:w-[74%] w-full px-5 text-md">
@@ -1969,7 +1973,7 @@ function searchUser($conn,$userName){
         }
         echo ' </div>';       
 }
-function informationEachUser($conn,$row){
+function informationEachUser($conn,$row,$numAccess,$numExpired){
     echo '
     <div class="xl:basis-[25%] md:w-[40%] sm:w-[50%] w-[85%]  rounded-full p-[4px] bg-green relative 
         ">
@@ -2029,7 +2033,8 @@ function informationEachUser($conn,$row){
                 echo'</div>
                 <div class="xl:flex xl:flex-row flex flex-col  gap-2 mt-5 px-5">';
                 if($_GET['language']=="en")
-                    echo'<div class="flex  gap-2 mt-5 items-center basis-[50%] ">
+                    echo'
+                <div class="flex  gap-2 mt-5 items-center basis-[50%] ">
                         <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">Email:</p>
                          <p class="text-black font-bold xl:basis-[60%] basis-[70%] text-start ">'.$row['email'].'</p>
                     </div>
@@ -2037,8 +2042,7 @@ function informationEachUser($conn,$row){
                        <div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
                         <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start mr-5">city:</p>
                            <p class="text-black font-bold basis-[60%] text-start">'.$row['city'].'</p>
-                    </div>
-                    
+                    </div>  
                     ';
                
                 else
@@ -2051,8 +2055,22 @@ function informationEachUser($conn,$row){
                         <p class="text-green text-1xl md:text-sm  font-bold basis-[60%] text-end mr-5">:المدينة</p>
                     </div>
         ';
-        ;
+        
                 echo'</div>';
+                if($_GET['language']=="en")
+                echo'
+                <div class="flex mt-5">
+                    <div class="flex  gap-2 mt-5 items-center basis-[50%] ml-3">
+                    <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start">access client:</p>
+                     <p class="text-black font-bold xl:basis-[60%] basis-[70%] text-start ">'.$numAccess.'</p>
+                    </div>
+              
+                   <div class="flex  gap-2 mt-5 items-center xl:basis-[50%] ">
+                    <p class="text-green text-1xl md:text-sm  font-bold basis-[40%] text-start mr-5">expired client:</p>
+                       <p class="text-black font-bold basis-[60%] text-start">'.$numExpired.'</p>
+                    </div> 
+                </div> 
+                ';
                 echo'<button class="block  px-10 py-2 p text-white transition duration-100 ease-in hover:scale-110 mt-20  font-bold reset  bg-red mr-2">reset</button>';
                 echo'</div>';
     

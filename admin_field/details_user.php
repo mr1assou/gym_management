@@ -17,6 +17,18 @@
     $stmt2=sqlsrv_prepare($conn,$query,array($_GET['client_id']));
     $outcome=sqlsrv_execute($stmt2);
     $row=sqlsrv_fetch_array($stmt2);
+
+    $sql = "SELECT dbo.catchGymAccess(?) AS numAccess";
+    $stmt3=sqlsrv_prepare($conn,$sql,array($_GET['client_id']));
+    $result=sqlsrv_execute($stmt3);
+    $result=sqlsrv_fetch_array($stmt3);
+    $numAccess=$result['numAccess'];
+    
+    $sql = "SELECT dbo.catchGymExpired(?) AS numExpired";
+    $stmt3=sqlsrv_prepare($conn,$sql,array($_GET['client_id']));
+    $result=sqlsrv_execute($stmt3);
+    $result=sqlsrv_fetch_array($stmt3);
+    $numExpired=$result['numExpired'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +91,7 @@
                 <div class="w-full mt-2 text-[10px] md:text-[15px]">
                     <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 " action="" method="post" enctype="multipart/form-data">
                         <input type="number" class="input hidden">
-                        <?php informationEachUser($conn,$row);?> 
+                        <?php informationEachUser($conn,$row,$numAccess,$numExpired);?> 
                     </form>                         
                 </div>
                 <?php displayDetailsEachUser($conn,$_GET['client_id']) ?>

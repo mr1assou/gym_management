@@ -61,11 +61,22 @@
         <div class="px-1 ">
         <div class="flex-col justify-between w-full  gap-2 mt-3 relative xl:p-10 p-5 shadow-[0_3px_10px_rgb(0,0,0,0.2)] ">
                 <?php
-                    if($_GET['language']=="en")
-                        echo '  <p class="text-center text-4xl text-green font-bold">Client Information</p>';
-                    else
-                        echo '<p class="text-center text-4xl text-green font-bold">
+                    if($_GET['language']=="en"){
+                        if($row['operation_status']=="access"){
+                            echo '  <p class="text-center text-4xl text-green font-bold">Client Information</p>';
+                        }
+                        else{
+                            echo '<p class="text-center text-4xl text-red font-bold">Client Information</p>';
+                        }
+                    }
+                    else{
+                        if($row['operation_status']=="access")
+                            echo '<p class="text-center text-4xl text-green font-bold">
                 معلومات المستخدم</p>';
+                    else
+                    echo '<p class="text-center text-4xl text-red font-bold">
+                معلومات المستخدم</p>';
+                    }
                 ?>
                 <div class="w-full mt-2 text-[10px] md:text-[15px] ">
                     <form class="xl:flex xl:flex-row flex flex-col items-center  xl:p-5 p-0 b" action="" method="post" enctype="multipart/form-data">

@@ -134,7 +134,7 @@
                         else
                             echo ' <label for="email" class="block mb-2 text-sm font-medium dark:text-white text-gray-500 text-end">:الحدث</label>';
                     ?>
-                    <textarea name="description" class=" border text-sm rounded-lg  block w-full ps-10 p-2.5 dark:placeholder-gray-4"   placeholder="description"></textarea>
+                    <textarea name="description" class=" border text-sm rounded-lg  block w-full ps-10 py-2 dark:placeholder-gray-4"   placeholder="description"></textarea>
                 </div>
                 <div class="mb-5">
                     <?php
@@ -143,7 +143,7 @@
                         else
                             echo '<label for="password" class="block mb-2 text-sm font-medium text-gray-500 dark:text-white text-end">:المبلغ</label>';
                     ?>
-                    <input type="number" name="amount"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
+                    <input type="number" min="1" max="<?php echo drawerMoney($conn,$_SESSION['gym_id']) ?>" name="amount"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required />
                 </div>
             </div>
                 <div class="basis-[30%] items-center flex justify-center">

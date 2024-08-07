@@ -1593,14 +1593,6 @@ video {
   line-height: 1rem;
 }
 
-.text-\[5px\] {
-  font-size: 5px;
-}
-
-.text-\[8px\] {
-  font-size: 8px;
-}
-
 .font-black {
   font-weight: 900;
 }
@@ -1690,10 +1682,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-\[\] {
-  color: ;
 }
 
 .line-through {
@@ -1913,11 +1901,6 @@ video {
 .focus\:border-gray-900:focus {
   --tw-border-opacity: 1;
   border-color: rgb(17 24 39 / var(--tw-border-opacity));
-}
-
-.focus\:border-green:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(35 190 21 / var(--tw-border-opacity));
 }
 
 .focus\:outline-none:focus {
@@ -2429,6 +2412,10 @@ video {
     line-height: 2rem;
   }
 
+  .xl\:text-\[13px\] {
+    font-size: 13px;
+  }
+
   .xl\:text-\[15px\] {
     font-size: 15px;
   }
@@ -2436,22 +2423,6 @@ video {
   .xl\:text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
-  }
-
-  .xl\:text-\[14px\] {
-    font-size: 14px;
-  }
-
-  .xl\:text-\[13px\] {
-    font-size: 13px;
-  }
-
-  .xl\:text-\[\] {
-    color: ;
-  }
-
-  .xl\:text-\[14\] {
-    color: 14;
   }
 }
 
